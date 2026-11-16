@@ -1,6 +1,6 @@
 # Osino Twin Hills: forward valuation
 
-Status: Phase 1 forward result, with a provisional Phase 2 reading of the two bids (ADRs 0031, 0032).
+Status: Phase 1 forward result, with the Phase 2 reading of the December 2023 market value and the two bids (ADRs 0031 to 0033).
 
 ## The project
 
@@ -74,26 +74,30 @@ The stage odds and the gold convenience yield dominate. Both carry flags: the st
 
 All figures use 20,000 paths and seed 1; `scripts/osino_case.py` regenerates them.
 
-## What the bids imply (provisional)
+## What the prices imply
 
-Both bids are compared with the project claim, because the acquirer funds construction (ADR 0031). Project price = equity value less net cash; exploration ground is valued at zero, which overstates the project price and so the implied odds; option exercise proceeds are not yet known. Net cash is from a vendor balance sheet (Barchart, status P) until Osino's own statements are obtained (ADR 0032), so these results are provisional. Each bid includes any control premium and synergies, which overstates the odds on a standalone basis.
+Balance-sheet items come from Osino's interim statements at September 30, 2023, the latest published before each price: net debt of C$14.09 million (cash C$8.34 million; Nebari credit facility C$19.68 million; leases and other financial liabilities C$2.75 million), 9.43 million options at C$1.02 and 9.25 million warrants at C$1.28. Exploration ground is valued at zero, which overstates the project price and so the implied odds (ADR 0031).
 
-Without a calibrated project-level spread, the implied odds absorb the acquirer's required return, so each bid is shown against a real spread on net project cash flows (ADR 0032).
+- **Undisturbed market value, December 15, 2023 (headline):** C$1.132 per share, implied by DPM's stated 37.2% premium to that day's close; with in-the-money options by the treasury method and net debt, C$195.7 million (US$146.3 million) for the equity claim with dilution (ADR 0030). Corporate G&A of C$7.3 million a year, the nine-month figure annualised, is deducted over the mine life (ADR 0033).
+- **Dundee Precious Metals offer, December 18, 2023:** C$287 million, C$279.6 million (US$208.8 million) for the project claim after net debt and option and warrant proceeds. Includes control premium and any synergies; overstates the odds on a standalone basis.
+- **Shanjin offer, February 23, 2024:** C$368 million, C$360.6 million (US$267.1 million) for the project claim. Same label.
 
-| Real spread | Dundee, Dec 18, 2023 (C$278.7M, US$208.1M) | Shanjin, Feb 23, 2024 (C$358.7M, US$265.6M) |
-|---|---|---|
-| 0% | 0.19 | 0.23 |
-| 4% | 0.26 | 0.33 |
-| 8% | 0.37 | 0.46 |
-| 12% | 0.52 | 0.64 |
-| 15% | 0.67 | 0.82 |
-| Break-even | 19.6% | 17.3% |
+Without a calibrated project-level spread, the implied odds absorb the required return, so each price is shown against a real spread on net project cash flows (ADR 0032).
 
-Reference points (spread over the 10-year TIPS yield on each date): the DFS's own 5% real (odds about 0.25 and 0.30); the CIM survey's FS-stage gold rate of 8.9% real (0.35 and 0.42); Lopatnikov and Rumyantsev's (2025) 16% real WACC for this project (0.63 and 0.76).
+| Real spread | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
+|---|---|---|---|
+| 0% | 0.15 | 0.19 | 0.23 |
+| 4% | 0.23 | 0.27 | 0.33 |
+| 8% | 0.35 | 0.37 | 0.46 |
+| 12% | 0.54 | 0.52 | 0.64 |
+| 15% | 0.78 | 0.67 | 0.83 |
+| Break-even | 16.8% | 19.6% | 17.2% |
 
-With no spread, the implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero; a positive spread on net cash flows reverses this. The odds at zero spread are a point on the curve, not "the acquirer's odds".
+Reference points, as real rates converted to spreads on each date: the DFS's own 5% (odds 0.21, 0.25 and 0.30); the CIM survey's FS-stage gold rate of 8.9% (0.32, 0.35 and 0.42); Eight Capital's fairness-opinion rates of 10.5% to 13.5% for Twin Hills (0.38 to 0.53, 0.40 to 0.51 and 0.48 to 0.62; constant-dollar cash flows at US$1,850 gold, so approximate; dated after the December 15 price); and Lopatnikov and Rumyantsev's (2025) 16% real WACC for this project (0.71, 0.63 and 0.76).
 
-`scripts/osino_bids.py` regenerates these figures. The undisturbed market value before the Dundee offer, the headline under ADR 0031, waits for a sourced corporate G&A burn.
+At the rates the fairness opinion used, the prices are consistent with odds of roughly 0.4 to 0.6 that the project is built on the schedule assumed at each date. With no spread, implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero; a positive spread reverses this. The odds at zero spread are a point on the curve, not anyone's odds.
+
+`scripts/osino_prices.py` regenerates these figures.
 
 ## What this is not
 

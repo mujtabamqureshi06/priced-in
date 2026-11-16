@@ -117,3 +117,13 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | Gold Royalty 6-K, Jul 31, 2023; Endeavour Silver release, Jul 31, 2023 | Cozamin 1.0% NSR on Calicanto and Vicochea concessions, US$7.5M cash | [V] | Candidate; concession-level production not disclosed |
 | TMAC releases 2019 to 2020; Osler deal note | Hope Bay additional 1.5% NSR, US$40M (Maverix, 2019) | [V] | Excluded: out-of-date plan, under three years of production |
 | Council on Environmental Quality, June 2020 | See section on timing | [V] | ADR 0023 |
+
+## Osino company documents (archived company website)
+
+| Source | Figure | Status | Use |
+|---|---|---|---|
+| Osino condensed interim financial statements, September 30, 2023 (osinoresources.com/wp-content/uploads/2023/12/Financial-Statements-Osino-September-2023-.pdf) | Cash C$8,338,550 (Note 7); credit facility C$19,676,192 (Note 12); leases C$83,804 (Note 11); other financial liabilities C$2,668,149 (Note 10); 159,514,399 shares; 9,431,134 options at C$1.02; 9,251,940 warrants at C$1.28 (Note 8) | [V] | Net debt and dilutive securities (ADR 0033) |
+| Osino MD&A, Q3 2023, dated November 29, 2023 | Corporate G&A C$5,448,933 for nine months (p. 14); FEED by 1Q2024; construction start 1H2024; potential first gold 1Q2026 | [V] | G&A and timing (ADRs 0031, 0033) |
+| Osino management information circular, January 29, 2024 (Dundee arrangement), Appendices C and D | Fairness opinions dated December 17, 2023; Eight Capital Twin Hills discount rates 10.5% to 13.5%, US$1,850 gold, P/NAV 0.25x to 0.50x (comparables), 0.35x to 0.60x (precedents) | [V] | Reference band (ADR 0033) |
+| DPM news release, December 18, 2023 | C$0.775 cash plus 0.0801 DPM share; C$1.553 per share; C$287 million fully diluted in the money; 37.2% premium to the December 15 close | [V] | Dundee price and undisturbed price |
+| Yintai (Shanjin) news release, February 25, 2024 | C$1.90 per share in cash, about C$368 million | [V] | Shanjin price |
