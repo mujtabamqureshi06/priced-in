@@ -1,0 +1,87 @@
+# Priors registry. Every assumption the engine uses, with its source and status.
+# Schema and rules: src/pricedin/priors.py. Status codes: docs/sources.md.
+# Entries are added only with a source and a location; see docs/calibration.md.
+
+priors:
+  - id: stage.pfs_to_fs
+    description: Probability that a project at PFS stage advances to a feasibility study.
+    distribution: {kind: fixed, value: 0.82}
+    units: probability
+    applies_to: {stage: PFS}
+    source: Sykes and Trench (2014), as reported in Lopatnikov and Rumyantsev (2025)
+    location: Lopatnikov and Rumyantsev (2025), Mining Science and Technology 10(3), Table 1
+    status: V
+    flag: >-
+      Cross-sectional count ratio, global copper; used as a stand-in for a
+      conversion rate.
+    sensitivity:
+      - {label: stress low, value: 0.50, source: judgment}
+      - {label: stress high, value: 0.95, source: judgment}
+    decision: ADR 0013
+    notes: >-
+      Ratio of project counts at PFS and FS at one point in time (92 and 75),
+      not a tracked conversion rate.
+
+  - id: stage.fs_to_build
+    description: >-
+      Probability that a project at FS stage reaches a construction decision.
+      One combined gate covering permitting, financing and the decision itself.
+    distribution: {kind: fixed, value: 0.88}
+    units: probability
+    applies_to: {stage: FS}
+    source: Sykes and Trench (2014), as reported in Lopatnikov and Rumyantsev (2025)
+    location: Lopatnikov and Rumyantsev (2025), Mining Science and Technology 10(3), Table 1
+    status: V
+    flag: >-
+      Cross-sectional count ratio, global copper; used as a stand-in for a
+      conversion rate. Applied unchanged to permitted or financed cases, which
+      probably understates their odds.
+    sensitivity:
+      - {label: AMC failure rate, value: 0.75, source: "AMC (McCarthy), Why feasibility studies fail", status: P}
+      - {label: stress low, value: 0.50, source: judgment}
+      - {label: stress high, value: 0.95, source: judgment}
+    decision: ADR 0013
+    notes: >-
+      Ratio of producing or constructing projects (66) to FS-stage projects (75)
+      at one point in time. Replaced by the Phase 4 cohort when available.
+
+  - id: capex.overrun.fs
+    description: >-
+      Ratio of as-built capital cost (nominal US$) to the bankable feasibility
+      study estimate (real US$, including contingency). Drawn once per path.
+    distribution: {kind: shifted_lognormal, mu: -1.495821, sigma: 0.944456, shift: 0.91}
+    units: nominal capital cost ratio (as-built / FS estimate)
+    applies_to: {stage: FS}
+    source: Bertisen and Davis (2008), The Engineering Economist 53(2):118-139, doi:10.1080/00137910802058533
+    location: p. 122 (fitted shifted lognormal) and p. 134, Equation (7)
+    status: V
+    flag: >-
+      Sample of 63 externally financed projects (46 completed 1995-2001 plus 17
+      from Castle 1985), all built; bankable-feasibility estimates only.
+    decision: ADR 0007 (real terms; apply capex.inflation_adjustment)
+    notes: >-
+      The paper reports the lognormal component by its mean (0.35) and standard
+      deviation (0.42), as fitted in @RISK. mu and sigma here are the equivalent
+      parameters of the underlying normal: sigma^2 = ln(1 + (0.42/0.35)^2),
+      mu = ln(0.35) - sigma^2/2. Fitted mean ratio 1.26; sample mean 1.25,
+      median 1.16, SD 0.30, range 0.93 to 2.14 (Table 1). Gold projects were not
+      statistically different (p. 129). A size-dependent version exists
+      (Equation 9) and is not used by default.
+
+  - id: capex.inflation_adjustment
+    description: >-
+      Factor converting the nominal capital cost ratio to real terms, so the
+      overrun is applied consistently with the engine's real-terms convention.
+    distribution: {kind: fixed, value: 0.914}
+    units: dimensionless multiplier
+    applies_to: {stage: FS}
+    source: Bertisen and Davis (2008), The Engineering Economist 53(2):118-139
+    location: p. 123
+    status: V
+    flag: >-
+      The authors' own assumption: 3% a year cost inflation, two years from study
+      to construction start, two years of construction. Gives a real mean
+      overrun of about 14%.
+    sensitivity:
+      - {label: no inflation adjustment, value: 1.0, source: judgment}
+    decision: ADR 0007

@@ -4,7 +4,7 @@ Every source that feeds a prior or a test case, with its verification status and
 
 Status: **[V]** verified against the primary document or the issuer's own release. **[V-abs]** verified from the abstract or citation only; the full text is still needed for the specific figure. **[S]** seen only in a secondary summary; do not cite publicly. **[P]** practitioner or industry source, not peer-reviewed. **[X]** do not use.
 
-Last full review: 2026-11-15.
+Last full review: 2026-11-16.
 
 ## 1. Test cases
 
@@ -75,8 +75,8 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 
 | Source | Figure we rely on | Status | What is still needed |
 |---|---|---|---|
-| Bertisen and Davis (2008), The Engineering Economist 53(2):118-139 | ~half of projects outside ±15% of FS capex; ~1 in 13 overrun ≥100%; shifted lognormal fits | [V-abs] (SME abstract, 2007 version) | Full text for the +14% real / +25% nominal means and the fitted lognormal parameters. Needs library access |
-| Suárez Nieto et al. (2024), Resources Policy 99:105427 | Average overrun ~37% to 40%; gold ~40% | [V-abs] | Full text for distribution, sample and gold subsample size |
+| Bertisen and Davis (2008), The Engineering Economist 53(2):118-139, doi:10.1080/00137910802058533 | 63 financed projects (46 completed 1995-2001 plus 17 from Castle 1985). Nominal cost ratio mean 1.25, median 1.16, SD 0.30, range 0.93 to 2.14 (Table 1, p. 122). About 14% real mean after their 0.914 inflation factor (p. 123). Shifted lognormal: shift 0.91, lognormal mean 0.35, SD 0.42 (p. 122; Equation 7, p. 134). 54% within ±15% of the size-adjusted expectation (21 of 46 outside; p. 132). Gold not statistically different (p. 129) | [V] full text read 2026-11-16 | **The abstract's "1 in 13 overrun of 100% or more" does not match the body**: Table 1 and p. 122 show 3 of 63 projects with ratios of 2.00 to 2.14 (about 1 in 21). Cite "3 of 63", not "1 in 13" |
+| Suárez Nieto et al. (2024), Resources Policy 99:105427 (ScienceDirect PII S0301420724007943) | **Not an overrun sample.** The paper examines capital cost estimation in four NI 43-101 technical reports of copper projects; the ~40% figure is a warning it cites from earlier literature | [V-abs] (abstract, University of Oviedo repository) | Do not use as an overrun prior. Trace the ~40% figure to its original source if needed |
 | Hatch (2016), "Statistical analysis of parameters influencing capital overruns on mining projects" | Regression on 98 projects, 1997-2015 | [P] | Candidate second overrun source; read in full |
 | S&P Global Market Intelligence (Manalo 2023) | 127 mines starting 2002-2023, discovered from 1980: mean 15.7 yr discovery to production (range 6 to 32); 70 gold mines 15.2 yr | [P] verified on S&P page | Survivor sample: only mines that reached production |
 | S&P (Manalo 2024) | Mean 17.9 yr for 2020-2023 starts vs 12.7 yr for 2005-2009 | [P] verified on S&P page | |
@@ -85,8 +85,8 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | CIM survey (Smith 2013), via Lopatnikov and Rumyantsev (2025) | Gold real discount rates: scoping 12.6%, PFS 11.1%, FS 8.9%, producing 5.7% | [V] as reported | Primary survey not yet located |
 | MinEx Consulting (Schodde) | ~45% of significant discoveries became mines | [P] | Locate the primary presentation |
 | McKinsey, AMC | 20% delivered within FS parameters; ~25% of FS projects fail | [P] | Locate primaries; use only as cross-checks |
-| Davis (1995), Mining Engineering 47(2):75-79 | Discounting rule | [V] citation | Read in full |
-| Iddon (2015) thesis | Dilution and offering discounts | [V] listing | Read in full |
+| Davis (1995), "(Mis)use of Monte Carlo simulations in NPV analysis", Mining Engineering **47(1)**, January 1995, pp. 75-79 | Discounting rule | [V] citation (OneMine; Pindred's published discussion cites 47(1)) | Read in full. The knowledge files give issue 2; the correct issue is 1 |
+| Iddon (2015) thesis on junior offerings | Dilution and offering discounts | open | Not yet located. The 2015 publication found is Iddon, Hettihewa and Wright, "Value relevance of accounting and other variables in the junior-mining sector", Australasian Accounting, Business and Finance Journal 9(1):25-42, doi:10.14453/aabfj.v9i1.3, which is not an offering study. The "1,526 offerings" claim is unverified |
 
 **Stage-transition priors.** No cohort-based source (one that follows projects from a study stage to a build decision) has been found. Searches so far returned the cross-sectional Sykes and Trench counts and unsourced aggregator figures, which are excluded. Until a cohort source is found, stage priors are wide and flagged, and the flag is carried into the waterfall.
 
