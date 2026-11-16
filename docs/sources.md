@@ -65,7 +65,11 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 |---|---|---|---|
 | Vox agreement | Announced Sept 28, 2026. **US$**13.0M cash for an effective 0.75% uncapped NSR from a private seller; subject to FIRB; completion expected Q4 2026 | Vox news release, Sept 28, 2026 (Vox reports in US$) | [V] |
 | Project status | FID Dec 2025; fully permitted; A$236M project debt (April 2026); EPC contract A$109M (May 2026); first concentrate targeted 2H 2027 | Same release | [V] |
-| FEED economics | Pre-production capex A$264M; pre-tax NPV8 A$411M; IRR 37% | Knowledge file; Boab FEED release, June 2024 | [S] confirm in Boab release |
+| FEED economics | Pre-production capex A$264M; pre-tax NPV8 A$411M; IRR 37%; pre-tax only, no after-tax figures | Boab FEED release, June 6, 2024, Tables 8 to 10, pp. 12 to 14 | [V] |
+| FEED schedule and deck | Annual lead and silver revenue, TC, RC, logistics, costs, capex (Table 10, p. 14); deck by financial year (Table 7, p. 12); payable 17.2 Moz silver and 546 kt lead (Table A11, p. 40) | Same release; transcribed in `cases/sorby_hills.yaml` | [V] |
+| FEED still applies | Production targets and financial forecasts "continue to apply" after the plant change | Boab ASX release, Dec 10, 2025, compliance statement | [V] |
+| Underlying royalty | 1% net smelter royalty to Quintana MH Holding Company LLC from the original acquisition, classed as a contingent liability; metals and interest not stated | Boab half-year report to Dec 31, 2025, Note 14, p. 21 | [V] |
+| Market on Sept 28, 2026 | Silver US$60.81/oz; LME lead cash US$1,886/t, 3-month US$1,911.5/t; 10-year TIPS 2.90%; 3-month bill 4.28%; US$0.7020 per A$ | `data/snapshots/2026-09-28.yaml` | [V] FRED; [P] vendor and secondary prices |
 
 ### 1.4 White Dam (South Australia, gold-copper)
 
@@ -117,6 +121,7 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | Gold Royalty 6-K, Jul 31, 2023; Endeavour Silver release, Jul 31, 2023 | Cozamin 1.0% NSR on Calicanto and Vicochea concessions, US$7.5M cash | [V] | Candidate; concession-level production not disclosed |
 | TMAC releases 2019 to 2020; Osler deal note | Hope Bay additional 1.5% NSR, US$40M (Maverix, 2019) | [V] | Excluded: out-of-date plan, under three years of production |
 | Council on Environmental Quality, June 2020 | See section on timing | [V] | ADR 0023 |
+| OR Royalties (formerly Osisko), audited statements for 2025 (Form 40-F exhibit 99.2, filed Feb 2026), Note 12 | Post-tax real discount rate 5.1% (2025), 4.9% (2024), goodwill test for Québec gold mines; statutory tax rate 26.5% | [V] | Reference rate for deals dated after Feb 2026 (ADR 0035) |
 
 ## Osino company documents (archived company website)
 

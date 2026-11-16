@@ -5,6 +5,8 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Multi-metal royalty cases (WP 2.6, ADR 0036): `pricedin.royalty_cases` (closed-form market-consistent royalty value on a multi-metal study table, correlated Monte Carlo check, implied odds of reaching production, break-even spread) and `price_models.CorrelatedGBM`.
+- Sorby Hills royalty case (ADR 0035, Decision Maker, DR-020): `cases/sorby_hills.yaml` (FEED Table 10), market snapshot for 2026-09-28, `scripts/sorby_hills_case.py` and the draft write-up `docs/cases/sorby_hills.md` (owner review before publication). The price equals the on-schedule value at a 2.3% real spread.
 - Royalty transaction dataset (WP 2.7): `data/transactions.csv` with its loader and checks (`pricedin.transactions`). Six disclosed deals: South Railroad (modelled), Sorby Hills (planned, needs WP 2.6), the Wharf control, and three deals listed but out of scope with the reason stated (White Dam, Kalman and Sylvania, and the February 2026 Australian portfolio).
 - ADR 0033 (Decision Maker, DR-019): Osino corporate G&A and the fairness-opinion reference band. Osino prices re-run on Osino's own September 30, 2023 statements, with the December 15, 2023 undisturbed value as headline (`scripts/osino_prices.py`, replacing `scripts/osino_bids.py`).
 - ADR 0032 (Decision Maker, DR-018): Osino bids shown against a project-level spread with the break-even marked; provisional bid section in the Osino write-up and `scripts/osino_bids.py`.

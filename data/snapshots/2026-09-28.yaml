@@ -1,0 +1,62 @@
+# Market snapshot for valuation date 2026-09-28 (Vox agreement on Sorby Hills, announced
+# before the open). Same-day values, as for the earlier snapshots. Raw observations only;
+# which ones a valuation uses is set by its decision record (ADR 0035). Retrieved 2026-11-16.
+
+as_of: 2026-09-28
+observations:
+  silver_spot:
+    value: 60.81
+    units: US$/oz
+    observed: 2026-09-28
+    source: Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: symbol SILVER
+    status: P
+    notes: >-
+      Vendor series; not the LBMA silver price.
+  lead_cash:
+    value: 1886.0
+    units: US$/t
+    observed: 2026-09-28
+    source: Westmetall market data, LME lead table
+    series: LME lead cash-settlement
+    status: P
+    notes: >-
+      Secondary publication of the LME official price.
+  lead_3m:
+    value: 1911.5
+    units: US$/t
+    observed: 2026-09-28
+    source: Westmetall market data, LME lead table
+    series: LME lead 3-month
+    status: P
+  real_yield_10y:
+    value: 0.0290
+    units: fraction per year
+    observed: 2026-09-28
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DFII10 (TIPS constant maturity, real)
+    status: V
+  tbill_3m:
+    value: 0.0428
+    units: fraction per year
+    observed: 2026-09-28
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DGS3MO (3-month Treasury, constant maturity)
+    status: V
+  audusd:
+    value: 0.7020
+    units: US$ per A$
+    observed: 2026-09-28
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DEXUSAL (noon buying rate)
+    status: V
+  silver_realised_vol_10y:
+    value: 0.3344
+    units: annual volatility
+    observed: 2026-09-28
+    source: computed from Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: weekday log returns, trailing 10 years, x sqrt(252)
+    status: P
+    notes: >-
+      Computed by scripts/realised_vol.py on the SILVER series. Not used by the royalty
+      value, which is linear in prices (ADR 0035).
