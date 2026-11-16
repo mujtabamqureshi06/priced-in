@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- ADR 0032 (Decision Maker, DR-018): Osino bids shown against a project-level spread with the break-even marked; provisional bid section in the Osino write-up and `scripts/osino_bids.py`.
 - ADR 0031 (Decision Maker, DR-017): Osino takeover and developer adapters. Market snapshots for 2023-12-15, 2023-12-18 and 2024-02-23.
 - `inversion.equity_frontier`: implied gate odds from an equity-based price (developer and takeover adapters), with synthetic recovery test.
 

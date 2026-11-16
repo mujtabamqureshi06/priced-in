@@ -1,6 +1,6 @@
 # Osino Twin Hills: forward valuation
 
-Status: Phase 1 forward result. The takeover inversion (Phase 2) waits for the diluted share count and net cash from the March 2024 circular.
+Status: Phase 1 forward result, with a provisional Phase 2 reading of the two bids (ADRs 0031, 0032).
 
 ## The project
 
@@ -40,6 +40,8 @@ With every risk off, the study deck and the study's 5% rate, the engine reproduc
 
 For Osino Twin Hills, the engine values the project at US$899 million against the study's US$480 million (+87%). The largest single step is market gold prices, which raise value by US$438 million.
 
+Why the engine's value is so far above the DFS NPV: it prices gold risk at market terms but carries no extra return for any other risk the project bears, beyond the stage odds and overrun it simulates. A buyer's or investor's required return for those other risks is not in this number; the bid section below shows how much it matters.
+
 Two steps need a word. The first two together carry most of the gap, and neither is a view: they restate the study at the market's real rate and the market's gold price on the valuation date, which is what market-consistent valuation means (ADR 0012). The base-timing step is positive because, with a zero convenience yield, waiting does not lower the value of future revenue under market prices (ADR 0024), while it does lower the present value of the costs.
 
 ## Equity claim
@@ -71,6 +73,27 @@ Nearly all the "never built" share comes from the stage gate (12% at odds of 0.8
 The stage odds and the gold convenience yield dominate. Both carry flags: the stage odds come from cross-sectional copper counts (ADR 0013), and the convenience yield was not checked against futures (ADR 0027).
 
 All figures use 20,000 paths and seed 1; `scripts/osino_case.py` regenerates them.
+
+## What the bids imply (provisional)
+
+Both bids are compared with the project claim, because the acquirer funds construction (ADR 0031). Project price = equity value less net cash; exploration ground is valued at zero, which overstates the project price and so the implied odds; option exercise proceeds are not yet known. Net cash is from a vendor balance sheet (Barchart, status P) until Osino's own statements are obtained (ADR 0032), so these results are provisional. Each bid includes any control premium and synergies, which overstates the odds on a standalone basis.
+
+Without a calibrated project-level spread, the implied odds absorb the acquirer's required return, so each bid is shown against a real spread on net project cash flows (ADR 0032).
+
+| Real spread | Dundee, Dec 18, 2023 (C$278.7M, US$208.1M) | Shanjin, Feb 23, 2024 (C$358.7M, US$265.6M) |
+|---|---|---|
+| 0% | 0.19 | 0.23 |
+| 4% | 0.26 | 0.33 |
+| 8% | 0.37 | 0.46 |
+| 12% | 0.52 | 0.64 |
+| 15% | 0.67 | 0.82 |
+| Break-even | 19.6% | 17.3% |
+
+Reference points (spread over the 10-year TIPS yield on each date): the DFS's own 5% real (odds about 0.25 and 0.30); the CIM survey's FS-stage gold rate of 8.9% real (0.35 and 0.42); Lopatnikov and Rumyantsev's (2025) 16% real WACC for this project (0.63 and 0.76).
+
+With no spread, the implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero; a positive spread on net cash flows reverses this. The odds at zero spread are a point on the curve, not "the acquirer's odds".
+
+`scripts/osino_bids.py` regenerates these figures. The undisturbed market value before the Dundee offer, the headline under ADR 0031, waits for a sourced corporate G&A burn.
 
 ## What this is not
 
