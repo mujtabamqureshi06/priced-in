@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Sensitivities and readout (WP 1.10): `pricedin.sensitivity` (tornado, build-year distribution, template readout). Osino Twin Hills forward valuation write-up (`docs/cases/osino_twin_hills.md`) and `scripts/osino_case.py` (WP 1.11).
 - Equity claim (WP 1.8, ADR 0030): `engine.Financing` and `Results.equity_value`; priors `equity.issue_discount` (Carpentier and Suret 2009) and `equity.debt_fraction`. ADR 0029: ramp-up not modelled in the public cases (DR-006 fallback).
 - ADR 0028 (Decision Maker, DR-014 and DR-015): South Railroad presented as an illustration across the buyer's spread, with the Osisko impairment rate and the Wharf control as reference points. `inversion.break_even_spread`, `zero_delay_value`, `zero_delay_odds_curve`. Draft case write-up `docs/cases/south_railroad.md` (owner review before publication) and `scripts/south_railroad_case.py`.
 - Waterfall (WP 1.9): `pricedin.report.project_waterfall` steps from the study NPV through discounting, market prices, base timing, overrun, ramp-up (labelled not modelled), stage failure, and price uncertainty with the build decision, on common paths. Steps sum exactly to the total.
