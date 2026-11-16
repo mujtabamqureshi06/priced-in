@@ -44,6 +44,19 @@ Why the engine's value is so far above the DFS NPV: it prices gold risk at marke
 
 Two steps need a word. The first two together carry most of the gap, and neither is a view: they restate the study at the market's real rate and the market's gold price on the valuation date, which is what market-consistent valuation means (ADR 0012). The base-timing step is positive because, with a zero convenience yield, waiting does not lower the value of future revenue under market prices (ADR 0024), while it does lower the present value of the costs.
 
+### Order-independent risk steps
+
+In a sequential waterfall, each risk's step depends on which risks were switched on before it. The Shapley version (ADR 0039) gives each risk its average marginal effect over every order. The four risk steps then read:
+
+| Risk step | Sequential | Shapley (std. error) |
+|---|---|---|
+| Base timing | +18.7 | +19.0 (3.5) |
+| Capital cost overrun | -55.0 | -51.9 (0.9) |
+| Stage failure | -128.3 | -128.8 (2.5) |
+| Price uncertainty and build decision | -11.0 | -13.8 (3.5) |
+
+The ranking does not change. Stage failure is the largest risk step under either method.
+
 ## Equity claim
 
 Existing shareholders' share of project value, after the transfer to new investors when initial capital is raised at a 10.54% discount: US$856 million with all-equity funding (the dilution upper bound), US$867 million with 30% debt and US$879 million with 60% debt (ADR 0030). Underwriting fees are not modelled.
