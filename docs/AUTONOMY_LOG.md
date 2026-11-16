@@ -12,3 +12,5 @@ Decisions and actions the Mastermind took while the owner was away, under his in
 | 2026-11-16 | App deployment | Not deployed: Streamlit Community Cloud needs the owner's sign-in. The app runs locally and is smoke-tested. | Owner |
 | 2026-11-16 | Osino net cash and option proceeds | Found on Osino's archived company website (statements, MD&A, circular); results re-run on primary figures (ADR 0033). | Mastermind |
 | 2026-11-16 | University library session | Not needed tonight; no licensed data was used. | Owner |
+| 2026-11-16 | Sorby Hills write-up | Built as a draft and kept unpublished; the Decision Maker asked that the owner approve the wording (ADR 0035). | Owner |
+| 2026-11-16 | Reference rate update | The Decision Maker corrected the Osisko figure to a rate converted to a spread at each deal's date and moved Sorby Hills to the 2025 OR Royalties rate (5.1%). South Railroad keeps the 2020 rate, which was the latest before its date. | Decision Maker |
