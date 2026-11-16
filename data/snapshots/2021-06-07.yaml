@@ -74,3 +74,12 @@ observations:
     status: P
     notes: >-
       Computed by Priced In from the vendor series; see scripts/realised_vol.py.
+  cad_nominal_10y:
+    value: 0.0147
+    units: fraction per year
+    observed: 2021-06-07
+    source: Bank of Canada, Valet API
+    series: BD.CDN.10YR.DQ.YLD (Government of Canada 10-year benchmark bond yield)
+    status: V
+    notes: >-
+      Used to value the fixed nominal C$ advance royalties (ADR 0024).
