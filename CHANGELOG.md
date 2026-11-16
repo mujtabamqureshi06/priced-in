@@ -4,6 +4,9 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Added
+- Least-squares Monte Carlo core (WP 3.2, ADR 0037): `pricedin.lsm` (Longstaff and Schwartz 2001), validated on the American put against QuantLib; QuantLib added as the `validation` dependency group.
+
 ## [0.2.0] - 2026-11-16
 
 Phase 2: price adapters, inversion and the public back-test.
