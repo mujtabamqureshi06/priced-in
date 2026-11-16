@@ -19,6 +19,12 @@ The values are fixed in the simulation, not drawn at random: the expected value 
 
 ## 3. Capital cost overrun
 
+`capex.overrun.fs` follows Bertisen and Davis (2008). Each simulated path draws one capital cost ratio: 0.91 plus a lognormal draw with mean 0.35 and standard deviation 0.42. The ratio compares as-built cost in nominal dollars with the feasibility estimate in real dollars, so the engine multiplies it by `capex.inflation_adjustment` (0.914, the authors' own inflation assumption) to stay in real terms (ADR 0007). The result is a real overrun of about 14% on average, with a long right tail.
+
+Why a shifted lognormal: the smallest observed ratio was 0.93, so costs rarely come in far under budget, while a few projects cost twice the estimate. A lognormal shifted to start near 0.91 captures both features.
+
+Limits, carried in the flag: the sample is 63 projects that were financed and built, with bankable-feasibility estimates. It says nothing about PFS-stage estimates, which are less precise, and projects that were never built are missing. There is no PFS default yet.
+
 ## 4. Ramp-up
 
 ## 5. Gold price volatility and the risk-free curve

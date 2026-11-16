@@ -115,3 +115,17 @@ def test_repository_registry_is_valid() -> None:
     assert fs.distribution.kind == "fixed"
     assert {a.value for a in fs.sensitivity} == {0.75, 0.5, 0.95}
     assert all(p.flagged for p in registry.priors.values() if p.id.startswith("stage."))
+
+
+def test_overrun_prior_reproduces_published_moments() -> None:
+    """Bertisen and Davis (2008) report the lognormal part as mean 0.35, SD 0.42."""
+    import math
+
+    registry = load_priors(Path(__file__).resolve().parents[1] / "data" / "priors.yaml")
+    dist = registry.get("capex.overrun.fs").distribution
+    assert dist.kind == "shifted_lognormal"
+    mean = math.exp(dist.mu + dist.sigma**2 / 2)
+    sd = mean * math.sqrt(math.exp(dist.sigma**2) - 1)
+    assert mean == pytest.approx(0.35, abs=5e-6)
+    assert sd == pytest.approx(0.42, abs=5e-6)
+    assert dist.shift == 0.91
