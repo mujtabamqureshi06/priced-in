@@ -128,7 +128,7 @@ def offer(
 
 
 UNDISTURBED_PRICE = 1.553 / 1.372  # implied by DPM's stated 37.2% premium to the close
-JULY_LOW, JULY_HIGH = 1.07, 1.20  # July 2023 trading range (circular, p. 109)
+JULY_LOW, JULY_HIGH = 1.07, 1.20  # July 2023 trading range (circular, p. 109; status S)
 
 PRICES = (
     market_value("Market value at the DFS, July 2023 low", "2023-07-13.yaml", JULY_LOW, MARCH_2023),

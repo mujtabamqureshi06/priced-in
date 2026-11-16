@@ -34,4 +34,4 @@ Reading the September 30, 2023 statements again for this work showed two simplif
 
 - `scripts/osino_prices.py` reads the July range, the December undisturbed value and both offers, each on its own balance sheet.
 - The December 15 undisturbed price rises from C$195.7 million to C$199.6 million. Its break-even spread moves from 18.2% to 18.1%. The CHANGELOG records the change.
-- The July 2023 reading uses the circular's trading range. Its source status stays P until the page is re-checked against the filed circular.
+- The July 2023 reading uses the circular's trading range. The range was recorded in an earlier reading without a note of which copy was read, so its status is S until it is re-checked against the filed circular on SEDAR+.
