@@ -192,3 +192,98 @@ def royalty_frontier(
             )
         )
     return Frontier(price=price, points=tuple(points))
+
+
+def zero_delay_value(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    royalty: RoyaltyClaim,
+    *,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> float:
+    """Royalty value with every gate passed and no added delay (the certain-build value)."""
+    res = simulate(
+        case,
+        market,
+        replace(timing, added_delay=0),
+        replace(risks, stage_odds=1.0),
+        royalty=royalty,
+        n_paths=n_paths,
+        seed=seed,
+    )
+    assert res.royalty_value is not None
+    return float(res.royalty_value.mean())
+
+
+def break_even_spread(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    royalty: RoyaltyClaim,
+    price: float,
+    *,
+    lo: float = 0.0,
+    hi: float = 0.5,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> float | None:
+    """Spread at which the price equals the certain, on-schedule royalty value (ADR 0028).
+
+    Below it, some build odds below one reconcile the price at zero delay; above it,
+    none do. Uses the same paths at every trial spread, so the value falls smoothly
+    with the spread. Returns None if the price lies outside the values at ``lo`` and
+    ``hi``.
+    """
+
+    def gap(s: float) -> float:
+        claim = replace(royalty, spread=s)
+        v = zero_delay_value(case, market, timing, risks, claim, n_paths=n_paths, seed=seed)
+        return v - price
+
+    g_lo, g_hi = gap(lo), gap(hi)
+    if g_lo * g_hi > 0:
+        return None
+    for _ in range(60):
+        mid = 0.5 * (lo + hi)
+        g_mid = gap(mid)
+        if g_lo * g_mid <= 0:
+            hi = mid
+        else:
+            lo, g_lo = mid, g_mid
+        if hi - lo < 1e-6:
+            break
+    return 0.5 * (lo + hi)
+
+
+def zero_delay_odds_curve(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    royalty: RoyaltyClaim,
+    price: float,
+    spreads: tuple[float, ...],
+    *,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> tuple[tuple[float, float], ...]:
+    """Zero-delay implied gate odds at each spread (ADR 0028, item 2(a))."""
+    out = []
+    for s in spreads:
+        f = royalty_frontier(
+            case,
+            market,
+            timing,
+            risks,
+            replace(royalty, spread=s),
+            price,
+            max_delay=0,
+            n_paths=n_paths,
+            seed=seed,
+        )
+        out.append((s, f.zero_delay_odds))
+    return tuple(out)

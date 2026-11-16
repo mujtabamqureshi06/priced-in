@@ -128,3 +128,37 @@ def test_points_above_one_are_not_solvable() -> None:
     assert not _point(0, 1.2).solvable
     assert not _point(0, -0.1).solvable
     assert _point(0, 0.4).solvable
+
+
+def test_break_even_spread_gives_unit_odds_at_zero_delay(south_railroad: Case) -> None:
+    from dataclasses import replace
+
+    from pricedin.inversion import break_even_spread, zero_delay_odds_curve
+
+    s = break_even_spread(south_railroad, MARKET, TIMING, RISKS, CLAIM, price=2079.0, n_paths=1_000)
+    assert s is not None
+    f = royalty_frontier(
+        south_railroad,
+        MARKET,
+        TIMING,
+        RISKS,
+        replace(CLAIM, spread=s),
+        2079.0,
+        max_delay=0,
+        n_paths=1_000,
+    )
+    assert f.zero_delay_odds == pytest.approx(1.0, abs=1e-3)
+    curve = zero_delay_odds_curve(
+        south_railroad, MARKET, TIMING, RISKS, CLAIM, 2079.0, (0.0, 0.05, 0.10), n_paths=500
+    )
+    odds = [q for _, q in curve]
+    assert odds[0] < odds[1] < odds[2]
+
+
+def test_break_even_none_when_price_out_of_range(south_railroad: Case) -> None:
+    from pricedin.inversion import break_even_spread
+
+    assert (
+        break_even_spread(south_railroad, MARKET, TIMING, RISKS, CLAIM, price=1e9, n_paths=200)
+        is None
+    )
