@@ -1,4 +1,4 @@
-"""The royalty transaction dataset (WP 2.7): ``data/transactions.csv``.
+"""The royalty transaction dataset (#73): ``data/transactions.csv``.
 
 One row per disclosed deal. Only deals with a public economic study at the deal date are
 modelled (scope ``modelled`` or ``planned``); producing-royalty controls have scope

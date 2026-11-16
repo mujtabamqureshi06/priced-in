@@ -1,4 +1,4 @@
-"""Least-squares Monte Carlo for optimal stopping (WP 3.2).
+"""Least-squares Monte Carlo for optimal stopping (#76).
 
 Longstaff and Schwartz (2001), "Valuing American Options by Simulation: A Simple
 Least-Squares Approach", Review of Financial Studies 14(1), 113-147.

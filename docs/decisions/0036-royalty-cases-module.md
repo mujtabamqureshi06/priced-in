@@ -1,11 +1,11 @@
-# 0036. Multi-metal royalties through a separate royalty-case module (WP 2.6)
+# 0036. Multi-metal royalties through a separate royalty-case module (#72)
 
 - Status: accepted
 - Date: 2026-11-16
 
 ## Context
 
-WP 2.6 asks for more than one metal: extra GBM price processes with a correlation input, revenue by metal, and a royalty on the metals the contract covers. Its test case, Sorby Hills, differs from the two Phase 1 cases in three ways:
+#72 asks for more than one metal: extra GBM price processes with a correlation input, revenue by metal, and a royalty on the metals the contract covers. Its test case, Sorby Hills, differs from the two Phase 1 cases in three ways:
 
 1. it sells two priced metals and no gold;
 2. its study is in A$;

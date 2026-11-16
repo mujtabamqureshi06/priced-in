@@ -1,4 +1,4 @@
-"""Priced In: a small app over the engine (WP 1.12).
+"""Priced In: a small app over the engine (#65).
 
 Run locally with:  uv run --extra app streamlit run app/streamlit_app.py
 

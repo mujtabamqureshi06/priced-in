@@ -6,7 +6,7 @@ One run draws, for every path:
 2. whether the project passes its remaining stage gates (one combined Bernoulli draw
    with the cumulative odds the caller supplies from ``data/priors.yaml``, ADR 0013);
 3. a capital cost ratio (ADR 0015), applied to initial and expansion capital;
-4. the build year, from the fixed build rule (WP 1.6): from the build-ready year the
+4. the build year, from the fixed build rule (#59): from the build-ready year the
    project is built in the first year its NPV at that year's gold price, at the study's
    capital estimate and discount rate, clears the hurdle; it never sees the overrun draw
    (ADR 0015). Paths that never clear it before the window closes are not built.
@@ -160,7 +160,7 @@ class Risks:
     Attributes:
         stage_odds: probability of passing every remaining stage gate (1.0 = off).
         overrun: capital cost ratio distribution, or None for no overrun.
-        build_rule: apply the price-dependent build decision (WP 1.6); if False, every
+        build_rule: apply the price-dependent build decision (#59); if False, every
             path that passes its gates builds in the build-ready year.
         build_hurdle: NPV the project must reach, at the decision rate and the current
             gold price, for the rule to build (case money units).
@@ -220,7 +220,7 @@ class RoyaltyClaim:
 
 @dataclass(frozen=True)
 class StreamClaim:
-    """A precious-metal stream on gold (WP 3.6).
+    """A precious-metal stream on gold (#80).
 
     The holder receives ``share`` of payable gold and pays, per ounce, the lesser of
     the transfer price and the spot price, the standard ongoing-payment term. Each
@@ -273,7 +273,7 @@ def fixed_nominal_advance(
 
 @dataclass(frozen=True)
 class Financing:
-    """How the operator funds initial capital, for the equity claim (WP 1.8, ADR 0030).
+    """How the operator funds initial capital, for the equity claim (#61, ADR 0030).
 
     Debt is raised at fair value, so it transfers no value. The equity-funded part of
     each year's initial capital (actual capital, overrun included, less the debt share

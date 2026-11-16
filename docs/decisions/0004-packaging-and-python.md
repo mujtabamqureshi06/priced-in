@@ -5,7 +5,7 @@
 
 ## Context
 
-WP 0.1 asks for a packaging tool to be chosen by ADR (uv or poetry) and a pinned Python version.
+#48 asks for a packaging tool to be chosen by ADR (uv or poetry) and a pinned Python version.
 
 ## Options
 

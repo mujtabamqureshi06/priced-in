@@ -1,12 +1,12 @@
 ---
 name: Feature
-about: New capability, tied to a work package in the roadmap
+about: New capability, tied to a phase in the roadmap
 labels: enhancement
 ---
 
-## Work package
+## Phase
 
-Phase and WP number from `docs/ROADMAP.md`:
+Phase from `docs/ROADMAP.md` (add the matching `phase-N` label):
 
 ## What it should do
 

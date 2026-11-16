@@ -1,4 +1,4 @@
-"""Inversion: from a royalty price to the odds-timing frontier (WP 2.5).
+"""Inversion: from a royalty price to the odds-timing frontier (#71).
 
 One price cannot identify both the odds that the project is built and how late it is
 built. For each added delay ``d`` (whole years on top of base timing), this module finds
@@ -356,7 +356,7 @@ def stream_frontier(
     n_paths: int = 10_000,
     seed: int = 0,
 ) -> Frontier:
-    """Implied gate odds from a stream deposit (WP 3.6).
+    """Implied gate odds from a stream deposit (#80).
 
     A stream pays nothing on paths that fail a gate, so, as for equity,
     q(d) = price / V_pass(d). ``price`` is the deposit in the case's money units.

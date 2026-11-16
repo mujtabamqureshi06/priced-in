@@ -15,8 +15,8 @@ Build in this order before any app polish:
 2. The Phase 1 core (simulation, gold price, cash flow, stage gates, overrun, ramp-up, fixed build rule, discounting, claims, waterfall) on Osino Twin Hills and South Railroad.
 3. One royalty inversion, on South Railroad, pulled forward from Phase 2.
 
-The app (WP 1.12) and other Phase 2 adapters follow. Any public description claims only what exists at the time.
+The app (#65) and other Phase 2 adapters follow. Any public description claims only what exists at the time.
 
 ## Consequences
 
-WP 2.1, 2.2 and 2.5 are partly pulled forward into Phase 1 for South Railroad only. The synthetic-recovery test for the inversion (WP 2.5) is still required before the South Railroad result is shown to anyone.
+#67, 2.2 and 2.5 are partly pulled forward into Phase 1 for South Railroad only. The synthetic-recovery test for the inversion (#71) is still required before the South Railroad result is shown to anyone.

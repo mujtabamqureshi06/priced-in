@@ -1,4 +1,4 @@
-"""Waterfall: from the study NPV to the engine's value, one named step at a time (WP 1.9).
+"""Waterfall: from the study NPV to the engine's value, one named step at a time (#62).
 
 Risks are switched on one at a time in a fixed order, all on the same random paths:
 
@@ -10,12 +10,12 @@ Risks are switched on one at a time in a fixed order, all on the same random pat
 4. Capital cost overrun (ADR 0015).
 5. Ramp-up: not modelled in the public cases (ADR 0029); reported as zero with that label.
 6. Stage failure (ADR 0013).
-7. Price uncertainty and the build decision (WP 1.6).
+7. Price uncertainty and the build decision (#59).
 
 Step sizes depend on the order. The steps sum exactly to the difference between the
 final value and the study NPV, because each value is the previous one plus its step.
 
-``shapley_waterfall`` removes the order dependence for the four risk steps (WP 3.5).
+``shapley_waterfall`` removes the order dependence for the four risk steps (#79).
 Steps 1 and 2 set the valuation basis and stay in sequence. Each risk's step is then its
 Shapley value: its average marginal effect over every order in which the four risks
 can be switched on (Shapley 1953). That takes 16 runs on the same paths. The Shapley
@@ -144,7 +144,7 @@ def shapley_waterfall(
     n_paths: int = 10_000,
     seed: int = 0,
 ) -> tuple[Step, ...]:
-    """Waterfall with order-independent risk steps (Shapley values), WP 3.5.
+    """Waterfall with order-independent risk steps (Shapley values), #79.
 
     The first three bars match ``project_waterfall``. Each risk bar is the Shapley
     value of that risk; ramp-up stays a labelled zero (ADR 0029). Standard errors come

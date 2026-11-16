@@ -1,6 +1,6 @@
 # Phase 2 back-test: what public prices imply about build odds
 
-Released with v0.2.0 (WP 2.8).
+Released with v0.2.0 (#74).
 
 ## 1. Question
 
@@ -23,7 +23,7 @@ The full method is in `docs/methodology.md`. The steps that matter here:
 
 ## 3. Data
 
-`data/transactions.csv` lists every deal considered, with sources (WP 2.7, ADR 0034). Only deals with a public economic study at the deal date are modelled.
+`data/transactions.csv` lists every deal considered, with sources (#73, ADR 0034). Only deals with a public economic study at the deal date are modelled.
 
 | Deal | Date | Price | Stage | Use |
 |---|---|---|---|---|

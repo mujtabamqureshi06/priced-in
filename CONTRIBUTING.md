@@ -5,7 +5,7 @@ These conventions apply to every change, whoever makes it.
 ## Workflow
 
 - `main` is always releasable. It is protected and CI must pass before a merge.
-- One work package, one branch, one pull request. Branch prefixes: `feat/`, `fix/`, `docs/`, `test/`, `chore/`, `research/`.
+- One issue, one branch, one pull request; reference the issue number in the pull request title. Branch prefixes: `feat/`, `fix/`, `docs/`, `test/`, `chore/`, `research/`.
 - Conventional commit messages (`feat: add GBM price model`, `docs: record ADR 0012`). No messages like "update".
 - Squash merge. Tags per release (`v0.1.0`).
 - Code, tests and documentation change in the same pull request.

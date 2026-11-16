@@ -1,4 +1,4 @@
-"""Regenerate every number in docs/backtest.md (WP 2.8) with one command.
+"""Regenerate every number in docs/backtest.md (#74) with one command.
 
 Runs, in order: the Wharf control, the South Railroad royalty illustration (ADR 0028),
 the Osino prices (ADRs 0031 to 0033) and the Sorby Hills royalty (ADR 0035), then the

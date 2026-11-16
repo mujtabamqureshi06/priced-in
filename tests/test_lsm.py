@@ -1,4 +1,4 @@
-"""Tests for least-squares Monte Carlo (WP 3.2)."""
+"""Tests for least-squares Monte Carlo (#76)."""
 
 from __future__ import annotations
 

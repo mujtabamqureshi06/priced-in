@@ -1,4 +1,4 @@
-"""Regenerate the Osino Twin Hills forward valuation tables (WP 1.11). Prints Markdown.
+"""Regenerate the Osino Twin Hills forward valuation tables (#64). Prints Markdown.
 
 Usage: uv run python scripts/osino_case.py
 """

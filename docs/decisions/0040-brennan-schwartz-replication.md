@@ -18,7 +18,7 @@ The mine has three options: close, reopen and abandon. It is described by:
 - a property tax, which acts as an extra discount rate;
 - a copper price that follows geometric Brownian motion with a 1% convenience yield.
 
-The original article was not accessible for this check (the hosting page failed). Maier (2021), *Annals of Operations Research* 299(1), 907-937, is open access. It specifies the model in discrete time (Sect. 2.2, Table 1) and reproduces Brennan and Schwartz's finite-difference values (Table 2). Those values are recorded with status S (secondary) in `data/benchmarks/brennan_schwartz_1985.yaml`.
+The benchmark values are Brennan and Schwartz's own: Table 1 (p. 148) for the parameters and Table 2 (p. 149) for the open and closed mine values, checked against the original article. Maier (2021), *Annals of Operations Research* 299(1), 907-937 (open access), reproduces the same figures and specifies the model in discrete time (Sect. 2.2). The values are recorded with status V in `data/benchmarks/brennan_schwartz_1985.yaml`.
 
 ## Decision
 
@@ -52,4 +52,4 @@ The structure also matches. At US$0.30 and US$0.40 the open mine closes at once,
 
 The LSM machinery is validated on a mining problem with switching options, inventory and taxes, not only on a financial option. Together with ADR 0037, this meets the Phase 3 validation criterion.
 
-The comparison should be repeated against the original article's table once it is accessible. The status of the benchmark values stays S until then.
+Brennan and Schwartz also report critical prices for the open mine with full inventory: open above 76 cents, close below 44 cents, abandon below 20 cents (p. 148). They are not yet compared with the fitted policy.

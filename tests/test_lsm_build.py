@@ -1,4 +1,4 @@
-"""Tests for the least-squares Monte Carlo build decision (WP 3.2, ADR 0038)."""
+"""Tests for the least-squares Monte Carlo build decision (#76, ADR 0038)."""
 
 from __future__ import annotations
 

@@ -22,7 +22,7 @@ How a different gold price changes each line (all in the case's money units, rea
   ``docs/methodology.md``).
 
 Capital, operating cost and working capital follow the study schedule. Capital cost
-overrun (ADR 0015) and ramp-up (ADR 0017) are applied in later work packages.
+overrun (ADR 0015) and ramp-up (ADR 0017) are applied in the engine (`pricedin.engine`).
 """
 
 from __future__ import annotations
