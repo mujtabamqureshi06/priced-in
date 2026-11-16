@@ -31,6 +31,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- `Risks.holding_cost` (ADR 0049): a real cost per year of deferral beyond the base year, paid by the project. Zero by default, so no published number changes.
 - Osino market value at the DFS (#90, ADR 0048). The July 2023 trading range is read on the March 31, 2023 statements: break-even spread 17.0% to 17.9%, against 18.1% for the December undisturbed value. Cash spent to May 29, 2023 is a sensitivity. USD/CAD added to the July 13, 2023 snapshot.
 - `Market.flat` for reading a price at a third-party rate (ADR 0045); `pricedin.defaults` reads stage odds, overrun, equity financing and base timing from the priors registry by id, and gives no default stage odds for a PEA-stage case. `pricedin.sensitivity.delay_threshold` reports where delay stops adding project value (ADR 0046).
 - Input validation in `Market`, `Timing`, `RoyaltyClaim` and `StreamClaim`; a case template that matches the schema, with a test that loads a filled template; economic sanity tests; CI runs the app test.
