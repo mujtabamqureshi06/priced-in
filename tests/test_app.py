@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_app_runs_both_cases() -> None:
     pytest.importorskip("streamlit")
-    from streamlit.testing.v1 import AppTest
+    from streamlit.testing.v1 import AppTest  # type: ignore[import-not-found,unused-ignore]
 
     at = AppTest.from_file(str(ROOT / "app" / "streamlit_app.py"), default_timeout=300)
     at.run()
