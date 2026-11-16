@@ -24,7 +24,7 @@ It values the royalty on thousands of simulated futures of the PFS mine plan, us
 | Base timing | 4 years to the PFS Year -1 | CEQ (2020) BLM EIS median (ADR 0023) |
 | Build rule | Build when after-tax NPV at 5% and the current gold price is at least zero, within 5 years | ADR 0023 |
 | Capital overrun | Bertisen and Davis (2008) applied to a PFS estimate, flagged | ADR 0015 |
-| Ramp-up | Not modelled | ADR 0019 pending |
+| Ramp-up | Not modelled | ADR 0029 |
 
 ## Disclosures required before any result is shown
 
@@ -87,4 +87,4 @@ These numbers are not "the market's odds", and nothing here suggests any party p
 - A second qualifying producing-royalty control (Houndé is being checked).
 - Impairment-test rates from other royalty companies.
 - A futures-based gold convenience yield for June 2021.
-- Ramp-up (ADR 0019), not yet modelled.
+- Ramp-up, not modelled (ADR 0029).
