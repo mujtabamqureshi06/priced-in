@@ -120,12 +120,17 @@ class Timing:
         years_to_start: years until the study's first schedule period with no delay.
         added_delay: further years of delay (the inversion's timing dimension).
         max_wait: years the build rule may defer construction after the build-ready year.
+        failure_after_delay: if False (default, ADR 0025), a path that fails a stage
+            gate fails at the base year (``years_to_start``), so added delay applies
+            only to paths that pass. True is the named sensitivity "failure discovered
+            at the delayed date".
 
     """
 
     years_to_start: int = 0
     added_delay: int = 0
     max_wait: int = 0
+    failure_after_delay: bool = False
 
     def __post_init__(self) -> None:
         """Reject negative years."""
@@ -254,6 +259,8 @@ class Results:
     @staticmethod
     def estimate(values: FloatArray) -> tuple[float, float]:
         """Mean and Monte Carlo standard error."""
+        if values.size < 2:
+            return float(values.mean()), 0.0
         return float(values.mean()), float(values.std(ddof=1) / np.sqrt(values.size))
 
 
@@ -355,7 +362,8 @@ def simulate(
 
     if royalty is not None and royalty_value is not None and advance_value is not None:
         unbuilt = ~built
-        end = np.where(passes, timing.build_ready + timing.max_wait, timing.build_ready)
+        fail_year = timing.build_ready if timing.failure_after_delay else timing.years_to_start
+        end = np.where(passes, timing.build_ready + timing.max_wait, fail_year)
         for n_adv in np.unique(end[unbuilt]):
             idx = np.flatnonzero(unbuilt & (end == n_adv))
             royalty_value[idx] = _advances_pv(int(n_adv), royalty, market.discount_rate)

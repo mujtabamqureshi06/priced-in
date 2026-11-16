@@ -43,6 +43,14 @@ The project claim is after-tax cash flow discounted at the valuation rate from t
 
 ## 10. Inversion and the odds-timing frontier (WP 2.5)
 
+One price cannot identify both the odds that a project is built and how late. For each added delay d (whole years on top of base timing, applied only to paths that pass their gates), the inversion finds the gate odds q(d) at which the royalty value equals the price. Because the gate draw is independent of price and overrun, value is linear in q:
+
+value(q, d) = q × V_pass(d) + (1 - q) × V_fail, so q(d) = (price - V_fail) / (V_pass(d) - V_fail).
+
+V_pass is the value on paths that pass (built when the rule allows; advances until production or until the window closes). V_fail is the advances paid until the base build-ready year on paths that fail (ADR 0025). All delays use the same price paths.
+
+Two numbers summarise the frontier without a timing prior (ADR 0023): the zero-delay odds q(0), the lowest build odds consistent with the price if the project keeps to the schedule assumed at the valuation date; and the certain-build delay, where q reaches 1, interpolated between whole years. The frontier is tested for shape allowing for Monte Carlo noise; if it is not monotone its shape is reported instead. In market-consistent mode the cost of delay to a gold royalty holder is the buyer's spread plus the convenience yield (ADR 0024), so the slope of the frontier depends mostly on those two inputs. Neither summary number is "the market's odds".
+
 ## References
 
 Full bibliography with verification status: [sources.md](sources.md).
