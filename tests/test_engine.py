@@ -281,3 +281,35 @@ def test_timing_priors_registered() -> None:
     assert priors.get("timing.years_to_start.south_railroad").distribution.value == 4  # type: ignore[union-attr]
     assert priors.get("timing.years_to_start.osino_twin_hills").distribution.value == 1  # type: ignore[union-attr]
     assert priors.get("build.window_years").status == "J"
+
+
+def test_fixed_nominal_advances_lose_real_value(south_railroad: Case) -> None:
+    market = Market.study_deck(south_railroad)
+    timing = Timing(years_to_start=2)
+    infl = 0.03
+    claim = RoyaltyClaim(rate=0.0, coverage=1.0, amr_per_year=100.0, amr_inflation=infl)
+    res = simulate(south_railroad, market, timing, Risks(stage_odds=0.0), royalty=claim, n_paths=1)
+    assert res.royalty_value is not None
+    expected = sum(100 / (1 + infl) ** k / 1.05**k for k in (1, 2))
+    assert res.royalty_value[0] == pytest.approx(expected)
+
+
+def test_credited_nominal_total_recovered_in_real_terms(south_railroad: Case) -> None:
+    market = Market.study_deck(south_railroad)
+    timing = Timing(years_to_start=3)
+    gold = np.asarray(south_railroad.schedule.columns["gold_revenue"].values, dtype=float)
+    years = 3 + np.arange(len(gold))
+    n_adv = 3 + int(np.flatnonzero(gold > 0)[0]) - 1
+    infl, adv = 0.02, 50_000.0
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0, amr_per_year=adv, amr_inflation=infl)
+    res = simulate(south_railroad, market, timing, Risks(), royalty=claim, n_paths=1)
+    pay = 0.01 * gold
+    left = adv * n_adv
+    for t in range(len(pay)):
+        idx = (1 + infl) ** years[t]
+        take = min(left / idx, pay[t])
+        pay[t] -= take
+        left -= take * idx
+    advances = sum(adv / (1 + infl) ** k / 1.05**k for k in range(1, n_adv + 1))
+    assert res.royalty_value is not None
+    assert res.royalty_value[0] == pytest.approx(float(pay @ 1.05**-years) + advances)
