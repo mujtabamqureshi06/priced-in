@@ -1,6 +1,6 @@
 # 0008. Buyer required return is a separate, fixed parameter
 
-- Status: accepted
+- Status: accepted; amended by ADR 0014 (fallback and control criteria)
 - Date: 2026-11-15
 - Decided by: owner
 
