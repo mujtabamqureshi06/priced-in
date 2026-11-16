@@ -27,6 +27,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Samis et al. (2006) and Schwartz (1997) were cited from secondary sources. The discounting rule now cites Samis, Davis and Laughton (2007), read in full. The gold-model rationale cites Brennan and Schwartz (1985).
 
 ### Changed
+- Methodology section 7 defines the spread and says why one price cannot separate it from the odds. The Osino note sets the fairness opinion's P/NAV ranges beside the prices (0.27x to 0.56x of the DFS NPV) and explains why a multiple is not a probability.
 - Osino's July 2023 trading range (C$1.07 to C$1.20) is now verified against Osino's own copy of its March 25, 2024 circular, p. 97 (status V); the earlier "p. 109" reference is corrected.
 - Work items are now GitHub issues (#48 to #94); documents, decision records and code refer to issue numbers. The Brennan and Schwartz (1985) benchmark values were checked against the original article (status V).
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
