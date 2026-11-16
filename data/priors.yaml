@@ -74,7 +74,6 @@ priors:
       overrun is applied consistently with the engine's real-terms convention.
     distribution: {kind: fixed, value: 0.914}
     units: dimensionless multiplier
-    applies_to: {stage: FS}
     source: Bertisen and Davis (2008), The Engineering Economist 53(2):118-139
     location: p. 123
     status: V
@@ -84,4 +83,27 @@ priors:
       overrun of about 14%.
     sensitivity:
       - {label: no inflation adjustment, value: 1.0, source: judgment}
-    decision: ADR 0007
+    decision: ADR 0007, ADR 0015
+
+  - id: capex.overrun.pfs
+    description: >-
+      Capital cost ratio applied to a PFS estimate. Same distribution as
+      capex.overrun.fs; there is no verified source for PFS-stage overruns.
+    distribution: {kind: shifted_lognormal, mu: -1.495821, sigma: 0.944456, shift: 0.91}
+    units: nominal capital cost ratio (as-built / study estimate)
+    applies_to: {stage: PFS}
+    source: Bertisen and Davis (2008), The Engineering Economist 53(2):118-139, doi:10.1080/00137910802058533
+    location: p. 122 and p. 134, Equation (7)
+    status: V
+    flag: >-
+      FS-stage overrun distribution applied to a PFS estimate; likely
+      understates PFS cost risk; no source for PFS-to-FS estimate growth.
+    sensitivity:
+      - {label: "lognormal SD widened to 0.70, mean held at 0.35 (mu -1.854541, sigma 1.268636)", value: 0.70, source: judgment}
+    decision: ADR 0015
+    notes: >-
+      The widened SD scales 0.42 by an assumed PFS-to-FS accuracy ratio of
+      25/15, labelled as judgment until a page in AACE International
+      Recommended Practice 47R-11 is verified. Applied to initial capital
+      including contingency and to expansion capital; not to sustaining
+      capital or closure. The build decision does not see the draw.

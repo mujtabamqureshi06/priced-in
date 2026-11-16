@@ -16,6 +16,8 @@ This document will hold every equation the engine uses, with its source. Section
 
 ## 5. Capital cost overrun and ramp-up (WP 1.5)
 
+Each path draws one capital cost ratio, applied to initial capital (including contingency) and expansion capital, not to sustaining capital or closure (ADR 0015). The build decision does not see the draw: Bertisen and Davis (2008) measured overruns found after the construction decision, so the decision rule tests the project at the study's capital estimate and the overrun reaches cash flows only once construction starts. A rule that could see the draw would skip high-overrun paths and overstate value.
+
 ## 6. Build decision (WP 1.6; Longstaff-Schwartz in WP 3.2)
 
 ## 7. Discounting (WP 1.7)
