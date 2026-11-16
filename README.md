@@ -59,7 +59,7 @@ res = simulate(
 print(res.estimate(res.project_value))  # (mean, Monte Carlo standard error), US$ million
 ```
 
-The app: `uv sync --extra app` then `uv run streamlit run app/streamlit_app.py`.
+The app: `uv sync --extra app` then `uv run streamlit run app/streamlit_app.py`. Deployment: [docs/deploying_the_app.md](docs/deploying_the_app.md).
 
 ## Repository layout
 
