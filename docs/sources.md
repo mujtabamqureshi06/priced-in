@@ -151,6 +151,14 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | QuantLib 1.44, `FdBlackScholesVanillaEngine` | American put reference value 4.487 (S=36, K=40, r=6%, vol 20%, 1 year) | [V] computed | ADR 0037 |
 | Fuller (2023), "An option-value framework for valuing mining streams", Resources Policy, doi:10.1016/j.resourpol.2023.103847 | A stream as a portfolio of European calls | [P] abstract read | ADR 0041 |
 
+## Gold price cross-check (ADR 0050)
+
+| Source | Figure | Status | Use |
+|---|---|---|---|
+| LBMA Gold Price PM, as republished in SD Bullion's daily fix tables (sdbullion.com/gold-prices-2021 to -2024) | PM fixes: 1,888.40 (2021-06-07), 1,830.00 (2022-06-10), 1,792.10 (2022-08-12), 1,958.05 (2023-07-13), 2,032.30 (2023-12-15), 2,023.95 (2023-12-18), 2,027.45 (2024-02-23) | [P] dealer copy; to confirm on LBMA's site | Cross-check of gold spot |
+| SPDR Gold Trust, Form 10-Q for the quarter to December 31, 2022 (SEC EDGAR) | 29,531.0 thousand oz of gold; 317,000,000 shares | [V] | Gold per share for the timing test |
+| GLD daily closes, Yahoo Finance | 177.87 (2021-06-07), 174.54 (2022-06-10), 167.87 (2022-08-12), 187.00 (2023-12-15) | [P] | Timing test |
+
 ## Osino company documents (archived company website)
 
 | Source | Figure | Status | Use |

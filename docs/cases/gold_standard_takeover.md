@@ -70,7 +70,16 @@ The timing assumption matters as much as the rate. Under the 4-year prior, the m
 
 The undisturbed reading uses the equity claim, floored at zero on each path (ADR 0047). The floor raised its break-even spread from 10.0% to 10.8% (4 years) and from 15.5% to 16.8% (1 year). The offer uses the project claim, which is not floored.
 
-`scripts/gsv_takeover.py` regenerates every figure (200,000 paths, seed 1).
+**Sensitivity: the LBMA PM gold price (ADR 0050).** The snapshot uses the June 10, 2022 closing gold price, US$1,871. The LBMA PM fix that day was US$1,830, 2.2% lower. June 10, 2022 was a US CPI release day, and gold rallied after the London fix into the New York close. The closing price is kept because the share prices read here are closing prices: a 4 pm New York gold price implied by the GLD trust is within 0.1% of it. At the LBMA PM the break-even spreads fall:
+
+| | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
+|---|---|---|---|---|
+| Closing price (headline) | 15.1% | 10.8% | 22.1% | 16.8% |
+| LBMA PM | 14.2% | 10.0% | 20.4% | 15.5% |
+
+The odds at the study's own rates do not change, because those rows hold gold flat at the FS deck.
+
+`scripts/gsv_takeover.py` regenerates every figure (200,000 paths, seed 1). The sensitivity was run by setting `gold_spot` to the snapshot's `gold_lbma_pm` value.
 
 ## Outcome tracking
 
