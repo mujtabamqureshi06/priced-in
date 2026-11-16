@@ -33,6 +33,13 @@ observations:
     source: Federal Reserve Bank of St. Louis, FRED
     series: DFII10 (TIPS constant maturity, real)
     status: V
+  usdcad:
+    value: 1.3126
+    units: C$ per US$
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DEXCAUS (noon buying rate)
+    status: V
   breakeven_10y:
     value: 0.0224
     units: fraction per year

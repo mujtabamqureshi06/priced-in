@@ -33,7 +33,7 @@ def test_observation_after_as_of_rejected() -> None:
 def test_missing_observation_names_the_snapshot() -> None:
     snap = load_snapshot(SNAPSHOTS / "2023-07-13.yaml")
     with pytest.raises(KeyError, match="2023-07-13"):
-        snap.value("usdcad")
+        snap.value("not_an_observation")
 
 
 @pytest.mark.parametrize("name", ["2023-12-15", "2023-12-18", "2024-02-23"])
