@@ -85,7 +85,8 @@ class GBM:
 
         step = (self.drift - 0.5 * self.volatility**2) + self.volatility * z
         log_paths = np.concatenate([np.zeros((n_paths, 1)), np.cumsum(step, axis=1)], axis=1)
-        return self.spot * np.exp(log_paths)
+        paths: FloatArray = np.asarray(self.spot * np.exp(log_paths), dtype=np.float64)
+        return paths
 
 
 def flat_deck(price: float, n_years: int, n_paths: int = 1) -> FloatArray:
