@@ -8,6 +8,7 @@ from pricedin.engine import (
     Overrun,
     Risks,
     RoyaltyClaim,
+    StreamClaim,
     Timing,
     fixed_nominal_advance,
     simulate,
@@ -436,3 +437,23 @@ def test_financing_rejects_bad_inputs() -> None:
         Financing(debt_fraction=1.5)
     with pytest.raises(ValueError):
         Financing(issue_discount=1.0)
+
+
+@pytest.mark.parametrize(
+    ("factory", "message"),
+    [
+        (lambda: Market(-1.0, 0.0, 0.1, 0.05), "gold_spot"),
+        (lambda: Market(1800.0, 0.0, -0.1, 0.05), "volatility"),
+        (lambda: Market(1800.0, 0.0, 0.1, -1.2), "discount_rate"),
+        (lambda: Timing(years_to_start=1.5), "years_to_start"),  # type: ignore[arg-type]
+        (lambda: Timing(max_wait=-1), "max_wait"),
+        (lambda: RoyaltyClaim(rate=5.0, coverage=1.0), "rate"),
+        (lambda: RoyaltyClaim(rate=0.01, coverage=1.2), "coverage"),
+        (lambda: RoyaltyClaim(rate=0.01, coverage=1.0, amr_per_year=-1.0), "amr_per_year"),
+        (lambda: StreamClaim(share=1.5, transfer_price=400.0), "share"),
+        (lambda: StreamClaim(share=0.1, transfer_price=-1.0), "transfer_price"),
+    ],
+)
+def test_invalid_inputs_raise_clear_errors(factory: object, message: str) -> None:
+    with pytest.raises(ValueError, match=message):
+        factory()  # type: ignore[operator]

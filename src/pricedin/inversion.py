@@ -38,13 +38,26 @@ Neither is "the market's odds".
 from __future__ import annotations
 
 import itertools
+from collections.abc import Callable
 from dataclasses import dataclass, replace
 from typing import Literal
 
 import numpy as np
+from numpy.typing import NDArray
 
-from pricedin.engine import Financing, Market, Risks, RoyaltyClaim, StreamClaim, Timing, simulate
+from pricedin.engine import (
+    Financing,
+    Market,
+    Results,
+    Risks,
+    RoyaltyClaim,
+    StreamClaim,
+    Timing,
+    simulate,
+)
 from pricedin.inputs import Case
+
+FloatArray = NDArray[np.float64]
 
 
 @dataclass(frozen=True)
@@ -289,6 +302,51 @@ def zero_delay_odds_curve(
     return tuple(out)
 
 
+def _zero_floor_frontier(
+    price: float,
+    max_delay: int,
+    run: Callable[[int], Results],
+    value_of: Callable[[Results], FloatArray],
+) -> Frontier:
+    """Frontier for a claim worth nothing on paths that fail a gate.
+
+    For such a claim value(q, d) = q x V_pass(d), so q(d) = price / V_pass(d). ``run(d)``
+    simulates every gate passed at added delay ``d``; ``value_of`` picks the claim's
+    per-path value from the results.
+    """
+    points: list[FrontierPoint] = []
+    previous: FloatArray | None = None
+    for d in range(max_delay + 1):
+        passed = run(d)
+        values = value_of(passed)
+        v_pass, se_pass = passed.estimate(values)
+        q = price / v_pass
+        weighted = (-q / v_pass) * values
+        step_se = 0.0
+        if previous is not None and weighted.size > 1:
+            diff = weighted - previous
+            step_se = float(diff.std(ddof=1) / np.sqrt(diff.size))
+        previous = weighted
+        points.append(
+            FrontierPoint(
+                added_delay=d,
+                gate_odds=q,
+                gate_odds_se=abs(q) * se_pass / abs(v_pass),
+                build_probability=q * float(passed.built.mean()),
+                value_if_passed=v_pass,
+                value_if_failed=0.0,
+                step_se=step_se,
+            )
+        )
+    return Frontier(price=price, points=tuple(points))
+
+
+def _claim(values: FloatArray | None, name: str) -> FloatArray:
+    if values is None:
+        raise ValueError(f"the simulation returned no {name} value")
+    return values
+
+
 def equity_frontier(
     case: Case,
     market: Market,
@@ -308,40 +366,15 @@ def equity_frontier(
     the adapter that calls this. A path that fails a gate is worth nothing to the
     project, so value(q, d) = q x V_pass(d) and q(d) = price / V_pass(d).
     """
-    points: list[FrontierPoint] = []
-    previous: np.ndarray | None = None
-    for d in range(max_delay + 1):
+    passed_risks = replace(risks, stage_odds=1.0)
+
+    def run(d: int) -> Results:
         t = replace(timing, added_delay=d)
-        passed = simulate(
-            case,
-            market,
-            t,
-            replace(risks, stage_odds=1.0),
-            financing=financing,
-            n_paths=n_paths,
-            seed=seed,
+        return simulate(
+            case, market, t, passed_risks, financing=financing, n_paths=n_paths, seed=seed
         )
-        assert passed.equity_value is not None
-        v_pass, se_pass = passed.estimate(passed.equity_value)
-        q = price / v_pass
-        weighted = (-q / v_pass) * passed.equity_value
-        step_se = 0.0
-        if previous is not None and weighted.size > 1:
-            diff = weighted - previous
-            step_se = float(diff.std(ddof=1) / np.sqrt(diff.size))
-        previous = weighted
-        points.append(
-            FrontierPoint(
-                added_delay=d,
-                gate_odds=q,
-                gate_odds_se=abs(q) * se_pass / abs(v_pass),
-                build_probability=q * float(passed.built.mean()),
-                value_if_passed=v_pass,
-                value_if_failed=0.0,
-                step_se=step_se,
-            )
-        )
-    return Frontier(price=price, points=tuple(points))
+
+    return _zero_floor_frontier(price, max_delay, run, lambda r: _claim(r.equity_value, "equity"))
 
 
 def stream_frontier(
@@ -361,36 +394,10 @@ def stream_frontier(
     A stream pays nothing on paths that fail a gate, so, as for equity,
     q(d) = price / V_pass(d). ``price`` is the deposit in the case's money units.
     """
-    points: list[FrontierPoint] = []
-    previous: np.ndarray | None = None
-    for d in range(max_delay + 1):
-        passed = simulate(
-            case,
-            market,
-            replace(timing, added_delay=d),
-            replace(risks, stage_odds=1.0),
-            stream=stream,
-            n_paths=n_paths,
-            seed=seed,
-        )
-        assert passed.stream_value is not None
-        v_pass, se_pass = passed.estimate(passed.stream_value)
-        q = price / v_pass
-        weighted = (-q / v_pass) * passed.stream_value
-        step_se = 0.0
-        if previous is not None and weighted.size > 1:
-            diff = weighted - previous
-            step_se = float(diff.std(ddof=1) / np.sqrt(diff.size))
-        previous = weighted
-        points.append(
-            FrontierPoint(
-                added_delay=d,
-                gate_odds=q,
-                gate_odds_se=abs(q) * se_pass / abs(v_pass),
-                build_probability=q * float(passed.built.mean()),
-                value_if_passed=v_pass,
-                value_if_failed=0.0,
-                step_se=step_se,
-            )
-        )
-    return Frontier(price=price, points=tuple(points))
+    passed_risks = replace(risks, stage_odds=1.0)
+
+    def run(d: int) -> Results:
+        t = replace(timing, added_delay=d)
+        return simulate(case, market, t, passed_risks, stream=stream, n_paths=n_paths, seed=seed)
+
+    return _zero_floor_frontier(price, max_delay, run, lambda r: _claim(r.stream_value, "stream"))

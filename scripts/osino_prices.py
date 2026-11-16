@@ -20,15 +20,17 @@ from pathlib import Path
 
 import numpy as np
 
-from pricedin.engine import Financing, Market, Overrun, Risks, Timing
+from pricedin import defaults
+from pricedin.engine import Financing, Market, Risks
 from pricedin.inputs import load_case
 from pricedin.inversion import equity_frontier
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.priors import load_priors
 from pricedin.snapshots import load_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 N, SEED = 20_000, 1
-YEARS_TO_START = 1
+PRIORS = load_priors(ROOT / "data" / "priors.yaml")
+TIMING = defaults.timing(PRIORS, "osino_twin_hills")
 # Osino interim statements, Sept 30, 2023 (C$ million): cash, Nebari credit facility,
 # leases, other financial liabilities (deferred consideration and leases).
 NET_DEBT = 19.676 + 0.084 + 2.668 - 8.339
@@ -95,19 +97,17 @@ def pv_annuity(rate: float, years: int) -> float:
 def odds_function(price: Price) -> tuple[Callable[[float], float], float, float]:
     """Return q(spread) at zero delay, the US$ price and the G&A share of it."""
     case = load_case(ROOT / "cases" / "osino_twin_hills.yaml")
-    dist = load_priors(ROOT / "data" / "priors.yaml").get("capex.overrun.fs").distribution
-    assert isinstance(dist, ShiftedLognormal)
-    risks = Risks(overrun=Overrun(dist, 0.914), build_rule=True)
-    timing = Timing(years_to_start=YEARS_TO_START, max_wait=5)
+    risks = Risks(overrun=defaults.overrun(PRIORS, case.study.stage), build_rule=True)
+    timing = TIMING
     snap = load_snapshot(ROOT / "data" / "snapshots" / price.snapshot)
     fx, r = snap.value("usdcad"), snap.value("real_yield_10y")
     base = Market.market_consistent(snap.value("gold_spot"), r, 0.0, snap.value("realised_vol_10y"))
     usd = price.project_price_cad / fx
-    financing = Financing(0.0, 0.1054) if price.claim == "equity" else Financing()
+    financing = defaults.equity_financing(PRIORS) if price.claim == "equity" else Financing()
     ga = GA_PER_YEAR / fx if price.claim == "equity" else 0.0
     life = len(case.schedule.periods)
-    ga_pass = ga * pv_annuity(r, YEARS_TO_START + life)
-    ga_fail = ga * pv_annuity(r, YEARS_TO_START)
+    ga_pass = ga * pv_annuity(r, TIMING.years_to_start + life)
+    ga_fail = ga * pv_annuity(r, TIMING.years_to_start)
 
     def q(spread: float) -> float:
         m = replace(base, discount_rate=r + spread)
