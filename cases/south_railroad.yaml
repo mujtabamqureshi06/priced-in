@@ -39,6 +39,10 @@ study:
     t0_column: "Year -1"
     convention: end_of_year
     source: {document: pfs_2020, location: "Table 22-7, pp. 22-7 to 22-8; reproduced exactly from the cash-flow row"}
+  marginal_tax_rate:
+    value: 0.2495
+    units: fraction of change in pre-tax profit
+    source: {document: pfs_2020, location: "Derived from Section 22.10, p. 22-4: 0.05 net proceeds tax + 0.21 x (1 - 0.05) federal tax"}
   tax_summary: >-
     Nevada net proceeds tax 5% of revenue less operating cost and depreciation;
     federal corporate tax 21%; no state income tax; 7-year MACRS depreciation;
@@ -52,6 +56,7 @@ status:
 
 schedule:
   money_units: US$ thousands
+  revenue_linked: [existing_royalties]
   periods: ["Year -1", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11"]
   columns:
     payable_gold_koz:
@@ -66,6 +71,14 @@ schedule:
       values: [0, 116572, 181802, 156087, 271189, 294330, 115887, 83993, 72687, 8209, 2038, 0]
       total: 1302793
       source: {document: pfs_2020, location: "Table 22-7, Total Revenues, p. 22-7"}
+    gold_revenue:
+      values: [0, 116572, 181802, 156087, 270219, 291400, 110728, 78894, 69398, 7919, 1980, 0]
+      total: 1284999
+      source: {document: pfs_2020, location: "Table 22-7, Revenues, Gold, p. 22-7"}
+    silver_revenue:
+      values: [0, 0, 0, 0, 969, 2930, 5158, 5099, 3289, 289, 58, 0]
+      total: 17794
+      source: {document: pfs_2020, location: "Table 22-7, Revenues, Silver, p. 22-7"}
     operating_cost:
       values: [0, 64901, 73388, 94929, 80306, 73167, 64750, 55787, 32574, 1914, 2856, 0]
       total: 544573

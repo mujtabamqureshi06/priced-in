@@ -39,6 +39,10 @@ study:
     t0_column: "Year 0"
     convention: end_of_year
     source: {document: dfs_2023, location: "Table 22.3.2, discount factor 1.00 in Year 0 and 0.95 in Year 1, p. 22.5"}
+  marginal_tax_rate:
+    value: 0.375
+    units: fraction of change in pre-tax profit
+    source: {document: dfs_2023, location: "Section 22.1.2, p. 22.1 (corporate tax 37.5%; royalty and levy deductible)"}
   tax_summary: >-
     Corporate tax 37.5%; 3% royalty on gold sales (tax deductible) and 1% export
     levy; development capital depreciated over three years from first revenue;
@@ -53,13 +57,14 @@ status:
 
 schedule:
   money_units: US$ millions
+  revenue_linked: [government_royalty_and_levy, selling_and_marketing]
   periods: ["Year 0", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12", "Year 13", "Year 14"]
   columns:
     payable_gold_koz:
       values: [0, 198, 177, 174, 156, 177, 152, 149, 135, 170, 135, 133, 157, 66, 0]
       total: 1979
       source: {document: dfs_2023, location: "Table 22.3.2, Au Produced, p. 22.5 (sales equal production times price, so produced ounces are treated as payable)"}
-    revenue:
+    gold_revenue:
       values: [0, 347, 309, 305, 273, 309, 266, 261, 237, 298, 236, 233, 274, 116, 0]
       total: 3463
       source: {document: dfs_2023, location: "Table 22.3.2, Gold Sales, p. 22.5"}

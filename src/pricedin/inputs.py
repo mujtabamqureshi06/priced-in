@@ -31,6 +31,8 @@ Fraction = Annotated[float, Field(ge=0.0, le=1.0)]
 REQUIRED_COLUMNS: frozenset[str] = frozenset(
     {
         "payable_gold_koz",
+        "gold_revenue",
+        "taxes",
         "initial_capex",
         "cash_flow_pre_tax",
         "cash_flow_after_tax",
@@ -108,6 +110,7 @@ class Study(_Strict):
     npv_pre_tax: Quantity
     npv_after_tax: Quantity
     irr_after_tax: Quantity
+    marginal_tax_rate: Quantity
     discounting: Discounting
     tax_summary: NonEmpty
 
@@ -131,6 +134,7 @@ class Schedule(_Strict):
 
     periods: tuple[NonEmpty, ...]
     money_units: MoneyUnits
+    revenue_linked: tuple[NonEmpty, ...] = ()
     columns: dict[str, Column]
 
     @model_validator(mode="after")
@@ -138,6 +142,9 @@ class Schedule(_Strict):
         missing = REQUIRED_COLUMNS - self.columns.keys()
         if missing:
             raise ValueError(f"schedule is missing required columns: {sorted(missing)}")
+        unknown = set(self.revenue_linked) - self.columns.keys()
+        if unknown:
+            raise ValueError(f"revenue_linked names unknown columns: {sorted(unknown)}")
         n = len(self.periods)
         for name, col in self.columns.items():
             if len(col.values) != n:
@@ -228,6 +235,7 @@ class Case(_Strict):
             self.study.npv_pre_tax.source,
             self.study.npv_after_tax.source,
             self.study.irr_after_tax.source,
+            self.study.marginal_tax_rate.source,
             self.study.discounting.source,
             *(q.source for q in self.study.price_deck.values()),
             *(c.source for c in self.schedule.columns.values()),

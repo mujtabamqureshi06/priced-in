@@ -143,14 +143,14 @@ def test_osino_residual_nets_to_about_zero() -> None:
     residual = [
         c["cash_flow_pre_tax"].values[i]
         - (
-            c["revenue"].values[i]
+            c["gold_revenue"].values[i]
             - c["government_royalty_and_levy"].values[i]
             - c["selling_and_marketing"].values[i]
             - c["operating_cost"].values[i]
             - c["initial_capex"].values[i]
             - c["sustaining_capex"].values[i]
         )
-        for i in range(len(c["revenue"].values))
+        for i in range(len(c["gold_revenue"].values))
     ]
     assert residual[1] == pytest.approx(10.7, abs=0.05)
     assert sum(residual) == pytest.approx(0.0, abs=2.0)
