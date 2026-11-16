@@ -2,7 +2,7 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Amended by: ADR 0027 (futures check replaced)
+- Amended by: ADR 0027 (futures check replaced); ADR 0050 (LBMA cross-check trigger)
 
 ## Context
 

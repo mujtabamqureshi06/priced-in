@@ -12,6 +12,15 @@ observations:
     status: P
     notes: >-
       Vendor series; not the LBMA PM fix.
+  gold_lbma_pm:
+    value: 2032.30
+    units: US$/oz
+    observed: 2023-12-15
+    source: LBMA Gold Price PM, as republished in SD Bullion's daily fix table (sdbullion.com/gold-prices-2023)
+    series: LBMA Gold Price PM (USD)
+    status: P
+    notes: >-
+      Cross-check only (ADRs 0024, 0050). Dealer copy; to be confirmed on LBMA's own site.
   real_yield_10y:
     value: 0.0169
     units: fraction per year
