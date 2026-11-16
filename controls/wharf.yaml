@@ -1,0 +1,53 @@
+# Producing-royalty control (ADR 0014, ADR 0026). Values sourced; no third-party documents stored.
+id: wharf
+name: Wharf mine 1.0% gross value royalty
+buyer: Metalla Royalty & Streaming Ltd.
+seller: third parties (not named in the release)
+operator: Coeur Mining, Inc.
+deal_date: 2020-06-22
+royalty_rate:
+  value: 0.01
+  units: fraction of gross value
+  source: Metalla news release, June 22, 2020 (SEC 6-K exhibit 99.1)
+price:
+  value: 6113254
+  units: US$
+  source: >-
+    Metalla audited statements, seven months ended Dec 31, 2020 (40-F exhibit 99.2):
+    US$1,000,000 cash; 899,201 shares at US$5.52 on June 30, 2020, total US$4,964,152
+    (Note 13(b)); transaction costs US$149,102 (Note 4(a)). Capitalised total
+    US$5,899,822 differs by US$213,432; not explained in the notes.
+price_sensitivities:
+  release_value:
+    value: 5770000
+    units: US$
+    source: Metalla news release, June 22, 2020 (US$1.0M cash and US$4.77M in shares)
+  capitalised_cost:
+    value: 5899822
+    units: US$
+    source: Metalla audited statements, Note 4 (royalty interests roll-forward)
+share_of_price_in_shares: 0.812
+mine_plan_tier: 2
+payable_gold_oz: [85000.0, 85000.0, 85000.0, 85000.0, 85000.0, 85000.0, 85000.0, 11720.0]
+schedule_basis: >-
+  Constructed from disclosed reserves and rate (ADR 0026, Tier 2): year-end 2019 proven
+  and probable reserves of 768,000 oz contained (Coeur news release, Feb 18, 2020) at
+  79% metallurgical recovery (Coeur 2019 10-K, gold reserves table), run at the midpoint
+  of 2020 guidance, 80,000 to 90,000 oz (Coeur 10-Q, Q2 2020), until exhausted. Gross
+  value royalty: payability 100%.
+schedule_sensitivities:
+  guidance_low: [80000.0, 80000.0, 80000.0, 80000.0, 80000.0, 80000.0, 80000.0, 46720.0]
+  guidance_high: [90000.0, 90000.0, 90000.0, 90000.0, 90000.0, 90000.0, 66720.0]
+gold_spot:
+  value: 1754.79
+  units: US$/oz
+  source: Alpha Vantage GOLD_SILVER_HISTORY daily, 2020-06-22 (status P)
+real_rate:
+  value: -0.0063
+  units: fraction per year
+  source: FRED DFII10, 2020-06-22
+notes: >-
+  Reserves at Wharf have been replaced for years; reserve-only cash flows understate
+  what a buyer could expect, so the spread on expected flows would be higher than the
+  reserve-based figure. Silver under the gross value royalty (about 1% of revenue) is
+  omitted, which slightly lowers the implied spread.
