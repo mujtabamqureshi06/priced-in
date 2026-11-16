@@ -10,7 +10,6 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 | 3. Depth | Multi-asset adapter, Longstaff-Schwartz build decision, copper model, streams | LSM validated against QuantLib and Brennan-Schwartz (1985); multi-asset bands (Orla); Schwartz-Smith synthetic recovery; v1.0.0 (ADR 0042) | In progress: LSM core and build rule, Brennan-Schwartz replication, Shapley waterfall, streams, Schwartz-Smith done; Orla and the Gold Standard takeover next |
 | 4. Evidence | Do implied odds predict builds? | Panel reproducible; results stated without overclaiming | Not started |
 | 5. Launch | Public polish, confidentiality audit, documentation | Every public number traceable; nothing private public | Not started |
-| 6. Final private test | Run on private cases outside this repository | Comparison done privately | Not started |
 
 ## Phase 0
 

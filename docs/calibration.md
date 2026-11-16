@@ -21,7 +21,7 @@ Stage gates carry probability only; they add no duration (ADR 0023). Base timing
 
 ## 3. Capital cost overrun
 
-`capex.overrun.fs` follows Bertisen and Davis (2008). Each simulated path draws one capital cost ratio: 0.91 plus a lognormal draw with mean 0.35 and standard deviation 0.42. The ratio compares as-built cost in nominal dollars with the feasibility estimate in real dollars, so the engine multiplies it by `capex.inflation_adjustment` (0.914, the authors' own inflation assumption) to stay in real terms (ADR 0007). The result is a real overrun of about 14% on average, with a long right tail.
+`capex.overrun.fs` follows Bertisen and Davis (2008). Each simulated path draws one capital cost ratio: 0.91 plus a lognormal draw with mean 0.35 and standard deviation 0.42. The ratio compares as-built cost in nominal dollars with the feasibility estimate in real dollars, so the engine multiplies it by `capex.inflation_adjustment` (0.914, the authors' own inflation assumption) to stay in real terms (ADR 0007). The result is a real overrun of 15.2% on average (0.914 x 1.26), with a long right tail.
 
 Why a shifted lognormal: the smallest observed ratio was 0.93, so costs rarely come in far under budget, while a few projects cost twice the estimate. A lognormal shifted to start near 0.91 captures both features.
 

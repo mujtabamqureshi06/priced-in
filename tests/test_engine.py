@@ -1,3 +1,4 @@
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -427,7 +428,7 @@ def test_equity_claim_dilution(osino: Case, overrun: Overrun) -> None:
         seed=2,
     )
     assert with_overrun.equity_value is not None
-    assert (with_overrun.equity_value <= with_overrun.project_value + 1e-9).all()
+    assert (with_overrun.equity_value <= np.maximum(with_overrun.project_value, 0.0) + 1e-9).all()
 
 
 def test_financing_rejects_bad_inputs() -> None:
@@ -457,3 +458,62 @@ def test_financing_rejects_bad_inputs() -> None:
 def test_invalid_inputs_raise_clear_errors(factory: object, message: str) -> None:
     with pytest.raises(ValueError, match=message):
         factory()  # type: ignore[operator]
+
+
+def test_equity_is_floored_at_zero_and_other_claims_unchanged(osino: Case) -> None:
+    from pricedin.engine import Financing
+
+    market = Market.market_consistent(1200.0, 0.01, 0.0, 0.3)
+    timing = Timing(years_to_start=1)
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0)
+    plain = simulate(osino, market, timing, Risks(), royalty=claim, n_paths=2000, seed=3)
+    heavy = simulate(
+        osino,
+        market,
+        timing,
+        Risks(),
+        royalty=claim,
+        financing=Financing(0.0, 0.9),
+        n_paths=2000,
+        seed=3,
+    )
+    assert heavy.equity_value is not None
+    assert float(np.min(heavy.equity_value)) >= 0.0
+    assert (heavy.equity_value == 0.0).any()
+    np.testing.assert_array_equal(heavy.project_value, plain.project_value)
+    assert heavy.royalty_value is not None and plain.royalty_value is not None
+    np.testing.assert_array_equal(heavy.royalty_value, plain.royalty_value)
+
+
+def test_flat_convention_matches_market_consistent_spread_k_times_one_plus_r(
+    south_railroad: Case,
+) -> None:
+    """A reference rate k on a flat deck equals a market-consistent spread of k(1 + r).
+
+    This pins the reference-rate convention (ADR 0045): for a revenue claim with zero
+    convenience yield, (1 + r) / (1 + r + s) = 1 / (1 + k) gives s = k(1 + r), not k - r.
+    """
+    k, r, spot = 0.05, 0.02, 1800.0
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0)
+    timing = Timing(years_to_start=2)
+    flat = simulate(south_railroad, Market.flat(spot, k), timing, Risks(), royalty=claim, n_paths=2)
+    mc = simulate(
+        south_railroad,
+        Market.market_consistent(spot, r, 0.0, 0.0),
+        timing,
+        Risks(),
+        royalty=replace(claim, spread=k * (1 + r)),
+        n_paths=2,
+    )
+    old = simulate(
+        south_railroad,
+        Market.market_consistent(spot, r, 0.0, 0.0),
+        timing,
+        Risks(),
+        royalty=replace(claim, spread=k - r),
+        n_paths=2,
+    )
+    assert flat.royalty_value is not None and mc.royalty_value is not None
+    assert old.royalty_value is not None
+    np.testing.assert_allclose(mc.royalty_value, flat.royalty_value, rtol=1e-12)
+    assert old.royalty_value[0] > flat.royalty_value[0] * 1.05

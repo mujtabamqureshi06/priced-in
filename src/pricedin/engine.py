@@ -86,6 +86,18 @@ class Market:
             raise ValueError(f"discount_rate must be above -1, got {self.discount_rate}")
 
     @classmethod
+    def flat(cls, price: float, rate: float) -> Market:
+        """Convention valuation (ADR 0045): the metal flat in real terms at ``price``.
+
+        This is how a stated real rate is applied by its source: a flat price deck, no
+        volatility, cash flows discounted at that rate. Use it to read a price at a
+        third-party reference rate. The spread curve and break-even spread stay in
+        market-consistent mode. For a pure revenue claim with zero convenience yield
+        the two agree when the market-consistent spread is ``rate * (1 + r)``.
+        """
+        return cls(gold_spot=price, drift=0.0, volatility=0.0, discount_rate=rate)
+
+    @classmethod
     def market_consistent(
         cls, gold_spot: float, real_rate: float, convenience_yield: float, volatility: float
     ) -> Market:
@@ -518,7 +530,10 @@ def simulate(
             raised = np.maximum(ratio[idx, None] * initial - financing.debt_fraction * initial, 0.0)
             d = financing.issue_discount
             transfer = (raised * d / (1.0 - d)) @ _discount(market.discount_rate, years)
-            equity_value[idx] = case.operator_share * (project_value[idx] - transfer)
+            # Limited liability (ADR 0030, DR-025): existing holders need not raise money
+            # at a value-destroying discount, so their value on a path is floored at zero.
+            # The project, royalty and stream claims on that path are unchanged.
+            equity_value[idx] = case.operator_share * np.maximum(project_value[idx] - transfer, 0.0)
         if stream is not None and stream_value is not None:
             stream_value[idx] = _stream_pv(case, stream, path_prices, years, market.discount_rate)
         if royalty is not None and royalty_value is not None and advance_value is not None:

@@ -9,15 +9,23 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from pricedin.engine import Financing, Market, Overrun, Risks, Timing, simulate
+from pricedin import defaults
+from pricedin.engine import Financing, Market, Risks, Timing, simulate
 from pricedin.inputs import load_case
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.priors import load_priors
 from pricedin.report import project_waterfall, shapley_waterfall
-from pricedin.sensitivity import build_year_distribution, project_readout, tornado
+from pricedin.sensitivity import (
+    build_year_distribution,
+    delay_text,
+    delay_threshold,
+    project_readout,
+    tornado,
+)
 from pricedin.snapshots import load_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
-N, SEED = 20_000, 1
+N, SEED = 200_000, 1  # published tables: standard errors under 0.3% of value
+DIAG_PATHS = 50_000
 
 
 def main() -> None:
@@ -25,15 +33,15 @@ def main() -> None:
     case = load_case(ROOT / "cases" / "osino_twin_hills.yaml")
     priors = load_priors(ROOT / "data" / "priors.yaml")
     snap = load_snapshot(ROOT / "data" / "snapshots" / "2023-07-13.yaml")
-    dist = priors.get("capex.overrun.fs").distribution
-    assert isinstance(dist, ShiftedLognormal)
-    overrun = Overrun(dist, 0.914)
-    odds = priors.get("stage.fs_to_build").distribution.value  # type: ignore[union-attr]
+    overrun = defaults.overrun(priors, case.study.stage)
+    odds = defaults.stage_odds(priors, case.study.stage)
+    base_timing = defaults.timing(priors, case.id)
+    financing = defaults.equity_financing(priors)
 
     base: dict[str, Any] = {
         "stage_odds": odds,
-        "years_to_start": 1,
-        "max_wait": 5,
+        "years_to_start": base_timing.years_to_start,
+        "max_wait": base_timing.max_wait,
         "convenience_yield": 0.0,
         "volatility": snap.value("realised_vol_10y"),
         "overrun": True,
@@ -61,12 +69,14 @@ def main() -> None:
             simulate(case, market, timing, risks, financing=financing, n_paths=N, seed=SEED),
         )
 
-    market, timing, risks, res = run(base, Financing(0.0, 0.1054))
+    market, timing, risks, res = run(base, financing)
     steps = project_waterfall(case, market, timing, risks, n_paths=N, seed=SEED)
     print("| Step | Value (US$M) | Change | Std. error |\n|---|---|---|---|")
     for s in steps:
         note = f" ({s.note})" if s.note else ""
         print(f"| {s.label}{note} | {s.value:,.1f} | {s.change:+,.1f} | {s.standard_error:.1f} |")
+    v, v_se = res.estimate(res.project_value)
+    print(f"\nEngine project value: {v:,.1f} (se {v_se:.1f}), {N:,} paths, seed {SEED}")
     print("\n" + project_readout("Osino Twin Hills", "US$ million", steps))
     shapley = shapley_waterfall(case, market, timing, risks, n_paths=N, seed=SEED)
     print("\n| Risk step | Sequential change | Shapley change (std. error) |\n|---|---|---|")
@@ -76,9 +86,12 @@ def main() -> None:
 
     assert res.equity_value is not None
     eq, eq_se = res.estimate(res.equity_value)
-    print(f"\nEquity claim, all-equity funding at a 10.54% discount: {eq:,.1f} (se {eq_se:.1f})")
+    print(
+        f"\nEquity claim, all-equity funding at a {financing.issue_discount:.2%} discount: "
+        f"{eq:,.1f} (se {eq_se:.1f})"
+    )
     for debt in (0.3, 0.6):
-        r = run(base, Financing(debt, 0.1054))[3]
+        r = run(base, Financing(debt, financing.issue_discount))[3]
         print(f"  debt {debt:.0%}: {r.estimate(r.equity_value)[0]:,.1f}")
 
     print("\n| Build timing | Share of paths |\n|---|---|")
@@ -105,6 +118,18 @@ def main() -> None:
             f"| {b.name} | {b.low_label} | {b.high_label} | {b.low:,.1f} | "
             f"{b.high:,.1f} | {b.swing:,.1f} |"
         )
+
+    d = delay_threshold(
+        case,
+        snap.value("gold_spot"),
+        snap.value("real_yield_10y"),
+        snap.value("realised_vol_10y"),
+        base_timing,
+        Risks(overrun=overrun, build_rule=True),
+        n_paths=DIAG_PATHS,
+        seed=SEED,
+    )
+    print(f"\n{delay_text(d)}")
 
 
 if __name__ == "__main__":

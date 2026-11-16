@@ -23,7 +23,9 @@ Inventory is a discrete state (remaining production periods), so the regression 
 once per date for every (mode, inventory) state together, on the same simulated prices.
 The basis is a piecewise-linear spline in the log price; polynomial bases left a low
 bias of 2% to 8% at low prices. Values follow Longstaff and Schwartz: the realised cash
-flows under the fitted policy, which makes the estimate low-biased.
+flows under the fitted policy. The policy is fitted and valued on the same paths, so the
+estimate carries in-sample (foresight) bias upward as well as suboptimality bias
+downward; the bias is not one-sided.
 """
 
 from __future__ import annotations

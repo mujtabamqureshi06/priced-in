@@ -25,7 +25,7 @@ The benchmark values are Brennan and Schwartz's own: Table 1 (p. 148) for the pa
 1. **Module.** `pricedin.switching` values the mine by LSM.
    - Inventory is a discrete state, the number of production periods left. One regression per date covers every (open or closed, inventory) state on the same simulated prices.
    - Periods are 0.2 years over a 60-year horizon, as in Maier (2021).
-   - Values are the realised cash flows under the fitted policy (Longstaff and Schwartz 2001), so the estimate is low-biased.
+   - Values are the realised cash flows under the fitted policy (Longstaff and Schwartz 2001). The policy is fitted and valued on the same paths, so suboptimality pulls the estimate down and in-sample fitting pushes it up; the bias is not one-sided.
 2. **Basis.** A piecewise-linear spline in the log price with 12 knots at quantiles. A cubic or quartic polynomial basis left a low bias of 2% to 8% at low prices, where most of the value is option value.
 3. **Check on payoffs and discounting.** The fixed-output mine (operate every period until the inventory is gone) has a closed-form value: each period's income tax is a call on copper. The simulation reproduces that value within Monte Carlo error.
 
@@ -44,7 +44,7 @@ The benchmark values are Brennan and Schwartz's own: Table 1 (p. 148) for the pa
 | 0.90 | 28.38 | 28.32 (0.18) | 28.18 | 28.12 (0.18) |
 | 1.00 | 34.01 | 33.98 (0.20) | 33.81 | 33.78 (0.20) |
 
-Every estimate is within one standard error of the published value. Every estimate is also below it, by 0.1% to 2.4%. That is the expected low bias of a fitted policy, and it is largest at low prices, where most of the value is option value.
+Every estimate is within one standard error of the published value. Every estimate is also below it, by 0.1% to 2.4%. The gap is largest at low prices, where most of the value is option value. It is consistent with a fitted policy that is slightly suboptimal, though in-sample fitting biases the other way, so the sign is not guaranteed.
 
 The structure also matches. At US$0.30 and US$0.40 the open mine closes at once, so its value is the closed value less the US$0.2M closing cost, as in the published table.
 

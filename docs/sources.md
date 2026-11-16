@@ -131,19 +131,20 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | Metalla news release, June 22, 2020; audited statements, seven months to Dec 31, 2020, Notes 4(a), 13(b) | Wharf 1.0% GVR: US$1.0M cash, 899,201 shares at US$5.52 (US$4,964,152), costs US$149,102 | [V] | Wharf control price |
 | Coeur news release, Feb 18, 2020; 2019 10-K reserves table; Q2 2020 10-Q | Wharf YE2019 P&P 768 koz contained, 79% recovery; 2020 guidance 80 to 90 koz | [V] | Wharf Tier 2 schedule |
 | Metalla Wharf royalty page | Metalla estimates 100% of Wharf reserves and resources are subject to the royalty | [P] | Coverage check |
-| Osisko Gold Royalties, audited 2020 statements, Notes 19 and 26 | Post-tax real discount rate 3.5% (2020), 4.1% (2019) for the Éléonore and Canadian Malartic NSR CGUs; statutory rate 26.5% | [V] | Convention reference (ADR 0028) |
+| Osisko Gold Royalties, audited 2020 statements, Notes 19 and 26 | Post-tax real discount rate 3.5% (2020), 4.1% (2019) for the Éléonore and Canadian Malartic NSR CGUs; recoverable amount on fair value less costs of disposal; long-term gold US$1,600 (2020); statutory rate 26.5% | [V] | Convention reference, applied with its own gold deck (ADRs 0028, 0045) |
 | Osisko, audited 2021 statements, Note 17 | 4.3% (2021) | [V] | Sensitivity only (published after the South Railroad date) |
 | Sandstorm release Dec 18, 2017; Acacia RNS Jan 17, 2018 | Houndé 2% NSR, US$45M cash; covers Kari North and South, nearly all of the 2.1 Moz reserve | [V] | Candidate control; not qualified: no pre-deal annual schedule by deposit found in free sources |
 | Franco-Nevada, audited 2020 statements, Note 8 | Discount rates disclosed only for energy CGUs (5% to 12%) | [V] | Not comparable to gold royalties |
 | Gold Royalty 6-K, Jul 31, 2023; Endeavour Silver release, Jul 31, 2023 | Cozamin 1.0% NSR on Calicanto and Vicochea concessions, US$7.5M cash | [V] | Candidate; concession-level production not disclosed |
 | TMAC releases 2019 to 2020; Osler deal note | Hope Bay additional 1.5% NSR, US$40M (Maverix, 2019) | [V] | Excluded: out-of-date plan, under three years of production |
 | Council on Environmental Quality, June 2020 | See section on timing | [V] | ADR 0023 |
-| OR Royalties (formerly Osisko), audited statements for 2025 (Form 40-F exhibit 99.2, filed Feb 2026), Note 12 | Post-tax real discount rate 5.1% (2025), 4.9% (2024), goodwill test for Québec gold mines; statutory tax rate 26.5% | [V] | Reference rate for deals dated after Feb 2026 (ADR 0035) |
+| OR Royalties (formerly Osisko), audited statements for 2025 (Form 40-F exhibit 99.2, filed Feb 2026), Note 12 | Post-tax real discount rate 5.1% (2025), 4.9% (2024), goodwill test on fair value less costs of disposal; long-term gold US$3,327 and silver US$42 (2025), US$2,184 and US$27 (2024); statutory tax rate 26.5% | [V] | Reference rate for deals dated after Feb 2026, applied with its own silver deck (ADRs 0035, 0045) |
 
 ## Method benchmarks
 
 | Source | Figure | Status | Use |
 |---|---|---|---|
+| Samis, Davis and Laughton (2007), Project Evaluation Conference, Melbourne, AusIMM, pp. 127 to 137 | Real-options practice risk-adjusts the uncertain inputs and discounts the resulting cash flows with risk-free factors; each claimant's cash flow is discounted for its own risk; contrasted with discounting net cash flow at one constant rate (pp. 128 to 129) | [V] read in full | Discounting rule (methodology section 7, ADR 0012) |
 | Brennan and Schwartz (1985), "Evaluating Natural Resource Investments", Journal of Business 58(2), 135-157, Table 1 (p. 148) and Table 2 (p. 149) | Copper mine parameters; values of the open and closed mine at US$0.30 to US$1.00/lb; critical prices (p. 148) | [V] | ADR 0040 |
 | Maier (2021), "Re-evaluating natural resource investments under uncertainty: An alternative to limited traditional approaches", Annals of Operations Research 299(1), 907-937, doi:10.1007/s10479-020-03569-w (open access), Sect. 2.2, Tables 1 and 2 | Discrete-time specification of the Brennan and Schwartz mine; same values reproduced | [V] | ADR 0040 |
 | Longstaff and Schwartz (2001), Review of Financial Studies 14(1), 113-147 | Least-squares Monte Carlo method | [V] citation | ADR 0037 |

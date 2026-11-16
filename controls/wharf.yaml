@@ -16,7 +16,10 @@ price:
     Metalla audited statements, seven months ended Dec 31, 2020 (40-F exhibit 99.2):
     US$1,000,000 cash; 899,201 shares at US$5.52 on June 30, 2020, total US$4,964,152
     (Note 13(b)); transaction costs US$149,102 (Note 4(a)). Capitalised total
-    US$5,899,822 differs by US$213,432; not explained in the notes.
+    US$5,899,822 differs by US$213,432; not explained in the notes. Date gap: the deal
+    and the market inputs are dated June 22 (announcement), while the shares are valued
+    at the June 30 closing, as ADR 0026 requires. The release value (US$5.77M, shares at
+    the announcement) gives a spread of 17.7% against 15.75% for this headline.
 price_sensitivities:
   release_value:
     value: 5770000

@@ -1,6 +1,6 @@
 # 0030. Equity claim and dilution
 
-- Status: accepted
+- Status: accepted; amended by ADR 0047 (equity floored at zero on each path)
 - Date: 2026-11-16
 
 ## Decision

@@ -11,7 +11,7 @@ Davis (1995) shows that simulating cash flows and then discounting each path at 
 
 Two modes, always labelled in the output.
 
-1. **Market-consistent mode (default).** Commodity prices simulated under risk-neutral dynamics (real risk-free rate less convenience yield). Cash flows discounted at the real risk-free rate. Project-specific risks (stage failure, overrun, delay, ramp-up) weighted by real-world probabilities with no added premium, following Samis et al. (2006). Output is a single expected value with its Monte Carlo standard error. No histogram of NPVs discounted at a risk-adjusted rate is ever shown.
+1. **Market-consistent mode (default).** Commodity prices simulated under risk-neutral dynamics (real risk-free rate less convenience yield). Cash flows discounted at the real risk-free rate. Project-specific risks (stage failure, overrun, delay, ramp-up) weighted by real-world probabilities with no added premium, following the real-options practice of risk-adjusting uncertain inputs and discounting with risk-free factors (Samis, Davis and Laughton 2007, pp. 128 to 129). Output is a single expected value with its Monte Carlo standard error. No histogram of NPVs discounted at a risk-adjusted rate is ever shown.
 2. **Analyst mode.** A deterministic price deck and stage-based real discount rates from the CIM survey priors (Smith 2013, as reported in Lopatnikov and Rumyantsev 2025). Its purpose is reconciliation: it reproduces a conventional NAV so a user can see how the engine's value relates to their own model.
 
 ## Consequences

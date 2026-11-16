@@ -24,10 +24,11 @@ from typing import Any
 import numpy as np
 import yaml
 
-from pricedin.engine import Financing, Market, Overrun, Risks, Timing
+from pricedin import defaults
+from pricedin.engine import Market, Risks
 from pricedin.inputs import load_case
-from pricedin.inversion import equity_frontier
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.inversion import project_frontier
+from pricedin.priors import load_priors
 from pricedin.snapshots import load_snapshot
 from pricedin.sum_of_parts import (
     Part,
@@ -38,8 +39,7 @@ from pricedin.sum_of_parts import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-N, SEED = 20_000, 1
-TIMING_PRIOR = "timing.years_to_start.south_railroad_fs2022"
+N, SEED = 200_000, 1  # published tables (standard errors shown)
 
 
 def load() -> dict[str, Any]:
@@ -96,12 +96,10 @@ def main() -> None:
     fx, spot, r = snap.value("usdcad"), snap.value("gold_spot"), snap.value("real_yield_10y")
     base = Market.market_consistent(spot, r, 0.0, snap.value("realised_vol_10y"))
     priors = load_priors(ROOT / "data" / "priors.yaml")
-    years = int(priors.get(TIMING_PRIOR).distribution.value)  # type: ignore[union-attr]
-    dist = priors.get("capex.overrun.fs").distribution
-    assert isinstance(dist, ShiftedLognormal)
+    timing = defaults.timing(priors, "south_railroad_fs2022")
+    years = timing.years_to_start
     case = load_case(ROOT / "cases" / "south_railroad_fs2022.yaml")
-    risks = Risks(overrun=Overrun(dist, 0.914), build_rule=True)
-    timing = Timing(years_to_start=years, max_wait=5)
+    risks = Risks(overrun=defaults.overrun(priors, case.study.stage), build_rule=True)
 
     equity, net_debt, ev = enterprise_value(d, fx)
     ga = d["corporate_ga"]["per_year"]["value"] / 1000.0
@@ -129,12 +127,13 @@ def main() -> None:
                 Part("Corporate G&A", -ga_pv, -ga_pv),
             ],
         )
-        f = equity_frontier(
-            case, m, timing, risks, Financing(), 1.0, max_delay=0, n_paths=N, seed=SEED
-        )
+        f = project_frontier(case, m, timing, risks, 1.0, max_delay=0, n_paths=N, seed=SEED)
         v_pass = f.points[0].value_if_passed / 1000.0
         lo, hi = band.low / v_pass, band.high / v_pass
-        odds = f"{lo:.2f} to {hi:.2f}" if hi <= 1 else f"{lo:.2f} to above 1"
+        if lo > 1:
+            odds = "above 1"
+        else:
+            odds = f"{lo:.2f} to {hi:.2f}" if hi <= 1 else f"{lo:.2f} to above 1"
         print(
             f"| {spread:.0%} | {cr_value:,.1f} | {band.low:,.1f} to {band.high:,.1f} | "
             f"{v_pass:,.1f} | {odds} |"

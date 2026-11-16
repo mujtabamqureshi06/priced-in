@@ -1,6 +1,6 @@
 # 0032. Presenting the Osino bids
 
-- Status: accepted
+- Status: accepted; the conversion of reference rates to spreads (k - r) is superseded by ADR 0045
 - Date: 2026-11-16
 
 ## Context

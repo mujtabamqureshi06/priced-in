@@ -25,15 +25,17 @@ from pathlib import Path
 
 import numpy as np
 
-from pricedin.engine import Financing, Market, Overrun, Risks, Timing, simulate
+from pricedin import defaults
+from pricedin.engine import Financing, Market, Risks, Timing, simulate
 from pricedin.inputs import Case, load_case
-from pricedin.inversion import equity_frontier
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.inversion import equity_frontier, project_frontier
+from pricedin.priors import load_priors
 from pricedin.snapshots import load_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
-N, SEED = 20_000, 1
-PRIOR = "timing.years_to_start.south_railroad_fs2022"
+N, SEED = 200_000, 1  # published tables (standard errors shown)
+CASE_ID = "south_railroad_fs2022"
+PRIORS = load_priors(ROOT / "data" / "priors.yaml")
 SNAPSHOT = "2022-06-10.yaml"
 
 # Gold Standard interim statements, March 31, 2022 (C$ million): cash less lease
@@ -79,17 +81,14 @@ def pv_annuity(rate: float, years: int) -> float:
 
 def base_years() -> int:
     """Years to the study's Year -1 from the timing prior (ADR 0043)."""
-    prior = load_priors(ROOT / "data" / "priors.yaml").get(PRIOR).distribution
-    return int(prior.value)  # type: ignore[union-attr]
+    return defaults.timing(PRIORS, CASE_ID).years_to_start
 
 
 def setup(years_to_start: int) -> tuple[Case, Market, Timing, Risks, float]:
     """Case, market, timing and risks on the snapshot; returns the US$/C$ rate too."""
-    case = load_case(ROOT / "cases" / "south_railroad_fs2022.yaml")
-    dist = load_priors(ROOT / "data" / "priors.yaml").get("capex.overrun.fs").distribution
-    assert isinstance(dist, ShiftedLognormal)
-    risks = Risks(overrun=Overrun(dist, 0.914), build_rule=True)
-    timing = Timing(years_to_start=years_to_start, max_wait=5)
+    case = load_case(ROOT / "cases" / f"{CASE_ID}.yaml")
+    risks = Risks(overrun=defaults.overrun(PRIORS, case.study.stage), build_rule=True)
+    timing = replace(defaults.timing(PRIORS, CASE_ID), years_to_start=years_to_start)
     snap = load_snapshot(ROOT / "data" / "snapshots" / SNAPSHOT)
     market = Market.market_consistent(
         snap.value("gold_spot"), snap.value("real_yield_10y"), 0.0, snap.value("realised_vol_10y")
@@ -98,27 +97,39 @@ def setup(years_to_start: int) -> tuple[Case, Market, Timing, Risks, float]:
 
 
 def odds_function(
-    price: Price, years_to_start: int
+    price: Price, years_to_start: int, flat_gold: float | None = None
 ) -> tuple[Callable[[float], float], float, float]:
-    """Return q(spread) at zero added delay, the US$ price and the G&A share of it."""
+    """Return q(rate) at zero added delay, the US$ price and the G&A share of it.
+
+    Market-consistent (``flat_gold`` None): q takes a real spread over the risk-free
+    rate. Convention mode (ADR 0045): gold flat at ``flat_gold`` and q takes the
+    discount rate itself.
+    """
     case, base, timing, risks, fx = setup(years_to_start)
     r = base.discount_rate
     usd = price.project_price_cad / fx * 1000.0  # case money is US$ thousands
-    financing = Financing(0.0, 0.1054) if price.claim == "equity" else Financing()
-    ga = GA_PER_YEAR / fx * 1000.0 if price.claim == "equity" else 0.0
+    equity = price.claim == "equity"
+    financing = defaults.equity_financing(PRIORS) if equity else Financing()
+    ga = GA_PER_YEAR / fx * 1000.0 if equity else 0.0
     life = len(case.schedule.periods)
-    ga_pass = ga * pv_annuity(r, years_to_start + life)
-    ga_fail = ga * pv_annuity(r, years_to_start)
 
-    def q(spread: float) -> float:
-        m = replace(base, discount_rate=r + spread)
-        f = equity_frontier(
-            case, m, timing, risks, financing, 1.0, max_delay=0, n_paths=N, seed=SEED
-        )
+    def q(x: float) -> float:
+        if flat_gold is None:
+            m, ga_rate = replace(base, discount_rate=r + x), r
+        else:
+            m, ga_rate = Market.flat(flat_gold, x), x
+        ga_pass = ga * pv_annuity(ga_rate, years_to_start + life)
+        ga_fail = ga * pv_annuity(ga_rate, years_to_start)
+        if equity:
+            f = equity_frontier(
+                case, m, timing, risks, financing, 1.0, max_delay=0, n_paths=N, seed=SEED
+            )
+        else:
+            f = project_frontier(case, m, timing, risks, 1.0, max_delay=0, n_paths=N, seed=SEED)
         denominator = f.points[0].value_if_passed - ga_pass + ga_fail
         return (usd + ga_fail) / denominator if denominator > 0 else float("inf")
 
-    return q, usd, ga_pass
+    return q, usd, ga * pv_annuity(r, years_to_start + life)
 
 
 def break_even(q: Callable[[float], float]) -> float:
@@ -148,7 +159,6 @@ def main() -> None:
         grid = (0.0, 0.04, 0.08, 0.12, 0.15)
         for price in PRICES:
             q, usd, ga_pass = odds_function(price, years)
-            r = market.discount_rate
             print(
                 f"\n{price.label}: C${price.project_price_cad:.1f}M = US${usd / 1000:.1f}M "
                 f"against the {price.claim} claim; PV of G&A on built paths "
@@ -158,13 +168,12 @@ def main() -> None:
                 " | ".join(f"{s:.0%}: {q(s):.2f}" if q(s) <= 1 else f"{s:.0%}: n/s" for s in grid)
             )
             print(f"Break-even spread: {break_even(q):.1%}")
-            for name, rate in (("FS 5%", 0.05), ("FS 10%", 0.10)):
-                value = q(rate - r)
-                print(
-                    f"  {name}: spread {rate - r:.1%}, odds {value:.2f}"
-                    if value <= 1
-                    else f"  {name}: spread {rate - r:.1%}, no solution"
-                )
+            deck = case.study.price_deck["gold"].value
+            flat, _, _ = odds_function(price, years, flat_gold=deck)
+            for name, rate in (("FS base 5%", 0.05), ("FS sensitivity 10%", 0.10)):
+                value = flat(rate)
+                shown = f"{value:.2f}" if value <= 1 else "no solution"
+                print(f"  {name}, gold flat at the FS deck US${deck:,.0f}: odds {shown}")
 
 
 if __name__ == "__main__":

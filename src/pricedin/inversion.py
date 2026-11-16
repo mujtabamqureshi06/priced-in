@@ -377,6 +377,32 @@ def equity_frontier(
     return _zero_floor_frontier(price, max_delay, run, lambda r: _claim(r.equity_value, "equity"))
 
 
+def project_frontier(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    price: float,
+    *,
+    max_delay: int = 10,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> Frontier:
+    """Implied gate odds from a price for the whole project (takeover adapter, ADR 0031).
+
+    The acquirer funds construction and bears every outcome, so the project claim is not
+    floored at zero on a path (unlike the equity claim, ADR 0030). A path that fails a
+    gate is worth nothing, so q(d) = price / V_pass(d).
+    """
+    passed_risks = replace(risks, stage_odds=1.0)
+
+    def run(d: int) -> Results:
+        t = replace(timing, added_delay=d)
+        return simulate(case, market, t, passed_risks, n_paths=n_paths, seed=seed)
+
+    return _zero_floor_frontier(price, max_delay, run, lambda r: r.project_value)
+
+
 def stream_frontier(
     case: Case,
     market: Market,
