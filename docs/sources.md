@@ -52,7 +52,7 @@ Corrections to figures often reported elsewhere: the takeover was **announced** 
 | PFS reserves | 1.246 Moz Au, 2.705 Moz Ag (P&P) | Vox release citing PFS | [V] |
 | PFS gold-price sensitivity | After-tax NPV5 US$142.4M at US$1,200 to US$386.5M at US$1,600 | GSV release, sensitivity table | [V] |
 | Later studies (outcome data only, ADR 0007) | FS Feb 23, 2022: initial capex US$190M, after-tax NPV5 US$315M at US$1,650/oz. Orla optimized FS Jan 2026: initial capex ~US$395M, after-tax NPV5 US$783M at US$3,100/oz | GSV material change report (SEC, 2022); Orla release Jan 2026; Equinox release Aug 17, 2026 | [V] |
-| Ownership history | GSV, then Orla Mining (2022), then Equinox Gold after the Equinox-Orla combination (2026) | Equinox release, Aug 17, 2026; trade press | [V] for Equinox ownership; Orla-GSV date to confirm |
+| Ownership history | GSV, then Orla Mining (2022), then Equinox Gold after the Equinox-Orla combination (2026) | Equinox release, Aug 17, 2026; trade press | [V]; Orla acquisition closed August 12, 2022 (section 1.5) |
 | Federal permit | BLM Record of Decision, announced Aug 17, 2026; early works started; first gold targeted 2028 | Equinox news release, Aug 17, 2026 | [V] |
 | Royalty terms (ADR 0016 check) | Uncapped 0.633% NSR over parts of South Railroad; advance royalty payments "payable on an ongoing, periodic basis prior to production"; covers large portions of Dark Star, Pinion and Jasperoid Wash plus portions of the POD and Bald Mountain zones in North Railroad (outside the PFS mine plan). No buy-down right specific to this royalty is disclosed; the AIF carries only general risk language on buy-downs. Whether advance payments are credited against later royalties is not disclosed | Vox release, Feb 2025 (development update); Vox AIF, March 21, 2025; Vox asset page | [V] for what is stated; credit and buy-down remain open |
 | Royalty coverage by deposit and year | Not found | Requires PFS resource and schedule by deposit (PFS Sections 14 to 16) and the royalty area map | open |
@@ -78,6 +78,19 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | Vox purchase | Agreement Sept 2, 2026; completed Sept 14, 2026. A$5.0M for a 2.0% NSR on gold and copper over nine tenements | Vox news releases, Sept 2 and Sept 14, 2026 | [V] |
 | Operating status | First gold from the restart in April 2026, re-treating historic heap-leach material; fresh-ore mining restart planned 2027; target 15 to 20 koz/yr; Vertigo restart PFS and FID expected by Q1 2027 | Same releases | [V] |
 | Use | Not a clean control: no reserve-based mine plan, and a July 2026 discovery adds exploration value. Kept as an example only | Decision: ADR 0008 | n/a |
+
+### 1.5 Gold Standard Ventures takeover by Orla Mining (2022)
+
+| Fact | Value | Source and location | Status |
+|---|---|---|---|
+| Terms | 0.1193 Orla share plus C$0.0001 per Gold Standard share; C$0.655 per share and C$242M gross at the June 10, 2022 close; 35% premium to the close and to the 10-day VWAP | Joint news release, June 13, 2022 | [V] |
+| Dates | Arrangement agreement June 12, 2022; announced June 13; closed August 12, 2022 | Management information circular, July 6, 2022 (SEC 6-K, exhibit 99.2); closing release, Aug 12, 2022 | [V] |
+| Securities | 358,735,368 shares, 15,724,678 options and 4,245,580 RSUs at the June 30, 2022 record date | Circular, Q&A | [V] |
+| Balance sheet, March 31, 2022 | Cash C$17,491,368; lease liabilities C$363,770; no borrowings; deferred revenue C$2,880,535 (Orion silver stream deposit); 18,397,523 options at a C$1.08 weighted average, of which 4,833,410 granted at C$0.57 in Q1 2022 | Interim statements, three months ended March 31, 2022 (SEC 6-K, May 9, 2022, exhibit 99.1) | [V] |
+| Silver stream | Orion, October 29, 2020: all silver from the South Railroad mine delivered for 15% of the spot price; US$2M deposit | Same statements, Note 6 | [V] |
+| 2022 FS | Report dated March 14, 2022 (effective Feb 23, 2022). After-tax NPV5 US$314.8M, NPV10 US$247.6M, IRR 44.3% at US$1,650/oz Au and US$21.50/oz Ag; initial capital US$190.2M; mid-year discounting (Section 22.14) | FS Tables 22-5 to 22-7 (SEC 6-K, March 2022, exhibit 99.1) | [V] |
+| Company schedule | Notice of Intent expected in Q1 2022; construction from Q2 2023 over 12 months; first gold Q3 2024 | Gold Standard news release, Feb 23, 2022 | [V] |
+| Notice of Intent (outcome data only) | Published in the Federal Register in August 2025 (FR Doc. 2025-15310) | Federal Register | [V] |
 
 ## 2. Calibration sources
 

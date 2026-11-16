@@ -89,13 +89,15 @@ class Quantity(_Strict):
 class Discounting(_Strict):
     """How the study discounts its cash-flow table.
 
-    ``t0_column`` is the schedule column discounted with exponent zero; later columns
-    are discounted at whole-year steps (end-of-year convention). This is checked by
-    reproducing the study NPV from the table.
+    ``t0_column`` is the schedule column discounted with exponent zero. Under
+    ``end_of_year`` the column k periods later is discounted k years; under
+    ``mid_year`` it is discounted k - 0.5 years (the t0 column itself stays at zero,
+    the common practice of placing pre-production capital at the valuation date). The
+    choice is checked by reproducing the study NPV from the table.
     """
 
     t0_column: NonEmpty
-    convention: Annotated[str, Field(pattern=r"^end_of_year$")] = "end_of_year"
+    convention: Annotated[str, Field(pattern=r"^(end_of_year|mid_year)$")] = "end_of_year"
     source: SourceRef
 
 

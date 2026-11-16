@@ -64,6 +64,6 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 | #78 | Uranium price model | Moved to after v1.0 (ADR 0042) |
 | #79 | Order-independent waterfall | Done (ADR 0039) |
 | #80 | Streams | Done (ADR 0041) |
-| #81 | Gold Standard Ventures takeover case | Open |
+| #81 | Gold Standard Ventures takeover case | Done (ADR 0043) |
 
 Later phases are tracked by the `phase-4` and `phase-5` labels on the issue tracker.

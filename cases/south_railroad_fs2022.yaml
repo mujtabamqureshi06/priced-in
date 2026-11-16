@@ -1,0 +1,133 @@
+# South Railroad (Nevada, gold), valued as of Orla Mining's offer for Gold Standard Ventures.
+# Schedule mode: the feasibility study's detailed financial model, Table 22-7, transcribed
+# row by row. Money in US$ thousands, real (flat price deck, no escalation; FS Section 22.5).
+# Valuation date: the close before the offer was announced (June 10, 2022). No look-ahead
+# (ADR 0007): only documents public on that date are used. The offer itself is read by
+# scripts/gsv_takeover.py.
+
+id: south_railroad_fs2022
+name: South Railroad (Dark Star and Pinion), 2022 feasibility study
+operator: Gold Standard Ventures Corp.
+jurisdiction: Nevada, United States
+commodity: gold
+currency: USD
+as_of: 2022-06-10
+operator_share: 1.0
+
+documents:
+  - id: fs_2022
+    title: South Railroad Project, Form 43-101F1 Technical Report, Feasibility Study, Elko County, Nevada (M3-PN185074, Revision 1)
+    issuer: Gold Standard Ventures Corp. (M3 Engineering and others)
+    date: 2022-03-14
+    url: https://www.sec.gov/Archives/edgar/data/1321847/000117625622000095/exhibit99-1.htm
+  - id: gsv_q1_2022
+    title: Gold Standard Ventures Corp., Condensed Interim Consolidated Financial Statements, three months ended March 31, 2022
+    issuer: Gold Standard Ventures Corp.
+    date: 2022-05-09
+    url: https://www.sec.gov/Archives/edgar/data/1321847/000117625622000141/exhibit99-1.htm
+
+study:
+  stage: FS
+  document: fs_2022
+  effective_date: 2022-02-23
+  price_deck:
+    gold: {value: 1650.0, units: US$/oz, source: {document: fs_2022, location: "Section 22.5; Table 22-7, Metal Prices"}}
+    silver: {value: 21.50, units: US$/oz, source: {document: fs_2022, location: "Section 22.5; Table 22-7, Metal Prices"}}
+  discount_rate: {value: 0.05, units: fraction per year, source: {document: fs_2022, location: "Table 22-5, p. 22-5"}}
+  npv_pre_tax: {value: 388866, units: US$ thousands, source: {document: fs_2022, location: "Table 22-7, Financial Indicators Before-Taxes"}}
+  npv_after_tax: {value: 314791, units: US$ thousands, source: {document: fs_2022, location: "Table 22-7, Financial Indicators After-Taxes"}}
+  irr_after_tax: {value: 0.443, units: fraction per year, source: {document: fs_2022, location: "Table 22-5, p. 22-5"}}
+  discounting:
+    t0_column: "Year -1"
+    convention: mid_year
+    source: {document: fs_2022, location: "Section 22.14 (mid-year method); Year -1 at t = 0 and Year k at k - 0.5 reproduce all four NPVs in Table 22-7 to within US$1 thousand"}
+  marginal_tax_rate:
+    value: 0.195
+    units: fraction of change in pre-tax profit
+    source: {document: fs_2022, location: "Fitted to Table 22-6, p. 22-5: reproduces the after-tax NPV at US$1,400, 1,500, 1,800 and 1,899 to within US$0.6 million. The statutory rates in Sections 22.10 and 22.11 give 0.258, which does not reproduce the table (ADR 0043)"}
+  tax_summary: >-
+    Nevada excise tax 0.75% of gross revenue between US$20 million and US$150 million a
+    year and 1.10% above; Nevada net proceeds tax 5% of revenue less excise tax,
+    operating cost and depreciation; federal corporate tax 21%; no state income tax;
+    7-year MACRS depreciation; all-equity financed (Sections 22.7, 22.10 to 22.13).
+    Cash taxes are paid one year after the year they accrue (Table 22-7).
+
+status:
+  permitted: false
+  financed: false
+  construction_decision: false
+  source: {document: fs_2022, location: "Section 20 (plan amendment and plan application under NEPA in progress); Orion term sheet only (FS news release, Feb 23, 2022)"}
+
+schedule:
+  money_units: US$ thousands
+  revenue_linked: [existing_royalties]
+  periods: ["Year -1", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12"]
+  columns:
+    payable_gold_koz:
+      values: [0, 82, 197, 191, 138, 105, 103, 80, 95, 25, 12, 2, 0]
+      total: 1030
+      source: {document: fs_2022, location: "Table 22-7, Payable Metals, Gold"}
+    payable_silver_koz:
+      values: [0, 4, 30, 32, 94, 83, 81, 97, 153, 29, 34, 8, 0]
+      total: 644
+      source: {document: fs_2022, location: "Table 22-7, Payable Metals, Silver"}
+    revenue:
+      values: [0, 134586, 324449, 315585, 228664, 174335, 170095, 132068, 156758, 41125, 20527, 3913, 0]
+      total: 1702105
+      source: {document: fs_2022, location: "Table 22-7, Total Revenues"}
+    gold_revenue:
+      values: [0, 134573, 324351, 315483, 228359, 174067, 169835, 131754, 156266, 41033, 20418, 3887, 0]
+      total: 1700026
+      source: {document: fs_2022, location: "Table 22-7, Revenues, Gold"}
+    silver_revenue:
+      values: [0, 13, 98, 102, 305, 268, 260, 314, 492, 92, 109, 26, 0]
+      total: 2078
+      source: {document: fs_2022, location: "Table 22-7, Revenues, Silver; Net of Silver Streaming Agreement"}
+    operating_cost:
+      values: [0, 81743, 108530, 117252, 116146, 113056, 108521, 98869, 52625, 4069, 4027, 1995, 0]
+      total: 806832
+      source: {document: fs_2022, location: "Table 22-7, Total Operating Cost"}
+    existing_royalties:
+      values: [0, 0, 0, 2271, 1954, 1757, 1335, 1264, 1446, 884, 0, 0, 0]
+      total: 10911
+      source: {document: fs_2022, location: "Table 22-7, Royalty; expected net royalty amounts, Section 22.8"}
+    salvage:
+      values: [0, 0, 0, 0, 0, 0, 0, 0, -12410, 0, 0, 0, 0]
+      total: -12410
+      source: {document: fs_2022, location: "Table 22-7, Salvage Value"}
+    reclamation:
+      values: [0, 0, 183, 1333, 1321, 1254, 1388, 2176, 2334, 1622, 0, 10958, 0]
+      total: 22569
+      source: {document: fs_2022, location: "Table 22-7, Reclamation/Closure"}
+    initial_capex:
+      values: [190197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      total: 190197
+      source: {document: fs_2022, location: "Table 22-7, Total Capital, Year -1 (pre-stripping, mining, process and owner's cost)"}
+    sustaining_capex:
+      values: [0, 37872, 25751, 31455, 23712, 30133, 16259, 11710, 6918, 1223, 1644, 0, 0]
+      total: 186676
+      source: {document: fs_2022, location: "Table 22-7, Sustaining Capital Expenditures, Mining and Process"}
+    working_capital:
+      values: [23449, -12389, -3394, 2021, 1290, 1899, -2154, -709, -6969, -3520, 611, 2, -139]
+      total: 0
+      source: {document: fs_2022, location: "Table 22-7, Total Working Capital (added to cash flow; Year -1 is the accounts payable build)"}
+    taxes:
+      values: [0, 0, 1944, 15987, 29804, 13009, 3722, 4446, 841, 17882, 5130, 1404, 0]
+      total: 94169
+      source: {document: fs_2022, location: "Table 22-7, Taxes (cash-flow section, paid one year after accrual)"}
+    cash_flow_pre_tax:
+      values: [-166748, 2582, 186592, 165296, 86822, 30033, 40438, 17341, 98877, 29807, 15467, -9037, -139]
+      total: 497330
+      source: {document: fs_2022, location: "Table 22-7, Cash Flow Before-Taxes"}
+    cash_flow_after_tax:
+      values: [-166748, 2582, 184649, 149309, 57018, 17025, 36716, 12895, 98036, 11924, 10337, -10442, -139]
+      total: 403162
+      source: {document: fs_2022, location: "Table 22-7, Cash Flow After-Taxes"}
+
+notes: >-
+  Silver revenue is net of the 2020 silver stream with Orion (all silver delivered for
+  15% of the spot price; GSV Q1 2022 statements, Note 6), so the stream is already in
+  the cash flow. Years 13 to 15 of Table 22-7 are zero and are not transcribed. Year 9
+  to Year 12 carry residual leaching, closure and working-capital flows. A change in
+  gold price changes tax in the same year; the study pays tax a year later, a small
+  timing difference measured against Table 22-6 in tests/test_south_railroad_fs2022.py.
