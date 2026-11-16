@@ -1,8 +1,7 @@
 """Commodity price paths.
 
-Phase 1 models gold with geometric Brownian motion (GBM). Schwartz (1997) could not fit
-a one-factor mean-reverting model to gold, so a random walk in the log price is the
-standard choice (ADR 0006).
+Phase 1 models gold with geometric Brownian motion (GBM), a random walk in the log
+price, as in Brennan and Schwartz (1985) (ADR 0006).
 
 Prices are in real terms (ADR 0007). Paths are sampled once a year, at the end of each
 year, to match the annual cash-flow tables the engine reproduces. The price for year

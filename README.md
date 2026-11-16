@@ -19,14 +19,18 @@ With all risks off, the study's flat price deck and its discount rate, the engin
 
 | Case | Price or study | What the engine says |
 |---|---|---|
-| [Osino Twin Hills](docs/cases/osino_twin_hills.md) (Namibia, DFS, July 2023) | DFS NPV US$480M at 5% and US$1,750/oz | US$899M under market prices on the DFS date; stage odds and the gold convenience yield move it most |
-| [Osino Twin Hills](docs/cases/osino_twin_hills.md), prices | Undisturbed market value (Dec 2023), Dundee and Shanjin offers | At the fairness opinion's 10.5% to 13.5% real rates, odds of roughly 0.4 to 0.6 that the project is built on schedule |
-| [South Railroad](docs/cases/south_railroad.md) (Nevada, PFS, June 2021) | Vox Royalty paid US$2.079M for a 0.633% NSR | The implied odds depend mainly on the return the buyer required: about 0.7 to 0.8 on schedule at a royalty company's own valuation rate; at the one qualifying market control, the PFS plan alone cannot account for the price |
-| [Gold Standard Ventures](docs/cases/gold_standard_takeover.md) (Nevada, FS, June 2022) | Orla Mining offered C$0.655 a share (C$242M gross) for Gold Standard, owner of South Railroad | At the FS's 10% rate the offer is consistent with odds of about 0.5 to 0.7 that South Railroad is built, depending on whether permitting takes the BLM median or the company schedule |
+| [Osino Twin Hills](docs/cases/osino_twin_hills.md) (Namibia, DFS, July 2023) | DFS NPV US$480M at 5% and US$1,750/oz | US$908M (standard error 1.8) under market prices on the DFS date; stage odds and the gold convenience yield move it most |
+| [Osino Twin Hills](docs/cases/osino_twin_hills.md), prices | Undisturbed market value (Dec 2023), Dundee and Shanjin offers | At the fairness opinion's 10.5% to 13.5% real rates and its US$1,850 gold deck, odds of roughly 0.7 to 1 that the project is built on schedule (about 0.5 to 0.85 at spot gold) |
+| [South Railroad](docs/cases/south_railroad.md) (Nevada, PFS, June 2021) | Vox Royalty paid US$2.079M for a 0.633% NSR | The implied odds depend mainly on the return the buyer required: about 0.8 to 0.9 on schedule at a royalty company's own valuation rate and gold deck (about 0.65 to 0.75 at spot gold); at the one qualifying market control, the PFS plan alone cannot account for the price |
+| [Gold Standard Ventures](docs/cases/gold_standard_takeover.md) (Nevada, FS, June 2022) | Orla Mining offered C$0.655 a share (C$242M gross) for Gold Standard, owner of South Railroad | At the FS's base 5% rate and its US$1,650 gold deck, the offer is consistent with odds of about 0.65 to 0.75 that South Railroad is built, depending on whether permitting takes the BLM median or the company schedule |
 | [Orla Mining](docs/cases/orla_sum_of_parts.md), sum of parts (Aug 2022) | Orla's market value after closing the Gold Standard acquisition | Orla traded well above the sum of its published plans, so the residual for South Railroad is an upper bound and does not identify its odds |
-| [Sorby Hills](docs/cases/sorby_hills.md) (Western Australia, silver-lead, in construction, Sept 2026) | Vox Royalty agreed to pay US$13.0M for an effective 0.75% NSR | The price equals the value of the study mine plan built on time at a 2.3% real spread: consistent with near-certain completion at royalty-company rates |
+| [Sorby Hills](docs/cases/sorby_hills.md) (Western Australia, silver-lead, in construction, Sept 2026) | Vox Royalty agreed to pay US$13.0M for an effective 0.75% NSR | Assuming the royalty covers silver and lead (an inference; Vox calls it a silver royalty), the price equals the value of the study plan built on time at a 2.3% market-consistent spread. At a royalty company's own rate and deck the price is above that value, so no odds reconcile it |
 
-The [Phase 2 back-test](docs/backtest.md) reads these cases together. Its main finding is that the required return dominates every answer.
+The [back-test](docs/backtest.md) reads these cases together. Its main finding is that the required return dominates every answer. Published values use 200,000 simulated paths; standard errors are shown in the case notes.
+
+Reference rates published by others (royalty-company impairment tests, fairness opinions, study rates) are applied the way their sources applied them, with the source's own price deck ([ADR 0045](docs/decisions/0045-reference-rate-convention.md)). An earlier version converted them to spreads incorrectly; the [changelog](CHANGELOG.md) lists the corrected values.
+
+One behaviour to keep in mind: with a zero gold convenience yield, expected gold grows at the real interest rate while costs are fixed, so delaying construction can raise a project's value ([ADR 0046](docs/decisions/0046-delay-at-zero-convenience-yield.md)).
 
 Every input carries its source and verification status in [data/priors.yaml](data/priors.yaml), [data/snapshots/](data/snapshots/) and the case files. Every judgment is a decision record in [docs/decisions/](docs/decisions/).
 
@@ -47,40 +51,53 @@ uv run python scripts/south_railroad_case.py # South Railroad tables
 
 ```python
 from pathlib import Path
-from pricedin.engine import Market, Risks, Timing, simulate
+from pricedin import defaults
+from pricedin.engine import Market, Risks, simulate
 from pricedin.inputs import load_case
+from pricedin.priors import load_priors
 from pricedin.snapshots import load_snapshot
 
 case = load_case(Path("cases/osino_twin_hills.yaml"))
 snap = load_snapshot(Path("data/snapshots/2023-07-13.yaml"))
 market = Market.from_snapshot(snap, convenience_yield=0.0)
+priors = load_priors(Path("data/priors.yaml"))
 res = simulate(
     case,
     market,
-    Timing(years_to_start=1, max_wait=5),
-    Risks(stage_odds=0.88, build_rule=True),
-    n_paths=10_000,
+    defaults.timing(priors, case.id),
+    Risks(
+        stage_odds=defaults.stage_odds(priors, case.study.stage),
+        overrun=defaults.overrun(priors, case.study.stage),
+        build_rule=True,
+    ),
+    n_paths=200_000,
     seed=1,
 )
-print(res.estimate(res.project_value))  # (mean, Monte Carlo standard error), US$ million
+print(res.estimate(res.project_value))  # (908.2, 1.8): mean and standard error, US$ million
 ```
 
 The app is live at [priced-in.streamlit.app](https://priced-in.streamlit.app/). To run it locally: `uv sync --extra app` then `uv run streamlit run app/streamlit_app.py`. Every number in the back-test: `uv run python scripts/backtest.py`.
+
+Market snapshots (`data/snapshots/`) hold derived values only. Gold volatilities come from a vendor's daily gold prices (Alpha Vantage), which are not redistributed; `scripts/realised_vol.py` recomputes a snapshot volatility from a downloaded copy of that series.
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `src/pricedin/` | Engine: inputs, priors, price models, project cash flow, simulation, inversion, controls, multi-metal royalty cases, transaction dataset, waterfall, sensitivities |
-| `cases/` | Study cash-flow tables transcribed with page references |
+| `src/pricedin/` | `inputs`, `priors`, `defaults` (settings read from the priors registry), `price_models`, `schwartz_smith` (two-factor model and Kalman filter), `project` (cash flow), `engine` (simulation and claims), `lsm` (least-squares Monte Carlo), `switching` (Brennan-Schwartz mine), `inversion`, `controls`, `royalty_cases` (multi-metal royalties), `sum_of_parts`, `transactions`, `report` (waterfalls), `sensitivity` |
+| `cases/` | Study cash-flow tables transcribed with page references, and the input template |
 | `controls/` | Producing-royalty purchases used to calibrate the buyer's required return |
-| `data/` | Priors registry, market snapshots, royalty transaction dataset, digitised ramp-up curves |
-| `docs/` | Methodology, calibration, sources register, case write-ups, decision records, project state |
+| `data/` | Priors registry, market snapshots, royalty transaction dataset, sum-of-parts inputs, benchmark values, digitised ramp-up curves |
+| `docs/` | Methodology, calibration, sources register, case write-ups, back-test, decision records, roadmap |
 | `scripts/`, `app/` | Reproducible case tables and the Streamlit app |
 
 ## Status
 
-Phases 1 (forward engine) and 2 (price adapters, inversion and the public back-test) are complete; ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 3 (Longstaff-Schwartz build decision, multi-asset and multi-metal projects) is next. See [docs/ROADMAP.md](docs/ROADMAP.md).
+Phases 1 (forward engine) and 2 (price adapters, inversion and the public back-test) are complete and released (v0.1.0, v0.2.0). The Phase 3 work is merged but not yet released: the least-squares Monte Carlo build decision (checked against QuantLib and a replication of Brennan and Schwartz 1985), the order-independent waterfall, gold streams, the Schwartz-Smith two-factor model, the Gold Standard takeover and the Orla sum of parts. Calibration to copper futures and a uranium deck are deferred (ADR 0042). Ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). See [docs/ROADMAP.md](docs/ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
+
+## How this was built
+
+I designed this project and made or approved every modelling choice; each is recorded with its reasons in [docs/decisions/](docs/decisions/). I used AI assistants (Anthropic's Claude) to research sources, write and test code, and draft documents, under my direction and review. The commit history shows this: some commits carry co-author lines from those tools. Every number traces to a source or a script in this repository, and the tests check the engine against published results.
 
 ## Development
 

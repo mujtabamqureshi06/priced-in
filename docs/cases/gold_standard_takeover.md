@@ -52,23 +52,25 @@ As for Osino, each price is shown against a real spread on net project cash flow
 
 | Real spread | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
 |---|---|---|---|---|
-| 0% | 0.30 | 0.32 | 0.30 | 0.29 |
-| 4% | 0.42 | 0.50 | 0.38 | 0.39 |
-| 8% | 0.58 | 0.80 | 0.47 | 0.53 |
-| 12% | 0.80 | above 1 | 0.59 | 0.73 |
-| 15% | above 1 | above 1 | 0.69 | 0.95 |
-| Break-even | 14.9% | 9.7% | 22.1% | 15.5% |
+| 0% | 0.29 | 0.30 | 0.30 | 0.28 |
+| 4% | 0.41 | 0.46 | 0.38 | 0.37 |
+| 8% | 0.57 | 0.72 | 0.47 | 0.50 |
+| 12% | 0.79 | above 1 | 0.59 | 0.67 |
+| 15% | 0.99 | above 1 | 0.69 | 0.86 |
+| Break-even | 15.1% | 10.8% | 22.1% | 16.8% |
 
-Reference points, as real rates converted to spreads:
+The study's own rates are read the way the study used them: gold flat at the FS deck of US$1,650, discounted at the rate, with this engine's stage and overrun risks on top (ADR 0045).
 
-| Reference rate | Spread | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
-|---|---|---|---|---|---|
-| FS 5% | 4.6% | 0.44 | 0.54 | 0.39 | 0.40 |
-| FS 10% | 9.6% | 0.66 | 0.98 | 0.52 | 0.60 |
+| Study rate, gold flat at US$1,650 | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
+|---|---|---|---|---|
+| FS base case, 5% | 0.74 | 0.93 | 0.64 | 0.70 |
+| FS sensitivity table, 10% | no solution | no solution | 0.87 | 0.98 |
 
-The timing assumption matters as much as the spread. Under the 4-year prior, the market value before the offer is consistent with certain passage at a real spread of about 10%. Under the company's schedule, the same price needs a spread of about 15%. One price cannot separate the odds from the timing, so both are reported.
+The timing assumption matters as much as the rate. Under the 4-year prior, the market value before the offer is consistent with certain passage at a market-consistent real spread of about 11%. Under the company's schedule, the same price needs a spread of about 17%. One price cannot separate the odds from the timing, so both are reported.
 
-`scripts/gsv_takeover.py` regenerates every figure (20,000 paths, seed 1).
+The undisturbed reading uses the equity claim, floored at zero on each path (ADR 0047). The floor raised its break-even spread from 10.0% to 10.8% (4 years) and from 15.5% to 16.8% (1 year). The offer uses the project claim, which is not floored.
+
+`scripts/gsv_takeover.py` regenerates every figure (200,000 paths, seed 1).
 
 ## Outcome tracking
 

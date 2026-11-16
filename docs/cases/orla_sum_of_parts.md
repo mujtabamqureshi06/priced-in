@@ -25,13 +25,13 @@ Exploration ground and resources outside the study plans are valued at zero. Tha
 
 | Real spread | Camino Rojo | South Railroad price | South Railroad value if built on schedule | Implied odds |
 |---|---|---|---|---|
-| 0% | 838.0 | 297.3 to 528.6 | 529.5 | 0.56 to 1.00 |
-| 4% | 723.7 | 411.7 to 643.0 | 373.3 | above 1 |
-| 8% | 633.6 | 501.8 to 733.1 | 266.7 | above 1 |
-| 12% | 561.6 | 573.8 to 805.1 | 192.6 | above 1 |
-| 15% | 516.7 | 618.6 to 849.9 | 151.7 | above 1 |
+| 0% | 838.0 | 297.3 to 528.6 | 538.1 | 0.55 to 0.98 |
+| 4% | 723.7 | 411.7 to 643.0 | 379.5 | above 1 |
+| 8% | 633.6 | 501.8 to 733.1 | 271.3 | above 1 |
+| 12% | 561.6 | 573.8 to 805.1 | 196.0 | above 1 |
+| 15% | 516.7 | 618.6 to 849.9 | 154.5 | above 1 |
 
-The band comes from Cerro Quema: its low end takes Cerro Quema at its study NPV, its high end at zero. South Railroad's value uses the 2022 feasibility study and the 4-year timing prior (ADR 0043).
+The band comes from Cerro Quema: its low end takes Cerro Quema at its study NPV, its high end at zero. South Railroad's value uses the 2022 feasibility study and the 4-year timing prior (ADR 0043), read against the project claim (ADR 0047).
 
 ## Reading
 
@@ -39,7 +39,7 @@ At any positive spread, the residual is larger than South Railroad would be wort
 
 For South Railroad itself, the single-asset reading of Orla's offer (`docs/cases/gold_standard_takeover.md`) is the one to use. This case shows the limit of the method for a producer with large unplanned resources. It does not claim the market price is wrong.
 
-`scripts/orla_sum_of_parts.py` regenerates every figure (20,000 paths, seed 1). Inputs and their sources are in `data/sum_of_parts/orla_2022-08-12.yaml`.
+`scripts/orla_sum_of_parts.py` regenerates every figure (200,000 paths, seed 1). Inputs and their sources are in `data/sum_of_parts/orla_2022-08-12.yaml`.
 
 ## Limits
 

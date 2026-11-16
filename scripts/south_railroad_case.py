@@ -1,4 +1,9 @@
-"""Regenerate the South Railroad illustration (ADR 0028). Prints Markdown tables.
+"""Regenerate the South Railroad illustration (ADRs 0028, 0045). Prints Markdown tables.
+
+Reference rates (Osisko) are read the way their source applied them: gold flat in
+real terms at spot, discounted at the stated rate (ADR 0045). The spread curve and the
+break-even spread are in market-consistent mode. The Wharf control is a
+market-consistent spread already.
 
 Usage: uv run python scripts/south_railroad_case.py
 """
@@ -8,18 +13,24 @@ from __future__ import annotations
 from dataclasses import replace
 from pathlib import Path
 
+from pricedin import defaults
 from pricedin.controls import implied_spread, load_control
-from pricedin.engine import Market, Overrun, Risks, RoyaltyClaim, Timing, fixed_nominal_advance
+from pricedin.engine import Market, Risks, RoyaltyClaim, fixed_nominal_advance
 from pricedin.inputs import load_case
 from pricedin.inversion import break_even_spread, royalty_frontier, zero_delay_odds_curve
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.priors import load_priors
+from pricedin.sensitivity import delay_text, delay_threshold
 from pricedin.snapshots import load_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
-N, SEED = 20_000, 1
+N, SEED = 200_000, 1  # published tables (standard errors shown)
 PRICE = 2079.0  # US$ thousands, ADR 0020
 PRICE_CAPITALISED = 2317.0
-OSISKO_POST_TAX, OSISKO_TAX = 0.035, 0.265  # Osisko 2020 audited statements, Notes 19, 26
+# Osisko Gold Royalties, 2020 audited statements: goodwill test (fair value less costs of
+# disposal) at a post-tax real rate of 3.5% with long-term gold at US$1,600; statutory
+# tax rate 26.5%.
+OSISKO_POST_TAX, OSISKO_TAX = 0.035, 0.265
+OSISKO_DECK = 1600.0
 
 
 def _odds(q: float) -> str:
@@ -33,10 +44,8 @@ def main() -> None:
     snap = load_snapshot(ROOT / "data" / "snapshots" / "2021-06-07.yaml")
     market = Market.from_snapshot(snap, convenience_yield=0.0)
     r = snap.value("real_yield_10y")
-    dist = priors.get("capex.overrun.pfs").distribution
-    assert isinstance(dist, ShiftedLognormal)
-    risks = Risks(overrun=Overrun(dist, 0.914), build_rule=True)
-    timing = Timing(years_to_start=4, max_wait=5)
+    risks = Risks(overrun=defaults.overrun(priors, case.study.stage), build_rule=True)
+    timing = defaults.timing(priors, "south_railroad")
     amr, infl = fixed_nominal_advance(
         120_000, snap.value("usdcad"), snap.value("cad_nominal_10y"), r, 1_000
     )
@@ -50,23 +59,37 @@ def main() -> None:
         wharf.gold_spot.value,
         wharf.real_rate.value,
     )
-    anchors = {
-        "Osisko raw (post-tax 3.5%)": OSISKO_POST_TAX - r,
-        "Osisko pre-tax equivalent (4.76%)": OSISKO_POST_TAX / (1 - OSISKO_TAX) - r,
-        "Wharf control": s_wharf,
+    spot = snap.value("gold_spot")
+    references = {
+        "Osisko post-tax 3.5%": OSISKO_POST_TAX,
+        "Osisko pre-tax equivalent 4.76%": OSISKO_POST_TAX / (1 - OSISKO_TAX),
     }
     be = break_even_spread(case, market, timing, risks, claim, PRICE, n_paths=N, seed=SEED)
     be_cap = break_even_spread(
         case, market, timing, risks, claim, PRICE_CAPITALISED, n_paths=N, seed=SEED
     )
     print(f"Break-even spread (US$2.079M): {be:.4f}; (US$2.317M): {be_cap:.4f}")
-    print("\n| Anchor | Real spread | Zero-delay odds |\n|---|---|---|")
-    for name, s in anchors.items():
-        q = zero_delay_odds_curve(
-            case, market, timing, risks, claim, PRICE, (s,), n_paths=N, seed=SEED
-        )[0][1]
-        shown = f"{q:.2f}" if q <= 1 else "no solution (price above certain-build value)"
-        print(f"| {name} | {s:.2%} | {shown} |")
+    print("\n| Reference | Method | Rate | Zero-delay odds (std. error) |\n|---|---|---|---|")
+    for name, k in references.items():
+        for gold, label in ((OSISKO_DECK, "Osisko's deck"), (spot, "spot")):
+            fr = royalty_frontier(
+                case,
+                Market.flat(gold, k),
+                timing,
+                risks,
+                claim,
+                PRICE,
+                max_delay=0,
+                n_paths=N,
+                seed=SEED,
+            )
+            p = fr.points[0]
+            shown = f"{p.gate_odds:.2f} ({p.gate_odds_se:.3f})" if p.solvable else "no solution"
+            print(f"| {name} | gold flat at {label} US${gold:,.0f} | {k:.2%} | {shown} |")
+    q = zero_delay_odds_curve(
+        case, market, timing, risks, claim, PRICE, (s_wharf,), n_paths=N, seed=SEED
+    )[0][1]
+    print(f"| Wharf control | market-consistent spread | {s_wharf:.2%} | {_odds(q)} |")
 
     grid = tuple(x / 100 for x in range(0, 21, 2))
     print("\n| Real spread | Zero-delay odds, credited | Not credited |\n|---|---|---|")
@@ -88,13 +111,13 @@ def main() -> None:
         print(f"| {s:.0%} | {_odds(q1)} | {_odds(q2)} |")
 
     for label, c in (("credited", claim), ("not credited", replace(claim, amr_credited=False))):
-        for name in ("Osisko raw (post-tax 3.5%)", "Osisko pre-tax equivalent (4.76%)"):
+        for name, k in references.items():
             fr = royalty_frontier(
                 case,
-                market,
+                Market.flat(OSISKO_DECK, k),
                 timing,
                 risks,
-                replace(c, spread=anchors[name]),
+                c,
                 PRICE,
                 max_delay=10,
                 n_paths=N,
@@ -107,10 +130,22 @@ def main() -> None:
             cbd = fr.certain_build_delay
             cbd_text = "none within 10 years" if cbd is None else f"{cbd:.1f} years"
             print(
-                f"\nFrontier at {name}, advances {label}: shape {fr.shape}; "
-                f"certain-build delay {cbd_text}"
+                f"\nFrontier at {name} (gold flat at Osisko's deck), advances {label}: "
+                f"shape {fr.shape}; certain-build delay {cbd_text}"
                 f"\n  delay: odds -> {pts}"
             )
+
+    d = delay_threshold(
+        case,
+        spot,
+        r,
+        snap.value("realised_vol_10y"),
+        timing,
+        risks,
+        n_paths=50_000,
+        seed=SEED,
+    )
+    print(f"\nProject value, every gate passed (ADR 0046). {delay_text(d)}")
 
 
 if __name__ == "__main__":

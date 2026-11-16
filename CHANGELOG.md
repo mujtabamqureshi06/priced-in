@@ -4,11 +4,34 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Fixed (erratum)
+- **Reference rates were converted to spreads incorrectly** (ADR 0045). Third-party rates (Osisko's and OR Royalties' impairment-test rates, the Eight Capital fairness opinion, the studies' own rates, the CIM survey, Lopatnikov and Rumyantsev) were applied as a spread of k less the real risk-free rate. Those rates were set against flat real price decks, while the engine's metal prices rise at the real rate. For a revenue claim the equivalent spread is k(1 + r), not k - r, so the old readings overstated spreads when the real rate was negative and understated them when it was positive. Reference rates are now applied the way their sources applied them: prices flat in real terms at the source's own deck (or at spot where none is stated), discounted at the stated rate. Corrected values:
+
+  | Result | Published in v0.2.0 and later | Corrected |
+  |---|---|---|
+  | South Railroad, Osisko 3.5% to 4.76% | odds 0.72 to 0.80 | 0.80 to 0.89 at Osisko's US$1,600 deck; 0.66 to 0.74 at spot |
+  | Osino undisturbed value, Eight Capital 10.5% to 13.5% | 0.38 to 0.53 | 0.69 to 0.98 at its US$1,850 deck; 0.48 to 0.64 at spot |
+  | Osino, Dundee offer | 0.40 to 0.51 | 0.72 to 0.98; 0.53 to 0.69 at spot |
+  | Osino, Shanjin offer | 0.48 to 0.62 | 0.92 to no solution; 0.67 to 0.86 at spot |
+  | Sorby Hills, OR Royalties 5.1% | 0.99 | no solution: the price is above the value of the plan built on time, at OR's deck and at spot |
+  | Gold Standard offer, FS 5% and 10% (in #97, unreleased) | 0.39 to 0.66 | 0.64 to 0.74 at 5%; no solution or 0.87 at 10%, depending on timing |
+
+  The break-even spreads, which use no reference rate, are unchanged apart from Monte Carlo noise. The back-test's statement that implied odds rise with stage was removed: the rows use different claims and rates and cannot be ranked.
+- Published tables now use 200,000 paths, and the standard errors are shown. At 20,000 paths, Osino's headline value (US$899M) was one draw with a standard error of 5.8; it is now US$908M (standard error 1.8). Published break-even spreads moved by up to 0.2 points from the path count.
+- The equity claim is floored at zero on each path (limited liability, ADR 0047). Takeover prices are read against the unfloored project claim (`inversion.project_frontier`). The floor raised the break-even spreads of the equity readings: Osino undisturbed from 16.9% to 18.2%, Gold Standard undisturbed from 10.0% to 10.8% (4-year timing) and from 15.5% to 16.8% (1-year).
+- Osisko's and OR Royalties' rates are labelled as goodwill-test rates on fair value less costs of disposal, not value in use. Other corrections:
+  - average real overrun 15.2%, not "about 14%";
+  - Brennan and Schwartz: sixteen published values, not eight;
+  - the in-sample bias of the replication is not one-sided.
+- Samis et al. (2006) and Schwartz (1997) were cited from secondary sources. The discounting rule now cites Samis, Davis and Laughton (2007), read in full. The gold-model rationale cites Brennan and Schwartz (1985).
+
 ### Changed
 - Work items are now GitHub issues (#48 to #94); documents, decision records and code refer to issue numbers. The Brennan and Schwartz (1985) benchmark values were checked against the original article (status V).
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- `Market.flat` for reading a price at a third-party rate (ADR 0045); `pricedin.defaults` reads stage odds, overrun, equity financing and base timing from the priors registry by id, and gives no default stage odds for a PEA-stage case. `pricedin.sensitivity.delay_threshold` reports where delay stops adding project value (ADR 0046).
+- Input validation in `Market`, `Timing`, `RoyaltyClaim` and `StreamClaim`; a case template that matches the schema, with a test that loads a filled template; economic sanity tests; CI runs the app test.
 - Sum-of-parts adapter (#75, ADR 0044): `pricedin.sum_of_parts` (producing-asset value at the expected gold price, residual band, treasury method); Orla Mining at August 12, 2022 in `data/sum_of_parts/orla_2022-08-12.yaml`, `scripts/orla_sum_of_parts.py` and `docs/cases/orla_sum_of_parts.md`; market snapshot for 2022-08-12.
 - Gold Standard Ventures takeover case (#81, ADR 0043): `cases/south_railroad_fs2022.yaml` (the 2022 feasibility study, Table 22-7), market snapshot for 2022-06-10, `scripts/gsv_takeover.py` and the write-up `docs/cases/gold_standard_takeover.md`. Schedule-mode cases can now use mid-year discounting (`project.period_times`). New timing prior `timing.years_to_start.south_railroad_fs2022`.
 - Schwartz-Smith two-factor model (#77, ADR 0042): `pricedin.schwartz_smith` with futures pricing, exact state transition, Kalman-filter likelihood and maximum-likelihood fitting; synthetic-recovery test. SciPy added as a dependency. Phase 3 exit amended (ADR 0042).
@@ -43,7 +66,7 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 - App (#65): `app/streamlit_app.py` with valuation, royalty price, timing and assumptions views; optional extra `app` (`uv sync --extra app`). Smoke test runs both cases when Streamlit is installed.
 - Sensitivities and readout (#63): `pricedin.sensitivity` (tornado, build-year distribution, template readout). Osino Twin Hills forward valuation write-up (`docs/cases/osino_twin_hills.md`) and `scripts/osino_case.py` (#64).
 - Equity claim (#61, ADR 0030): `engine.Financing` and `Results.equity_value`; priors `equity.issue_discount` (Carpentier and Suret 2009) and `equity.debt_fraction`. ADR 0029: ramp-up not modelled in the public cases.
-- ADR 0028: South Railroad presented as an illustration across the buyer's spread, with the Osisko impairment rate and the Wharf control as reference points. `inversion.break_even_spread`, `zero_delay_value`, `zero_delay_odds_curve`. Draft case write-up `docs/cases/south_railroad.md` (owner review before publication) and `scripts/south_railroad_case.py`.
+- ADR 0028: South Railroad presented as an illustration across the buyer's spread, with the Osisko impairment rate and the Wharf control as reference points. `inversion.break_even_spread`, `zero_delay_value`, `zero_delay_odds_curve`. Case write-up `docs/cases/south_railroad.md` and `scripts/south_railroad_case.py`.
 - Waterfall (#62): `pricedin.report.project_waterfall` steps from the study NPV through discounting, market prices, base timing, overrun, ramp-up (labelled not modelled), stage failure, and price uncertainty with the build decision, on common paths. Steps sum exactly to the total.
 - Producing-royalty controls (`pricedin.controls`): implied real spread in market-consistent mode, analyst-mode implied rate, Tier 2 schedules from reserves and rate. First control file `controls/wharf.yaml` (Metalla, 2020), all values sourced. ADR 0027: the futures check is replaced by the same-y gold-control condition.
 - ADR 0026: control criteria amended (share consideration at closing-date fair value; two-tier mine-plan test; one-control rule).

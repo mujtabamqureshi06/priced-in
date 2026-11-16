@@ -119,3 +119,14 @@ def test_royalty_odds_rise_with_price_paid(case: Case) -> None:
         for price in (2_000.0, 4_000.0, 6_000.0)
     ]
     assert odds[0] < odds[1] < odds[2]
+
+
+def test_delay_raises_value_at_zero_convenience_yield(case: Case) -> None:
+    """Documented behaviour (ADR 0046): in market-consistent mode with zero convenience
+    yield, expected gold grows at the real rate while costs are fixed, so delay raises
+    project value. A large enough convenience yield reverses it."""
+    t0, t3 = Timing(years_to_start=1), Timing(years_to_start=4)
+    rising = Market.market_consistent(1800.0, 0.02, 0.0, 0.15)
+    assert _value(case, rising, t3, Risks()) > _value(case, rising, t0, Risks())
+    falling = Market.market_consistent(1800.0, 0.02, 0.05, 0.15)
+    assert _value(case, falling, t3, Risks()) < _value(case, falling, t0, Risks())

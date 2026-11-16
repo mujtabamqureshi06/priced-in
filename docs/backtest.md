@@ -15,7 +15,7 @@ The full method is in `docs/methodology.md`. The steps that matter here:
 1. **Market-consistent values.** Metal prices follow geometric Brownian motion with drift equal to the real risk-free rate less a convenience yield. Cash flows are discounted at the real risk-free rate plus a stated spread (ADRs 0012, 0024). There is no distribution of NPVs at a risk-adjusted rate (Davis 1995).
 2. **Odds are linear in value.** Paths that fail a stage gate pay nothing except any advance royalties, so for each added delay the implied odds have a closed form: price less the value on failing paths, divided by the value on passing paths less the value on failing paths (ADR 0023).
 3. **One price, two unknowns.** A price cannot separate odds from timing. Every result is a frontier of odds against delay, summarised by the zero-delay odds (ADR 0023).
-4. **The required return.** It is not observed. Each result is shown across a range of real spreads. It is marked at the break-even spread, where the price equals the value of certain, on-schedule construction, and at reference rates converted to spreads at each deal's date (ADRs 0028, 0032, 0035).
+4. **The required return.** It is not observed. Each result is shown across a range of real spreads. It is marked at the break-even spread, where the price equals the value of certain, on-schedule construction. Third-party reference rates are applied the way their sources applied them: prices flat in real terms at the source's own deck (or at spot where none is stated), discounted at the stated rate, with this engine's risks on top (ADR 0045).
 5. **Claims match prices.**
    - A royalty price is compared with the royalty claim.
    - An undisturbed market value is compared with the equity claim, with dilution and corporate costs.
@@ -44,15 +44,15 @@ Market inputs are dated snapshots in `data/snapshots/`. No observation postdates
 
 ## 4. Results
 
-| Case | Claim | Break-even real spread | Reference rate (converted at the deal date) | Zero-delay implied odds at the reference |
+| Case | Claim | Break-even real spread (market-consistent) | Reference rate, applied as its source did (ADR 0045) | Zero-delay implied odds at the reference |
 |---|---|---|---|---|
-| South Railroad (PFS) | Royalty with advance royalties | 8.3% | Osisko 2020, 3.5% post-tax real: 4.3% raw, 5.6% pre-tax | 0.72 to 0.80 |
-| Osino, undisturbed (DFS) | Equity, diluted, less G&A | 16.8% | Eight Capital fairness opinion, 10.5% to 13.5% real: 8.8% to 11.8% | 0.38 to 0.53 |
-| Osino, Dundee offer | Project | 19.6% | Same | 0.40 to 0.51 |
-| Osino, Shanjin offer | Project | 17.2% | Same | 0.48 to 0.62 |
-| Sorby Hills (construction) | Royalty, all payable metals | 2.3% | OR Royalties 2025, 5.1% post-tax real: 2.2% raw, 4.0% pre-tax | 0.99 at the raw rate; at the pre-tax rate the price is above the certain value |
+| South Railroad (PFS) | Royalty with advance royalties | 8.4% | Osisko 2020, 3.5% post-tax and 4.76% pre-tax real, gold flat at Osisko's US$1,600 (at spot US$1,898) | 0.80 to 0.89 (0.66 to 0.74) |
+| Osino, undisturbed (DFS) | Equity, diluted, less G&A | 18.2% | Eight Capital fairness opinion, 10.5% to 13.5% real, gold flat at its US$1,850 (at spot) | 0.69 to 0.98 (0.48 to 0.64) |
+| Osino, Dundee offer | Project | 19.7% | Same | 0.72 to 0.98 (0.53 to 0.69) |
+| Osino, Shanjin offer | Project | 17.3% | Same | 0.92 to no solution (0.67 to 0.86) |
+| Sorby Hills (construction) | Royalty; assumes it covers silver and lead (an inference) | 2.3% | OR Royalties 2025, 5.1% post-tax and 6.94% pre-tax real, silver flat at OR's US$42, lead at spot (and both at spot) | no solution: the price is above the value of the plan built on time |
 
-Royalty spreads and project-level spreads are not the same quantity. A royalty carries no capital or operating cost risk; the project claim does. The two kinds of reference rate are therefore not comparable across rows. Within each row, the reading is the same: what the odds are at the stated required return.
+Royalty spreads and project-level spreads are not the same quantity. A royalty carries no capital or operating cost risk; the project claim does. The reference rates are therefore not comparable across rows, and the rows cannot be ranked by stage. Within each row, the reading is the same: what the odds are at the stated required return. The break-even spreads come from 200,000 paths and carry standard errors under 0.2 points.
 
 ### What happened afterwards (outcome tracking only)
 
@@ -64,18 +64,18 @@ None of these outcomes is used in any valuation.
 
 ## 5. Control behaviour
 
-**Wharf.** The one qualifying producing-royalty purchase implies a 15.8% real spread (ADR 0026). That is far above the 2% to 6% the royalty companies' own impairment-test rates give once converted to spreads. Four reasons, all stated with the control:
+**Wharf.** The one qualifying producing-royalty purchase implies a 15.8% market-consistent real spread (ADR 0026). That is far above the royalty companies' own impairment-test rates (3.5% to 5.1% post-tax real), which correspond to spreads of about the same size for a royalty (ADR 0045). Four reasons, all stated with the control:
 
 1. Its cash flows are built from reserves only, so the spread is an upper bound on the true one (a lower bound on value).
 2. 81% of the price was paid in the buyer's shares.
 3. It is one deal on one date.
-4. The impairment rates are value-in-use rates for royalties a company already holds, not purchase prices.
+4. The impairment rates are goodwill-test rates (fair value less costs of disposal) for royalties a company already holds, applied to the company's own price deck; they are not purchase prices.
 
 The deviation is explained rather than resolved. A second control remains open (ADR 0028).
 
 **White Dam.** It was planned as a second control, but it cannot be one. At the deal date there was no published mine plan for the royalty ground (ADR 0034).
 
-**Sorby Hills as the high-odds check.** The build plan expected a funded project in construction to imply near-certain odds. At royalty-company rates converted to the deal date, it does: odds of 0.99, or a price above the certain value at the pre-tax rate. That holds only if the royalty covers all payable metals. A silver-only reading cannot reproduce the price at any spread (ADR 0035).
+**Sorby Hills as the high-odds check.** The build plan expected a funded project in construction to imply near-certain odds. It does not at royalty-company rates. At OR Royalties' 5.1% on its own silver deck, and at spot prices, the value of the FEED plan built on time is below the price, so no odds solve. The price equals that value only at a market-consistent spread of 2.3%, and only if the royalty covers silver and lead; on a silver-only reading no spread reproduces it (ADR 0035). The deviation is reported, not explained away: the readings in the case note (a lower required return, value beyond the FEED plan, higher expected prices, a wider royalty base) cannot be separated by the price alone.
 
 ## 6. Synthetic recovery
 
@@ -92,10 +92,7 @@ Each test also checks the cases with no solution: a price above the certain, on-
 **They say:**
 
 1. **The required return dominates.** In every case, moving the spread across a plausible range moves the implied odds more than any other input. A price can only be read jointly with a stated required return. That is why every result is a curve, with the break-even marked.
-2. **The ordering by stage is as expected.** At reference rates converted to each deal's date, implied odds rise with stage:
-   - about 0.7 to 0.8 for a PFS-stage royalty;
-   - about 0.4 to 0.6 for a DFS-stage developer and its bidders, on project-level spreads that also price capital and operating risk;
-   - about 1 for a funded project in construction.
+2. **The cases cannot be ranked by stage.** The three cases use different claims and reference rates, so their implied odds are not comparable across rows.
 3. **Delay is cheap for royalties.** For a royalty valued at market prices, waiting costs the holder only the spread plus the convenience yield, so moderate delays change the implied odds by a few points per year.
 
 **They do not say:**
@@ -110,12 +107,12 @@ The numbers are not "the market's odds". They are the odds consistent with each 
 ## 8. Limits
 
 1. **Few cases.** Two royalties, one project with three equity prices, and one control.
-2. **Reference rates.** They come from accounting disclosures and a fairness opinion, not from observed purchase prices, and the conversion to pre-tax rates is approximate.
+2. **Reference rates.** They come from accounting disclosures, a fairness opinion and the studies, not from observed purchase prices. Each is applied with its source's own price deck where one is stated (ADR 0045), and the gross-up to pre-tax rates is approximate.
 3. **Value beyond the study mine plan is not modelled.** It would raise the value and lower the implied odds. Resources outside the plan exist at South Railroad and Sorby Hills.
 4. **Convenience yields are zero by default.** The break-even spread moves by about one point per point of yield (Sorby Hills sensitivity).
 5. **Ramp-up is not modelled** (ADR 0029). Time runs in whole years.
 6. **Some price inputs are secondary** (status P): vendor gold and silver series, and a secondary publication of LME lead prices.
-7. **Osino's July 2023 developer value is not yet computed.** The circular gives the July 2023 trading range (C$1.07 to C$1.20, p. 109), but the last balance sheet published before that date (March 31, 2023) has not yet been retrieved.
+7. **Osino's July 2023 developer value is not yet computed.** The circular gives the July 2023 trading range (C$1.07 to C$1.20, p. 109), and Osino's March 31, 2023 statements, the last published before that date, have now been retrieved; the reading is tracked in #90.
 
 ## 9. Reproduce
 
@@ -127,7 +124,7 @@ The numbers are not "the market's odds". They are the odds consistent with each 
 - `scripts/sorby_hills_case.py`;
 - the dataset summary.
 
-Fixed seeds; about 15 seconds.
+Fixed seeds; 200,000 paths; about three minutes.
 
 ## Sources
 

@@ -38,6 +38,8 @@ At zero spread and zero convenience yield, the LSM rule waits to the end of the 
 | LSM, valuation rate (-0.82%) | 0.742 (0.003) | 0.830 (0.003) | 0.93 | 4.71 |
 | LSM, study 5% | 0.725 (0.002) | 0.808 (0.003) | 0.95 | 4.19 |
 
+Re-run under ADR 0045 (200,000 paths), at the market-consistent spreads equivalent for revenue to Osisko's 3.5% and 4.76%, k(1 + r): fixed rule 0.663 and 0.738; optimal rule at the valuation rate 0.682 and 0.762; optimal rule at the study's 5% 0.671 and 0.748. The gap between the rules at a common decision rate stays about 1 point.
+
 Most of the gap comes from the decision rate. At a common decision rate, the optimal rule defers construction on low-price paths. That is a measured value of waiting of about 1 point of implied odds.
 
 ## Limits

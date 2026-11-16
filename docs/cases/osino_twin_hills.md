@@ -33,12 +33,12 @@ With every risk off, the study deck and the study's 5% rate, the engine reproduc
 | Discounting at the valuation rate (1.52% real instead of 5%) | 636.2 | +156.2 | 0.0 |
 | Market gold prices (spot US$1,960.61 with its market drift, instead of US$1,750 flat) | 1,074.6 | +438.4 | 0.0 |
 | Base timing (one year later) | 1,093.3 | +18.7 | 0.0 |
-| Capital cost overrun | 1,038.3 | -55.0 | 1.0 |
-| Ramp-up | 1,038.3 | 0.0 | not modelled |
-| Stage failure | 910.0 | -128.3 | 2.6 |
-| Price uncertainty and build decision | 899.0 | -11.0 | 5.8 |
+| Capital cost overrun | 1,038.5 | -54.8 | 0.3 |
+| Ramp-up | 1,038.5 | 0.0 | not modelled |
+| Stage failure | 914.2 | -124.2 | 0.8 |
+| Price uncertainty and build decision | 908.2 | -6.1 | 1.8 |
 
-For Osino Twin Hills, the engine values the project at US$899 million against the study's US$480 million (+87%). The largest single step is market gold prices, which raise value by US$438 million.
+For Osino Twin Hills, the engine values the project at US$908 million (standard error 1.8) against the study's US$480 million (+89%). Across seeds 1 to 5 the value runs from 908.2 to 910.7, within two standard errors of each other. The largest single step is market gold prices, which raise value by US$438 million. The last step, price uncertainty and the build decision, is small: -6.1 with a standard error of 1.8.
 
 Why the engine's value is so far above the DFS NPV: it prices gold risk at market terms but carries no extra return for any other risk the project bears, beyond the stage odds and overrun it simulates. A buyer's or investor's required return for those other risks is not in this number; the bid section below shows how much it matters.
 
@@ -50,24 +50,24 @@ In a sequential waterfall, each risk's step depends on which risks were switched
 
 | Risk step | Sequential | Shapley (std. error) |
 |---|---|---|
-| Base timing | +18.7 | +19.0 (3.5) |
-| Capital cost overrun | -55.0 | -51.9 (0.9) |
-| Stage failure | -128.3 | -128.8 (2.5) |
-| Price uncertainty and build decision | -11.0 | -13.8 (3.5) |
+| Base timing | +18.7 | +16.6 (1.1) |
+| Capital cost overrun | -54.8 | -52.0 (0.3) |
+| Stage failure | -124.2 | -125.6 (0.8) |
+| Price uncertainty and build decision | -6.1 | -5.5 (1.1) |
 
 The ranking does not change. Stage failure is the largest risk step under either method.
 
 ## Equity claim
 
-Existing shareholders' share of project value, after the transfer to new investors when initial capital is raised at a 10.54% discount: US$856 million with all-equity funding (the dilution upper bound), US$867 million with 30% debt and US$879 million with 60% debt (ADR 0030). Underwriting fees are not modelled.
+Existing shareholders' share of project value, after the transfer to new investors when initial capital is raised at a 10.54% discount: US$881 million with all-equity funding (the dilution upper bound), US$891 million with 30% debt and US$902 million with 60% debt (ADR 0030). Existing holders' value is floored at zero on each path (ADR 0047). Underwriting fees are not modelled.
 
 ## When the project is built
 
 | Build timing | Share of paths |
 |---|---|
-| Year 1 (on the assumed schedule) | 87.6% |
+| Year 1 (on the assumed schedule) | 88.0% |
 | Later years, deferred by the build rule | under 0.1% each |
-| Never built | 12.4% |
+| Never built | 12.0% |
 
 Nearly all the "never built" share comes from the stage gate (12% at odds of 0.88). At spot prices well above the DFS deck, the build rule almost never defers.
 
@@ -75,17 +75,19 @@ Nearly all the "never built" share comes from the stage gate (12% at odds of 0.8
 
 | Input | Low | High | Value at low | Value at high | Swing |
 |---|---|---|---|---|---|
-| Stage odds | 0.75 (AMC, practitioner) | 0.95 (stress) | 760.2 | 974.5 | 214.2 |
-| Convenience yield | 0% (base) | 1% | 899.0 | 752.3 | 146.7 |
-| Capital overrun | off | on (base) | 947.1 | 899.0 | 48.1 |
-| Base timing | 0 years | 2 years | 879.6 | 910.5 | 31.0 |
-| Volatility | GVZ 12.7% | 20% | 901.8 | 880.8 | 21.0 |
-| Build window | 5 years (base) | 10 years | 899.0 | 894.5 | 4.5 |
-| Build-rule rate | study 5% (base) | 8.9% (CIM FS) | 899.0 | 899.2 | 0.2 |
+| Stage odds | 0.75 (AMC, practitioner) | 0.95 (stress) | 772.4 | 980.4 | 208.0 |
+| Convenience yield | 0% (base) | 1% | 908.2 | 760.5 | 147.7 |
+| Capital overrun | off | on (base) | 956.4 | 908.2 | 48.3 |
+| Base timing | 0 years | 2 years | 893.4 | 925.7 | 32.2 |
+| Volatility | GVZ 12.7% | 20% | 910.3 | 892.7 | 17.6 |
+| Build window | 5 years (base) | 10 years | 908.2 | 905.5 | 2.7 |
+| Build-rule rate | study 5% (base) | 8.9% (CIM FS) | 908.2 | 908.2 | 0.1 |
 
 The stage odds and the gold convenience yield dominate. Both carry flags: the stage odds come from cross-sectional copper counts (ADR 0013), and the convenience yield was not checked against futures (ADR 0027).
 
-All figures use 20,000 paths and seed 1; `scripts/osino_case.py` regenerates them.
+**Delay (ADR 0046).** With every gate passed, one year of delay raises project value by US$23.6 million at zero convenience yield and no spread, because expected gold grows at the real rate while costs are fixed. Delay stops adding value at a convenience yield of 1.07% (no spread), or at a real spread of 2.54% (zero convenience yield).
+
+All figures use 200,000 paths and seed 1; `scripts/osino_case.py` regenerates them.
 
 ## What the prices imply
 
@@ -95,26 +97,39 @@ Balance-sheet items come from Osino's interim statements at September 30, 2023, 
 - **Dundee Precious Metals offer, December 18, 2023:** C$287 million, C$279.6 million (US$208.8 million) for the project claim after net debt and option and warrant proceeds. Includes control premium and any synergies; overstates the odds on a standalone basis.
 - **Shanjin offer, February 23, 2024:** C$368 million, C$360.6 million (US$267.1 million) for the project claim. Same label.
 
-Without a calibrated project-level spread, the implied odds absorb the required return, so each price is shown against a real spread on net project cash flows (ADR 0032).
+Without a calibrated project-level spread, the implied odds absorb the required return, so each price is shown against a real spread on net project cash flows, in market-consistent mode (ADR 0032). Standard errors are under 0.002 throughout.
 
 | Real spread | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
 |---|---|---|---|
 | 0% | 0.15 | 0.19 | 0.23 |
-| 4% | 0.23 | 0.27 | 0.33 |
-| 8% | 0.35 | 0.37 | 0.46 |
-| 12% | 0.54 | 0.52 | 0.64 |
-| 15% | 0.78 | 0.67 | 0.83 |
-| Break-even | 16.8% | 19.6% | 17.2% |
+| 4% | 0.22 | 0.26 | 0.33 |
+| 8% | 0.33 | 0.37 | 0.46 |
+| 12% | 0.50 | 0.52 | 0.64 |
+| 15% | 0.68 | 0.66 | 0.82 |
+| Break-even | 18.2% | 19.7% | 17.3% |
 
-Reference points, as real rates converted to spreads on each date: the DFS's own 5% (odds 0.21, 0.25 and 0.30); the CIM survey's FS-stage gold rate of 8.9% (0.32, 0.35 and 0.42); Eight Capital's fairness-opinion rates of 10.5% to 13.5% for Twin Hills (0.38 to 0.53, 0.40 to 0.51 and 0.48 to 0.62; constant-dollar cash flows at US$1,850 gold, so approximate; dated after the December 15 price); and Lopatnikov and Rumyantsev's (2025) 16% real WACC for this project (0.71, 0.63 and 0.76).
+Reference rates are read the way their sources used them: gold flat in real terms at the source's deck, or at spot where none is stated, discounted at the stated rate, with this engine's stage and overrun risks on top (ADR 0045).
 
-At the rates the fairness opinion used, the prices are consistent with odds of roughly 0.4 to 0.6 that the project is built on the schedule assumed at each date. With no spread, implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero; a positive spread reverses this. The odds at zero spread are a point on the curve, not anyone's odds.
+| Reference | Gold | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
+|---|---|---|---|---|
+| DFS, 5% | US$1,750 (DFS deck) | 0.49 | 0.52 | 0.66 |
+| Eight Capital fairness opinion, 10.5% | US$1,850 (its deck) | 0.69 | 0.72 | 0.92 |
+| Eight Capital, 13.5% | US$1,850 | 0.98 | 0.98 | no solution |
+| Eight Capital, 10.5% | spot | 0.48 | 0.53 | 0.67 |
+| Eight Capital, 13.5% | spot | 0.64 | 0.69 | 0.86 |
+| Lopatnikov and Rumyantsev (2025), 16% real WACC for this project (applied by them to probability-weighted flows) | spot | 0.82 | 0.86 | no solution |
 
-`scripts/osino_prices.py` regenerates these figures.
+Spot is about US$2,020 to US$2,036 on the three dates. The Eight Capital opinion is dated after the December 15 price. The CIM survey's FS-stage gold rate of 8.9% already includes development risk, so it is shown as a value only. With gold flat at spot, the project is worth about US$449 to US$460 million at 8.9%, against prices of US$146 to US$267 million.
+
+At the fairness opinion's rates and gold deck, the prices are consistent with odds of roughly 0.7 to 1 that the project is built on the schedule assumed at each date. At spot gold the range is roughly 0.5 to 0.85. With no spread, implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero (ADR 0046). The odds at zero spread are a point on the curve, not anyone's odds.
+
+The undisturbed reading uses the equity claim, which is now floored at zero on each path (ADR 0047): existing holders can walk away rather than fund a value-destroying raise. At high spreads the floor binds on about a fifth of paths, which raised the break-even spread from 16.9% to 18.2%. The bids use the project claim, which is not floored.
+
+`scripts/osino_prices.py` regenerates these figures (200,000 paths, seed 1).
 
 ## Fixed rule and optimal build timing
 
-An optimal build rule, fitted by least-squares Monte Carlo (ADR 0038), gives the same project value as the fixed rule within Monte Carlo error at project-level spreads of 5% and above, including the fairness opinion's band. Both rules build as soon as the project is ready. At zero spread and zero convenience yield, the optimal rule waits to the end of the window, because delay then lowers the value of capital but not of revenue; that is an artefact of those two assumptions. `scripts/build_rule_comparison.py` gives the table.
+An optimal build rule, fitted by least-squares Monte Carlo (ADR 0038), gives the same project value as the fixed rule within about US$2 million at project-level spreads of 5%, 10% and 15%. Both rules build as soon as the project is ready. At zero spread and zero convenience yield, the optimal rule waits to the end of the window, because delay then lowers the value of capital but not of revenue; that is an artefact of those two assumptions. `scripts/build_rule_comparison.py` gives the table.
 
 ## What this is not
 

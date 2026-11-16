@@ -8,12 +8,13 @@ there is no free-text generation, so every number in it can be traced to a resul
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 import numpy as np
 
-from pricedin.engine import Results
+from pricedin.engine import Market, Results, Risks, Timing, simulate
+from pricedin.inputs import Case
 from pricedin.report import Step
 
 Params = Mapping[str, Any]
@@ -83,4 +84,85 @@ def project_readout(case_name: str, units: str, steps: tuple[Step, ...]) -> str:
         f"({(final - study) / study:+.0%}). "
         f"The largest single step is {largest.label.lower()}, which {direction} value "
         f"by {abs(largest.change):,.0f} {units}."
+    )
+
+
+@dataclass(frozen=True)
+class DelayThreshold:
+    """Where one year of delay stops adding project value (ADR 0046).
+
+    Attributes:
+        gain: change in project value from one added year of delay, at zero convenience
+            yield and no spread.
+        convenience_yield: yield at which that change is zero, with no spread; None if
+            it is not found below the search limit.
+        spread: real spread at which that change is zero, with zero convenience yield;
+            None if not found below the search limit.
+
+    """
+
+    gain: float
+    convenience_yield: float | None
+    spread: float | None
+
+
+def delay_threshold(
+    case: Case,
+    spot: float,
+    real_rate: float,
+    volatility: float,
+    timing: Timing,
+    risks: Risks,
+    *,
+    n_paths: int = 50_000,
+    seed: int = 1,
+    max_yield: float = 0.05,
+    max_spread: float = 0.3,
+) -> DelayThreshold:
+    """Find the convenience yield, and separately the spread, at which delay stops paying.
+
+    With zero convenience yield, expected gold grows at the real rate while costs are
+    fixed in real terms, so deferring construction raises project value. Every gate is
+    passed; the given overrun and build rule apply. Common random numbers keep the
+    comparison of delayed and on-time values smooth.
+    """
+    passed = replace(risks, stage_odds=1.0)
+    later_timing = replace(timing, added_delay=timing.added_delay + 1)
+
+    def gain(y: float, spread: float) -> float:
+        drift = float(np.log1p(real_rate)) - y
+        market = Market(spot, drift, volatility, real_rate + spread)
+        now = simulate(case, market, timing, passed, n_paths=n_paths, seed=seed)
+        later = simulate(case, market, later_timing, passed, n_paths=n_paths, seed=seed)
+        return float(later.project_value.mean() - now.project_value.mean())
+
+    def root(f: Callable[[float], float], hi: float) -> float | None:
+        lo = 0.0
+        if f(lo) <= 0 or f(hi) > 0:
+            return None
+        for _ in range(30):
+            mid = 0.5 * (lo + hi)
+            lo, hi = (mid, hi) if f(mid) > 0 else (lo, mid)
+        return 0.5 * (lo + hi)
+
+    return DelayThreshold(
+        gain=gain(0.0, 0.0),
+        convenience_yield=root(lambda y: gain(y, 0.0), max_yield),
+        spread=root(lambda s: gain(0.0, s), max_spread),
+    )
+
+
+def delay_text(d: DelayThreshold) -> str:
+    """Describe a delay threshold in plain sentences."""
+    if d.gain <= 0:
+        return (
+            f"One year of delay changes project value by {d.gain:+,.1f} at zero convenience "
+            "yield and no spread, so delay does not add value here."
+        )
+    y = "not reached below 5%" if d.convenience_yield is None else f"{d.convenience_yield:.2%}"
+    s = "not reached below 30%" if d.spread is None else f"{d.spread:.2%}"
+    return (
+        f"One year of delay changes project value by {d.gain:+,.1f} at zero convenience yield "
+        f"and no spread. Delay stops adding value at a convenience yield of {y} (no spread), "
+        f"or at a real spread of {s} (zero convenience yield)."
     )

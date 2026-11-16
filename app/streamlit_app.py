@@ -14,19 +14,11 @@ from pathlib import Path
 
 import streamlit as st
 
-from pricedin.engine import (
-    Financing,
-    Market,
-    Overrun,
-    Risks,
-    RoyaltyClaim,
-    Timing,
-    fixed_nominal_advance,
-    simulate,
-)
+from pricedin import defaults
+from pricedin.engine import Market, Risks, RoyaltyClaim, fixed_nominal_advance, simulate
 from pricedin.inputs import load_case
 from pricedin.inversion import break_even_spread, royalty_frontier
-from pricedin.priors import ShiftedLognormal, load_priors
+from pricedin.priors import load_priors
 from pricedin.report import project_waterfall
 from pricedin.sensitivity import build_year_distribution, project_readout
 from pricedin.snapshots import load_snapshot
@@ -37,18 +29,12 @@ CASES = {
     "South Railroad (Nevada; PFS 2020; valued June 7, 2021)": {
         "file": "south_railroad.yaml",
         "snapshot": "2021-06-07.yaml",
-        "overrun": "capex.overrun.pfs",
-        "stage_odds": 0.82 * 0.88,
-        "years_to_start": 4,
         "units": "US$ thousand",
         "royalty": True,
     },
     "Osino Twin Hills (Namibia; DFS 2023; valued July 13, 2023)": {
         "file": "osino_twin_hills.yaml",
         "snapshot": "2023-07-13.yaml",
-        "overrun": "capex.overrun.fs",
-        "stage_odds": 0.88,
-        "years_to_start": 1,
         "units": "US$ million",
         "royalty": False,
     },
@@ -73,10 +59,12 @@ case = load_case(ROOT / "cases" / str(cfg["file"]))
 priors = load_priors(ROOT / "data" / "priors.yaml")
 snap = load_snapshot(ROOT / "data" / "snapshots" / str(cfg["snapshot"]))
 market = Market.from_snapshot(snap, convenience_yield=float(y))
-dist = priors.get(str(cfg["overrun"])).distribution
-assert isinstance(dist, ShiftedLognormal)
-risks = Risks(stage_odds=float(cfg["stage_odds"]), overrun=Overrun(dist, 0.914), build_rule=True)
-timing = Timing(years_to_start=int(cfg["years_to_start"]), max_wait=5)
+risks = Risks(
+    stage_odds=defaults.stage_odds(priors, case.study.stage),
+    overrun=defaults.overrun(priors, case.study.stage),
+    build_rule=True,
+)
+timing = defaults.timing(priors, case.id)
 units = str(cfg["units"])
 
 tabs = ["Valuation", "Timing", "Assumptions"]
@@ -97,7 +85,13 @@ with views["Valuation"]:
     )
     st.bar_chart({s.label: s.change for s in steps[1:]})
     res = simulate(
-        case, market, timing, risks, financing=Financing(0.0, 0.1054), n_paths=n_paths, seed=1
+        case,
+        market,
+        timing,
+        risks,
+        financing=defaults.equity_financing(priors),
+        n_paths=n_paths,
+        seed=1,
     )
     assert res.equity_value is not None
     eq, se = res.estimate(res.equity_value)
@@ -110,7 +104,7 @@ if "Royalty price" in views:
             120_000, snap.value("usdcad"), snap.value("cad_nominal_10y"), r, 1_000
         )
         credited = st.toggle("Advances credited against later royalties", value=True)
-        spread = st.slider("Buyer's real spread over the risk-free rate", 0.0, 0.20, 0.0558, 0.002)
+        spread = st.slider("Buyer's real spread over the risk-free rate", 0.0, 0.20, 0.04, 0.002)
         claim = RoyaltyClaim(0.00633, 0.35, amr, credited, spread, infl)
         price = 2079.0
         frontier = royalty_frontier(
@@ -151,8 +145,10 @@ if "Royalty price" in views:
             f"Zero-delay odds: {frontier.zero_delay_odds:.2f}. Frontier shape: "
             f"{frontier.shape}. Break-even spread: "
             f"{'not in 0% to 50%' if be is None else f'{be:.1%}'}. "
-            "Reference points: Osisko impairment rate about 4.3% to 5.6%; Wharf control "
-            "about 15.8% (ADR 0028)."
+            "Reference points as market-consistent spreads: Osisko's 2020 goodwill-test "
+            "rate (3.5% post-tax, 4.76% pre-tax, on a flat deck) is equivalent to about "
+            "3.5% to 4.7% for a royalty (ADR 0045); the Wharf control is about 15.8% "
+            "(ADR 0028)."
         )
 
 with views["Timing"]:

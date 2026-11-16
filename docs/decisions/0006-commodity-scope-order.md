@@ -9,7 +9,7 @@ Each commodity needs its own price model and calibration. Building several at on
 
 ## Decision
 
-- Phase 1: gold, modelled with geometric Brownian motion. Schwartz (1997) could not fit a one-factor mean-reverting model to gold.
+- Phase 1: gold, modelled with geometric Brownian motion, as in Brennan and Schwartz (1985).
 - Phase 2: silver and lead, plus a simple by-product copper treatment. Needed for Sorby Hills.
 - Phase 3: copper with the Schwartz-Smith (2000) two-factor model; uranium with a term price and consensus deck, flagged as a weaker price model.
 
