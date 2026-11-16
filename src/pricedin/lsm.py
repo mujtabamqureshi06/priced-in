@@ -125,7 +125,7 @@ def fit_rule(
             continue
         x = _basis(paths[itm, k] / scale, degree)
         coef, *_ = np.linalg.lstsq(x, cash[itm], rcond=None)
-        coefficients[k] = coef
+        coefficients[k] = np.asarray(coef, dtype=np.float64)
         stop = np.zeros(n_paths, dtype=bool)
         stop[itm] = now[itm] >= x @ coef
         cash = np.where(stop, now, cash)
