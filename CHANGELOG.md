@@ -4,6 +4,9 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Added
+- `inversion.equity_frontier`: implied gate odds from an equity-based price (developer and takeover adapters), with synthetic recovery test.
+
 ## [0.1.0] - 2026-11-16
 
 First release: the Phase 1 forward engine on two public cases, and the South Railroad royalty inversion pulled forward from Phase 2.
