@@ -1,0 +1,92 @@
+# Phase 4 panel protocol
+
+- Status: draft. It freezes when the two open checks in section 8 are closed and this line changes to "frozen"; the freezing commit hash is then recorded in section 9. No outcome data is collected before then.
+- Decision record: ADR 0051.
+
+## 1. Question
+
+Do the build odds implied by a gold developer's market value carry information about whether its project reaches a construction decision within 36 months, beyond what price to net asset value (P/NAV) and study stage already carry?
+
+The test is descriptive. A positive result would not show that prices are right or wrong, and the project makes no claim about trading.
+
+## 2. Universe
+
+**Core panel.** ASX-listed companies whose main asset is a single gold project, and that published a first scoping study (PEA), pre-feasibility study (PFS) or feasibility study (FS) between January 1, 2012 and December 31, 2021. The 36-month outcome window then closes by December 31, 2024.
+
+**Candidate list.** The list is built from a stated, complete source that includes companies later delisted, acquired or wound up, before any documents are checked. The source is an open check (section 8). Inclusion is decided from the candidate list alone. Every candidate dropped later, for example for missing documents, is recorded with its reason, and drop rates are reported by outcome.
+
+**Supplementary set.** TSX and TSXV gold developers whose own websites archive their filings (as Osino's did) are kept in a separate, labelled set. Archives survive mainly for companies that survived, so these names would select on the outcome and do not enter the core test.
+
+**Exclusions, decided before outcomes are seen.**
+- Companies with more than one project at study stage at the snapshot date.
+- Projects whose study does not report an after-tax NPV and IRR.
+- Byproduct credits above 20% of study revenue.
+
+## 3. Snapshots
+
+Quarterly, at each calendar quarter end from the first study date until the earliest of:
+- a construction decision;
+- a takeover completion;
+- 36 months after the first study.
+
+At each snapshot the panel records:
+- **Share price:** the closing price, as traded, from the source named in section 8.
+- **Share counts:** shares on issue, options and warrants by series, from the latest quarterly Appendix 5B or periodic report published before the snapshot.
+- **Balance sheet:** cash and debt from the same report.
+- **Study:** the latest study published before the snapshot (stage, after-tax NPV and rate, IRR, initial capital, life, annual production, all-in sustaining cost, price deck, tax basis, document and page).
+- **Market inputs:** gold spot, the real rate and AUD/USD on the snapshot date (ADR 0024 conventions).
+
+No information dated after a snapshot enters that snapshot.
+
+## 4. Outcomes
+
+For each project, with the date and source document:
+- **Event:** a construction decision, defined as a board decision to proceed with construction, publicly announced, with funding committed or in place.
+- **Competing outcome:** completion of a takeover of the company or a sale of the project. If the project is sold, it is followed under its new owner, and a construction decision by that owner within the window counts as the event.
+- **Observed non-event:** no construction decision by the end of the window, including abandonment, impairment to nil or a change of business. Abandonment is not censoring; coding it as censored would bias the test toward success.
+- **Censored:** only when the project cannot be tracked after a stated search (company announcements, the acquirer's disclosures, news).
+
+A random 20% of outcome labels are coded a second time from the source documents, blind to the first coding. Disagreements are reported and resolved by a stated rule.
+
+**Financings.** Each equity raise in the window is recorded with its price, the closing price before announcement, and any attached warrants. That sample replaces or confirms the 10.54% issue-discount prior (ADR 0030, #94).
+
+## 5. Implied odds per snapshot
+
+**Mine plan.** A parametric study builder turns each study's headline figures into an annual cash-flow schedule, calibrated so that it reproduces the study's reported after-tax NPV and IRR.
+
+**Validation.** A subsample is drawn at random with a recorded seed: the larger of 10 projects or 20% of the panel. Each project in it has its study cash-flow table hand-transcribed with the existing case template. The builder's error against the transcription (in project value at the snapshot's market inputs) is reported, and that tolerance is carried into every result. The existing four cases are not used for validation; three of them are not ASX gold.
+
+**Inversion.** The existing developer adapter and inversion read the equity claim at each snapshot (ADRs 0030, 0031, 0047). Results are reported at the break-even spread and at stated reference spreads, with the timing prior stated (ADR 0023).
+
+## 6. Test
+
+- **Primary:** discrimination of the event within 36 months by the zero-delay implied odds at the first snapshot after each study, measured by AUC with a confidence interval, and calibration by Brier score.
+- **Comparators:** P/NAV at the same snapshot (price over the study's after-tax NPV) and study-stage indicators.
+- **Model:** logit of the event on implied odds, with P/NAV and stage as controls. Takeover is treated as a competing outcome (Fine and Gray subdistribution hazard as a robustness check).
+- **Clustering:** quarterly snapshots of one project are not independent, so standard errors are clustered by project, and the primary test uses one snapshot per project.
+
+## 7. Power
+
+With one snapshot per project and a two-sided 5% test at 80% power, the smallest AUC distinguishable from 0.5 (Hanley and McNeil 1982 standard errors) is:
+
+| Projects | Event share | Events | Detectable AUC |
+|---|---|---|---|
+| 40 | 30% | 12 | 0.78 |
+| 50 | 30% | 15 | 0.75 |
+| 50 | 40% | 20 | 0.73 |
+| 60 | 40% | 24 | 0.71 |
+
+A comparison of implied odds against P/NAV needs a difference in AUC, which these sizes cannot detect reliably unless the difference is large. The paper reports that difference with its interval and does not call it significant unless it is. If the core panel falls below 30 projects, the design goes back for review.
+
+## 8. Open checks before freezing
+
+1. **Delisted share prices.** A source of daily or quarter-end closing prices that covers ASX companies later delisted, from 2012 to 2024. Candidates:
+   - the free end-of-day archive at asxhistoricaldata.asx20list.com, which removes "illiquid stocks"; that filter must be checked against a sample of known thin juniors;
+   - Market Index daily snapshots (free account, the owner's);
+   - Morningstar DatAnalysis through a library (the owner's login).
+   If none covers the delisted names, the panel is blocked.
+2. **Candidate list.** A complete, dated list of ASX gold projects at study stage, including those later abandoned or acquired. The candidate is the Australian Government's annual Resources and Energy Major Projects reports, which list projects by stage; their coverage threshold must be checked against small developers.
+
+## 9. Freeze
+
+Freezing commit: not yet frozen.
