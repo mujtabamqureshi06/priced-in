@@ -25,6 +25,9 @@ dependencies = [
     "pyyaml>=6.0",
 ]
 
+[project.optional-dependencies]
+app = ["streamlit>=1.35"]
+
 [dependency-groups]
 dev = [
     "mypy>=1.10",
