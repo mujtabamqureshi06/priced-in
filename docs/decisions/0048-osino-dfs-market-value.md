@@ -8,7 +8,7 @@
 
 ADR 0031 lists three Osino prices. The first, the developer's market value around the DFS (filed July 13, 2023), was not read because the last balance sheet published before that date had not been retrieved (#90). Osino's interim statements at March 31, 2023, and the MD&A for that quarter, are now in hand from the company's archived website.
 
-The circular gives Osino's July 2023 trading range, C$1.07 to C$1.20 (p. 109), not a closing price on July 13. The only vendor series reachable for that date is the thin US over-the-counter listing.
+Osino's March 25, 2024 circular gives the July 2023 TSXV trading range, C$1.07 to C$1.20 (p. 97), not a closing price on July 13. The only vendor series reachable for that date is the thin US over-the-counter listing.
 
 Reading the September 30, 2023 statements again for this work showed two simplifications in the December 15, 2023 reading:
 - restricted and deferred share units (2.91 million and 0.11 million) were left out;
@@ -34,4 +34,4 @@ Reading the September 30, 2023 statements again for this work showed two simplif
 
 - `scripts/osino_prices.py` reads the July range, the December undisturbed value and both offers, each on its own balance sheet.
 - The December 15 undisturbed price rises from C$195.7 million to C$199.6 million. Its break-even spread moves from 18.2% to 18.1%. The CHANGELOG records the change.
-- The July 2023 reading uses the circular's trading range. The range was recorded in an earlier reading without a note of which copy was read, so its status is S until it is re-checked against the filed circular on SEDAR+.
+- The July 2023 range was checked against Osino's own copy of the March 25, 2024 circular (p. 97; status V).
