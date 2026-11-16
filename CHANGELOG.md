@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Waterfall (WP 1.9): `pricedin.report.project_waterfall` steps from the study NPV through discounting, market prices, base timing, overrun, ramp-up (labelled not modelled), stage failure, and price uncertainty with the build decision, on common paths. Steps sum exactly to the total.
 - Producing-royalty controls (`pricedin.controls`): implied real spread in market-consistent mode, analyst-mode implied rate, Tier 2 schedules from reserves and rate. First control file `controls/wharf.yaml` (Metalla, 2020), all values sourced. ADR 0027 (Decision Maker, DR-013): the futures check is replaced by the same-y gold-control condition.
 - ADR 0026 (Decision Maker, DR-012): control criteria amended (share consideration at closing-date fair value; two-tier mine-plan test; one-control rule).
 - Inversion (WP 2.5): `pricedin.inversion.royalty_frontier` solves implied gate odds for each added delay in closed form (value is linear in the odds), with Monte Carlo standard errors, a noise-aware shape test, the zero-delay odds and the certain-build delay. Synthetic recovery tests. ADR 0025 (Decision Maker, DR-011): failing paths fail at the base build-ready year; `Timing.failure_after_delay` keeps the old rule as a sensitivity.
