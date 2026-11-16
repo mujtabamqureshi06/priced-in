@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pricedin"
-version = "0.1.0"
+version = "0.2.0"
 description = "Simulation engine for undeveloped mining assets that backs out the build odds and timing implied by market prices."
 readme = "README.md"
 license = "MIT"

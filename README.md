@@ -20,7 +20,11 @@ With all risks off, the study's flat price deck and its discount rate, the engin
 | Case | Price or study | What the engine says |
 |---|---|---|
 | [Osino Twin Hills](docs/cases/osino_twin_hills.md) (Namibia, DFS, July 2023) | DFS NPV US$480M at 5% and US$1,750/oz | US$899M under market prices on the DFS date; stage odds and the gold convenience yield move it most |
+| [Osino Twin Hills](docs/cases/osino_twin_hills.md), prices | Undisturbed market value (Dec 2023), Dundee and Shanjin offers | At the fairness opinion's 10.5% to 13.5% real rates, odds of roughly 0.4 to 0.6 that the project is built on schedule |
 | [South Railroad](docs/cases/south_railroad.md) (Nevada, PFS, June 2021) | Vox Royalty paid US$2.079M for a 0.633% NSR | The implied odds depend mainly on the return the buyer required: about 0.7 to 0.8 on schedule at a royalty company's own valuation rate; at the one qualifying market control, the PFS plan alone cannot account for the price |
+| [Sorby Hills](docs/cases/sorby_hills.md) (Western Australia, silver-lead, in construction, Sept 2026) | Vox Royalty agreed to pay US$13.0M for an effective 0.75% NSR | The price equals the value of the study mine plan built on time at a 2.3% real spread: consistent with near-certain completion at royalty-company rates |
+
+The [Phase 2 back-test](docs/backtest.md) reads these cases together. Its main finding is that the required return dominates every answer.
 
 Every input carries its source and verification status in [data/priors.yaml](data/priors.yaml), [data/snapshots/](data/snapshots/) and the case files. Every judgment is a decision record in [docs/decisions/](docs/decisions/).
 
@@ -59,22 +63,22 @@ res = simulate(
 print(res.estimate(res.project_value))  # (mean, Monte Carlo standard error), US$ million
 ```
 
-The app: `uv sync --extra app` then `uv run streamlit run app/streamlit_app.py`. Deployment: [docs/deploying_the_app.md](docs/deploying_the_app.md).
+The app is live at [priced-in.streamlit.app](https://priced-in.streamlit.app/). To run it locally: `uv sync --extra app` then `uv run streamlit run app/streamlit_app.py`. Every number in the back-test: `uv run python scripts/backtest.py`.
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `src/pricedin/` | Engine: inputs, priors, price model, project cash flow, simulation, inversion, controls, waterfall, sensitivities |
+| `src/pricedin/` | Engine: inputs, priors, price models, project cash flow, simulation, inversion, controls, multi-metal royalty cases, transaction dataset, waterfall, sensitivities |
 | `cases/` | Study cash-flow tables transcribed with page references |
 | `controls/` | Producing-royalty purchases used to calibrate the buyer's required return |
-| `data/` | Priors registry, market snapshots, digitised ramp-up curves |
+| `data/` | Priors registry, market snapshots, royalty transaction dataset, digitised ramp-up curves |
 | `docs/` | Methodology, calibration, sources register, case write-ups, decision records, project state |
 | `scripts/`, `app/` | Reproducible case tables and the Streamlit app |
 
 ## Status
 
-Phase 1 (forward engine) is complete apart from ramp-up, which the public studies do not give enough detail to model (ADR 0029). The South Railroad royalty inversion from Phase 2 is done; the developer and takeover adapters are next. See [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md).
+Phases 1 (forward engine) and 2 (price adapters, inversion and the public back-test) are complete; ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 3 (Longstaff-Schwartz build decision, multi-asset and multi-metal projects) is next. See [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md).
 
 ## Development
 

@@ -1,6 +1,6 @@
 # Sorby Hills: what the Vox royalty price implies
 
-Status: draft for owner review (ADR 0035). The repository is private; nothing here is published before the owner approves the wording.
+Status: wording approved by the owner on 2026-11-16 (ADR 0035).
 
 ## The deal
 
