@@ -517,3 +517,33 @@ def test_flat_convention_matches_market_consistent_spread_k_times_one_plus_r(
     assert old.royalty_value is not None
     np.testing.assert_allclose(mc.royalty_value, flat.royalty_value, rtol=1e-12)
     assert old.royalty_value[0] > flat.royalty_value[0] * 1.05
+
+
+def test_holding_cost_is_paid_during_deferral_only(south_railroad: Case) -> None:
+    """ADR 0049: a fixed cost for each year construction is deferred past the base year."""
+    market = Market.study_deck(south_railroad)
+    timing = Timing(years_to_start=1, added_delay=2)
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0)
+    base = simulate(south_railroad, market, timing, Risks(), royalty=claim, n_paths=3)
+    held = simulate(
+        south_railroad, market, timing, Risks(holding_cost=10.0), royalty=claim, n_paths=3
+    )
+    expected = 10.0 * (1.05**-2 + 1.05**-3)
+    np.testing.assert_allclose(base.project_value - held.project_value, expected)
+    assert held.royalty_value is not None and base.royalty_value is not None
+    np.testing.assert_allclose(held.royalty_value, base.royalty_value)
+
+
+def test_holding_cost_on_failed_paths_follows_the_failure_date(south_railroad: Case) -> None:
+    market = Market.study_deck(south_railroad)
+    risks = Risks(stage_odds=0.0, holding_cost=10.0)
+    at_base = simulate(south_railroad, market, Timing(years_to_start=1, added_delay=2), risks)
+    np.testing.assert_allclose(at_base.project_value, 0.0)
+    late = Timing(years_to_start=1, added_delay=2, failure_after_delay=True)
+    at_delay = simulate(south_railroad, market, late, risks, n_paths=2)
+    np.testing.assert_allclose(at_delay.project_value, -10.0 * (1.05**-2 + 1.05**-3))
+
+
+def test_negative_holding_cost_is_rejected() -> None:
+    with pytest.raises(ValueError, match="holding_cost"):
+        Risks(holding_cost=-1.0)

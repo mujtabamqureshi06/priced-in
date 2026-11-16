@@ -201,6 +201,10 @@ class Risks:
         lsm_rate: real rate the LSM decision discounts at; None means the valuation
             rate. Setting it to the study's rate gives both rules the same decision rate
             (ADR 0038).
+        holding_cost: real cost per year, in case money units, paid by the project at the
+            end of each year that construction is deferred beyond ``years_to_start`` (ADR
+            0049). Zero by default: no sourced figure exists. It lowers the project and
+            equity claims, not the royalty or stream. The build decision does not include it.
 
     """
 
@@ -212,11 +216,14 @@ class Risks:
     build_decision: Literal["fixed", "lsm"] = "fixed"
     lsm_degree: int = 3
     lsm_rate: float | None = None
+    holding_cost: float = 0.0
 
     def __post_init__(self) -> None:
-        """Reject odds outside [0, 1]."""
+        """Reject odds outside [0, 1] and a negative holding cost."""
         if not 0.0 <= self.stage_odds <= 1.0:
             raise ValueError(f"stage_odds must be in [0, 1], got {self.stage_odds}")
+        if self.holding_cost < 0.0:
+            raise ValueError(f"holding_cost must be non-negative, got {self.holding_cost}")
 
 
 @dataclass(frozen=True)
@@ -519,13 +526,29 @@ def simulate(
     advance_value = np.zeros(n_paths) if royalty is not None else None
     periods = np.arange(n_periods)
     times = period_times(case)
+    # Holding cost (ADR 0049): paid at the end of each year of deferral beyond the base
+    # year, until construction, the close of the build window, or a failed gate.
+    fail_year = timing.build_ready if timing.failure_after_delay else timing.years_to_start
+    hold_end = np.where(
+        built, build_year, np.where(passes, timing.build_ready + timing.max_wait, fail_year)
+    )
+    holding = np.zeros(n_paths)
+    if risks.holding_cost > 0.0:
+        for end in np.unique(hold_end):
+            n_hold = int(end) - timing.years_to_start
+            if n_hold > 0:
+                hold_years = np.arange(timing.years_to_start + 1, int(end) + 1, dtype=np.float64)
+                pv = risks.holding_cost * float(_discount(market.discount_rate, hold_years).sum())
+                holding[hold_end == end] = pv
+    project_value -= holding
+
     for b in np.unique(build_year[built]):
         idx = np.flatnonzero(build_year == b)
         path_prices = prices[np.ix_(idx, b + periods)]
         cf = schedule_cash_flows(case, path_prices)
         after_tax = cf.after_tax - (ratio[idx, None] - 1.0) * capex
         years = b + times
-        project_value[idx] = after_tax @ _discount(market.discount_rate, years)
+        project_value[idx] = after_tax @ _discount(market.discount_rate, years) - holding[idx]
         if financing is not None and equity_value is not None:
             raised = np.maximum(ratio[idx, None] * initial - financing.debt_fraction * initial, 0.0)
             d = financing.issue_discount
@@ -549,7 +572,6 @@ def simulate(
 
     if royalty is not None and royalty_value is not None and advance_value is not None:
         unbuilt = ~built
-        fail_year = timing.build_ready if timing.failure_after_delay else timing.years_to_start
         end = np.where(passes, timing.build_ready + timing.max_wait, fail_year)
         for n_adv in np.unique(end[unbuilt]):
             idx = np.flatnonzero(unbuilt & (end == n_adv))
