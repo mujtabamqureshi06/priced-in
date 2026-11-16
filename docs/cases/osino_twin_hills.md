@@ -98,7 +98,7 @@ Each price uses the last Osino statements published before its date (ADRs 0031, 
 
 The prices:
 
-- **Market value at the DFS, July 2023:** the July 2023 trading range, C$1.07 to C$1.20 per share (circular, p. 109; to be re-checked against the filed circular, status S). That gives C$171.7 to C$194.3 million (US$130.8 to US$148.0 million) for the equity claim with dilution (ADR 0030). Corporate G&A of C$6.9 million a year (Q1 2023, annualised) is deducted over the mine life.
+- **Market value at the DFS, July 2023:** the July 2023 trading range, C$1.07 to C$1.20 per share (Osino's March 25, 2024 circular, p. 97). That gives C$171.7 to C$194.3 million (US$130.8 to US$148.0 million) for the equity claim with dilution (ADR 0030). Corporate G&A of C$6.9 million a year (Q1 2023, annualised) is deducted over the mine life.
 - **Undisturbed market value, December 15, 2023:** C$1.132 per share, implied by DPM's stated 37.2% premium to that day's close. That gives C$199.6 million (US$149.3 million) for the same claim, with G&A of C$7.3 million a year (nine months to September, annualised; ADR 0033).
 - **Dundee Precious Metals offer, December 18, 2023:** C$287 million. After net debt and exercise proceeds, that is C$279.6 million (US$208.8 million) for the project claim. It includes any control premium and synergies, so it overstates the odds on a standalone basis.
 - **Shanjin offer, February 23, 2024:** C$368 million, or C$360.6 million (US$267.1 million) for the project claim. Same caveat.
