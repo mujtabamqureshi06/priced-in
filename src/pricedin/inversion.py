@@ -43,7 +43,7 @@ from typing import Literal
 
 import numpy as np
 
-from pricedin.engine import Financing, Market, Risks, RoyaltyClaim, Timing, simulate
+from pricedin.engine import Financing, Market, Risks, RoyaltyClaim, StreamClaim, Timing, simulate
 from pricedin.inputs import Case
 
 
@@ -325,6 +325,58 @@ def equity_frontier(
         v_pass, se_pass = passed.estimate(passed.equity_value)
         q = price / v_pass
         weighted = (-q / v_pass) * passed.equity_value
+        step_se = 0.0
+        if previous is not None and weighted.size > 1:
+            diff = weighted - previous
+            step_se = float(diff.std(ddof=1) / np.sqrt(diff.size))
+        previous = weighted
+        points.append(
+            FrontierPoint(
+                added_delay=d,
+                gate_odds=q,
+                gate_odds_se=abs(q) * se_pass / abs(v_pass),
+                build_probability=q * float(passed.built.mean()),
+                value_if_passed=v_pass,
+                value_if_failed=0.0,
+                step_se=step_se,
+            )
+        )
+    return Frontier(price=price, points=tuple(points))
+
+
+def stream_frontier(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    stream: StreamClaim,
+    price: float,
+    *,
+    max_delay: int = 10,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> Frontier:
+    """Implied gate odds from a stream deposit (WP 3.6).
+
+    A stream pays nothing on paths that fail a gate, so, as for equity,
+    q(d) = price / V_pass(d). ``price`` is the deposit in the case's money units.
+    """
+    points: list[FrontierPoint] = []
+    previous: np.ndarray | None = None
+    for d in range(max_delay + 1):
+        passed = simulate(
+            case,
+            market,
+            replace(timing, added_delay=d),
+            replace(risks, stage_odds=1.0),
+            stream=stream,
+            n_paths=n_paths,
+            seed=seed,
+        )
+        assert passed.stream_value is not None
+        v_pass, se_pass = passed.estimate(passed.stream_value)
+        q = price / v_pass
+        weighted = (-q / v_pass) * passed.stream_value
         step_se = 0.0
         if previous is not None and weighted.size > 1:
             diff = weighted - previous

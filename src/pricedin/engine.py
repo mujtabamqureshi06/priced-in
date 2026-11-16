@@ -218,6 +218,35 @@ class RoyaltyClaim:
     amr_inflation: float = 0.0
 
 
+@dataclass(frozen=True)
+class StreamClaim:
+    """A precious-metal stream on gold (WP 3.6).
+
+    The holder receives ``share`` of payable gold and pays, per ounce, the lesser of
+    the transfer price and the spot price, the standard ongoing-payment term. Each
+    delivered ounce is therefore worth max(P - c, 0): the stream is a strip of call
+    options on gold (Fuller 2023). The upfront deposit is the price being read and is
+    not modelled as a cash flow.
+
+    Attributes:
+        share: fraction of payable gold delivered to the holder.
+        transfer_price: ongoing payment per ounce at the valuation date, real US$/oz.
+        transfer_escalation: real annual growth of the transfer price (0 if it is fixed
+            in real terms; negative if it is fixed in nominal terms).
+        spread: holder's required spread over the valuation rate (ADR 0014).
+
+    """
+
+    share: float
+    transfer_price: float
+    transfer_escalation: float = 0.0
+    spread: float = 0.0
+
+
+#: Case money units per (thousand ounces x US$/oz), i.e. per US$ thousand.
+_PER_US_THOUSAND = {"US$ thousands": 1.0, "US$ millions": 1e-3}
+
+
 def fixed_nominal_advance(
     amount: float, fx: float, nominal_rate: float, real_rate: float, money_scale: float
 ) -> tuple[float, float]:
@@ -281,6 +310,7 @@ class Results:
     build_year: IntArray
     seed: int
     n_paths: int
+    stream_value: FloatArray | None = None
     version: str = field(default=pricedin.__version__)
 
     @property
@@ -380,6 +410,7 @@ def simulate(
     risks: Risks,
     *,
     royalty: RoyaltyClaim | None = None,
+    stream: StreamClaim | None = None,
     financing: Financing | None = None,
     n_paths: int = 10_000,
     seed: int = 0,
@@ -441,6 +472,7 @@ def simulate(
     equity_value = np.zeros(n_paths) if financing is not None else None
     initial = np.asarray(cols["initial_capex"].values, dtype=np.float64)
     royalty_value = np.zeros(n_paths) if royalty is not None else None
+    stream_value = np.zeros(n_paths) if stream is not None else None
     advance_value = np.zeros(n_paths) if royalty is not None else None
     periods = np.arange(n_periods)
     for b in np.unique(build_year[built]):
@@ -455,6 +487,8 @@ def simulate(
             d = financing.issue_discount
             transfer = (raised * d / (1.0 - d)) @ _discount(market.discount_rate, years)
             equity_value[idx] = case.operator_share * (project_value[idx] - transfer)
+        if stream is not None and stream_value is not None:
+            stream_value[idx] = _stream_pv(case, stream, path_prices, years, market.discount_rate)
         if royalty is not None and royalty_value is not None and advance_value is not None:
             gold = np.asarray(cols["gold_revenue"].values, dtype=np.float64)
             gold_rev = gold * path_prices / case.study.price_deck["gold"].value
@@ -478,6 +512,7 @@ def simulate(
     return Results(
         project_value=project_value,
         royalty_value=royalty_value,
+        stream_value=stream_value,
         advance_value=advance_value,
         equity_value=equity_value,
         passed_gates=passes,
@@ -486,6 +521,21 @@ def simulate(
         seed=seed,
         n_paths=n_paths,
     )
+
+
+def _stream_pv(
+    case: Case, stream: StreamClaim, prices: FloatArray, years: FloatArray, rate: float
+) -> FloatArray:
+    """Present value of stream deliveries on built paths, in the case's money units."""
+    units = case.schedule.money_units
+    if units not in _PER_US_THOUSAND:
+        raise ValueError(f"streams need a US$ case, got money units '{units}'")
+    ounces = np.asarray(case.schedule.columns["payable_gold_koz"].values, dtype=np.float64)
+    transfer = stream.transfer_price * (1.0 + stream.transfer_escalation) ** years
+    margin = np.maximum(prices - transfer[None, :], 0.0)
+    flows = stream.share * ounces[None, :] * margin * _PER_US_THOUSAND[units]
+    pv: FloatArray = flows @ _discount(rate + stream.spread, years)
+    return pv
 
 
 def _advances_pv(n_advances: int, royalty: RoyaltyClaim, rate: float) -> float:
