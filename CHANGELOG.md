@@ -8,7 +8,8 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
-- Least-squares Monte Carlo core (WP 3.2, ADR 0037): `pricedin.lsm` (Longstaff and Schwartz 2001), validated on the American put against QuantLib; QuantLib added as the `validation` dependency group.
+- Optimal build timing (WP 3.2, ADR 0038): `Risks(build_decision="lsm")` builds when the market-consistent value of building now is at least the fitted value of waiting, fitted on independent paths; `lsm_rate` sets the decision rate. The fixed rule stays the headline; `scripts/build_rule_comparison.py` compares the two for Osino and South Railroad, and the case notes report the comparison.
+- Least-squares Monte Carlo core (WP 3.2, ADR 0037): `pricedin.lsm` (Longstaff and Schwartz 2001), validated on the American put against QuantLib; QuantLib added as the `validation` dependency group. Accepts a one-step discount factor above 1 (negative real rates).
 
 ## [0.2.0] - 2026-11-16
 

@@ -38,11 +38,13 @@ Simplifications, stated:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Literal
 
 import numpy as np
 from numpy.typing import NDArray
 
 import pricedin
+from pricedin import lsm
 from pricedin.inputs import Case
 from pricedin.price_models import GBM
 from pricedin.priors import ShiftedLognormal
@@ -163,7 +165,15 @@ class Risks:
         build_hurdle: NPV the project must reach, at the decision rate and the current
             gold price, for the rule to build (case money units).
         decision_rate: discount rate the build rule uses; None means the study's own
-            rate (ADR 0023).
+            rate (ADR 0023). Used by the fixed rule only.
+        build_decision: "fixed" applies the hurdle rule above (ADR 0023); "lsm" builds
+            when the market-consistent value of building now is at least the fitted
+            value of waiting, by least-squares Monte Carlo (ADR 0038). Only used when
+            ``build_rule`` is true.
+        lsm_degree: polynomial degree of the LSM regression basis in the gold price.
+        lsm_rate: real rate the LSM decision discounts at; None means the valuation
+            rate. Setting it to the study's rate gives both rules the same decision rate
+            (ADR 0038).
 
     """
 
@@ -172,6 +182,9 @@ class Risks:
     build_rule: bool = False
     build_hurdle: float = 0.0
     decision_rate: float | None = None
+    build_decision: Literal["fixed", "lsm"] = "fixed"
+    lsm_degree: int = 3
+    lsm_rate: float | None = None
 
     def __post_init__(self) -> None:
         """Reject odds outside [0, 1]."""
@@ -305,6 +318,61 @@ def _decision_npv(case: Case, price: FloatArray, rate: float) -> FloatArray:
     return values
 
 
+def _build_value(case: Case, market: Market, price: FloatArray, rate: float) -> FloatArray:
+    """Market-consistent value, at the build year, of building now at gold price ``price``.
+
+    Expected prices from the build year follow the market drift; after-tax cash flows
+    at study capital (the decision never sees the overrun draw, ADR 0015) are discounted
+    at ``rate``. Using the expected price path ignores the convexity the tax
+    floor adds; this is stated in ADR 0038.
+    """
+    n = len(case.schedule.periods)
+    t = np.arange(n, dtype=np.float64)
+    path = price[:, None] * np.exp(market.drift * t)[None, :]
+    cf = schedule_cash_flows(case, path)
+    values: FloatArray = cf.after_tax @ _discount(rate, t)
+    return values
+
+
+def _lsm_build_years(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    prices: FloatArray,
+    passes: BoolArray,
+    rng: np.random.Generator,
+) -> IntArray:
+    """Build year per path from a least-squares Monte Carlo rule (ADR 0038).
+
+    The rule is fitted on independent paths, so a path's own future prices never
+    inform its decision, then applied to the valuation paths. Decision dates run from
+    the build-ready year to the end of the window; a path that never builds gets -1.
+    """
+    first, last = timing.build_ready, timing.build_ready + timing.max_wait
+    start = max(first - 1, 0)
+
+    def window(p: FloatArray) -> FloatArray:
+        cols = p[:, start : last + 1]
+        if first == 0:  # a dummy time-0 column so that the first decision is a step
+            cols = np.concatenate([p[:, :1], cols], axis=1)
+        return cols
+
+    rate = market.discount_rate if risks.lsm_rate is None else risks.lsm_rate
+
+    def payoff(k: int, state: FloatArray) -> FloatArray:
+        return np.maximum(_build_value(case, market, state, rate), 0.0)
+
+    fit_paths = GBM(market.gold_spot, market.drift, market.volatility).simulate(
+        last, prices.shape[0], rng
+    )
+    discount = 1.0 / (1.0 + rate)
+    rule = lsm.fit_rule(window(fit_paths), payoff, discount, degree=risks.lsm_degree)
+    _, step = lsm.apply_rule(rule, window(prices[:, : last + 1]), payoff, discount)
+    build_year = np.where((step > 0) & passes, first - 1 + step, -1)
+    return np.asarray(build_year, dtype=np.int64)
+
+
 def simulate(
     case: Case,
     market: Market,
@@ -323,8 +391,8 @@ def simulate(
     n_periods = len(case.schedule.periods)
     horizon = timing.build_ready + timing.max_wait + n_periods
 
-    price_rng, gate_rng, overrun_rng = (
-        np.random.default_rng(s) for s in np.random.SeedSequence(seed).spawn(3)
+    price_rng, gate_rng, overrun_rng, fit_rng = (
+        np.random.default_rng(s) for s in np.random.SeedSequence(seed).spawn(4)
     )
     prices = GBM(market.gold_spot, market.drift, market.volatility).simulate(
         horizon, n_paths, price_rng
@@ -340,6 +408,9 @@ def simulate(
         if risks.build_rule
         else range(timing.build_ready, timing.build_ready + 1)
     )
+    if risks.build_rule and risks.build_decision == "lsm":
+        build_year = _lsm_build_years(case, market, timing, risks, prices, passes, fit_rng)
+        candidates = range(0)
     for k in candidates:
         waiting = passes & (build_year < 0)
         if not waiting.any():

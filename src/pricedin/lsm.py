@@ -98,7 +98,7 @@ def fit_rule(
         paths: state on each path at steps 0..n, shape ``(n_paths, n_steps + 1)``.
             Stopping is allowed at steps 1..n.
         payoff: value of stopping at step k for every path (non-negative).
-        discount: discount factor for one step.
+        discount: discount factor for one step (above 1 when the real rate is negative).
         degree: degree of the polynomial basis in the scaled state.
         scale: divisor applied to the state before the basis (numerical conditioning);
             default the mean of the time-0 state.
@@ -110,8 +110,8 @@ def fit_rule(
     n_steps = n_cols - 1
     if n_steps < 1:
         raise ValueError("paths need at least one step after time 0")
-    if not 0.0 < discount <= 1.0:
-        raise ValueError(f"discount must be in (0, 1], got {discount}")
+    if not discount > 0.0:
+        raise ValueError(f"discount must be positive, got {discount}")
     scale = float(np.mean(paths[:, 0])) if scale is None else scale
     needed = 10 * (degree + 1) if min_in_the_money is None else min_in_the_money
 

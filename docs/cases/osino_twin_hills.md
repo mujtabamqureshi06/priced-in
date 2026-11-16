@@ -99,6 +99,10 @@ At the rates the fairness opinion used, the prices are consistent with odds of r
 
 `scripts/osino_prices.py` regenerates these figures.
 
+## Fixed rule and optimal build timing
+
+An optimal build rule, fitted by least-squares Monte Carlo (ADR 0038), gives the same project value as the fixed rule within Monte Carlo error at project-level spreads of 5% and above, including the fairness opinion's band. Both rules build as soon as the project is ready. At zero spread and zero convenience yield, the optimal rule waits to the end of the window, because delay then lowers the value of capital but not of revenue; that is an artefact of those two assumptions. `scripts/build_rule_comparison.py` gives the table.
+
 ## What this is not
 
 This is a value under stated assumptions, not a view on Osino's share price or on the takeover terms. The July 2023 market value is not yet read: the last balance sheet published before that date is still to be retrieved (`docs/backtest.md`, limit 7).

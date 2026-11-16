@@ -72,6 +72,18 @@ At 5.6%, the price is consistent with certain construction only with a delay of 
 
 All figures use 20,000 paths and seed 1; `scripts/south_railroad_case.py` regenerates them.
 
+## Fixed rule and optimal build timing
+
+The headline uses the fixed build rule (ADR 0023). An optimal rule, fitted by least-squares Monte Carlo (ADR 0038), gives these zero-delay odds at the two Osisko spreads:
+
+| Build rule | Raw 4.3% | Pre-tax 5.6% | Passing paths built in the window | Mean build year |
+|---|---|---|---|---|
+| Fixed, study 5% (headline) | 0.72 | 0.80 | 0.99 | 4.0 |
+| Optimal, at the valuation rate (-0.82%) | 0.74 | 0.83 | 0.93 | 4.7 |
+| Optimal, at the study's 5% | 0.73 | 0.81 | 0.95 | 4.2 |
+
+At a common decision rate, the optimal rule defers construction on low-price paths. That is a measured value of waiting of about 1 point of implied odds. Most of the remaining gap comes from deciding at a negative real rate, at which delay lowers the value of capital but not of revenue.
+
 ## Reading the result
 
 Headline wording (ADR 0028):
