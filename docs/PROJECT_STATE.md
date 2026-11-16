@@ -4,7 +4,7 @@ Updated: 2026-11-16 by the Mastermind.
 
 ## Where we are
 
-Phase 0 exit criteria are met except the owner's walk-through. Phase 1 core is built apart from ramp-up and the equity claim; the waterfall is built. The South Railroad inversion (ADR 0009 slice) has a draft result in `docs/cases/south_railroad.md`, presented across the buyer's spread because only one producing-royalty control qualifies (ADR 0028). It is not published; the owner reviews the wording first.
+Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built and released as v0.1.0 (private); ramp-up is not modelled in the public cases (ADR 0029). Phase 2 is under way: the South Railroad royalty inversion (ADR 0028) and a provisional reading of the Osino bids (ADR 0032) are done; the undisturbed Osino value and the developer value wait for sourced inputs.
 
 ## Done
 
@@ -19,12 +19,16 @@ Phase 0 exit criteria are met except the owner's walk-through. Phase 1 core is b
 - Producing-royalty controls (`pricedin.controls`): Wharf (Metalla, 2020) qualifies as a Tier 2 control; Osisko's 2020 audited impairment rate is the convention reference (ADRs 0026 to 0028).
 - Relationship check on control buyers and sellers: done; the owner has no relationships with any of them.
 
+## Done overnight (2026-11-16)
+
+- ADRs 0029 to 0032; equity claim with dilution; sensitivities and readout; Osino write-up; Streamlit app; methodology and calibration complete; README rewritten; v0.1.0 released; equity-based inversion; Osino bids across a project-level spread. See `docs/AUTONOMY_LOG.md` for actions taken in place of the owner.
+
 ## Next
 
-1. Houndé as a second control: Endeavour's technical report on SEDAR+ for a by-deposit schedule (ADR 0028).
-2. Impairment-test rates of Franco-Nevada, Sandstorm and Royal Gold for the year before each deal date.
-3. Verify the South Railroad resource figures against the 2020 PFS for the case wording.
-4. WP 1.5 ramp-up (ADR 0019), equity claim and dilution (WP 1.8), Osino case write-up.
+1. Osino: net cash and option proceeds from Osino's own statements and the March 2024 circular; a sourced corporate G&A burn; then the undisturbed (December 15, 2023) and developer (July 2023) values (ADRs 0031, 0032).
+2. A project-level spread calibrated on producing-mine transactions (ADR 0032 revisit), and a second producing-royalty control (ADR 0028).
+3. Phase 2 back-test across the Vox deals (Sorby Hills, White Dam) once their cases are built.
+4. Phase 3 planning: Longstaff-Schwartz build decision and the multi-asset adapter.
 
 ## Open
 
