@@ -4,6 +4,8 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-16
+
 ### Fixed (erratum)
 - **Reference rates were converted to spreads incorrectly** (ADR 0045). Third-party rates (Osisko's and OR Royalties' impairment-test rates, the Eight Capital fairness opinion, the studies' own rates, the CIM survey, Lopatnikov and Rumyantsev) were applied as a spread of k less the real risk-free rate. Those rates were set against flat real price decks, while the engine's metal prices rise at the real rate. For a revenue claim the equivalent spread is k(1 + r), not k - r, so the old readings overstated spreads when the real rate was negative and understated them when it was positive. Reference rates are now applied the way their sources applied them: prices flat in real terms at the source's own deck (or at spot where none is stated), discounted at the stated rate. Corrected values:
 
