@@ -8,7 +8,7 @@ Risks are switched on one at a time in a fixed order, all on the same random pat
    no volatility.
 3. Base timing: construction starts ``years_to_start`` years after the valuation date.
 4. Capital cost overrun (ADR 0015).
-5. Ramp-up (ADR 0019): not yet modelled; the step is reported as zero with that label.
+5. Ramp-up: not modelled in the public cases (ADR 0029); reported as zero with that label.
 6. Stage failure (ADR 0013).
 7. Price uncertainty and the build decision (WP 1.6).
 
@@ -70,7 +70,7 @@ def project_waterfall(
             market_no_vol,
             start,
             replace(no_risk, overrun=risks.overrun),
-            "not modelled (ADR 0019 pending)",
+            "not modelled (ADR 0029)",
         ),
         (
             "Stage failure",

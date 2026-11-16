@@ -102,3 +102,18 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 |---|---|
 | Discovery Alert, Farmonaut and similar aggregators (for example "60% of FS projects achieve financing") | No traceable primary source [X] |
 | ResearchGate "20-60% overrun review" | Low quality [X] |
+
+## Producing-royalty controls and reference rates (ADRs 0026 to 0028)
+
+| Source | Figure | Status | Use |
+|---|---|---|---|
+| Metalla news release, June 22, 2020; audited statements, seven months to Dec 31, 2020, Notes 4(a), 13(b) | Wharf 1.0% GVR: US$1.0M cash, 899,201 shares at US$5.52 (US$4,964,152), costs US$149,102 | [V] | Wharf control price |
+| Coeur news release, Feb 18, 2020; 2019 10-K reserves table; Q2 2020 10-Q | Wharf YE2019 P&P 768 koz contained, 79% recovery; 2020 guidance 80 to 90 koz | [V] | Wharf Tier 2 schedule |
+| Metalla Wharf royalty page | Metalla estimates 100% of Wharf reserves and resources are subject to the royalty | [P] | Coverage check |
+| Osisko Gold Royalties, audited 2020 statements, Notes 19 and 26 | Post-tax real discount rate 3.5% (2020), 4.1% (2019) for the Éléonore and Canadian Malartic NSR CGUs; statutory rate 26.5% | [V] | Convention reference (ADR 0028) |
+| Osisko, audited 2021 statements, Note 17 | 4.3% (2021) | [V] | Sensitivity only (published after the South Railroad date) |
+| Sandstorm release Dec 18, 2017; Acacia RNS Jan 17, 2018 | Houndé 2% NSR, US$45M cash; covers Kari North and South, nearly all of the 2.1 Moz reserve | [V] | Candidate control; not qualified: no pre-deal annual schedule by deposit found in free sources |
+| Franco-Nevada, audited 2020 statements, Note 8 | Discount rates disclosed only for energy CGUs (5% to 12%) | [V] | Not comparable to gold royalties |
+| Gold Royalty 6-K, Jul 31, 2023; Endeavour Silver release, Jul 31, 2023 | Cozamin 1.0% NSR on Calicanto and Vicochea concessions, US$7.5M cash | [V] | Candidate; concession-level production not disclosed |
+| TMAC releases 2019 to 2020; Osler deal note | Hope Bay additional 1.5% NSR, US$40M (Maverix, 2019) | [V] | Excluded: out-of-date plan, under three years of production |
+| Council on Environmental Quality, June 2020 | See section on timing | [V] | ADR 0023 |

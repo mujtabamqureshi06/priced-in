@@ -3,6 +3,7 @@
 - Status: accepted
 - Date: 2026-11-16
 - Decided by: Independent Decision Maker (owner's proxy), decision record DR-006
+- Applied with: ADR 0029 (fallback: not modelled in either public case)
 - Supersedes: ADR 0017, which rested on a wrong premise (that McNulty's curves came only from mills and chemical plants)
 
 ## Context
