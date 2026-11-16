@@ -1,6 +1,6 @@
 # 0017. Ramp-up risk in schedule mode
 
-- Status: accepted
+- Status: superseded by ADR 0019 (premise was wrong: heap leach is in McNulty's sample)
 - Date: 2026-11-16
 - Decided by: Independent Decision Maker (owner's proxy), decision record DR-005
 - Changes: build plan WP 1.5

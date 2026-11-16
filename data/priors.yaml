@@ -115,7 +115,7 @@ priors:
     source: McNulty (1998), Mining Engineering 50(10):50-55
     location: Table 2, p. 53 (23 of 41 plants)
     status: V
-    decision: ADR 0017
+    decision: ADR 0019 (all-plant weights are the sensitivity)
     notes: 23/41. Curve values in data/ramp_up_mcnulty_1998.csv.
 
   - id: rampup.weight.series2
@@ -125,7 +125,7 @@ priors:
     source: McNulty (1998), Mining Engineering 50(10):50-55
     location: Table 2, p. 53 (5 of 41 plants)
     status: V
-    decision: ADR 0017
+    decision: ADR 0019
     notes: 5/41.
 
   - id: rampup.weight.series3
@@ -135,7 +135,7 @@ priors:
     source: McNulty (1998), Mining Engineering 50(10):50-55
     location: Table 2, p. 53 (6 of 41 plants)
     status: V
-    decision: ADR 0017
+    decision: ADR 0019
     notes: 6/41.
 
   - id: rampup.weight.series4
@@ -145,5 +145,33 @@ priors:
     source: McNulty (1998), Mining Engineering 50(10):50-55
     location: Table 2, p. 53 (7 of 41 plants)
     status: V
-    decision: ADR 0017
+    decision: ADR 0019
     notes: 7/41. Three of the seven Series 4 plants closed within 36 months of startup (p. 52).
+
+  - id: rampup.weight.oxide.series1
+    description: >-
+      Probability of McNulty Series 1 ramp-up for the hydrometallurgical oxide
+      plant class (agitated or heap leaching of gold or copper oxide ores).
+    distribution: {kind: fixed, value: 0.8571429}
+    units: probability
+    applies_to: {commodity: gold}
+    source: McNulty (1998), Mining Engineering 50(10):50-55
+    location: Tables 1 and 2, pp. 51 and 53 (6 of 7 hydrometallurgical oxide plants)
+    status: V
+    flag: McNulty (1998) Table 2 counts, 7 plants, plants built before 1998.
+    sensitivity:
+      - {label: all-plant weight (23/41), value: 0.5609756, source: "McNulty (1998), Table 2", status: V}
+    decision: ADR 0019
+
+  - id: rampup.weight.oxide.series2
+    description: Probability of McNulty Series 2 ramp-up for the hydrometallurgical oxide class.
+    distribution: {kind: fixed, value: 0.1428571}
+    units: probability
+    applies_to: {commodity: gold}
+    source: McNulty (1998), Mining Engineering 50(10):50-55
+    location: Tables 1 and 2, pp. 51 and 53 (1 of 7 hydrometallurgical oxide plants)
+    status: V
+    flag: McNulty (1998) Table 2 counts, 7 plants, plants built before 1998.
+    sensitivity:
+      - {label: all-plant weight (5/41), value: 0.1219512, source: "McNulty (1998), Table 2", status: V}
+    decision: ADR 0019

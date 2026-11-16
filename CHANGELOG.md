@@ -8,6 +8,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - mypy no-any-return on Python 3.11 in `price_models` (#4).
 
 ### Added
+- ADRs 0018 to 0021: tax approximation (Mastermind); ramp-up by plant class, superseding 0017; royalty price basis, clarifying 0014; advance royalties and buy-down for South Railroad. Oxide-class ramp-up weights (`rampup.weight.oxide.*`).
 - Schedule-mode project cash flow (WP 1.3): `pricedin.project` recomputes revenue, revenue-linked costs and tax for any gold price path; reproduces both study tables exactly at the deck and the published price sensitivities within the errors in ADR 0018. Cases gain `gold_revenue`, `revenue_linked` and a sourced `marginal_tax_rate`.
 - McNulty (1998) ramp-up curves digitised from the original Figure 1 (`data/ramp_up_mcnulty_1998.csv`) and series weights from its Table 2 (`rampup.weight.series1` to `series4`).
 - Osino Twin Hills case (`cases/osino_twin_hills.yaml`) from DFS Table 22.3.2, reproducing the published NPV5 within cell rounding; two internal DFS inconsistencies documented.

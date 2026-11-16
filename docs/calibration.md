@@ -29,7 +29,7 @@ PFS cases (`capex.overrun.pfs`, ADR 0015) use the same distribution with a flag 
 
 ## 4. Ramp-up
 
-Not modelled for heap-leach cases such as South Railroad: the study's own ramp-up profile is used and the waterfall labels the step "not modelled; study ramp-up profile used" (ADR 0017). Milled cases will use McNulty (1998) curves once the original paper is in hand; the curves replace the study's ramp-up years rather than adding to them.
+McNulty (1998) curves, digitised from the original Figure 1 (`data/ramp_up_mcnulty_1998.csv`), weighted by McNulty's own Table 2 counts for the plant class (ADR 0019). Both public cases fall in the hydrometallurgical oxide class (6 of 7 plants Series 1, 1 of 7 Series 2); the all-plant counts (23/5/6/7 of 41) are the named sensitivity. The curves replace a study's own ramp-up years rather than adding to them. Weights are counts from a small, pre-1998 sample and are labelled as such, not presented as precise probabilities.
 
 ## 5. Gold price volatility and the risk-free curve
 
