@@ -230,12 +230,39 @@ def fixed_nominal_advance(
 
 
 @dataclass(frozen=True)
+class Financing:
+    """How the operator funds initial capital, for the equity claim (WP 1.8, ADR 0030).
+
+    Debt is raised at fair value, so it transfers no value. The equity-funded part of
+    each year's initial capital (actual capital, overrun included, less the debt share
+    of the study estimate) is raised at a discount ``issue_discount`` to fair value,
+    which transfers ``E x d / (1 - d)`` to the new investors.
+
+    Attributes:
+        debt_fraction: share of the study's initial capital estimate funded by debt.
+        issue_discount: discount of the equity issue price to fair value.
+
+    """
+
+    debt_fraction: float = 0.0
+    issue_discount: float = 0.0
+
+    def __post_init__(self) -> None:
+        """Reject values outside their ranges."""
+        if not 0.0 <= self.debt_fraction <= 1.0:
+            raise ValueError("debt_fraction must be in [0, 1]")
+        if not 0.0 <= self.issue_discount < 1.0:
+            raise ValueError("issue_discount must be in [0, 1)")
+
+
+@dataclass(frozen=True)
 class Results:
     """Per-path outcomes and values. Values are present values at the valuation date."""
 
     project_value: FloatArray
     royalty_value: FloatArray | None
     advance_value: FloatArray | None
+    equity_value: FloatArray | None
     passed_gates: BoolArray
     built: BoolArray
     build_year: IntArray
@@ -285,6 +312,7 @@ def simulate(
     risks: Risks,
     *,
     royalty: RoyaltyClaim | None = None,
+    financing: Financing | None = None,
     n_paths: int = 10_000,
     seed: int = 0,
 ) -> Results:
@@ -339,6 +367,8 @@ def simulate(
         capex = capex + np.asarray(cols["expansion_capex"].values, dtype=np.float64)
 
     project_value = np.zeros(n_paths)
+    equity_value = np.zeros(n_paths) if financing is not None else None
+    initial = np.asarray(cols["initial_capex"].values, dtype=np.float64)
     royalty_value = np.zeros(n_paths) if royalty is not None else None
     advance_value = np.zeros(n_paths) if royalty is not None else None
     periods = np.arange(n_periods)
@@ -349,6 +379,11 @@ def simulate(
         after_tax = cf.after_tax - (ratio[idx, None] - 1.0) * capex
         years = (b + periods).astype(np.float64)
         project_value[idx] = after_tax @ _discount(market.discount_rate, years)
+        if financing is not None and equity_value is not None:
+            raised = np.maximum(ratio[idx, None] * initial - financing.debt_fraction * initial, 0.0)
+            d = financing.issue_discount
+            transfer = (raised * d / (1.0 - d)) @ _discount(market.discount_rate, years)
+            equity_value[idx] = case.operator_share * (project_value[idx] - transfer)
         if royalty is not None and royalty_value is not None and advance_value is not None:
             gold = np.asarray(cols["gold_revenue"].values, dtype=np.float64)
             gold_rev = gold * path_prices / case.study.price_deck["gold"].value
@@ -373,6 +408,7 @@ def simulate(
         project_value=project_value,
         royalty_value=royalty_value,
         advance_value=advance_value,
+        equity_value=equity_value,
         passed_gates=passes,
         built=built,
         build_year=build_year,

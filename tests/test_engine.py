@@ -396,3 +396,43 @@ def test_failure_timing_switch(south_railroad: Case) -> None:
     assert late.royalty_value is not None and base.royalty_value is not None
     assert late.royalty_value[0] == pytest.approx(sum(100 / 1.05**k for k in (1, 2, 3)))
     assert base.royalty_value[0] == pytest.approx(100 / 1.05)
+
+
+def test_equity_claim_dilution(osino: Case, overrun: Overrun) -> None:
+    from pricedin.engine import Financing
+
+    market = Market.study_deck(osino)
+    base = simulate(osino, market, Timing(), Risks(), financing=Financing(), n_paths=2)
+    assert base.equity_value is not None
+    np.testing.assert_allclose(base.equity_value, base.project_value)
+
+    d = 0.0909
+    diluted = simulate(osino, market, Timing(), Risks(), financing=Financing(0.0, d), n_paths=2)
+    assert diluted.equity_value is not None
+    expected = base.project_value[0] - 365 * d / (1 - d)  # all capital in Year 0
+    assert diluted.equity_value[0] == pytest.approx(expected)
+
+    geared = simulate(osino, market, Timing(), Risks(), financing=Financing(1.0, d), n_paths=2)
+    assert geared.equity_value is not None
+    np.testing.assert_allclose(geared.equity_value, base.project_value)
+
+    with_overrun = simulate(
+        osino,
+        market,
+        Timing(),
+        Risks(overrun=overrun),
+        financing=Financing(1.0, d),
+        n_paths=500,
+        seed=2,
+    )
+    assert with_overrun.equity_value is not None
+    assert (with_overrun.equity_value <= with_overrun.project_value + 1e-9).all()
+
+
+def test_financing_rejects_bad_inputs() -> None:
+    from pricedin.engine import Financing
+
+    with pytest.raises(ValueError):
+        Financing(debt_fraction=1.5)
+    with pytest.raises(ValueError):
+        Financing(issue_discount=1.0)

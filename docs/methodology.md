@@ -37,7 +37,7 @@ The fixed rule tests each year from the build-ready year until the window closes
 
 ## 8. Claims: project, equity, royalty (WP 1.8)
 
-The project claim is after-tax cash flow discounted at the valuation rate from the valuation date. A royalty pays rate x coverage x gold revenue on each path, discounted at the valuation rate plus the buyer's spread (ADR 0014). Advance minimum royalties are paid at the end of each year before the first production year, and stop at gate failure or when the build window closes; if credited, their total is recovered from the first royalty payments (ADR 0021). Equity follows in WP 2.
+The project claim is after-tax cash flow discounted at the valuation rate from the valuation date. A royalty pays rate x coverage x gold revenue on each path, discounted at the valuation rate plus the buyer's spread (ADR 0014). Advance minimum royalties are paid at the end of each year before the first production year, and stop at gate failure or when the build window closes; if credited, their total is recovered from the first royalty payments (ADR 0021). The equity claim (ADR 0030) is the operator's share of project value less the value transferred to new shareholders when the equity-funded part of initial capital is raised at a discount d to fair value: E x d / (1 - d), with E the actual initial capital (overrun included) less the debt share of the study estimate. Debt is raised at fair value and transfers no value. The headline assumes all-equity funding, the upper bound on dilution.
 
 ## 9. Waterfall decomposition (WP 1.9)
 
