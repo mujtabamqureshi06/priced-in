@@ -163,10 +163,14 @@ class RoyaltyClaim:
     Attributes:
         rate: royalty rate as a fraction of revenue.
         coverage: fraction of the mine plan's gold the royalty covers (ADR 0016).
-        amr_per_year: advance minimum royalty per year before production, in the case's
-            money units, real.
+        amr_per_year: advance minimum royalty per year before production, a fixed nominal
+            amount converted to the case's money units at the valuation-date exchange
+            rate.
         amr_credited: whether paid advances are recovered from later royalty payments.
         spread: buyer's required spread over the valuation rate (ADR 0014).
+        amr_inflation: annual inflation used to turn the fixed nominal advance into real
+            terms (ADR 0021); 0 treats it as real. Credited advances are recovered as
+            the same nominal total, so their real value falls with the recovery year.
 
     """
 
@@ -175,6 +179,7 @@ class RoyaltyClaim:
     amr_per_year: float = 0.0
     amr_credited: bool = True
     spread: float = 0.0
+    amr_inflation: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -331,7 +336,8 @@ def _advances_pv(n_advances: int, royalty: RoyaltyClaim, rate: float) -> float:
     if n_advances <= 0 or royalty.amr_per_year == 0.0:
         return 0.0
     years = np.arange(1, n_advances + 1, dtype=np.float64)
-    return float(royalty.amr_per_year * _discount(rate + royalty.spread, years).sum())
+    real = royalty.amr_per_year * _discount(royalty.amr_inflation, years)
+    return float(real @ _discount(rate + royalty.spread, years))
 
 
 def _royalty_pv(
@@ -344,14 +350,15 @@ def _royalty_pv(
     """Present value of royalty payments plus advances, with optional crediting.
 
     Advances are paid at the end of years 1..n_advances (until production starts).
-    If credited, their total is recovered from the first royalty payments.
+    If credited, their nominal total is recovered from the first royalty payments.
     """
     paid = payments.copy()
     if royalty.amr_credited and n_advances > 0:
-        to_recover = np.full(paid.shape[0], royalty.amr_per_year * n_advances)
+        nominal_left = np.full(paid.shape[0], royalty.amr_per_year * n_advances)
         for t in range(paid.shape[1]):
-            take = np.minimum(to_recover, paid[:, t])
+            index = (1.0 + royalty.amr_inflation) ** years[t]
+            take = np.minimum(nominal_left / index, paid[:, t])
             paid[:, t] -= take
-            to_recover -= take
+            nominal_left -= take * index
     pv: FloatArray = paid @ _discount(rate + royalty.spread, years)
     return pv + _advances_pv(n_advances, royalty, rate)

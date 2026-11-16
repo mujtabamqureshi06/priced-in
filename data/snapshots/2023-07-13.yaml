@@ -1,0 +1,69 @@
+# Market snapshot for valuation date 2023-07-13. Raw observations only; which ones a
+# valuation uses is set by its decision record. Values retrieved 2026-11-16.
+
+as_of: 2023-07-13
+observations:
+  gold_spot:
+    value: 1960.61
+    units: US$/oz
+    observed: 2023-07-13
+    source: Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: symbol GOLD
+    status: P
+    notes: >-
+      Vendor series; not the LBMA PM fix.
+  real_yield_5y:
+    value: 0.0177
+    units: fraction per year
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DFII5 (TIPS constant maturity, real)
+    status: V
+  real_yield_7y:
+    value: 0.0162
+    units: fraction per year
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DFII7 (TIPS constant maturity, real)
+    status: V
+  real_yield_10y:
+    value: 0.0152
+    units: fraction per year
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DFII10 (TIPS constant maturity, real)
+    status: V
+  breakeven_10y:
+    value: 0.0224
+    units: fraction per year
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: T10YIE (10-year breakeven inflation)
+    status: V
+  gvz:
+    value: 0.1273
+    units: annual volatility, 30-day implied
+    observed: 2023-07-13
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: GVZCLS (CBOE Gold ETF Volatility Index)
+    status: V
+    notes: >-
+      Implied from GLD options; 30-day horizon.
+  realised_vol_5y:
+    value: 0.143
+    units: annual volatility
+    observed: 2023-07-13
+    source: computed from Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: weekday log returns, trailing 5 years, x sqrt(252)
+    status: P
+    notes: >-
+      Computed by Priced In from the vendor series; see scripts/realised_vol.py.
+  realised_vol_10y:
+    value: 0.141
+    units: annual volatility
+    observed: 2023-07-13
+    source: computed from Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: weekday log returns, trailing 10 years, x sqrt(252)
+    status: P
+    notes: >-
+      Computed by Priced In from the vendor series; see scripts/realised_vol.py.
