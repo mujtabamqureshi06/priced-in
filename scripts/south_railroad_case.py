@@ -40,8 +40,11 @@ def main() -> None:
 
     wharf = load_control(ROOT / "controls" / "wharf.yaml")
     s_wharf = implied_spread(
-        wharf.price.value, wharf.royalty_rate.value, wharf.payable_gold_oz,
-        wharf.gold_spot.value, wharf.real_rate.value,
+        wharf.price.value,
+        wharf.royalty_rate.value,
+        wharf.payable_gold_oz,
+        wharf.gold_spot.value,
+        wharf.real_rate.value,
     )
     anchors = {
         "Osisko raw (post-tax 3.5%)": OSISKO_POST_TAX - r,
@@ -63,10 +66,19 @@ def main() -> None:
 
     grid = tuple(x / 100 for x in range(0, 21, 2))
     print("\n| Real spread | Zero-delay odds, credited | Not credited |\n|---|---|---|")
-    cred = zero_delay_odds_curve(case, market, timing, risks, claim, PRICE, grid, n_paths=N, seed=SEED)
+    cred = zero_delay_odds_curve(
+        case, market, timing, risks, claim, PRICE, grid, n_paths=N, seed=SEED
+    )
     nocred = zero_delay_odds_curve(
-        case, market, timing, risks, replace(claim, amr_credited=False), PRICE, grid,
-        n_paths=N, seed=SEED,
+        case,
+        market,
+        timing,
+        risks,
+        replace(claim, amr_credited=False),
+        PRICE,
+        grid,
+        n_paths=N,
+        seed=SEED,
     )
     for (s, q1), (_, q2) in zip(cred, nocred, strict=True):
         f = lambda q: f"{q:.2f}" if q <= 1 else "no solution"  # noqa: E731
@@ -75,17 +87,25 @@ def main() -> None:
     for label, c in (("credited", claim), ("not credited", replace(claim, amr_credited=False))):
         for name in ("Osisko raw (post-tax 3.5%)", "Osisko pre-tax equivalent (4.76%)"):
             fr = royalty_frontier(
-                case, market, timing, risks, replace(c, spread=anchors[name]), PRICE,
-                max_delay=10, n_paths=N, seed=SEED,
+                case,
+                market,
+                timing,
+                risks,
+                replace(c, spread=anchors[name]),
+                PRICE,
+                max_delay=10,
+                n_paths=N,
+                seed=SEED,
             )
             pts = ", ".join(
                 f"{p.added_delay}: {p.gate_odds:.2f}" if p.solvable else f"{p.added_delay}: n/s"
                 for p in fr.points
             )
             cbd = fr.certain_build_delay
+            cbd_text = "none within 10 years" if cbd is None else f"{cbd:.1f} years"
             print(
                 f"\nFrontier at {name}, advances {label}: shape {fr.shape}; "
-                f"certain-build delay {'none within 10 years' if cbd is None else f'{cbd:.1f} years'}"
+                f"certain-build delay {cbd_text}"
                 f"\n  delay: odds -> {pts}"
             )
 
