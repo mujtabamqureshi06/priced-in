@@ -17,6 +17,8 @@ The values are fixed in the simulation, not drawn at random: the expected value 
 
 ## 2. Stage durations and lead times
 
+Stage gates carry probability only; they add no duration (ADR 0023). Base timing is set per case from an independent sourced duration where one exists, otherwise from company guidance published by the valuation date: South Railroad 4 years (BLM median of 3.79 years from Notice of Intent to Record of Decision, CEQ 2020; sensitivities 3 and 5), Osino 1 year (DFS Section 25; sensitivities 0 and 2). There is no timing prior: the frontier carries delay, and S&P and MinEx discovery-to-production lead times are not used because they do not measure delay against a company's own schedule. The build window is 5 years (10 as a sensitivity), a judgment (ADR 0023).
+
 ## 3. Capital cost overrun
 
 `capex.overrun.fs` follows Bertisen and Davis (2008). Each simulated path draws one capital cost ratio: 0.91 plus a lognormal draw with mean 0.35 and standard deviation 0.42. The ratio compares as-built cost in nominal dollars with the feasibility estimate in real dollars, so the engine multiplies it by `capex.inflation_adjustment` (0.914, the authors' own inflation assumption) to stay in real terms (ADR 0007). The result is a real overrun of about 14% on average, with a long right tail.
@@ -33,8 +35,16 @@ McNulty (1998) curves, digitised from the original Figure 1 (`data/ramp_up_mcnul
 
 ## 5. Gold price volatility and the risk-free curve
 
+Market inputs come only from the dated snapshots in `data/snapshots/` (ADR 0024): the 10-year TIPS yield as the flat real rate (FRED DFII10), trailing 10-year realised gold volatility from the daily series (GVZ on the date as a sensitivity), a zero gold convenience yield (flagged; 1% sensitivity; not checked against futures, ADR 0027), and the Government of Canada 10-year yield with spot USD/CAD for C$ payments. The full TIPS curve is a Phase 3 refinement.
+
 ## 6. Dilution and financing
+
+Equity is raised at a 10.54% discount to fair value (Carpentier and Suret 2009, mean of 3,476 Canadian private placements, 1993 to 2003; median 9.09% and 15% as sensitivities), with all-equity funding as the headline: the upper bound on dilution (ADR 0030). Debt shares of 30% and 60% are judgment sensitivities. Underwriting fees are not modelled.
 
 ## 7. Analyst-mode discount rates
 
+The CIM Mineral Economics survey (Smith 2013, as reported in Lopatnikov and Rumyantsev 2025) gives real gold rates of 12.6% (scoping), 11.1% (PFS), 8.9% (FS) and 5.7% (producing). They are used as cross-checks only: the FS rate as a stricter build-rule hurdle (ADR 0023), and the producing rate labelled "producing-mine valuation convention; not royalty-specific" (ADR 0028).
+
 ## 8. Buyer's required return (ADR 0008)
+
+A constant real spread over the real risk-free rate, calibrated on purchases of royalties on producing mines (ADR 0014, amended by 0026 and 0028). One control qualifies so far: Metalla's 2020 purchase of a 1.0% gross value royalty on Coeur's Wharf mine (Tier 2 schedule from disclosed reserves and guidance; 81% paid in shares), which implies about 15.8% on reserve-only flows, a lower bound. The convention reference is Osisko Gold Royalties' audited 2020 post-tax real discount rate of 3.5% for its producing Canadian NSR royalties (4.76% pre-tax equivalent). The two put South Railroad on opposite sides of the feasible region, so the spread is not fixed: results are shown across spreads with the break-even marked, until a second qualifying control agrees within tolerance.
