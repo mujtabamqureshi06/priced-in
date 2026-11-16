@@ -243,3 +243,41 @@ def test_invalid_inputs_rejected() -> None:
         Timing(added_delay=-1)
     with pytest.raises(ValueError, match="stage_odds"):
         Risks(stage_odds=1.2)
+
+
+def test_decision_rate_changes_only_the_build_choice(south_railroad: Case) -> None:
+    market = Market(gold_spot=1050.0, drift=0.0, volatility=0.0, discount_rate=0.05)
+    timing = Timing(max_wait=0)
+    study_rate = simulate(south_railroad, market, timing, Risks(build_rule=True), n_paths=2)
+    strict = simulate(
+        south_railroad, market, timing, Risks(build_rule=True, decision_rate=0.5), n_paths=2
+    )
+    assert study_rate.built.all()
+    assert not strict.built.any()
+
+
+def test_window_and_advance_diagnostics(south_railroad: Case) -> None:
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0, amr_per_year=100.0)
+    market = Market.study_deck(south_railroad)
+    expired = simulate(
+        south_railroad,
+        market,
+        Timing(max_wait=2),
+        Risks(build_rule=True, build_hurdle=1e12),
+        royalty=claim,
+        n_paths=4,
+    )
+    assert expired.window_expired_share == 1.0
+    assert expired.advance_share == pytest.approx(1.0)
+    built = simulate(south_railroad, market, Timing(), Risks(), royalty=claim, n_paths=4)
+    assert built.window_expired_share == 0.0
+    assert built.advance_share is not None and 0.0 <= built.advance_share < 0.05
+    no_claim = simulate(south_railroad, market, Timing(), Risks(), n_paths=2)
+    assert no_claim.advance_share is None
+
+
+def test_timing_priors_registered() -> None:
+    priors = load_priors(ROOT / "data" / "priors.yaml")
+    assert priors.get("timing.years_to_start.south_railroad").distribution.value == 4  # type: ignore[union-attr]
+    assert priors.get("timing.years_to_start.osino_twin_hills").distribution.value == 1  # type: ignore[union-attr]
+    assert priors.get("build.window_years").status == "J"

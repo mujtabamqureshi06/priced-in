@@ -190,3 +190,23 @@ def test_oxide_class_weights_match_table_2() -> None:
     assert s1.value == pytest.approx(6 / 7, abs=1e-6)
     assert s2.value == pytest.approx(1 / 7, abs=1e-6)
     assert s1.value + s2.value == pytest.approx(1.0, abs=1e-6)
+
+
+def test_judgment_status_requires_decision_and_flag() -> None:
+    from pricedin.priors import Prior
+
+    base = {
+        "id": "x.y",
+        "description": "d",
+        "distribution": {"kind": "fixed", "value": 1.0},
+        "units": "years",
+        "source": "judgment",
+        "location": "DR-000",
+        "status": "J",
+    }
+    with pytest.raises(ValueError, match="status J"):
+        Prior.model_validate(base)
+    with pytest.raises(ValueError, match="status J"):
+        Prior.model_validate({**base, "flag": "f", "decision": "ADR 9999", "source": "a paper"})
+    ok = Prior.model_validate({**base, "flag": "f", "decision": "ADR 9999"})
+    assert ok.flagged

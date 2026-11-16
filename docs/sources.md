@@ -2,7 +2,7 @@
 
 Every source that feeds a prior or a test case, with its verification status and where the figure sits. Third-party documents are not stored in this repository (ADR 0003).
 
-Status: **[V]** verified against the primary document or the issuer's own release. **[V-abs]** verified from the abstract or citation only; the full text is still needed for the specific figure. **[S]** seen only in a secondary summary; do not cite publicly. **[P]** practitioner or industry source, not peer-reviewed. **[X]** do not use.
+Status: **[V]** verified against the primary document or the issuer's own release. **[V-abs]** verified from the abstract or citation only; the full text is still needed for the specific figure. **[S]** seen only in a secondary summary; do not cite publicly. **[P]** practitioner or industry source, not peer-reviewed. **[J]** a stated judgment, recorded in a decision record and flagged in every output. **[X]** do not use.
 
 Last full review: 2026-11-16.
 
@@ -85,6 +85,7 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | S&P Global Market Intelligence (Manalo 2023) | 127 mines starting 2002-2023, discovered from 1980: mean 15.7 yr discovery to production (range 6 to 32); 70 gold mines 15.2 yr | [P] verified on S&P page | Survivor sample: only mines that reached production |
 | S&P (Manalo 2024) | Mean 17.9 yr for 2020-2023 starts vs 12.7 yr for 2005-2009 | [P] verified on S&P page | |
 | S&P (Manalo 2025, 2026 updates) | 17.8 yr for 2020-2024 starts; 2026: 16 yr across 232 assets, ~30 yr for non-operating assets with feasibility studies | [P] verified on S&P page | Phase split (studies, decision, construction) not yet verified |
+| Council on Environmental Quality (June 12, 2020), Environmental Impact Statement Timelines (2010-2018), https://nepa.gov/sites/default/files/documents/CEQ_EIS_Timeline_Report_2020-6-12.pdf | BLM, 143 EISs: mean NOI to ROD 4.36 yr (Figure 5, p. 9), median 3.79 yr (Figure 6, p. 13); all agencies mean 4.5, median 3.5, quartiles 2.2 and 6.0 (p. 1, Figure 1 p. 4) | [V] | Covers all EIS types, not mines only. Used for South Railroad base timing (ADR 0023) |
 | Sykes and Trench (2014), via Lopatnikov and Rumyantsev (2025), Table 1 | Copper pyramid count ratios 88% / 82% / 14% | [V] as reported | **Cross-sectional counts, not conversion rates.** Weak prior only |
 | CIM survey (Smith 2013), via Lopatnikov and Rumyantsev (2025) | Gold real discount rates: scoping 12.6%, PFS 11.1%, FS 8.9%, producing 5.7% | [V] as reported | Primary survey not yet located |
 | McNulty (1998), "Developing innovative technology", Mining Engineering 50(10):50-55 | Four ramp-up curves (Fig. 1, p. 52) from 41 plants; classification 23/5/6/7 by series (Table 2, p. 53); hydrometallurgical oxide plants, including heap leach, 6/1/0/0 | [V] full text read 2026-11-16 (scan supplied by the owner) | Curves digitised by eye, about ±2 points |

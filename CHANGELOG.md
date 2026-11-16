@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- ADR 0023 (Decision Maker, DR-009): base timing per case (South Railroad 4 years from CEQ BLM EIS data; Osino 1 year from DFS guidance), no timing prior for the reported point, build hurdle and 5-year window. Priors `timing.years_to_start.*`, `build.hurdle`, `build.window_years`; registry status `J` for stated judgments. Engine: `Risks.decision_rate`, and `Results.window_expired_share` and `advance_share` diagnostics.
 - Simulation engine (WP 1.4 to 1.6, part of 1.8): `pricedin.engine.simulate` draws gold paths, stage gates, the capital cost ratio and the build year, and values the project and a royalty with advance minimum royalties on the same paths. Every risk has a switch; with all off the engine returns the study NPV exactly. ADR 0022 records the timing conventions.
 
 ### Fixed
