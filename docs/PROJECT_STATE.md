@@ -4,7 +4,7 @@ Updated: 2026-11-16 by the Mastermind.
 
 ## Where we are
 
-Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built and released as v0.1.0 (private); ramp-up is not modelled in the public cases (ADR 0029). Phase 2 is under way: the South Railroad royalty inversion (ADR 0028) and a provisional reading of the Osino bids (ADR 0032) are done; the undisturbed Osino value and the developer value wait for sourced inputs.
+Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built and released as v0.1.0 (private); ramp-up is not modelled in the public cases (ADR 0029). Phase 2 is under way: the South Railroad royalty inversion (ADR 0028) and the Osino reading of the December 15, 2023 market value and both bids on Osino's own statements (ADRs 0031 to 0033) are done; the July 2023 developer value waits for a primary share price and the Q1 2023 balance sheet.
 
 ## Done
 
@@ -25,7 +25,7 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 
 ## Next
 
-1. Osino: net cash and option proceeds from Osino's own statements and the March 2024 circular; a sourced corporate G&A burn; then the undisturbed (December 15, 2023) and developer (July 2023) values (ADRs 0031, 0032).
+1. Osino July 2023 developer value: a primary daily share price for 2023-07-13 and the Q1 2023 statements (archived company website).
 2. A project-level spread calibrated on producing-mine transactions (ADR 0032 revisit), and a second producing-royalty control (ADR 0028).
 3. Phase 2 back-test across the Vox deals (Sorby Hills, White Dam) once their cases are built.
 4. Phase 3 planning: Longstaff-Schwartz build decision and the multi-asset adapter.
@@ -41,4 +41,5 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 
 - Walk-through of the design (Phase 0 exit criterion); the design walk-through document ends with self-test questions.
 - South Railroad wording approved by the owner on 2026-11-16 (ADR 0028). Library session permitted, not a blocker (ADR 0027). See `docs/AUTONOMY_LOG.md`.
-- Making the repository public remains the owner's decision.
+- Making the repository public remains the owner's decision; it stays private for now (owner, 2026-11-16).
+- Deploy the app on Streamlit Community Cloud: steps in `docs/deploying_the_app.md` (needs the owner's sign-in).
