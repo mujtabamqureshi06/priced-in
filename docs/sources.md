@@ -123,6 +123,15 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | Council on Environmental Quality, June 2020 | See section on timing | [V] | ADR 0023 |
 | OR Royalties (formerly Osisko), audited statements for 2025 (Form 40-F exhibit 99.2, filed Feb 2026), Note 12 | Post-tax real discount rate 5.1% (2025), 4.9% (2024), goodwill test for Québec gold mines; statutory tax rate 26.5% | [V] | Reference rate for deals dated after Feb 2026 (ADR 0035) |
 
+## Method benchmarks
+
+| Source | Figure | Status | Use |
+|---|---|---|---|
+| Maier (2021), "Re-evaluating natural resource investments under uncertainty: An alternative to limited traditional approaches", Annals of Operations Research 299(1), 907-937, doi:10.1007/s10479-020-03569-w (open access), Sect. 2.2, Tables 1 and 2 | Brennan and Schwartz (1985) copper mine: parameters and finite-difference values of the open and closed mine at US$0.30 to US$1.00/lb | [S] for the Brennan and Schwartz values (reproduced; original not accessed); [V] for Maier's own specification | ADR 0040 |
+| Longstaff and Schwartz (2001), Review of Financial Studies 14(1), 113-147 | Least-squares Monte Carlo method | [V] citation | ADR 0037 |
+| QuantLib 1.44, `FdBlackScholesVanillaEngine` | American put reference value 4.487 (S=36, K=40, r=6%, vol 20%, 1 year) | [V] computed | ADR 0037 |
+| Fuller (2023), "An option-value framework for valuing mining streams", Resources Policy, doi:10.1016/j.resourpol.2023.103847 | A stream as a portfolio of European calls | [P] abstract read | ADR 0041 |
+
 ## Osino company documents (archived company website)
 
 | Source | Figure | Status | Use |

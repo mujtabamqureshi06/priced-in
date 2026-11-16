@@ -1,0 +1,35 @@
+# Brennan and Schwartz (1985) copper mine: published values for validating the
+# least-squares Monte Carlo method (ADR 0040). Values in US$ millions.
+#
+# The finite-difference values are those of Brennan and Schwartz (1985), Journal of
+# Business 58(2), 135-157, as reproduced by Maier (2021), Annals of Operations Research
+# 299(1), 907-937, Table 2 (open access, doi:10.1007/s10479-020-03569-w). The original
+# article was not accessible for this check, so the status is S (secondary) until the
+# values are compared with it. Parameters: Maier (2021), Table 1.
+
+source: Maier (2021), Annals of Operations Research 299(1), Table 2, reproducing Brennan and Schwartz (1985)
+status: S
+parameters:
+  output_rate: 10000000       # lb a year
+  inventory: 150000000        # lb
+  average_cost: 0.50         # US$/lb, initial
+  opening_cost: 200000     # US$, initial
+  closing_cost: 200000     # US$, initial
+  maintenance_cost: 500000 # US$ a year, initial
+  cost_inflation: 0.08
+  convenience_yield: 0.01
+  price_variance: 0.08
+  interest_rate: 0.10
+  royalty: 0.0
+  income_tax: 0.50
+  property_tax: 0.02
+values:
+  # price US$/lb: [open, closed]
+  0.30: [1.25, 1.45]
+  0.40: [4.15, 4.35]
+  0.50: [7.95, 8.11]
+  0.60: [12.52, 12.49]
+  0.70: [17.56, 17.38]
+  0.80: [22.88, 22.68]
+  0.90: [28.38, 28.18]
+  1.00: [34.01, 33.81]
