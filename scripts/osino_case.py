@@ -42,16 +42,23 @@ def main() -> None:
 
     def run(p: Mapping[str, Any], financing: Financing | None = None) -> Any:
         market = Market.market_consistent(
-            snap.value("gold_spot"), snap.value("real_yield_10y"),
-            p["convenience_yield"], p["volatility"],
+            snap.value("gold_spot"),
+            snap.value("real_yield_10y"),
+            p["convenience_yield"],
+            p["volatility"],
         )
         risks = Risks(
-            stage_odds=p["stage_odds"], overrun=overrun if p["overrun"] else None,
-            build_rule=True, decision_rate=p["decision_rate"],
+            stage_odds=p["stage_odds"],
+            overrun=overrun if p["overrun"] else None,
+            build_rule=True,
+            decision_rate=p["decision_rate"],
         )
         timing = Timing(years_to_start=p["years_to_start"], max_wait=p["max_wait"])
-        return market, timing, risks, simulate(
-            case, market, timing, risks, financing=financing, n_paths=N, seed=SEED
+        return (
+            market,
+            timing,
+            risks,
+            simulate(case, market, timing, risks, financing=financing, n_paths=N, seed=SEED),
         )
 
     market, timing, risks, res = run(base, Financing(0.0, 0.1054))
@@ -86,7 +93,8 @@ def main() -> None:
         "max_wait": (("5 years (base)", 5), ("10 years", 10)),
         "decision_rate": (("study 5% (base)", None), ("8.9% (CIM FS)", 0.089)),
     }
-    print("\n| Input | Low | High | Value at low | Value at high | Swing |\n|---|---|---|---|---|---|")
+    print("\n| Input | Low | High | Value at low | Value at high | Swing |")
+    print("|---|---|---|---|---|---|")
     for b in tornado(value, base, alts):
         print(
             f"| {b.name} | {b.low_label} | {b.high_label} | {b.low:,.1f} | "
