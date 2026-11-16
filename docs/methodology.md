@@ -35,17 +35,30 @@ Each path draws one capital cost ratio, applied to initial capital (including co
 
 The fixed rule tests each year from the build-ready year until the window closes. It builds in the first year in which the project's after-tax NPV at that year's gold price, held flat, at the study's capital estimate and discount rate, reaches the hurdle. It never sees the overrun draw. A path the rule does not build before the window closes is not built. The extra capital from an overrun carries no tax shield, which slightly understates value on overrun paths.
 
+The optimal rule (ADR 0038) uses least-squares Monte Carlo (Longstaff and Schwartz 2001; ADR 0037).
+- **Decision dates:** from the build-ready year to the end of the window.
+- **Building now:** worth the market-consistent value of the project at that year, at study capital.
+- **Waiting:** worth the regression estimate of continuing, fitted on independent paths with a cubic polynomial basis in the gold price.
+
+The fixed rule remains the headline. At project-level spreads of 5% and above, the two rules agree for Osino within Monte Carlo error.
+
+The method is validated in two ways:
+1. on the American put, against QuantLib finite differences (ADR 0037);
+2. on the Brennan and Schwartz (1985) copper mine (ADR 0040). That mine has options to close, reopen and abandon, inventory as a discrete state, and a spline basis in the log price. All eight published values are matched within one standard error.
+
 ## 7. Discounting (WP 1.7)
 
 Cash flows fall at the end of each whole year after the valuation date. In market-consistent mode, simulated cash flows are expected under risk-neutral gold dynamics and discounted at the real risk-free rate, while project-specific risks (stage gates, overrun) are simulated at real-world probabilities without a further premium (Samis et al. 2006; ADR 0012). The engine therefore never reports a distribution of NPVs discounted at a risk-adjusted rate (Davis 1995). Analyst mode, a single risk-adjusted rate on expected cash flows at the study deck, exists only for reconciliation and for the analyst-mode cross-check of controls (ADR 0014). A royalty is discounted at the real risk-free rate plus the buyer's spread; under risk-neutral gold dynamics an ounce of royalty revenue t years out is then worth spot x e^(-yt) x ((1 + r)/(1 + r + s))^t, so the cost of delay to the royalty holder is about s + y and does not depend on r (ADR 0024; tested).
 
-## 8. Claims: project, equity, royalty (WP 1.8)
+## 8. Claims: project, equity, royalty, stream (WP 1.8, WP 3.6)
 
 The project claim is after-tax cash flow discounted at the valuation rate from the valuation date. A royalty pays rate x coverage x gold revenue on each path, discounted at the valuation rate plus the buyer's spread (ADR 0014). Advance minimum royalties are paid at the end of each year before the first production year, and stop at gate failure or when the build window closes; if credited, their total is recovered from the first royalty payments (ADR 0021). The equity claim (ADR 0030) is the operator's share of project value less the value transferred to new shareholders when the equity-funded part of initial capital is raised at a discount d to fair value: E x d / (1 - d), with E the actual initial capital (overrun included) less the debt share of the study estimate. Debt is raised at fair value and transfers no value. The headline assumes all-equity funding, the upper bound on dilution.
 
+A gold stream (ADR 0041) delivers a share of payable gold to the holder against an ongoing payment equal to the lesser of a transfer price and spot. Each delivered ounce is therefore worth max(P - c, 0): the stream is a strip of call options on gold (Fuller 2023). It is discounted at the valuation rate plus the holder's spread. A stream pays nothing on failing paths, so its implied odds are price / V_pass(d), as for equity.
+
 ## 9. Waterfall decomposition (WP 1.9)
 
-The waterfall switches risks on one at a time in a fixed order on the same random paths: the study NPV; discounting at the valuation rate with the study deck held flat; market gold prices (spot with its market-consistent drift); base timing; capital cost overrun; ramp-up (reported as not modelled until ADR 0019 is implemented); stage failure; and price uncertainty with the build decision. Each bar is the change in the mean value, with its Monte Carlo standard error. Step sizes depend on the order; an order-independent attribution is planned for Phase 3.
+The waterfall switches risks on one at a time in a fixed order on the same random paths: the study NPV; discounting at the valuation rate with the study deck held flat; market gold prices (spot with its market-consistent drift); base timing; capital cost overrun; ramp-up (reported as not modelled until ADR 0019 is implemented); stage failure; and price uncertainty with the build decision. Each bar is the change in the mean value, with its Monte Carlo standard error. Step sizes depend on the order. The Shapley version (ADR 0039) keeps the first two steps in sequence and gives each of the four risk steps its average marginal effect over every order (Shapley 1953), from 16 runs on common paths.
 
 ## 10. Inversion and the odds-timing frontier (WP 2.5)
 
@@ -59,12 +72,17 @@ Two numbers summarise the frontier without a timing prior (ADR 0023): the zero-d
 
 ## References
 
+- Brennan, M. J. and Schwartz, E. S. (1985). Evaluating natural resource investments. Journal of Business 58(2): 135-157 (values as reproduced by Maier 2021).
 - Bertisen, J. and Davis, G. A. (2008). Bias and error in mine project capital cost estimation. The Engineering Economist 53(2): 118-139.
 - Carpentier, C. and Suret, J.-M. (2009). Private placements by small public entities: Canadian experience. CIRANO 2009s-12.
 - Council on Environmental Quality (2020). Environmental Impact Statement Timelines (2010-2018).
 - Davis, G. A. (1995). (Mis)use of Monte Carlo simulations in NPV analysis. Mining Engineering 47(1): 75-79.
+- Fuller, E. W. (2023). An option-value framework for valuing mining streams. Resources Policy. doi:10.1016/j.resourpol.2023.103847.
+- Longstaff, F. A. and Schwartz, E. S. (2001). Valuing American options by simulation: a simple least-squares approach. Review of Financial Studies 14(1): 113-147.
 - Lopatnikov, A. and Rumyantsev, A. (2025). Mining Science and Technology 10(3) (reporting Sykes and Trench 2014 and Smith 2013).
+- Maier, S. (2021). Re-evaluating natural resource investments under uncertainty: an alternative to limited traditional approaches. Annals of Operations Research 299(1): 907-937.
 - McNulty, T. (1998). Developing innovative technology. Mining Engineering 50(10): 50-55.
+- Shapley, L. S. (1953). A value for n-person games. In Contributions to the Theory of Games II, Annals of Mathematics Studies 28: 307-317.
 - Samis et al. (2006) and Schwartz (1997): cited from secondary sources for now; full references to be verified in the sources register.
 
 Full bibliography with verification status: [sources.md](sources.md).
