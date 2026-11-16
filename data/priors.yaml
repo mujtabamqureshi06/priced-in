@@ -262,3 +262,33 @@ priors:
     sensitivity:
       - {label: "1% a year", value: 0.01, source: judgment}
     decision: ADR 0024
+
+  - id: equity.issue_discount
+    description: >-
+      Discount of the operator's equity issue price to fair value when it raises
+      the equity-funded part of initial capital (WP 1.8).
+    distribution: {kind: fixed, value: 0.1054}
+    units: fraction of fair value
+    source: Carpentier and Suret (2009), Private Placements by Small Public Entities - Canadian Experience, CIRANO 2009s-12
+    location: Table 6, p. 31 (3,476 placements, 1993 to 2003; mean 10.54%, median 9.09%; discount to the price 10 trading days after announcement)
+    status: V
+    flag: Canadian small-company private placements, 1993 to 2003, not mining-specific. Underwriting fees not modelled.
+    sensitivity:
+      - {label: "median 9.09%", value: 0.0909, source: "Carpentier and Suret (2009), Table 6, p. 31", status: V}
+      - {label: "15% (developer bought deals)", value: 0.15, source: judgment}
+    decision: ADR 0030
+
+  - id: equity.debt_fraction
+    description: Share of the study's initial capital estimate funded by debt at fair value.
+    distribution: {kind: fixed, value: 0.0}
+    units: fraction of initial capital
+    source: judgment
+    location: DR-016, Q2
+    status: J
+    flag: >-
+      Dilution upper bound (all-equity funding); understates equity value and
+      pushes developer-adapter implied odds higher.
+    sensitivity:
+      - {label: "30% debt", value: 0.30, source: judgment}
+      - {label: "60% debt", value: 0.60, source: judgment}
+    decision: ADR 0030
