@@ -1,0 +1,8 @@
+# Autonomy log
+
+Decisions and actions the Mastermind took while the owner was away, under his instruction of 2026-11-16 to proceed without waiting on approvals that do not block work. The owner can reverse any of them.
+
+| Date | Item | What was done | Normally decided by |
+|---|---|---|---|
+| 2026-11-16 | South Railroad wording (ADR 0028) | Owner approved the wording in `docs/cases/south_railroad.md` before going offline. Recorded; publication itself still waits for the repository to be made public, which the owner has not asked for. | Owner |
+| 2026-11-16 | University library session (ADR 0027) | Owner permitted its use for data searches if it works; it is not treated as a blocker. Only derived figures may be committed. | Owner |
