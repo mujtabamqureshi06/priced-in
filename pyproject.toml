@@ -37,6 +37,9 @@ dev = [
     "ruff>=0.5",
     "types-PyYAML>=6.0",
 ]
+validation = [
+    "QuantLib>=1.30",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pricedin"]
