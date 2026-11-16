@@ -245,3 +245,20 @@ priors:
     sensitivity:
       - {label: "10 years", value: 10, source: judgment}
     decision: ADR 0023
+
+  - id: market.convenience_yield.gold
+    description: >-
+      Gold convenience yield (lease rate) in the market-consistent drift. The
+      same value is used for the target and for every gold control (ADR 0024).
+    distribution: {kind: fixed, value: 0.0}
+    units: fraction per year
+    source: judgment
+    location: DR-010, Q2
+    status: J
+    flag: >-
+      Gold lease rate set to zero; not yet checked against COMEX futures for the
+      valuation dates. The cost of delay to a royalty holder is the buyer's
+      spread plus this yield.
+    sensitivity:
+      - {label: "1% a year", value: 0.01, source: judgment}
+    decision: ADR 0024

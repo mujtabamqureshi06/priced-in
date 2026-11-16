@@ -47,6 +47,7 @@ from pricedin.inputs import Case
 from pricedin.price_models import GBM
 from pricedin.priors import ShiftedLognormal
 from pricedin.project import schedule_cash_flows
+from pricedin.snapshots import Snapshot
 
 FloatArray = NDArray[np.float64]
 IntArray = NDArray[np.int64]
@@ -81,6 +82,23 @@ class Market:
             drift=float(np.log1p(real_rate)) - convenience_yield,
             volatility=volatility,
             discount_rate=real_rate,
+        )
+
+    @classmethod
+    def from_snapshot(
+        cls,
+        snapshot: Snapshot,
+        *,
+        convenience_yield: float,
+        rate_key: str = "real_yield_10y",
+        vol_key: str = "realised_vol_10y",
+    ) -> Market:
+        """Market-consistent inputs from a dated snapshot (ADR 0024 defaults)."""
+        return cls.market_consistent(
+            gold_spot=snapshot.value("gold_spot"),
+            real_rate=snapshot.value(rate_key),
+            convenience_yield=convenience_yield,
+            volatility=snapshot.value(vol_key),
         )
 
     @classmethod
@@ -180,6 +198,30 @@ class RoyaltyClaim:
     amr_credited: bool = True
     spread: float = 0.0
     amr_inflation: float = 0.0
+
+
+def fixed_nominal_advance(
+    amount: float, fx: float, nominal_rate: float, real_rate: float, money_scale: float
+) -> tuple[float, float]:
+    """Return engine inputs for a fixed nominal advance in a foreign currency (ADR 0024).
+
+    A fixed nominal stream in currency C is worth its payments discounted at C's nominal
+    rate and converted at spot (covered interest parity). The engine discounts advances
+    at the real rate after deflating them, so the deflator that reproduces the nominal
+    discount is ``(1 + nominal_rate) / (1 + real_rate) - 1``.
+
+    Args:
+        amount: advance per year in currency C (e.g. 120,000 C$).
+        fx: units of C per US$ on the valuation date.
+        nominal_rate: C's nominal government yield on the valuation date.
+        real_rate: the valuation's real rate.
+        money_scale: US$ per case money unit (1,000 for US$ thousands).
+
+    Returns:
+        ``(amr_per_year, amr_inflation)`` for ``RoyaltyClaim``.
+
+    """
+    return amount / fx / money_scale, (1.0 + nominal_rate) / (1.0 + real_rate) - 1.0
 
 
 @dataclass(frozen=True)

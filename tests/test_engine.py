@@ -3,7 +3,15 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from pricedin.engine import Market, Overrun, Risks, RoyaltyClaim, Timing, simulate
+from pricedin.engine import (
+    Market,
+    Overrun,
+    Risks,
+    RoyaltyClaim,
+    Timing,
+    fixed_nominal_advance,
+    simulate,
+)
 from pricedin.inputs import Case, load_case
 from pricedin.priors import ShiftedLognormal, load_priors
 from pricedin.project import npv, schedule_cash_flows
@@ -313,3 +321,54 @@ def test_credited_nominal_total_recovered_in_real_terms(south_railroad: Case) ->
     advances = sum(adv / (1 + infl) ** k / 1.05**k for k in range(1, n_adv + 1))
     assert res.royalty_value is not None
     assert res.royalty_value[0] == pytest.approx(float(pay @ 1.05**-years) + advances)
+
+
+def test_royalty_value_does_not_depend_on_the_real_rate(south_railroad: Case) -> None:
+    gold = np.asarray(south_railroad.schedule.columns["gold_revenue"].values, dtype=float)
+    deck = south_railroad.study.price_deck["gold"].value
+    timing = Timing(years_to_start=4)
+    years = 4 + np.arange(len(gold))
+    for y in (0.0, 0.01):
+        values = []
+        for r in (-0.0082, 0.0152):
+            market = Market.market_consistent(1898.5, r, y, 0.0)
+            res = simulate(
+                south_railroad,
+                market,
+                timing,
+                Risks(),
+                royalty=RoyaltyClaim(rate=0.00633, coverage=0.35),
+                n_paths=1,
+            )
+            assert res.royalty_value is not None
+            values.append(res.royalty_value[0])
+        expected = float(0.00633 * 0.35 * gold * (1898.5 / deck) @ np.exp(-y * years))
+        np.testing.assert_allclose(values, expected, rtol=1e-12)
+
+
+def test_fixed_nominal_advance_matches_nominal_discounting(south_railroad: Case) -> None:
+    amr, infl = fixed_nominal_advance(120_000, 1.2062, 0.0147, -0.0082, 1_000)
+    assert amr == pytest.approx(120 / 1.2062)
+    market = Market.market_consistent(1898.5, -0.0082, 0.0, 0.0)
+    res = simulate(
+        south_railroad,
+        market,
+        Timing(years_to_start=3),
+        Risks(stage_odds=0.0),
+        royalty=RoyaltyClaim(rate=0.0, coverage=1.0, amr_per_year=amr, amr_inflation=infl),
+        n_paths=1,
+    )
+    expected = sum(120 / 1.2062 / 1.0147**k for k in (1, 2, 3))
+    assert res.royalty_value is not None
+    assert res.royalty_value[0] == pytest.approx(expected)
+
+
+def test_market_from_snapshot_uses_decided_defaults() -> None:
+    from pricedin.snapshots import load_snapshot
+
+    snap = load_snapshot(ROOT / "data" / "snapshots" / "2021-06-07.yaml")
+    m = Market.from_snapshot(snap, convenience_yield=0.0)
+    assert m.gold_spot == snap.value("gold_spot")
+    assert m.discount_rate == pytest.approx(-0.0082)
+    assert m.volatility == pytest.approx(0.148)
+    assert m.drift == pytest.approx(np.log(1 - 0.0082))

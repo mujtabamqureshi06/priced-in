@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- ADR 0024 (Decision Maker, DR-010): market inputs. `Market.from_snapshot`, prior `market.convenience_yield.gold`, Bank of Canada 10-year yield in the 2021 snapshot, and `engine.fixed_nominal_advance` (covered interest parity valuation of the fixed C$ advances). Test that the royalty value is independent of the real rate in market-consistent mode.
 - Market snapshots (`pricedin.snapshots`, `data/snapshots/2021-06-07.yaml`, `2023-07-13.yaml`): gold spot, TIPS real yields (5, 7, 10 years), 10-year breakeven, USD/CAD, GVZ and realised volatility, each with source, series, observation date and status; observations after the valuation date are rejected. `scripts/realised_vol.py` reproduces the realised volatility figures.
 - Advance minimum royalties as a fixed nominal amount (ADR 0021): `RoyaltyClaim.amr_inflation` deflates each advance to real terms, and credited advances are recovered as the same nominal total.
 - ADR 0023 (Decision Maker, DR-009): base timing per case (South Railroad 4 years from CEQ BLM EIS data; Osino 1 year from DFS guidance), no timing prior for the reported point, build hurdle and 5-year window. Priors `timing.years_to_start.*`, `build.hurdle`, `build.window_years`; registry status `J` for stated judgments. Engine: `Risks.decision_rate`, and `Results.window_expired_share` and `advance_share` diagnostics.
