@@ -372,3 +372,27 @@ def test_market_from_snapshot_uses_decided_defaults() -> None:
     assert m.discount_rate == pytest.approx(-0.0082)
     assert m.volatility == pytest.approx(0.148)
     assert m.drift == pytest.approx(np.log(1 - 0.0082))
+
+
+def test_failure_timing_switch(south_railroad: Case) -> None:
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0, amr_per_year=100.0)
+    market = Market.study_deck(south_railroad)
+    late = simulate(
+        south_railroad,
+        market,
+        Timing(years_to_start=1, added_delay=2, failure_after_delay=True),
+        Risks(stage_odds=0.0),
+        royalty=claim,
+        n_paths=1,
+    )
+    base = simulate(
+        south_railroad,
+        market,
+        Timing(years_to_start=1, added_delay=2),
+        Risks(stage_odds=0.0),
+        royalty=claim,
+        n_paths=1,
+    )
+    assert late.royalty_value is not None and base.royalty_value is not None
+    assert late.royalty_value[0] == pytest.approx(sum(100 / 1.05**k for k in (1, 2, 3)))
+    assert base.royalty_value[0] == pytest.approx(100 / 1.05)

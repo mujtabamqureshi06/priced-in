@@ -3,6 +3,7 @@
 - Status: accepted
 - Date: 2026-11-16
 - Decided by: Mastermind (routine)
+- Amended by: ADR 0025 (item 2: failure now occurs at the base build-ready year)
 
 ## Context
 
