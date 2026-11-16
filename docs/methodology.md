@@ -12,6 +12,15 @@ This document will hold every equation the engine uses, with its source. Section
 
 ## 3. Project cash flow (WP 1.3)
 
+Schedule mode starts from the study's annual cash-flow table and changes only what depends on the gold price (`pricedin.project`):
+
+- Gold revenue in period t: study gold revenue × P_t / P_deck. By-product revenue stays at the study deck in Phase 1.
+- Revenue-linked costs (royalties, levies, selling costs named in the case) scale with total revenue in the same period.
+- Tax: study tax + τ × Δ(pre-tax profit), where τ is the case's sourced marginal rate; a negative result pays zero and is carried forward as a credit (ADR 0018).
+- Capital, operating costs and working capital follow the study.
+
+With the study deck, the engine reproduces the study table exactly. At other prices it reproduces Osino's published after-tax NPV5 within 0.3% (US$1,500 to US$2,000/oz) and South Railroad's within -2.3% to +5.2% (US$1,200 to US$1,600/oz); South Railroad's pre-tax NPV5 is within 0.1%. The South Railroad after-tax gap comes from treating Nevada's net proceeds tax and federal tax as one rate.
+
 ## 4. Stage gates and delays (WP 1.4)
 
 ## 5. Capital cost overrun and ramp-up (WP 1.5)
