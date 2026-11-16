@@ -5,13 +5,14 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Royalty transaction dataset (WP 2.7): `data/transactions.csv` with its loader and checks (`pricedin.transactions`). Six disclosed deals: South Railroad (modelled), Sorby Hills (planned, needs WP 2.6), the Wharf control, and three deals listed but out of scope with the reason stated (White Dam, Kalman and Sylvania, and the February 2026 Australian portfolio).
 - ADR 0033 (Decision Maker, DR-019): Osino corporate G&A and the fairness-opinion reference band. Osino prices re-run on Osino's own September 30, 2023 statements, with the December 15, 2023 undisturbed value as headline (`scripts/osino_prices.py`, replacing `scripts/osino_bids.py`).
-
-### Fixed
-- The Shanjin price used a December 31, 2023 balance published after the price date; replaced with the September 30, 2023 statements.
 - ADR 0032 (Decision Maker, DR-018): Osino bids shown against a project-level spread with the break-even marked; provisional bid section in the Osino write-up and `scripts/osino_bids.py`.
 - ADR 0031 (Decision Maker, DR-017): Osino takeover and developer adapters. Market snapshots for 2023-12-15, 2023-12-18 and 2024-02-23.
 - `inversion.equity_frontier`: implied gate odds from an equity-based price (developer and takeover adapters), with synthetic recovery test.
+
+### Fixed
+- The Shanjin price used a December 31, 2023 balance published after the price date; replaced with the September 30, 2023 statements.
 
 ## [0.1.0] - 2026-11-16
 
