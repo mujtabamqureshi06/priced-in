@@ -1,6 +1,6 @@
 # 0014. Producing-royalty controls for the buyer's required return (amends 0008)
 
-- Status: accepted; clarified by ADR 0020 (price basis)
+- Status: accepted; clarified by ADR 0020 (price basis); amended by ADR 0026 (criteria 1 and 3, one-control rule)
 - Date: 2026-11-15
 - Decided by: Independent Decision Maker (owner's proxy), decision record DR-002
 - Amends: ADR 0008 (owner), by adding a fallback. The owner has been asked to review.

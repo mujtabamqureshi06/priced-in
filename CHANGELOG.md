@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- ADR 0026 (Decision Maker, DR-012): control criteria amended (share consideration at closing-date fair value; two-tier mine-plan test; one-control rule).
 - Inversion (WP 2.5): `pricedin.inversion.royalty_frontier` solves implied gate odds for each added delay in closed form (value is linear in the odds), with Monte Carlo standard errors, a noise-aware shape test, the zero-delay odds and the certain-build delay. Synthetic recovery tests. ADR 0025 (Decision Maker, DR-011): failing paths fail at the base build-ready year; `Timing.failure_after_delay` keeps the old rule as a sensitivity.
 - ADR 0024 (Decision Maker, DR-010): market inputs. `Market.from_snapshot`, prior `market.convenience_yield.gold`, Bank of Canada 10-year yield in the 2021 snapshot, and `engine.fixed_nominal_advance` (covered interest parity valuation of the fixed C$ advances). Test that the royalty value is independent of the real rate in market-consistent mode.
 - Market snapshots (`pricedin.snapshots`, `data/snapshots/2021-06-07.yaml`, `2023-07-13.yaml`): gold spot, TIPS real yields (5, 7, 10 years), 10-year breakeven, USD/CAD, GVZ and realised volatility, each with source, series, observation date and status; observations after the valuation date are rejected. `scripts/realised_vol.py` reproduces the realised volatility figures.
