@@ -16,9 +16,9 @@ Phases close on exit criteria, not dates. The full work-package detail lives in 
 
 | WP | Content | Status |
 |---|---|---|
-| 0.1 | Repository and tooling | Done locally; awaiting GitHub repository |
+| 0.1 | Repository and tooling | Done (branch protection not available from this session) |
 | 0.2 | Project documents | Done |
-| 0.3 | Source verification (`docs/sources.md`) | Case facts done; calibration sources partly done |
-| 0.4 | Priors registry (`data/priors.yaml`, loader) | Not started |
-| 0.5 | Input template and hand-filled cases | Not started; needs the DFS and PFS documents |
+| 0.3 | Source verification (`docs/sources.md`) | Case facts done; Bertisen and Davis read in full; others in progress |
+| 0.4 | Priors registry (`data/priors.yaml`, loader) | In progress: loader, stage priors, FS overrun |
+| 0.5 | Input template and hand-filled cases | South Railroad done (reproduces PFS NPV exactly); Osino waits on the DFS report |
 | 0.6 | Founding ADRs | Done (0001 to 0012) |

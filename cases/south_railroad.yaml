@@ -1,0 +1,136 @@
+# South Railroad (Nevada, gold), valued as of the Vox royalty purchase.
+# Schedule mode: the PFS annual cash-flow table, Table 22-7, transcribed row by row.
+# Money in US$ thousands, real (flat price deck, no escalation; PFS Section 22.5).
+# No look-ahead (ADR 0007): only documents public on 2021-06-07 are used.
+
+id: south_railroad
+name: South Railroad (Dark Star and Pinion)
+operator: Gold Standard Ventures Corp.
+jurisdiction: Nevada, United States
+commodity: gold
+currency: USD
+as_of: 2021-06-07
+operator_share: 1.0
+
+documents:
+  - id: pfs_2020
+    title: South Railroad Project, Form 43-101F1 Technical Report, Updated Preliminary Feasibility Study, Elko County, Nevada
+    issuer: Gold Standard Ventures Corp. (M3 Engineering and others)
+    date: 2020-03-23
+    url: https://www.sec.gov/Archives/edgar/data/1321847/000117625620000120/exhibit99-1.htm
+  - id: vox_2021
+    title: Vox Royalty Acquires Rancher Royalty on South Railroad Gold Development Project in Nevada
+    issuer: Vox Royalty Corp.
+    date: 2021-06-07
+    url: https://www.marketscreener.com/quote/stock/VOX-ROYALTY-CORP-111381375/news/Vox-Royalty-Acquires-Rancher-Royalty-On-South-Railroad-Gold-Development-Project-In-Nevada-35536336/
+
+study:
+  stage: PFS
+  document: pfs_2020
+  effective_date: 2020-03-23
+  price_deck:
+    gold: {value: 1400.0, units: US$/oz, source: {document: pfs_2020, location: "Section 22.5, p. 22-3"}}
+    silver: {value: 17.11, units: US$/oz, source: {document: pfs_2020, location: "Section 22.5, p. 22-3"}}
+  discount_rate: {value: 0.05, units: fraction per year, source: {document: pfs_2020, location: "Table 22-5, p. 22-5"}}
+  npv_pre_tax_usd_k: {value: 331423, units: US$ thousands, source: {document: pfs_2020, location: "Table 22-5, p. 22-5"}}
+  npv_after_tax_usd_k: {value: 265045, units: US$ thousands, source: {document: pfs_2020, location: "Table 22-5, p. 22-5"}}
+  irr_after_tax: {value: 0.400, units: fraction per year, source: {document: pfs_2020, location: "Table 22-5, p. 22-5"}}
+  discounting:
+    t0_column: "Year -1"
+    convention: end_of_year
+    source: {document: pfs_2020, location: "Table 22-7, pp. 22-7 to 22-8; reproduced exactly from the cash-flow row"}
+  tax_summary: >-
+    Nevada net proceeds tax 5% of revenue less operating cost and depreciation;
+    federal corporate tax 21%; no state income tax; 7-year MACRS depreciation;
+    all-equity financed (Sections 22.7, 22.10, 22.12).
+
+status:
+  permitted: false
+  financed: false
+  construction_decision: false
+  source: {document: pfs_2020, location: "Section 20 (mine requires an EIS under NEPA; exploration Plan of Operations only)"}
+
+schedule:
+  periods: ["Year -1", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11"]
+  columns:
+    payable_gold_koz:
+      values: [0, 83, 130, 111, 193, 208, 79, 56, 50, 6, 1, 0]
+      total: 918
+      source: {document: pfs_2020, location: "Table 22-7, Payable Metals, p. 22-7"}
+    payable_silver_koz:
+      values: [0, 0, 0, 0, 57, 171, 301, 298, 192, 17, 3, 0]
+      total: 1040
+      source: {document: pfs_2020, location: "Table 22-7, Payable Metals, p. 22-7"}
+    revenue_usd_k:
+      values: [0, 116572, 181802, 156087, 271189, 294330, 115887, 83993, 72687, 8209, 2038, 0]
+      total: 1302793
+      source: {document: pfs_2020, location: "Table 22-7, Total Revenues, p. 22-7"}
+    operating_cost_usd_k:
+      values: [0, 64901, 73388, 94929, 80306, 73167, 64750, 55787, 32574, 1914, 2856, 0]
+      total: 544573
+      source: {document: pfs_2020, location: "Table 22-7, Total Operating Cost, p. 22-7"}
+    existing_royalties_usd_k:
+      values: [0, 1803, 2812, 2414, 4194, 4552, 1793, 1299, 1124, 127, 32, 0]
+      total: 20149
+      source: {document: pfs_2020, location: "Table 22-7, Royalty, p. 22-7; about 1.24% NSR after planned buy-downs, Section 22.8"}
+    salvage_usd_k:
+      values: [0, 0, 0, 0, 0, 0, -1713, -17116, 0, 0, -1500, 0]
+      total: -20329
+      source: {document: pfs_2020, location: "Table 22-7, Salvage Value, p. 22-7"}
+    reclamation_usd_k:
+      values: [0, 2183, 2183, 3876, 3876, 3422, 3422, 1729, 1729, 0, 10674, 0]
+      total: 33094
+      source: {document: pfs_2020, location: "Table 22-7, Reclamation/Closure, p. 22-7"}
+    initial_capex_usd_k:
+      values: [132877, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      total: 132877
+      source: {document: pfs_2020, location: "Table 22-3, p. 22-3; Table 22-7, p. 22-8"}
+    expansion_capex_usd_k:
+      values: [0, 0, 0, 64844, 0, 0, 0, 0, 0, 0, 0, 0]
+      total: 64844
+      source: {document: pfs_2020, location: "Table 22-3, p. 22-3 (HPGR expansion, Year 3)"}
+    sustaining_capex_usd_k:
+      values: [0, 19930, 12627, 6728, 11928, 8911, 9419, 9956, 6899, 1127, 329, 0]
+      total: 87854
+      source: {document: pfs_2020, location: "Table 22-3, p. 22-3; Table 22-7, p. 22-8"}
+    working_capital_usd_k:
+      values: [0, 2141, -1090, 2475, -4355, -1221, 4197, 137, -1598, -753, 246, -179]
+      total: 0
+      source: {document: pfs_2020, location: "Table 22-7, Total Working Capital, p. 22-8"}
+    taxes_usd_k:
+      values: [0, 1492, 8014, 2390, 27277, 36266, 2786, 1518, 2379, 0, 0, 0]
+      total: 82121
+      source: {document: pfs_2020, location: "Table 22-7, Taxes (cash-flow section), p. 22-8"}
+    cash_flow_pre_tax_usd_k:
+      values: [-132877, 29896, 89703, -14229, 166529, 203057, 42414, 32475, 28763, 4287, -10106, -179]
+      total: 439733
+      source: {document: pfs_2020, location: "Table 22-7, Cash Flow Before-Taxes, p. 22-8"}
+    cash_flow_after_tax_usd_k:
+      values: [-132877, 28404, 81689, -16619, 139252, 166791, 39627, 30958, 26384, 4287, -10106, -179]
+      total: 357611
+      source: {document: pfs_2020, location: "Table 22-7, Cash Flow After-Taxes, p. 22-8"}
+
+royalties:
+  - holder: Vox Royalty Corp.
+    kind: NSR
+    rate: {value: 0.00633, units: fraction of net smelter return, source: {document: vox_2021, location: "Transaction highlights"}}
+    coverage_fraction:
+      value: 0.35
+      units: fraction of the 1.9 Moz resource
+      source: {document: vox_2021, location: "Transaction highlights"}
+    advance_minimum_per_year:
+      value: 120000
+      units: C$ per year (approximate)
+      source: {document: vox_2021, location: "Transaction highlights"}
+    advance_minimum_credited: null
+    notes: >-
+      Coverage is stated as a share of the resource, not of the PFS mine plan,
+      and its split by deposit and year is not disclosed. Whether advance minimum
+      payments are credited against later royalties is not disclosed. This
+      royalty is a pre-existing private royalty, so it is probably part of the
+      1.24% existing royalty burden already deducted in the PFS cash flow
+      (Section 22.8); to be confirmed.
+
+notes: >-
+  Year 9 to Year 11 carry residual leaching, closure and working-capital flows.
+  Totals reported by the PFS are checked against the sum of each row.
