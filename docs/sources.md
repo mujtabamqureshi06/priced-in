@@ -37,7 +37,7 @@ Corrections to the knowledge files: the takeover was **announced** in February 2
 | Fact | Value | Source and location | Status |
 |---|---|---|---|
 | Vox purchase | Announced June 7, 2021. US$1.98M cash for an effective 0.633% NSR from a private family; covers ~35% of the 1.9 Moz resource; advance minimum royalties ~C$120k/yr | Vox news release, June 7, 2021 | [V] |
-| Finder's fee | US$99k | Knowledge file | [S] confirm in Vox release or MD&A |
+| Finder's fee and capitalised cost | US$99,000 finder's fee paid to a private entity, on top of US$1.98M cash to the private individuals. Capitalised cost at Dec 31, 2021: US$2,316,757 (about US$238k above the two disclosed payments, presumably other transaction costs) | Vox audited consolidated financial statements for 2022 and 2021, Note 6 (Form 40-F exhibit 99.2, SEC, 2023) | [V] |
 | Vox's own revenue estimate | ~C$250k to C$750k/yr averaged over life of mine, based on the PFS | Vox news release, June 7, 2021 | [V] |
 | PFS release and report | Results Feb 18, 2020; technical report signed March 23, 2020; filed March 24, 2020 | GSV news releases; report certificate pages | [V] |
 | PFS economics | Pre-tax NPV5 US$331.4M; after-tax NPV5 US$265.0M; after-tax IRR 40.0%; at US$1,400/oz Au and US$17.11/oz Ag | GSV news release, March 24, 2020 | [V] |
@@ -50,7 +50,7 @@ Corrections to the knowledge files: the takeover was **announced** in February 2
 | Later studies (outcome data only, ADR 0007) | FS Feb 23, 2022: initial capex US$190M, after-tax NPV5 US$315M at US$1,650/oz. Orla optimized FS Jan 2026: initial capex ~US$395M, after-tax NPV5 US$783M at US$3,100/oz | GSV material change report (SEC, 2022); Orla release Jan 2026; Equinox release Aug 17, 2026 | [V] |
 | Ownership history | GSV, then Orla Mining (2022), then Equinox Gold after the Equinox-Orla combination (2026) | Equinox release, Aug 17, 2026; trade press | [V] for Equinox ownership; Orla-GSV date to confirm |
 | Federal permit | BLM Record of Decision, announced Aug 17, 2026; early works started; first gold targeted 2028 | Equinox news release, Aug 17, 2026 | [V] |
-| AMR credit against later royalties | Not found | Royalty agreement is private; check Vox MD&A and GSV/Orla filings | open |
+| Royalty terms (ADR 0016 check) | Uncapped 0.633% NSR over parts of South Railroad; advance royalty payments "payable on an ongoing, periodic basis prior to production"; covers large portions of Dark Star, Pinion and Jasperoid Wash plus portions of the POD and Bald Mountain zones in North Railroad (outside the PFS mine plan). No buy-down right specific to this royalty is disclosed; the AIF carries only general risk language on buy-downs. Whether advance payments are credited against later royalties is not disclosed | Vox release, Feb 2025 (development update); Vox AIF, March 21, 2025; Vox asset page | [V] for what is stated; credit and buy-down remain open |
 | Royalty coverage by deposit and year | Not found | Requires PFS resource and schedule by deposit (PFS Sections 14 to 16) and the royalty area map | open |
 
 Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean overrun series. Scope, cost base and price deck changed between studies.
