@@ -41,6 +41,8 @@ The project claim is after-tax cash flow discounted at the valuation rate from t
 
 ## 9. Waterfall decomposition (WP 1.9)
 
+The waterfall switches risks on one at a time in a fixed order on the same random paths: the study NPV; discounting at the valuation rate with the study deck held flat; market gold prices (spot with its market-consistent drift); base timing; capital cost overrun; ramp-up (reported as not modelled until ADR 0019 is implemented); stage failure; and price uncertainty with the build decision. Each bar is the change in the mean value, with its Monte Carlo standard error. Step sizes depend on the order; an order-independent attribution is planned for Phase 3.
+
 ## 10. Inversion and the odds-timing frontier (WP 2.5)
 
 One price cannot identify both the odds that a project is built and how late. For each added delay d (whole years on top of base timing, applied only to paths that pass their gates), the inversion finds the gate odds q(d) at which the royalty value equals the price. Because the gate draw is independent of price and overrun, value is linear in q:
