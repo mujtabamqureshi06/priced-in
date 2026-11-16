@@ -22,6 +22,10 @@ PRICE_CAPITALISED = 2317.0
 OSISKO_POST_TAX, OSISKO_TAX = 0.035, 0.265  # Osisko 2020 audited statements, Notes 19, 26
 
 
+def _odds(q: float) -> str:
+    return f"{q:.2f}" if q <= 1 else "no solution"
+
+
 def main() -> None:
     """Print the tables."""
     case = load_case(ROOT / "cases" / "south_railroad.yaml")
@@ -81,8 +85,7 @@ def main() -> None:
         seed=SEED,
     )
     for (s, q1), (_, q2) in zip(cred, nocred, strict=True):
-        f = lambda q: f"{q:.2f}" if q <= 1 else "no solution"  # noqa: E731
-        print(f"| {s:.0%} | {f(q1)} | {f(q2)} |")
+        print(f"| {s:.0%} | {_odds(q1)} | {_odds(q2)} |")
 
     for label, c in (("credited", claim), ("not credited", replace(claim, amr_credited=False))):
         for name in ("Osisko raw (post-tax 3.5%)", "Osisko pre-tax equivalent (4.76%)"):
