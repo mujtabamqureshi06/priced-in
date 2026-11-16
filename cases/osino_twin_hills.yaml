@@ -1,0 +1,116 @@
+# Osino Twin Hills (Namibia, gold), schedule mode from the DFS cash-flow table.
+# Table 22.3.2 transcribed row by row; money in US$ millions, real (Q1 2023 money,
+# no escalation; DFS Section 22.1.3). Costs are entered as positive numbers.
+# Valuation date: the DFS technical report filing. Later prices (Dundee, Dec 2023;
+# Yintai, Feb 2024) use this same study; their valuation dates are set by the adapters.
+
+id: osino_twin_hills
+name: Twin Hills Gold Project
+operator: Osino Resources Corp.
+jurisdiction: Namibia
+commodity: gold
+currency: USD
+as_of: 2023-07-13
+operator_share: 1.0
+
+documents:
+  - id: dfs_2023
+    title: Definitive Feasibility Study of the Twin Hills Gold Project, Namibia, NI 43-101 Technical Report (effective June 12, 2023)
+    issuer: Osino Resources Corp. (Lycopodium Minerals Africa and others)
+    date: 2023-07-05
+    url: https://www.sedarplus.ca (Osino Resources Corp. profile, technical report filed 2023-07-13)
+  - id: dfs_release_2023
+    title: Osino Announces Definitive Feasibility Study Results for Twin Hills Gold Project, Namibia
+    issuer: Osino Resources Corp.
+    date: 2023-06-12
+    url: https://www.theglobeandmail.com/investing/markets/stocks/OSI-X/pressreleases/17630747/osino-announces-definitive-feasibility-study-results-for-twin-hills-gold-project-namibia-us742m-pre-tax-npv-34-irr-22-year-payback/
+
+study:
+  stage: FS
+  document: dfs_2023
+  effective_date: 2023-06-12
+  price_deck:
+    gold: {value: 1750.0, units: US$/oz, source: {document: dfs_2023, location: "Table 22.3.1, p. 22.2"}}
+  discount_rate: {value: 0.05, units: fraction per year, source: {document: dfs_2023, location: "Table 22.3.2, discount factor row, p. 22.5"}}
+  npv_pre_tax: {value: 742, units: US$ millions, source: {document: dfs_2023, location: "Table 22.4.1, p. 22.7"}}
+  npv_after_tax: {value: 480, units: US$ millions, source: {document: dfs_2023, location: "Table 22.4.1, p. 22.7"}}
+  irr_after_tax: {value: 0.28, units: fraction per year, source: {document: dfs_2023, location: "Table 22.4.1, p. 22.7 (Table 22.3.2 states 33%; see notes)"}}
+  discounting:
+    t0_column: "Year 0"
+    convention: end_of_year
+    source: {document: dfs_2023, location: "Table 22.3.2, discount factor 1.00 in Year 0 and 0.95 in Year 1, p. 22.5"}
+  tax_summary: >-
+    Corporate tax 37.5%; 3% royalty on gold sales (tax deductible) and 1% export
+    levy; development capital depreciated over three years from first revenue;
+    sustaining capital expensed in the year spent; about US$75M of pre-production
+    expenses carried forward as tax losses; 100% equity basis (Sections 22.1 to 22.3).
+
+status:
+  permitted: true
+  financed: false
+  construction_decision: false
+  source: {document: dfs_2023, location: "Section 4, pp. 4.3 and 4.8 (Mining Licence ML238 and Environmental Clearance Certificate, both 3 November 2022); Section 20, p. 20.1; Section 22.3, p. 22.2 (100% equity basis, no financing in place)"}
+
+schedule:
+  money_units: US$ millions
+  periods: ["Year 0", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12", "Year 13", "Year 14"]
+  columns:
+    payable_gold_koz:
+      values: [0, 198, 177, 174, 156, 177, 152, 149, 135, 170, 135, 133, 157, 66, 0]
+      total: 1979
+      source: {document: dfs_2023, location: "Table 22.3.2, Au Produced, p. 22.5 (sales equal production times price, so produced ounces are treated as payable)"}
+    revenue:
+      values: [0, 347, 309, 305, 273, 309, 266, 261, 237, 298, 236, 233, 274, 116, 0]
+      total: 3463
+      source: {document: dfs_2023, location: "Table 22.3.2, Gold Sales, p. 22.5"}
+    government_royalty_and_levy:
+      values: [0, 13.9, 12.4, 12.2, 10.9, 12.4, 10.7, 10.4, 9.5, 11.9, 9.4, 9.3, 11.0, 4.6, 0]
+      total: 139
+      resolution: 0.1
+      source: {document: dfs_2023, location: "Table 22.3.2, Royalty & Export Levy, p. 22.5"}
+    selling_and_marketing:
+      values: [0, 0.5, 0.5, 0.5, 0.4, 0.5, 0.4, 0.4, 0.4, 0.5, 0.4, 0.4, 0.4, 0.2, 0]
+      total: 5
+      resolution: 0.1
+      source: {document: dfs_2023, location: "Table 22.3.2, Selling & Marketing Costs, p. 22.5"}
+    operating_cost:
+      values: [0, 132.4, 143.6, 148.6, 151.7, 154.3, 154.8, 157.6, 163.5, 160.4, 144.3, 135.4, 109.2, 60.7, 0]
+      total: 1817
+      resolution: 0.1
+      source: {document: dfs_2023, location: "Table 22.3.2, Total Cash Operating Cost, p. 22.5"}
+    initial_capex:
+      values: [365, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      total: 365
+      source: {document: dfs_2023, location: "Table 22.3.2, Project Capex US$331M plus contingency US$34M, p. 22.5 (includes US$18M capitalised pre-strip)"}
+    sustaining_capex:
+      values: [0, 3.9, 17.7, 1.3, 11.9, 1.1, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 11.5, 11.5, -35]
+      total: 29
+      resolution: 0.1
+      source: {document: dfs_2023, location: "Table 22.3.2, Sustaining Capex incl. closure, p. 22.5; Year 14 is the US$35M salvage credit (note 4)"}
+    taxes:
+      values: [0, 0, 4.8, 7.6, 36.6, 52.8, 37.3, 34.4, 23.4, 46.7, 30.3, 32.5, 53.3, 14.5, 13.1]
+      total: 387
+      resolution: 0.1
+      source: {document: dfs_2023, location: "Table 22.3.2, Tax Paid, p. 22.5"}
+    cash_flow_pre_tax:
+      values: [-365, 207, 137, 142, 98, 141, 100, 93, 63, 122, 82, 86, 136, 32, 35]
+      total: 1108
+      source: {document: dfs_2023, location: "Table 22.3.2, Net Free Cash Flow before Tax, p. 22.5"}
+    cash_flow_after_tax:
+      values: [-365, 207, 132, 134, 61, 88, 63, 58, 39, 75, 52, 54, 83, 18, 22]
+      total: 721
+      source: {document: dfs_2023, location: "Table 22.3.2, Net Free Cash Flow after Tax, p. 22.5"}
+
+notes: >-
+  Two inconsistencies inside the DFS. (1) Capex timing: Section 22.2 says US$100M
+  is spent in Year -1 and US$265M in Year 0, but Table 22.3.2 places all US$365M in
+  Year 0 at a discount factor of 1.00. The table reproduces the published NPV5
+  (US$480M after tax); the split timing would give about US$452M. The table is
+  used. (2) IRR: Table 22.3.2 states a post-tax IRR of 33%, which the table's cash
+  flows reproduce; Table 22.4.1 and the June 12, 2023 release state 28%. The
+  summary figure is recorded above as published; the table is the basis for
+  reconciliation. Also, the table's pre-tax free cash flow is not fully explained
+  by the rows shown: the residual is +10.7 in Year 1 and -5.9 and -7.0 in Years 12
+  and 13 (US$M) and nets to about zero over life, consistent with working-capital
+  movements. The table labels contingency "@ 15%" while note 4 and Table 22.3.1
+  give 9.8% of construction capital; the US$34M amount is consistent in both.

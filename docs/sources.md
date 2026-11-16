@@ -17,11 +17,15 @@ Last full review: 2026-11-16.
 | DFS IRR at US$1,750/oz | 34% pre-tax; 28% post-tax | Same release, Table 1 | [V] |
 | DFS NPV5 at US$1,950/oz | Pre-tax US$1,024M; post-tax US$656M | Same release, Table 1 | [V] |
 | Initial capital | US$365M, including US$34M contingency and US$18M capitalised pre-strip | Same release, highlights | [V] |
-| Sustaining capital | US$41M | Northern Miner and Canadian Mining Journal reports of the release | [S] check DFS Section 21 |
+| Sustaining capital | US$64M including closure (Table 22.3.1, p. 22.3); US$29M net of the US$35M plant salvage credit in the cash-flow table (Table 22.3.2, p. 22.5). The US$41M in press reports is not in the DFS tables | DFS technical report, read 2026-11-16 | [V] |
 | Mine life and throughput | 13 years; 5.0 Mtpa | Same release | [V] |
 | Average production | ~175 koz/yr first 5 years; ~162 koz/yr over life | DPM release, Dec 18, 2023, citing the FS | [V] |
 | Fiscal terms in DFS model | 3% gross royalty (tax deductible) and 1% export levy | Osino release, June 12, 2023 | [V] |
-| Technical report filed | July 13, 2023 | Osino news release, July 13, 2023 | [V] |
+| Technical report filed | July 13, 2023 (signed July 5, 2023; effective June 12, 2023) | Osino news release, July 13, 2023; DFS title page | [V] |
+| DFS cash-flow table | Transcribed into `cases/osino_twin_hills.yaml`; reproduces NPV5 US$480M after tax (480.1) and US$742M pre-tax (743.2, cell rounding) | DFS Table 22.3.2, p. 22.5 | [V] |
+| DFS internal inconsistencies | Capex timing: text says US$100M in Year -1 and US$265M in Year 0 (Section 22.2), table puts all US$365M in Year 0; the published NPV follows the table. IRR: table states 33% post-tax (reproduced), summary Table 22.4.1 and the release state 28%. Contingency labelled 15% in the table, 9.8% elsewhere (same US$34M) | DFS pp. 22.2, 22.5, 22.7 | [V] |
+| Fiscal terms | Corporate tax 37.5%; 3% royalty and 1% export levy; development capital depreciated over three years; about US$75M tax losses carried forward | DFS Section 22.1, p. 22.1 | [V] |
+| Permits at the DFS | Mining Licence ML238 and Environmental Clearance Certificate granted 3 November 2022 | DFS Section 4, pp. 4.3 and 4.8; Section 20 | [V] |
 | Market EV at DFS | ~US$132M | Lopatnikov and Rumyantsev (2025) | [S] recompute from shares, price, cash and debt on June 12, 2023 |
 | Dundee (DPM) agreement | Dec 17, 2023 (agreement date); announced Dec 18, 2023. C$0.775 cash plus 0.0801 DPM share per Osino share; implied C$1.553/share; total equity C$287M fully diluted in-the-money | DPM news release, Dec 18, 2023 | [V] |
 | DPM bid in US$ | ~US$214M | Press conversion (Mining Technology, Dec 19, 2023) | [S] convert ourselves at the Dec 15, 2023 FX rate |

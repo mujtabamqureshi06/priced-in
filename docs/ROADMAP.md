@@ -20,5 +20,5 @@ Phases close on exit criteria, not dates. The full work-package detail lives in 
 | 0.2 | Project documents | Done |
 | 0.3 | Source verification (`docs/sources.md`) | Case facts done; Bertisen and Davis read in full; others in progress |
 | 0.4 | Priors registry (`data/priors.yaml`, loader) | In progress: loader, stage priors, FS overrun |
-| 0.5 | Input template and hand-filled cases | South Railroad done (reproduces PFS NPV exactly); Osino waits on the DFS report |
+| 0.5 | Input template and hand-filled cases | Done: South Railroad (exact) and Osino (within cell rounding) |
 | 0.6 | Founding ADRs | Done (0001 to 0012) |

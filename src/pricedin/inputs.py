@@ -9,8 +9,9 @@ own annual cash-flow table is entered row by row, so the engine can reproduce th
 study NPV exactly with every risk switched off. Build-up mode (tonnes, grade and
 costs) comes later.
 
-Money is entered in the units the report uses, stated in the column name (for example
-``_usd_k`` for thousands of US dollars), to avoid conversion errors at entry.
+Money is entered in the units the report uses, declared once per case in
+``schedule.money_units``, to avoid conversion errors at entry. Physical columns carry their
+unit in the column name (for example ``payable_gold_koz``).
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ from __future__ import annotations
 from datetime import date
 from enum import StrEnum
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -30,14 +31,17 @@ Fraction = Annotated[float, Field(ge=0.0, le=1.0)]
 REQUIRED_COLUMNS: frozenset[str] = frozenset(
     {
         "payable_gold_koz",
-        "initial_capex_usd_k",
-        "cash_flow_pre_tax_usd_k",
-        "cash_flow_after_tax_usd_k",
+        "initial_capex",
+        "cash_flow_pre_tax",
+        "cash_flow_after_tax",
     }
 )
 
-#: Tolerance when checking a column against the report's own total (report units).
-#: Reports round each cell, so totals can differ from the sum by a few units.
+#: Money units a report may use.
+MoneyUnits = Literal["US$ thousands", "US$ millions"]
+
+#: Tolerance when checking a column against the report's own total, in units of the
+#: smallest digit shown. Reports round each cell, so totals can differ from the sum.
 TOTAL_TOLERANCE = 2.0
 
 
@@ -101,18 +105,24 @@ class Study(_Strict):
     effective_date: date
     price_deck: dict[str, Quantity]
     discount_rate: Quantity
-    npv_pre_tax_usd_k: Quantity
-    npv_after_tax_usd_k: Quantity
+    npv_pre_tax: Quantity
+    npv_after_tax: Quantity
     irr_after_tax: Quantity
     discounting: Discounting
     tax_summary: NonEmpty
 
 
 class Column(_Strict):
-    """One row of the report's cash-flow table: a value per period, plus the report's total."""
+    """One row of the report's cash-flow table: a value per period, plus the report's total.
+
+    ``resolution`` is the smallest digit the report shows for this row (1 for whole
+    numbers, 0.1 for one decimal); the total check allows ``TOTAL_TOLERANCE`` of them
+    per cell-rounding error budget.
+    """
 
     values: tuple[float, ...]
     total: float | None = None
+    resolution: Annotated[float, Field(gt=0)] = 1.0
     source: SourceRef
 
 
@@ -120,6 +130,7 @@ class Schedule(_Strict):
     """The report's annual table, transcribed. Periods are the report's own labels."""
 
     periods: tuple[NonEmpty, ...]
+    money_units: MoneyUnits
     columns: dict[str, Column]
 
     @model_validator(mode="after")
@@ -133,7 +144,8 @@ class Schedule(_Strict):
                 raise ValueError(
                     f"column '{name}' has {len(col.values)} values but there are {n} periods"
                 )
-            if col.total is not None and abs(sum(col.values) - col.total) > TOTAL_TOLERANCE:
+            allowed = max(TOTAL_TOLERANCE, 0.5 * n) * col.resolution
+            if col.total is not None and abs(sum(col.values) - col.total) > allowed:
                 raise ValueError(
                     f"column '{name}' sums to {sum(col.values):,.1f} but the report total is "
                     f"{col.total:,.1f}; check the transcription"
@@ -213,8 +225,8 @@ class Case(_Strict):
         refs = [
             self.status.source,
             self.study.discount_rate.source,
-            self.study.npv_pre_tax_usd_k.source,
-            self.study.npv_after_tax_usd_k.source,
+            self.study.npv_pre_tax.source,
+            self.study.npv_after_tax.source,
             self.study.irr_after_tax.source,
             self.study.discounting.source,
             *(q.source for q in self.study.price_deck.values()),
