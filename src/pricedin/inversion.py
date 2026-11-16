@@ -43,7 +43,7 @@ from typing import Literal
 
 import numpy as np
 
-from pricedin.engine import Market, Risks, RoyaltyClaim, Timing, simulate
+from pricedin.engine import Financing, Market, Risks, RoyaltyClaim, Timing, simulate
 from pricedin.inputs import Case
 
 
@@ -287,3 +287,58 @@ def zero_delay_odds_curve(
         )
         out.append((s, f.zero_delay_odds))
     return tuple(out)
+
+
+def equity_frontier(
+    case: Case,
+    market: Market,
+    timing: Timing,
+    risks: Risks,
+    financing: Financing,
+    price: float,
+    *,
+    max_delay: int = 10,
+    n_paths: int = 10_000,
+    seed: int = 0,
+) -> Frontier:
+    """Implied gate odds from an equity-based price (developer or takeover adapters).
+
+    ``price`` is the market or offer value of the project to existing shareholders, in
+    the case's money units: equity value less net cash and other assets, as defined by
+    the adapter that calls this. A path that fails a gate is worth nothing to the
+    project, so value(q, d) = q x V_pass(d) and q(d) = price / V_pass(d).
+    """
+    points: list[FrontierPoint] = []
+    previous: np.ndarray | None = None
+    for d in range(max_delay + 1):
+        t = replace(timing, added_delay=d)
+        passed = simulate(
+            case,
+            market,
+            t,
+            replace(risks, stage_odds=1.0),
+            financing=financing,
+            n_paths=n_paths,
+            seed=seed,
+        )
+        assert passed.equity_value is not None
+        v_pass, se_pass = passed.estimate(passed.equity_value)
+        q = price / v_pass
+        weighted = (-q / v_pass) * passed.equity_value
+        step_se = 0.0
+        if previous is not None and weighted.size > 1:
+            diff = weighted - previous
+            step_se = float(diff.std(ddof=1) / np.sqrt(diff.size))
+        previous = weighted
+        points.append(
+            FrontierPoint(
+                added_delay=d,
+                gate_odds=q,
+                gate_odds_se=abs(q) * se_pass / abs(v_pass),
+                build_probability=q * float(passed.built.mean()),
+                value_if_passed=v_pass,
+                value_if_failed=0.0,
+                step_se=step_se,
+            )
+        )
+    return Frontier(price=price, points=tuple(points))

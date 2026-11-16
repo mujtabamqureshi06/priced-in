@@ -162,3 +162,36 @@ def test_break_even_none_when_price_out_of_range(south_railroad: Case) -> None:
         break_even_spread(south_railroad, MARKET, TIMING, RISKS, CLAIM, price=1e9, n_paths=200)
         is None
     )
+
+
+def test_equity_frontier_synthetic_recovery() -> None:
+    from pricedin.engine import Financing
+    from pricedin.inversion import equity_frontier
+
+    case = load_case(ROOT / "cases" / "osino_twin_hills.yaml")
+    market = Market.market_consistent(1960.6, 0.0152, 0.0, 0.141)
+    timing = Timing(years_to_start=1, max_wait=5)
+    risks = Risks(build_rule=True)
+    fin = Financing(0.0, 0.1054)
+    q_true, d_true = 0.7, 2
+    truth = simulate(
+        case,
+        market,
+        replace_timing(timing, d_true),
+        Risks(stage_odds=q_true, build_rule=True),
+        financing=fin,
+        n_paths=40_000,
+        seed=9,
+    )
+    assert truth.equity_value is not None
+    price, se_price = truth.estimate(truth.equity_value)
+    f = equity_frontier(case, market, timing, risks, fin, price, max_delay=3, n_paths=20_000)
+    pt = f.points[d_true]
+    assert abs(pt.gate_odds - q_true) < 4 * np.hypot(pt.gate_odds_se, se_price / pt.value_if_passed)
+    assert f.shape in ("rising", "flat", "not monotone")
+
+
+def replace_timing(t: Timing, d: int) -> Timing:
+    from dataclasses import replace
+
+    return replace(t, added_delay=d)
