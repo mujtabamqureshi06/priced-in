@@ -10,6 +10,8 @@ Status codes follow ``docs/sources.md``:
 - ``V-abs``: verified from the abstract or citation only.
 - ``S``: seen only in a secondary summary.
 - ``P``: practitioner or industry source, not peer-reviewed.
+- ``J``: a stated judgment; the source reads "judgment", and the entry names its
+  decision record and carries a flag.
 
 Entries with status ``S`` must carry a flag. A flagged prior can be used, but every
 output that depends on it must show the flag text (ADR 0013).
@@ -34,6 +36,7 @@ class Status(StrEnum):
     VERIFIED_ABSTRACT = "V-abs"
     SECONDARY = "S"
     PRACTITIONER = "P"
+    JUDGMENT = "J"
 
 
 class Fixed(BaseModel):
@@ -164,6 +167,13 @@ class Prior(BaseModel):
     def _secondary_must_be_flagged(self) -> Prior:
         if self.status is Status.SECONDARY and not self.flagged:
             raise ValueError(f"prior '{self.id}' has status S and must set a flag")
+        if self.status is Status.JUDGMENT and (
+            self.source != "judgment" or not self.decision or not self.flagged
+        ):
+            raise ValueError(
+                f"prior '{self.id}' has status J: source must be 'judgment', "
+                "with a decision record and a flag"
+            )
         return self
 
 

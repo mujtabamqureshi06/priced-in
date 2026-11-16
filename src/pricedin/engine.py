@@ -137,8 +137,10 @@ class Risks:
         overrun: capital cost ratio distribution, or None for no overrun.
         build_rule: apply the price-dependent build decision (WP 1.6); if False, every
             path that passes its gates builds in the build-ready year.
-        build_hurdle: NPV the project must reach, at the study's discount rate and the
-            current gold price, for the rule to build (case money units).
+        build_hurdle: NPV the project must reach, at the decision rate and the current
+            gold price, for the rule to build (case money units).
+        decision_rate: discount rate the build rule uses; None means the study's own
+            rate (ADR 0023).
 
     """
 
@@ -146,6 +148,7 @@ class Risks:
     overrun: Overrun | None = None
     build_rule: bool = False
     build_hurdle: float = 0.0
+    decision_rate: float | None = None
 
     def __post_init__(self) -> None:
         """Reject odds outside [0, 1]."""
@@ -180,11 +183,26 @@ class Results:
 
     project_value: FloatArray
     royalty_value: FloatArray | None
+    advance_value: FloatArray | None
+    passed_gates: BoolArray
     built: BoolArray
     build_year: IntArray
     seed: int
     n_paths: int
     version: str = field(default=pricedin.__version__)
+
+    @property
+    def window_expired_share(self) -> float:
+        """Share of paths that pass every gate but are never built (ADR 0023)."""
+        return float((self.passed_gates & ~self.built).mean())
+
+    @property
+    def advance_share(self) -> float | None:
+        """Share of royalty value that comes from advance minimum royalties."""
+        if self.royalty_value is None or self.advance_value is None:
+            return None
+        total = float(self.royalty_value.sum())
+        return float(self.advance_value.sum()) / total if total else None
 
     @staticmethod
     def estimate(values: FloatArray) -> tuple[float, float]:
@@ -197,14 +215,12 @@ def _discount(rate: float, years: FloatArray) -> FloatArray:
     return factors
 
 
-def _decision_npv(case: Case, price: FloatArray) -> FloatArray:
-    """Project NPV at the study's discount rate with each path's price held flat."""
+def _decision_npv(case: Case, price: FloatArray, rate: float) -> FloatArray:
+    """Project NPV at the decision rate with each path's price held flat."""
     n = len(case.schedule.periods)
     flat = np.repeat(price[:, None], n, axis=1)
     cf = schedule_cash_flows(case, flat)
-    values: FloatArray = cf.after_tax @ _discount(
-        case.study.discount_rate.value, np.arange(n, dtype=np.float64)
-    )
+    values: FloatArray = cf.after_tax @ _discount(rate, np.arange(n, dtype=np.float64))
     return values
 
 
@@ -232,6 +248,9 @@ def simulate(
         horizon, n_paths, price_rng
     )
 
+    decision_rate = (
+        case.study.discount_rate.value if risks.decision_rate is None else risks.decision_rate
+    )
     passes = gate_rng.random(n_paths) < risks.stage_odds
     build_year = np.full(n_paths, -1, dtype=np.int64)
     candidates = (
@@ -245,7 +264,9 @@ def simulate(
             break
         if risks.build_rule:
             ok = np.zeros(n_paths, dtype=bool)
-            ok[waiting] = _decision_npv(case, prices[waiting, k]) >= risks.build_hurdle
+            ok[waiting] = (
+                _decision_npv(case, prices[waiting, k], decision_rate) >= risks.build_hurdle
+            )
         else:
             ok = waiting
         build_year[ok] = k
@@ -265,6 +286,7 @@ def simulate(
 
     project_value = np.zeros(n_paths)
     royalty_value = np.zeros(n_paths) if royalty is not None else None
+    advance_value = np.zeros(n_paths) if royalty is not None else None
     periods = np.arange(n_periods)
     for b in np.unique(build_year[built]):
         idx = np.flatnonzero(build_year == b)
@@ -273,7 +295,7 @@ def simulate(
         after_tax = cf.after_tax - (ratio[idx, None] - 1.0) * capex
         years = (b + periods).astype(np.float64)
         project_value[idx] = after_tax @ _discount(market.discount_rate, years)
-        if royalty is not None and royalty_value is not None:
+        if royalty is not None and royalty_value is not None and advance_value is not None:
             gold = np.asarray(cols["gold_revenue"].values, dtype=np.float64)
             gold_rev = gold * path_prices / case.study.price_deck["gold"].value
             payments = royalty.rate * royalty.coverage * gold_rev
@@ -282,17 +304,21 @@ def simulate(
             royalty_value[idx] = _royalty_pv(
                 payments, years, n_advances, royalty, market.discount_rate
             )
+            advance_value[idx] = _advances_pv(n_advances, royalty, market.discount_rate)
 
-    if royalty is not None and royalty_value is not None:
+    if royalty is not None and royalty_value is not None and advance_value is not None:
         unbuilt = ~built
         end = np.where(passes, timing.build_ready + timing.max_wait, timing.build_ready)
         for n_adv in np.unique(end[unbuilt]):
             idx = np.flatnonzero(unbuilt & (end == n_adv))
             royalty_value[idx] = _advances_pv(int(n_adv), royalty, market.discount_rate)
+            advance_value[idx] = royalty_value[idx]
 
     return Results(
         project_value=project_value,
         royalty_value=royalty_value,
+        advance_value=advance_value,
+        passed_gates=passes,
         built=built,
         build_year=build_year,
         seed=seed,

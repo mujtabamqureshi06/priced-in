@@ -175,3 +175,73 @@ priors:
     sensitivity:
       - {label: all-plant weight (5/41), value: 0.1219512, source: "McNulty (1998), Table 2", status: V}
     decision: ADR 0019
+
+  - id: timing.years_to_start.south_railroad
+    description: >-
+      Whole years from the South Railroad valuation date (2021-06-07) to the
+      study's Year -1 (construction and pre-strip year), with no added delay.
+    distribution: {kind: fixed, value: 4}
+    units: years
+    applies_to: {stage: PFS, jurisdiction: "Nevada, United States"}
+    source: Council on Environmental Quality (June 12, 2020), Environmental Impact Statement Timelines (2010-2018)
+    location: Figure 6, p. 13 (BLM median NOI to ROD 3.79 years, 143 EISs); Figure 5, p. 9 (BLM mean 4.36)
+    status: V
+    flag: >-
+      On-schedule permitting assumption. CEQ figures cover all EIS types, not
+      mines. BLM median rounded to whole years; time before the Notice of Intent
+      and from the Record of Decision to construction set to zero; the FS is
+      assumed to run alongside the EIS.
+    sensitivity:
+      - {label: "3 years (optimistic)", value: 3, source: judgment}
+      - {label: "5 years (BLM mean plus time before the Notice of Intent)", value: 5, source: judgment}
+    decision: ADR 0023
+    notes: >-
+      The 2020 PFS gives no calendar schedule (s. 1.11, p. 1-17; s. 26). Dates
+      published after the valuation date are used only for outcome tracking.
+
+  - id: timing.years_to_start.osino_twin_hills
+    description: >-
+      Whole years from the Osino valuation date (2023-07-13) to the DFS Year 0
+      (all initial capital), with no added delay.
+    distribution: {kind: fixed, value: 1}
+    units: years
+    applies_to: {stage: FS, jurisdiction: Namibia}
+    source: Twin Hills DFS, NI 43-101 technical report (Lycopodium, June 2023)
+    location: Section 25, p. 25.16 (funding by January 2024; FEED four to five months; first gold within 24 months)
+    status: V
+    flag: Company guidance as published on or before the valuation date.
+    sensitivity:
+      - {label: "0 years (the study as published)", value: 0, source: judgment}
+      - {label: "2 years", value: 2, source: judgment}
+    decision: ADR 0023
+
+  - id: build.hurdle
+    description: >-
+      NPV the fixed build rule requires: after-tax NPV at the study's own
+      discount rate, the path's real gold price held flat, study capital (never
+      the overrun draw), including the study's tax and royalty burden.
+    distribution: {kind: fixed, value: 0.0}
+    units: case money units
+    source: judgment
+    location: DR-009, Q4
+    status: J
+    flag: Fixed build rule; hurdle and decision rate are judgment.
+    sensitivity:
+      - {label: "decision rate 8.9% in place of the study rate (CIM FS-stage gold real rate, used as a stricter hurdle)", value: 0.089, source: "Smith (2013), CIM Mineral Economics survey, via Lopatnikov and Rumyantsev (2025)", status: V}
+    decision: ADR 0023
+
+  - id: build.window_years
+    description: >-
+      Years after the build-ready year in which the fixed rule may still build.
+      Paths not built by then are not built, and advance royalties stop.
+    distribution: {kind: fixed, value: 5}
+    units: years
+    source: judgment
+    location: DR-009, Q4
+    status: J
+    flag: >-
+      Build window is judgment. Outputs show the share of paths that reach the
+      end of the window and the share of royalty value from advance royalties.
+    sensitivity:
+      - {label: "10 years", value: 10, source: judgment}
+    decision: ADR 0023
