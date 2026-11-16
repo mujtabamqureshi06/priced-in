@@ -148,3 +148,35 @@ def test_pfs_sensitivity_keeps_mean_and_widens_sd() -> None:
     sd = mean * math.sqrt(math.exp(sigma**2) - 1)
     assert mean == pytest.approx(0.35, abs=5e-6)
     assert sd == pytest.approx(0.70, abs=5e-6)
+
+
+def test_ramp_up_weights_match_mcnulty_table_2() -> None:
+    registry = load_priors(Path(__file__).resolve().parents[1] / "data" / "priors.yaml")
+    counts = {1: 23, 2: 5, 3: 6, 4: 7}
+    weights = {}
+    for series, n in counts.items():
+        dist = registry.get(f"rampup.weight.series{series}").distribution
+        assert dist.kind == "fixed"
+        weights[series] = dist.value
+        assert dist.value == pytest.approx(n / 41, abs=1e-6)
+    assert sum(weights.values()) == pytest.approx(1.0, abs=1e-6)
+
+
+def test_ramp_up_curves_are_complete_and_ordered() -> None:
+    import csv
+
+    path = Path(__file__).resolve().parents[1] / "data" / "ramp_up_mcnulty_1998.csv"
+    with path.open(encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    curve: dict[int, dict[int, float]] = {}
+    for r in rows:
+        curve.setdefault(int(r["series"]), {})[int(r["months_since_commissioning"])] = float(
+            r["percent_of_design_capacity"]
+        )
+    assert set(curve) == {1, 2, 3, 4}
+    for s in curve.values():
+        assert sorted(s) == [6, 12, 18, 24, 30, 36]
+        values = [s[m] for m in sorted(s)]
+        assert values == sorted(values)
+    for m in (6, 12, 18, 24, 30, 36):
+        assert curve[1][m] > curve[2][m] > curve[3][m] > curve[4][m]
