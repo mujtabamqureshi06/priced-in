@@ -1,0 +1,36 @@
+# Private material: never committed (see docs/decisions/0010-confidentiality.md)
+private/
+sources/
+*.denylist
+.denylist*
+
+# Third-party documents: the repository holds links and page references only
+*.pdf
+*.docx
+*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Data caches
+data/cache/
+data/raw/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
