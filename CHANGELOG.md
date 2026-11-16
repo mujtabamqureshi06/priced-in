@@ -8,6 +8,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- Schwartz-Smith two-factor model (WP 3.3, ADR 0042): `pricedin.schwartz_smith` with futures pricing, exact state transition, Kalman-filter likelihood and maximum-likelihood fitting; synthetic-recovery test. SciPy added as a dependency. Phase 3 exit amended (ADR 0042).
 - Gold streams (WP 3.6, ADR 0041): `engine.StreamClaim` and `Results.stream_value` (delivered ounces worth max(P - c, 0), a strip of calls) and `inversion.stream_frontier`; tests against the Black-Scholes strip and synthetic recovery. Methodology updated for Phase 3.
 - Brennan and Schwartz (1985) replication (WP 3.2, ADR 0040): `pricedin.switching` values a mine with options to close, reopen and abandon by least-squares Monte Carlo with discrete inventory states and a spline basis; every published value is matched within one standard error (`scripts/brennan_schwartz.py`, `data/benchmarks/brennan_schwartz_1985.yaml`).
 - Order-independent waterfall (WP 3.5, ADR 0039): `report.shapley_waterfall` gives each risk step its Shapley value over the four risks, with path-level standard errors; Osino note and `scripts/osino_case.py` show both versions.
