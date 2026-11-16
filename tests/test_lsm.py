@@ -90,4 +90,4 @@ def test_rejects_bad_inputs() -> None:
     with pytest.raises(ValueError, match="at least one step"):
         value_option(np.ones((10, 1)), _put, 0.99)
     with pytest.raises(ValueError, match="discount"):
-        value_option(np.ones((10, 3)), _put, 1.5)
+        value_option(np.ones((10, 3)), _put, 0.0)
