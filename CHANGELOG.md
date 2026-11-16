@@ -10,7 +10,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
   | Result | Published in v0.2.0 and later | Corrected |
   |---|---|---|
   | South Railroad, Osisko 3.5% to 4.76% | odds 0.72 to 0.80 | 0.80 to 0.89 at Osisko's US$1,600 deck; 0.66 to 0.74 at spot |
-  | Osino undisturbed value, Eight Capital 10.5% to 13.5% | 0.38 to 0.53 | 0.69 to 0.98 at its US$1,850 deck; 0.48 to 0.64 at spot |
+  | Osino undisturbed value, Eight Capital 10.5% to 13.5% | 0.38 to 0.53 | 0.71 to about 1 at its US$1,850 deck; 0.49 to 0.65 at spot (includes the dilution correction below) |
   | Osino, Dundee offer | 0.40 to 0.51 | 0.72 to 0.98; 0.53 to 0.69 at spot |
   | Osino, Shanjin offer | 0.48 to 0.62 | 0.92 to no solution; 0.67 to 0.86 at spot |
   | Sorby Hills, OR Royalties 5.1% | 0.99 | no solution: the price is above the value of the plan built on time, at OR's deck and at spot |
@@ -23,6 +23,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
   - average real overrun 15.2%, not "about 14%";
   - Brennan and Schwartz: sixteen published values, not eight;
   - the in-sample bias of the replication is not one-sided.
+- Osino's December 15, 2023 undisturbed value now counts dilutive securities series by series, and includes restricted and deferred share units (ADR 0048). Before, warrants were treated as one block at their weighted-average strike, and share units were left out. The price rises from C$195.7 million to C$199.6 million, and the break-even spread moves from 18.2% to 18.1%. The two offers are unchanged.
 - Samis et al. (2006) and Schwartz (1997) were cited from secondary sources. The discounting rule now cites Samis, Davis and Laughton (2007), read in full. The gold-model rationale cites Brennan and Schwartz (1985).
 
 ### Changed
@@ -30,6 +31,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- Osino market value at the DFS (#90, ADR 0048). The July 2023 trading range is read on the March 31, 2023 statements: break-even spread 17.0% to 17.9%, against 18.1% for the December undisturbed value. Cash spent to May 29, 2023 is a sensitivity. USD/CAD added to the July 13, 2023 snapshot.
 - `Market.flat` for reading a price at a third-party rate (ADR 0045); `pricedin.defaults` reads stage odds, overrun, equity financing and base timing from the priors registry by id, and gives no default stage odds for a PEA-stage case. `pricedin.sensitivity.delay_threshold` reports where delay stops adding project value (ADR 0046).
 - Input validation in `Market`, `Timing`, `RoyaltyClaim` and `StreamClaim`; a case template that matches the schema, with a test that loads a filled template; economic sanity tests; CI runs the app test.
 - Sum-of-parts adapter (#75, ADR 0044): `pricedin.sum_of_parts` (producing-asset value at the expected gold price, residual band, treasury method); Orla Mining at August 12, 2022 in `data/sum_of_parts/orla_2022-08-12.yaml`, `scripts/orla_sum_of_parts.py` and `docs/cases/orla_sum_of_parts.md`; market snapshot for 2022-08-12.

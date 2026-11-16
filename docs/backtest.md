@@ -34,9 +34,10 @@ The full method is in `docs/methodology.md`. The steps that matter here:
 | Kalman and Sylvania (Vox) | Aug 20, 2026 | A$3.4M for both | Development and exploration | Listed only |
 | Federation and a copper tonnage royalty (Vox) | Feb 26, 2026 | up to A$0.65M | Mixed | Listed only |
 
-Osino Twin Hills adds three equity prices on one project, each with Osino's own September 30, 2023 balance sheet (ADR 0033):
+Osino Twin Hills adds four prices on one project, each with the last Osino balance sheet published before its date (ADRs 0033 and 0048):
 
-- the undisturbed market value on December 15, 2023;
+- the market value at the DFS, from the July 2023 trading range (March 31, 2023 statements);
+- the undisturbed market value on December 15, 2023 (September 30, 2023 statements, as below);
 - Dundee Precious Metals' offer (December 18, 2023);
 - Shanjin's offer (February 23, 2024).
 
@@ -47,7 +48,8 @@ Market inputs are dated snapshots in `data/snapshots/`. No observation postdates
 | Case | Claim | Break-even real spread (market-consistent) | Reference rate, applied as its source did (ADR 0045) | Zero-delay implied odds at the reference |
 |---|---|---|---|---|
 | South Railroad (PFS) | Royalty with advance royalties | 8.4% | Osisko 2020, 3.5% post-tax and 4.76% pre-tax real, gold flat at Osisko's US$1,600 (at spot US$1,898) | 0.80 to 0.89 (0.66 to 0.74) |
-| Osino, undisturbed (DFS) | Equity, diluted, less G&A | 18.2% | Eight Capital fairness opinion, 10.5% to 13.5% real, gold flat at its US$1,850 (at spot) | 0.69 to 0.98 (0.48 to 0.64) |
+| Osino, market value at the DFS, July 2023 (DFS) | Equity, diluted, less G&A | 17.0% to 17.9% | Eight Capital fairness opinion (dated later), 10.5% to 13.5% real, gold flat at its US$1,850 (at spot) | 0.62 to 0.98 (0.48 to 0.73) |
+| Osino, undisturbed, Dec 2023 (DFS) | Equity, diluted, less G&A | 18.1% | Same | 0.71 to about 1 (0.49 to 0.65) |
 | Osino, Dundee offer | Project | 19.7% | Same | 0.72 to 0.98 (0.53 to 0.69) |
 | Osino, Shanjin offer | Project | 17.3% | Same | 0.92 to no solution (0.67 to 0.86) |
 | Sorby Hills (construction) | Royalty; assumes it covers silver and lead (an inference) | 2.3% | OR Royalties 2025, 5.1% post-tax and 6.94% pre-tax real, silver flat at OR's US$42, lead at spot (and both at spot) | no solution: the price is above the value of the plan built on time |
@@ -106,13 +108,13 @@ The numbers are not "the market's odds". They are the odds consistent with each 
 
 ## 8. Limits
 
-1. **Few cases.** Two royalties, one project with three equity prices, and one control.
+1. **Few cases.** Two royalties, one project with four prices, and one control.
 2. **Reference rates.** They come from accounting disclosures, a fairness opinion and the studies, not from observed purchase prices. Each is applied with its source's own price deck where one is stated (ADR 0045), and the gross-up to pre-tax rates is approximate.
 3. **Value beyond the study mine plan is not modelled.** It would raise the value and lower the implied odds. Resources outside the plan exist at South Railroad and Sorby Hills.
 4. **Convenience yields are zero by default.** The break-even spread moves by about one point per point of yield (Sorby Hills sensitivity).
 5. **Ramp-up is not modelled** (ADR 0029). Time runs in whole years.
 6. **Some price inputs are secondary** (status P): vendor gold and silver series, and a secondary publication of LME lead prices.
-7. **Osino's July 2023 developer value is not yet computed.** The circular gives the July 2023 trading range (C$1.07 to C$1.20, p. 109), and Osino's March 31, 2023 statements, the last published before that date, have now been retrieved; the reading is tracked in #90.
+7. **Osino's July 2023 price is a monthly range.** The circular gives the July 2023 trading range, not the July 13 close, so that reading is a band (ADR 0048). Cash spent between March 31 and the price date is approximate and shown as a sensitivity.
 
 ## 9. Reproduce
 

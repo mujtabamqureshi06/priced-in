@@ -46,7 +46,7 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 |---|---|---|
 | #67 | Adapter interface | Done (ADR 0031) |
 | #68 | Royalty adapter | Done |
-| #69 | Single-asset developer adapter | Done; Osino July 2023 value in #90 |
+| #69 | Single-asset developer adapter | Done; Osino July 2023 value added in #90 (ADR 0048) |
 | #70 | Takeover adapter | Done |
 | #71 | Inversion and odds-timing frontier | Done |
 | #72 | Multi-commodity revenue | Done (ADR 0036) |

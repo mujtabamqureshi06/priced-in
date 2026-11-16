@@ -91,39 +91,53 @@ All figures use 200,000 paths and seed 1; `scripts/osino_case.py` regenerates th
 
 ## What the prices imply
 
-Balance-sheet items come from Osino's interim statements at September 30, 2023, the latest published before each price: net debt of C$14.09 million (cash C$8.34 million; Nebari credit facility C$19.68 million; leases and other financial liabilities C$2.75 million), 9.43 million options at C$1.02 and 9.25 million warrants at C$1.28. Exploration ground is valued at zero, which overstates the project price and so the implied odds (ADR 0031).
+Each price uses the last Osino statements published before its date (ADRs 0031, 0033 and 0048). Exploration ground is valued at zero, which overstates the project price and so the implied odds (ADR 0031). Options and warrants count series by series by the treasury method, and restricted and deferred share units always count.
 
-- **Undisturbed market value, December 15, 2023 (headline):** C$1.132 per share, implied by DPM's stated 37.2% premium to that day's close; with in-the-money options by the treasury method and net debt, C$195.7 million (US$146.3 million) for the equity claim with dilution (ADR 0030). Corporate G&A of C$7.3 million a year, the nine-month figure annualised, is deducted over the mine life (ADR 0033).
-- **Dundee Precious Metals offer, December 18, 2023:** C$287 million, C$279.6 million (US$208.8 million) for the project claim after net debt and option and warrant proceeds. Includes control premium and any synergies; overstates the odds on a standalone basis.
-- **Shanjin offer, February 23, 2024:** C$368 million, C$360.6 million (US$267.1 million) for the project claim. Same label.
+- **March 31, 2023 (for July 2023):** net cash of C$2.3 million. That is cash of C$8.82 million against the Nebari facility of C$5.98 million, C$0.29 million of accrued interest, and C$0.24 million of leases and other financial liabilities. Shares 158.2 million; 10.71 million options at C$0.94; warrants at C$0.88, C$1.10, C$1.35 and C$1.45; 2.68 million RSUs. The second Nebari tranche, drawn in May 2023, leaves net debt unchanged apart from its fee.
+- **September 30, 2023 (for the later prices):** net debt of C$14.09 million. That is cash of C$8.34 million against the Nebari facility of C$19.68 million and C$2.75 million of leases and other financial liabilities. Shares 159.5 million; 9.43 million options at C$1.02; warrants at C$0.88, C$1.35, C$1.46 and C$1.53; 3.02 million RSUs and DSUs.
 
-Without a calibrated project-level spread, the implied odds absorb the required return, so each price is shown against a real spread on net project cash flows, in market-consistent mode (ADR 0032). Standard errors are under 0.002 throughout.
+The prices:
 
-| Real spread | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
-|---|---|---|---|
-| 0% | 0.15 | 0.19 | 0.23 |
-| 4% | 0.22 | 0.26 | 0.33 |
-| 8% | 0.33 | 0.37 | 0.46 |
-| 12% | 0.50 | 0.52 | 0.64 |
-| 15% | 0.68 | 0.66 | 0.82 |
-| Break-even | 18.2% | 19.7% | 17.3% |
+- **Market value at the DFS, July 2023:** the July 2023 trading range, C$1.07 to C$1.20 per share (circular, p. 109). That gives C$171.7 to C$194.3 million (US$130.8 to US$148.0 million) for the equity claim with dilution (ADR 0030). Corporate G&A of C$6.9 million a year (Q1 2023, annualised) is deducted over the mine life.
+- **Undisturbed market value, December 15, 2023:** C$1.132 per share, implied by DPM's stated 37.2% premium to that day's close. That gives C$199.6 million (US$149.3 million) for the same claim, with G&A of C$7.3 million a year (nine months to September, annualised; ADR 0033).
+- **Dundee Precious Metals offer, December 18, 2023:** C$287 million. After net debt and exercise proceeds, that is C$279.6 million (US$208.8 million) for the project claim. It includes any control premium and synergies, so it overstates the odds on a standalone basis.
+- **Shanjin offer, February 23, 2024:** C$368 million, or C$360.6 million (US$267.1 million) for the project claim. Same caveat.
 
-Reference rates are read the way their sources used them: gold flat in real terms at the source's deck, or at spot where none is stated, discounted at the stated rate, with this engine's stage and overrun risks on top (ADR 0045).
+Without a calibrated project-level spread, the implied odds absorb the required return. Each price is therefore shown against a real spread on net project cash flows, in market-consistent mode (ADR 0032). Standard errors are under 0.002 throughout.
 
-| Reference | Gold | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
+| Real spread | July 2023, C$1.07 to C$1.20 | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
 |---|---|---|---|---|
-| DFS, 5% | US$1,750 (DFS deck) | 0.49 | 0.52 | 0.66 |
-| Eight Capital fairness opinion, 10.5% | US$1,850 (its deck) | 0.69 | 0.72 | 0.92 |
-| Eight Capital, 13.5% | US$1,850 | 0.98 | 0.98 | no solution |
-| Eight Capital, 10.5% | spot | 0.48 | 0.53 | 0.67 |
-| Eight Capital, 13.5% | spot | 0.64 | 0.69 | 0.86 |
-| Lopatnikov and Rumyantsev (2025), 16% real WACC for this project (applied by them to probability-weighted flows) | spot | 0.82 | 0.86 | no solution |
+| 0% | 0.15 to 0.16 | 0.15 | 0.19 | 0.23 |
+| 4% | 0.22 to 0.25 | 0.23 | 0.26 | 0.33 |
+| 8% | 0.33 to 0.37 | 0.34 | 0.37 | 0.46 |
+| 12% | 0.50 to 0.56 | 0.50 | 0.52 | 0.64 |
+| 15% | 0.70 to 0.79 | 0.70 | 0.66 | 0.82 |
+| Break-even | 17.0% to 17.9% | 18.1% | 19.7% | 17.3% |
 
-Spot is about US$2,020 to US$2,036 on the three dates. The Eight Capital opinion is dated after the December 15 price. The CIM survey's FS-stage gold rate of 8.9% already includes development risk, so it is shown as a value only. With gold flat at spot, the project is worth about US$449 to US$460 million at 8.9%, against prices of US$146 to US$267 million.
+Reference rates are read the way their sources used them, with this engine's stage and overrun risks on top (ADR 0045). Gold is flat in real terms at the source's deck, or at spot where none is stated, and discounted at the stated rate.
 
-At the fairness opinion's rates and gold deck, the prices are consistent with odds of roughly 0.7 to 1 that the project is built on the schedule assumed at each date. At spot gold the range is roughly 0.5 to 0.85. With no spread, implied odds fall slightly as delay is added, because waiting lowers the present value of costs but not of revenue when the convenience yield is zero (ADR 0046). The odds at zero spread are a point on the curve, not anyone's odds.
+| Reference | Gold | July 2023 | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
+|---|---|---|---|---|---|
+| DFS, 5% | US$1,750 (DFS deck) | 0.43 to 0.49 | 0.50 | 0.52 | 0.66 |
+| Eight Capital fairness opinion, 10.5% | US$1,850 (its deck) | 0.62 to 0.70 | 0.71 | 0.72 | 0.92 |
+| Eight Capital, 13.5% | US$1,850 | 0.87 to 0.98 | about 1.0 | 0.98 | no solution |
+| Eight Capital, 10.5% | spot | 0.48 to 0.54 | 0.49 | 0.53 | 0.67 |
+| Eight Capital, 13.5% | spot | 0.65 to 0.73 | 0.65 | 0.69 | 0.86 |
+| Lopatnikov and Rumyantsev (2025), 16% real WACC for this project (applied by them to probability-weighted flows) | spot | 0.85 to 0.96 | 0.84 | 0.86 | no solution |
 
-The undisturbed reading uses the equity claim, which is now floored at zero on each path (ADR 0047): existing holders can walk away rather than fund a value-destroying raise. At high spreads the floor binds on about a fifth of paths, which raised the break-even spread from 16.9% to 18.2%. The bids use the project claim, which is not floored.
+Spot gold was US$1,961 on July 13, 2023, and about US$2,020 to US$2,036 on the three later dates. The Eight Capital opinion is dated after the July and December 15 prices.
+
+The CIM survey's FS-stage gold rate of 8.9% already includes development risk, so it is shown as a value only. With gold flat at spot, the project is worth about US$410 million at 8.9% in July 2023 and US$449 to US$460 million on the later dates. The prices are US$131 to US$267 million.
+
+What the readings show:
+
+- **Fairness-opinion rates.** At the opinion's rates and gold deck, the prices are consistent with odds of roughly 0.6 to 1 that the project is built on the schedule assumed at each date. At spot gold the range is roughly 0.5 to 0.85.
+- **July against December.** The market value at the DFS and the undisturbed value five months later need almost the same project-level spread to be fair, about 17% to 18%.
+- **Delay at zero spread.** With no spread, implied odds fall slightly as delay is added. Waiting lowers the present value of costs but not of revenue when the convenience yield is zero (ADR 0046). The odds at zero spread are a point on the curve, not anyone's odds.
+
+**July 2023 sensitivity.** The Q1 MD&A implies that about C$4.6 million of cash was spent between March 31 and May 29, 2023 (ADR 0048). Counting it raises the July project price by that amount. The break-even spread then moves to 16.8% to 17.7%, and the Eight Capital readings at its deck to 0.63 to 0.71 (10.5%) and 0.89 to no solution (13.5%).
+
+**Equity floor.** The market-value readings use the equity claim, which is floored at zero on each path (ADR 0047). Existing holders can walk away rather than fund a value-destroying raise. At high spreads the floor binds on about a fifth of paths, which raised the December break-even spread from 16.9% to 18.2%, measured before the dilution correction of ADR 0048. The offers use the project claim, which is not floored.
 
 `scripts/osino_prices.py` regenerates these figures (200,000 paths, seed 1).
 
@@ -133,4 +147,4 @@ An optimal build rule, fitted by least-squares Monte Carlo (ADR 0038), gives the
 
 ## What this is not
 
-This is a value under stated assumptions, not a view on Osino's share price or on the takeover terms. The July 2023 market value is not yet read: the last balance sheet published before that date is still to be retrieved (`docs/backtest.md`, limit 7).
+This is a value under stated assumptions, not a view on Osino's share price or on the takeover terms.
