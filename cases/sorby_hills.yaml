@@ -1,0 +1,145 @@
+# Sorby Hills (Western Australia, silver-lead), valued as of the Vox royalty agreement.
+# Royalty case (ADR 0036): the FEED study's annual table, Table 10, transcribed row by row.
+# Money in A$ millions, real (FEED deck in constant dollars). Costs are entered as positive
+# numbers; the source shows them in brackets. The source shows "-" for empty cells (0 here).
+# No look-ahead (ADR 0007): only documents public on 2026-09-28 are used.
+
+id: sorby_hills
+name: Sorby Hills
+operator: Boab Metals Limited
+jurisdiction: Western Australia, Australia
+as_of: 2026-09-28
+
+documents:
+  - id: feed_2024
+    title: Sorby Hills Project FEED Study (ASX announcement)
+    issuer: Boab Metals Limited
+    date: 2024-06-06
+    url: https://cdn-api.markitdigital.com/apiman-gateway/ASX/asx-research/1.0/file/2924-02814842-6A1210639
+  - id: boab_2025_12
+    title: Significant Capital Cost and Project Delivery Time Reductions at Sorby Hills (ASX announcement)
+    issuer: Boab Metals Limited
+    date: 2025-12-10
+    url: https://bulletin.webull.com/qbd/announcement/20251210/499500902/54954254bb5d972a247a6ac84c41cdc5.pdf
+  - id: boab_hy_2026
+    title: Consolidated Interim Financial Report, half year ended 31 December 2025
+    issuer: Boab Metals Limited
+    date: 2026-03-10
+    url: https://boabmetals.com/wp-content/uploads/2026/03/Half-Yearly-Report-and-Accounts.pdf
+  - id: vox_2026
+    title: Vox to Acquire Silver Royalty over the Sorby Hills Project in Australia
+    issuer: Vox Royalty Corp.
+    date: 2026-09-28
+    url: https://www.newswire.com/news/vox-to-acquire-silver-royalty-over-the-sorby-hills-project-in-australia
+
+study:
+  stage: FEED
+  document: feed_2024
+  effective_date: 2024-06-06
+  still_applies: {document: boab_2025_12, location: "Compliance statement, p. 4: production targets and financial forecasts continue to apply"}
+  npv_pre_tax: {value: 411, units: A$ millions, source: {document: feed_2024, location: "Table 10, p. 14"}}
+  discount_rate: {value: 0.08, units: fraction per year, source: {document: feed_2024, location: "NPV8 label, pp. 1, 14"}}
+  discounting_note: >-
+    The FEED does not state its valuation date or timing convention. Mid-year discounting
+    from 1 January 2025 gives A$409M against the reported A$411M.
+  payable_metal:
+    silver_moz: {value: 17.2, units: Moz payable, source: {document: feed_2024, location: "Table A11, p. 40"}}
+    lead_kt: {value: 546, units: kt payable, source: {document: feed_2024, location: "Table A11, p. 40"}}
+  inferred_share: {value: 0.17, units: fraction of ore mined, source: {document: feed_2024, location: "Table 10, p. 14"}}
+
+deck:
+  basis: >-
+    Table 7 (p. 12) gives the deck by Australian financial year (July to June). A calendar
+    year spans two financial years, so its deck is the average of the two; FY2029+ applies
+    from calendar 2029. Check: revenue times A$:US$ over the deck price gives 17.2 Moz
+    payable silver and 546 kt payable lead, the Table A11 totals.
+  source: {document: feed_2024, location: "Table 7, p. 12"}
+  units: {silver: US$/oz, lead: US$/t}
+  prices:
+    silver: [25.3, 26.1, 26.85, 27.4, 27.5, 27.5, 27.5, 27.5, 27.5, 27.5, 27.5, 27.5]
+    lead: [2263.5, 2268.5, 2261.5, 2252.5, 2251.0, 2251.0, 2251.0, 2251.0, 2251.0, 2251.0, 2251.0, 2251.0]
+  usd_per_local: [0.70, 0.70, 0.695, 0.685, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68]
+  treatment_charge: {value: 125, units: US$/t concentrate, source: {document: feed_2024, location: "Table 7, p. 12"}}
+  refining_charge: {value: 1.25, units: US$/oz silver, source: {document: feed_2024, location: "Table 7, p. 12"}}
+
+status:
+  construction_decision: true
+  financed: true
+  first_concentrate: H2 2027
+  source: {document: vox_2026, location: "Highlights and construction timeline (operator figures)"}
+
+schedule:
+  money_units: A$ millions
+  first_production_period: "2027"
+  periods: ["2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036"]
+  columns:
+    lead_revenue:
+      values: [0, 0, 198, 225, 260, 215, 207, 208, 165, 226, 98, 0]
+      total: 1803
+      source: {document: feed_2024, location: "Table 10, Lead Revenue, p. 14"}
+    silver_revenue:
+      values: [0, 0, 59, 70, 131, 121, 57, 62, 71, 82, 40, 0]
+      total: 693
+      source: {document: feed_2024, location: "Table 10, Silver Revenue, p. 14"}
+    total_revenue:
+      values: [0, 0, 257, 295, 392, 337, 264, 269, 237, 308, 138, 0]
+      total: 2496
+      source: {document: feed_2024, location: "Table 10, Total Revenue, p. 14"}
+    lead_treatment:
+      values: [0, 0, 18, 20, 24, 20, 18, 18, 15, 18, 8, 0]
+      total: 160
+      source: {document: feed_2024, location: "Table 10, Lead Treatment, p. 14"}
+    silver_refining:
+      values: [0, 0, 3, 3, 6, 6, 3, 3, 3, 4, 2, 0]
+      total: 32
+      source: {document: feed_2024, location: "Table 10, Silver Refining, p. 14"}
+    royalties:
+      values: [0, 0, 10, 11, 14, 12, 10, 11, 9, 12, 5, 0]
+      total: 95
+      source: {document: feed_2024, location: "Table 10, Royalties, p. 14"}
+    logistics:
+      values: [0, 0, 14, 15, 17, 15, 13, 13, 11, 13, 6, 0]
+      total: 117
+      source: {document: feed_2024, location: "Table 10, Logistics, p. 14"}
+    mining:
+      values: [0, 0, 51, 62, 94, 93, 81, 71, 54, 36, 4, 0]
+      total: 547
+      source: {document: feed_2024, location: "Table 10, Mining, p. 14"}
+    processing:
+      values: [0, 0, 38, 47, 47, 47, 47, 47, 47, 47, 24, 0]
+      total: 388
+      source: {document: feed_2024, location: "Table 10, Processing, p. 14"}
+    g_and_a:
+      values: [0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 5, 0]
+      total: 88
+      source: {document: feed_2024, location: "Table 10, G&A, p. 14"}
+    operating_cash_flow:
+      values: [0, 0, 114, 126, 180, 134, 81, 96, 88, 168, 84, 0]
+      total: 1069
+      source: {document: feed_2024, location: "Table 10, Operating Cash Flow, p. 14"}
+    upfront_capex:
+      values: [131, 133, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      total: 264
+      source: {document: feed_2024, location: "Table 10, Upfront Capex, p. 14"}
+    sustaining_capex:
+      values: [0, 0, 12, 1, 3, 1, 0, 0, 0, 0, 5, 4]
+      total: 26
+      source: {document: feed_2024, location: "Table 10, Sustaining Capex, p. 14"}
+    net_cash_flow:
+      values: [-131, -133, 101, 125, 177, 133, 81, 96, 88, 168, 78, -4]
+      total: 778
+      source: {document: feed_2024, location: "Table 10, Net Cash Flow, p. 14"}
+
+royalty:
+  holder: Vox Royalty Corp. (agreement; completion pending FIRB approval)
+  kind: NSR
+  rate: {value: 0.0075, units: fraction of net smelter return, source: {document: vox_2026, location: "Opening paragraph: effective 0.75% NSR"}}
+  coverage_fraction: {value: 1.0, units: fraction of the FEED schedule, source: {document: vox_2026, location: "Royalty covers the tenements that host these deposits and targets"}}
+  price: {value: 13.0, units: US$ millions, source: {document: vox_2026, location: "Consideration and conditions precedent"}}
+  metals: [lead, silver]
+  deductions: [lead_treatment, silver_refining]
+  notes: >-
+    The release does not say which metals the royalty covers or explain "effective". Boab
+    discloses a 1% NSR to Quintana MH Holding Company LLC from the original acquisition
+    (boab_hy_2026, Note 14), metals not stated; 1% on the 75% interest Boab then held would
+    give an effective 0.75%. That reconciliation is an inference (ADR 0035).

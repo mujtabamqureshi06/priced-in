@@ -89,6 +89,68 @@ class GBM:
         return paths
 
 
+@dataclass(frozen=True)
+class CorrelatedGBM:
+    """Geometric Brownian motion for several commodities with correlated shocks (WP 2.6).
+
+    Each price follows its own GBM; the annual normal shocks are correlated through the
+    Cholesky factor of ``correlation``. With one commodity this is ``GBM``.
+
+    Attributes:
+        spots: price of each commodity at time 0.
+        drifts: continuously compounded annual drift of each price.
+        volatilities: annual volatility of each price's log returns.
+        correlation: correlation matrix of the annual log-return shocks.
+
+    """
+
+    spots: tuple[float, ...]
+    drifts: tuple[float, ...]
+    volatilities: tuple[float, ...]
+    correlation: tuple[tuple[float, ...], ...]
+
+    def __post_init__(self) -> None:
+        """Check shapes, signs and that the correlation matrix is valid."""
+        n = len(self.spots)
+        if n == 0 or len(self.drifts) != n or len(self.volatilities) != n:
+            raise ValueError("spots, drifts and volatilities must have the same, non-zero length")
+        if any(s <= 0 for s in self.spots):
+            raise ValueError("spots must be positive")
+        if any(v < 0 for v in self.volatilities):
+            raise ValueError("volatilities must be non-negative")
+        corr = np.asarray(self.correlation, dtype=np.float64)
+        if corr.shape != (n, n):
+            raise ValueError(f"correlation must be {n} x {n}, got {corr.shape}")
+        if not np.allclose(corr, corr.T) or not np.allclose(np.diag(corr), 1.0):
+            raise ValueError("correlation must be symmetric with ones on the diagonal")
+        if float(np.min(np.linalg.eigvalsh(corr))) < -1e-12:
+            raise ValueError("correlation must be positive semi-definite")
+
+    def simulate(self, n_years: int, n_paths: int, rng: np.random.Generator) -> FloatArray:
+        """Simulate annual prices, exactly at each annual point.
+
+        Returns:
+            Array of shape ``(n_commodities, n_paths, n_years + 1)``; column 0 is spot.
+
+        """
+        if n_years < 0 or n_paths < 1:
+            raise ValueError("n_years must be non-negative and n_paths at least 1")
+        n = len(self.spots)
+        corr = np.asarray(self.correlation, dtype=np.float64)
+        # Eigen-decomposition rather than Cholesky so a singular matrix (perfect
+        # correlation) is accepted.
+        w, v = np.linalg.eigh(corr)
+        factor = v * np.sqrt(np.clip(w, 0.0, None))
+        z = np.einsum("ij,jpt->ipt", factor, rng.standard_normal((n, n_paths, n_years)))
+        out = np.empty((n, n_paths, n_years + 1))
+        for i in range(n):
+            vol = self.volatilities[i]
+            step = (self.drifts[i] - 0.5 * vol**2) + vol * z[i]
+            log_paths = np.concatenate([np.zeros((n_paths, 1)), np.cumsum(step, axis=1)], axis=1)
+            out[i] = self.spots[i] * np.exp(log_paths)
+        return out
+
+
 def flat_deck(price: float, n_years: int, n_paths: int = 1) -> FloatArray:
     """Return a deterministic flat price deck, as used in technical studies.
 
