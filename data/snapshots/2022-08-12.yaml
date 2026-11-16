@@ -1,0 +1,38 @@
+# Market snapshot for valuation date 2022-08-12 (the day Orla Mining closed its acquisition of
+# Gold Standard Ventures). Raw observations only; which ones a valuation
+# uses is set by its decision record. Values retrieved 2026-11-16.
+
+as_of: 2022-08-12
+observations:
+  gold_spot:
+    value: 1801.60
+    units: US$/oz
+    observed: 2022-08-12
+    source: Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: symbol GOLD
+    status: P
+    notes: >-
+      Vendor series; not the LBMA PM fix.
+  real_yield_10y:
+    value: 0.0037
+    units: fraction per year
+    observed: 2022-08-12
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DFII10 (TIPS constant maturity, real)
+    status: V
+  usdcad:
+    value: 1.2783
+    units: C$ per US$
+    observed: 2022-08-12
+    source: Federal Reserve Bank of St. Louis, FRED
+    series: DEXCAUS (noon buying rate)
+    status: V
+  realised_vol_10y:
+    value: 0.1445
+    units: annual volatility
+    observed: 2022-08-12
+    source: computed from Alpha Vantage GOLD_SILVER_HISTORY, daily
+    series: weekday log returns, trailing 10 years, x sqrt(252)
+    status: P
+    notes: >-
+      Computed by scripts/realised_vol.py.

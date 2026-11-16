@@ -91,6 +91,10 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | 2022 FS | Report dated March 14, 2022 (effective Feb 23, 2022). After-tax NPV5 US$314.8M, NPV10 US$247.6M, IRR 44.3% at US$1,650/oz Au and US$21.50/oz Ag; initial capital US$190.2M; mid-year discounting (Section 22.14) | FS Tables 22-5 to 22-7 (SEC 6-K, March 2022, exhibit 99.1) | [V] |
 | Company schedule | Notice of Intent expected in Q1 2022; construction from Q2 2023 over 12 months; first gold Q3 2024 | Gold Standard news release, Feb 23, 2022 | [V] |
 | Notice of Intent (outcome data only) | Published in the Federal Register in August 2025 (FR Doc. 2025-15310) | Federal Register | [V] |
+| Orla balance sheet, June 30, 2022 | Cash US$66.7M; credit facility US$129.2M; Fresnillo obligation US$37.8M; leases US$1.3M; 258.478M shares; 7.82M options at C$2.53; warrants 3.0M at C$1.40 and 29.545M at C$3.00; 0.44M RSUs and 0.66M DSUs; G&A US$5.83M for six months | Orla interim statements, six months ended June 30, 2022 (SEC 6-K, August 2022, exhibit 99.1) | [V] |
+| Shares issued at closing | 43,688,556 Orla shares, fair value US$149.363M (US$3.4188 a share) | Orla interim statements, nine months ended September 30, 2022, note 12 | [V] |
+| Camino Rojo FS (January 2021) | After-tax NPV5 US$452M at US$1,600/oz; annual cash-flow table pp. 22-13 to 22-14 | Kappes, Cassiday & Associates technical report (SEC 6-K, February 2021, exhibit 99.1) | [V] |
+| Cerro Quema PFS (July 2021) | After-tax NPV5 US$176M at US$1,600/oz; US$79M to US$272M from US$1,250 to US$1,950 | Orla material change report, July 28, 2021 | [V] |
 
 ## 2. Calibration sources
 
