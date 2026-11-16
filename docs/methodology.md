@@ -23,15 +23,21 @@ With the study deck, the engine reproduces the study table exactly. At other pri
 
 ## 4. Stage gates and delays (WP 1.4)
 
+Time runs in whole years from the valuation date (ADR 0022). Each path draws once whether it passes the remaining stage gates, with the cumulative odds from `data/priors.yaml` (ADR 0013). A path that fails, fails at the build-ready year: the years to construction start plus any added delay. Added delay moves the whole study schedule later and is the timing dimension of the inversion.
+
 ## 5. Capital cost overrun and ramp-up (WP 1.5)
 
 Each path draws one capital cost ratio, applied to initial capital (including contingency) and expansion capital, not to sustaining capital or closure (ADR 0015). The build decision does not see the draw: Bertisen and Davis (2008) measured overruns found after the construction decision, so the decision rule tests the project at the study's capital estimate and the overrun reaches cash flows only once construction starts. A rule that could see the draw would skip high-overrun paths and overstate value.
 
 ## 6. Build decision (WP 1.6; Longstaff-Schwartz in WP 3.2)
 
+The fixed rule tests each year from the build-ready year until the window closes. It builds in the first year in which the project's after-tax NPV at that year's gold price, held flat, at the study's capital estimate and discount rate, reaches the hurdle. It never sees the overrun draw. A path the rule does not build before the window closes is not built. The extra capital from an overrun carries no tax shield, which slightly understates value on overrun paths.
+
 ## 7. Discounting (WP 1.7)
 
 ## 8. Claims: project, equity, royalty (WP 1.8)
+
+The project claim is after-tax cash flow discounted at the valuation rate from the valuation date. A royalty pays rate x coverage x gold revenue on each path, discounted at the valuation rate plus the buyer's spread (ADR 0014). Advance minimum royalties are paid at the end of each year before the first production year, and stop at gate failure or when the build window closes; if credited, their total is recovered from the first royalty payments (ADR 0021). Equity follows in WP 2.
 
 ## 9. Waterfall decomposition (WP 1.9)
 
