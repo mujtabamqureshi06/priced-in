@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-019
 
 ## Context
 

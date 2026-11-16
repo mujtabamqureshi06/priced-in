@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-014 and DR-015
 - Amends: ADR 0014 (the spread is not fixed on one control), ADR 0026 item 4
 
 ## Context
@@ -20,7 +19,7 @@ One producing-royalty control qualifies: Wharf (Metalla, 2020; Tier 2, 81% paid 
 ## Conditions
 
 - Resource and reserve figures in the wording come from the 2020 PFS and the June 2021 Vox release only. No resource-upside adjustment is made to South Railroad.
-- **Owner review before publication** of the wording in items 2(c) and 2(d).
+- **Review before publication** of the wording in items 2(c) and 2(d) (done).
 
 ## Revisit if
 

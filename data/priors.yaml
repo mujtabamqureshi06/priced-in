@@ -223,7 +223,7 @@ priors:
     distribution: {kind: fixed, value: 0.0}
     units: case money units
     source: judgment
-    location: DR-009, Q4
+    location: ADR 0023, item 4
     status: J
     flag: Fixed build rule; hurdle and decision rate are judgment.
     sensitivity:
@@ -237,7 +237,7 @@ priors:
     distribution: {kind: fixed, value: 5}
     units: years
     source: judgment
-    location: DR-009, Q4
+    location: ADR 0023, item 4
     status: J
     flag: >-
       Build window is judgment. Outputs show the share of paths that reach the
@@ -253,7 +253,7 @@ priors:
     distribution: {kind: fixed, value: 0.0}
     units: fraction per year
     source: judgment
-    location: DR-010, Q2
+    location: ADR 0024, item 2
     status: J
     flag: >-
       Gold lease rate set to zero; not yet checked against COMEX futures for the
@@ -283,7 +283,7 @@ priors:
     distribution: {kind: fixed, value: 0.0}
     units: fraction of initial capital
     source: judgment
-    location: DR-016, Q2
+    location: ADR 0030, item 2
     status: J
     flag: >-
       Dilution upper bound (all-equity funding); understates equity value and

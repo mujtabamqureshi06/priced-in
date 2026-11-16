@@ -34,7 +34,7 @@ Last full review: 2026-11-16.
 | Yintai deal closing | Aug 29, 2024 | Osino news release, Aug 29, 2024 | [V] |
 | Diluted shares, net cash, debt, loan terms | Not yet extracted | Osino management information circular, March 25, 2024 (SEDAR+) | open |
 
-Corrections to the knowledge files: the takeover was **announced** in February 2024 and **closed** on August 29, 2024. Both bids are equity prices in **Canadian dollars**; the US$214M and US$272M figures are press conversions. The US$464M NPV used by Lopatnikov and Rumyantsev (2025) does not appear in the DFS release; the release figure is US$480M post-tax. The DFS cash-flow table is the authority for reconciliation.
+Corrections to figures often reported elsewhere: the takeover was **announced** in February 2024 and **closed** on August 29, 2024. Both bids are equity prices in **Canadian dollars**; the US$214M and US$272M figures are press conversions. The US$464M NPV used by Lopatnikov and Rumyantsev (2025) does not appear in the DFS release; the release figure is US$480M post-tax. The DFS cash-flow table is the authority for reconciliation.
 
 ### 1.2 South Railroad (Nevada, gold)
 
@@ -95,7 +95,7 @@ Note: the capex path (US$132.9M, then US$190M, then ~US$395M) is not a clean ove
 | McNulty (1998), "Developing innovative technology", Mining Engineering 50(10):50-55 | Four ramp-up curves (Fig. 1, p. 52) from 41 plants; classification 23/5/6/7 by series (Table 2, p. 53); hydrometallurgical oxide plants, including heap leach, 6/1/0/0 | [V] full text read 2026-11-16 (scan supplied by the owner) | Curves digitised by eye, about ±2 points |
 | MinEx Consulting (Schodde) | ~45% of significant discoveries became mines | [P] | Locate the primary presentation |
 | McKinsey, AMC | 20% delivered within FS parameters; ~25% of FS projects fail | [P] | Locate primaries; use only as cross-checks |
-| Davis (1995), "(Mis)use of Monte Carlo simulations in NPV analysis", Mining Engineering **47(1)**, January 1995, pp. 75-79 | Discounting rule | [V] citation (OneMine; Pindred's published discussion cites 47(1)) | Read in full. The knowledge files give issue 2; the correct issue is 1 |
+| Davis (1995), "(Mis)use of Monte Carlo simulations in NPV analysis", Mining Engineering **47(1)**, January 1995, pp. 75-79 | Discounting rule | [V] citation (OneMine; Pindred's published discussion cites 47(1)) | Read in full. Some secondary sources give issue 2; the correct issue is 1 |
 | Iddon (2015) thesis on junior offerings | Dilution and offering discounts | open | Not yet located. The 2015 publication found is Iddon, Hettihewa and Wright, "Value relevance of accounting and other variables in the junior-mining sector", Australasian Accounting, Business and Finance Journal 9(1):25-42, doi:10.14453/aabfj.v9i1.3, which is not an offering study. The "1,526 offerings" claim is unverified |
 
 **Stage-transition priors.** No cohort-based source (one that follows projects from a study stage to a build decision) has been found. Searches so far returned the cross-sectional Sykes and Trench counts and unsourced aggregator figures, which are excluded. Until a cohort source is found, stage priors are wide and flagged, and the flag is carried into the waterfall.

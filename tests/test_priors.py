@@ -201,7 +201,7 @@ def test_judgment_status_requires_decision_and_flag() -> None:
         "distribution": {"kind": "fixed", "value": 1.0},
         "units": "years",
         "source": "judgment",
-        "location": "DR-000",
+        "location": "ADR 0000",
         "status": "J",
     }
     with pytest.raises(ValueError, match="status J"):

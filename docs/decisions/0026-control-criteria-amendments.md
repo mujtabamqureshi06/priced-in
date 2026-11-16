@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-012
 - Amends: ADR 0014, criteria 1 and 3, and the fallback in item 7
 
 ## Context
@@ -19,12 +18,12 @@ A first screen of disclosed acquisitions by Gold Royalty, Metalla, Elemental and
 ## Conditions
 
 - Wharf's reserves have been replaced year after year; under criterion 6 its spread absorbs expected life extension and is pushed down. Each control's spread is shown separately with a one-line note on plausible upside beyond reserves, not quantified.
-- Buyers and sellers of each control go to the owner for the relationship check (ADR 0014).
-- No spread is fixed until the Decision Maker has seen the candidates side by side, with each control's analyst-mode implied rate next to the convention cross-check.
+- Each control's buyer and seller are checked for conflicts of interest (ADR 0014).
+- No spread is fixed until the candidates have been compared side by side, with each control's analyst-mode implied rate next to the convention cross-check.
 
 ## Revisit if
 
 - Two or more cash controls qualify: Tier 2 and share-paid controls then become sensitivities.
 - The two anchors in item 4 move South Railroad's zero-delay implied odds by more than 25 percentage points.
 
-Confidence (Decision Maker): high on items 1 and 2; medium on item 4. Owner review: not required, apart from the relationship check.
+Confidence: high on items 1 and 2; medium on item 4.

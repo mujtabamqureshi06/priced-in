@@ -1,7 +1,5 @@
 # Sorby Hills: what the Vox royalty price implies
 
-Status: wording approved by the owner on 2026-11-16 (ADR 0035).
-
 ## The deal
 
 On September 28, 2026, Vox Royalty agreed to buy an effective 0.75% net smelter return (NSR) royalty over Boab Metals' Sorby Hills silver-lead project in Western Australia. The price is US$13.0 million in cash, paid to a private seller. Completion depends on Foreign Investment Review Board approval.

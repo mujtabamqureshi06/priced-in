@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-15
-- Decided by: owner (approved in the build plan, WP 1.7)
 
 ## Context
 

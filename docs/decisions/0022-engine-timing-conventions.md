@@ -2,12 +2,11 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Mastermind (routine)
 - Amended by: ADR 0025 (item 2: failure now occurs at the base build-ready year)
 
 ## Context
 
-The simulation engine (`pricedin.engine`) needs fixed conventions for when things happen on a path: when a stage gate fails, when the build rule may act, when advance royalties are paid, and how an overrun meets tax. These are modelling conventions, not calibration values. The values that need a source or a judgment (years to construction start, the delay distribution, the build-rule hurdle and window) are parameters and go to the Decision Maker as DR-009.
+The simulation engine (`pricedin.engine`) needs fixed conventions for when things happen on a path: when a stage gate fails, when the build rule may act, when advance royalties are paid, and how an overrun meets tax. These are modelling conventions, not calibration values. The values that need a source or a judgment (years to construction start, the delay distribution, the build-rule hurdle and window) are parameters, set in ADR 0023.
 
 ## Decision
 

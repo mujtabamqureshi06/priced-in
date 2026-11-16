@@ -78,7 +78,7 @@ The app is live at [priced-in.streamlit.app](https://priced-in.streamlit.app/). 
 
 ## Status
 
-Phases 1 (forward engine) and 2 (price adapters, inversion and the public back-test) are complete; ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 3 (Longstaff-Schwartz build decision, multi-asset and multi-metal projects) is next. See [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md).
+Phases 1 (forward engine) and 2 (price adapters, inversion and the public back-test) are complete; ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 3 (Longstaff-Schwartz build decision, multi-asset and multi-metal projects) is next. See [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Development
 

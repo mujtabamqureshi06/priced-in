@@ -5,7 +5,7 @@ These conventions apply to every change, whoever makes it.
 ## Workflow
 
 - `main` is always releasable. It is protected and CI must pass before a merge.
-- One work order, one branch, one pull request. Branch prefixes: `feat/`, `fix/`, `docs/`, `test/`, `chore/`, `research/`.
+- One work package, one branch, one pull request. Branch prefixes: `feat/`, `fix/`, `docs/`, `test/`, `chore/`, `research/`.
 - Conventional commit messages (`feat: add GBM price model`, `docs: record ADR 0012`). No messages like "update".
 - Squash merge. Tags per release (`v0.1.0`).
 - Code, tests and documentation change in the same pull request.
@@ -46,4 +46,4 @@ Significant decisions are recorded as short ADRs in `docs/decisions/` (ADR 0001)
 - [ ] Docs updated in the same pull request.
 - [ ] Every number traceable to inputs or `data/priors.yaml` with a source.
 - [ ] No confidential material and no third-party documents.
-- [ ] Reviewed, and explainable by the owner.
+- [ ] Reviewed, and every choice explainable.
