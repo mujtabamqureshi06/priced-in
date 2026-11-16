@@ -1,6 +1,6 @@
 # South Railroad: what the Vox royalty price implies
 
-Status: draft for owner review. Not for publication until the owner approves the wording in the "Reading the result" section (ADR 0028).
+Status: wording approved by the owner on 2026-11-16 (ADR 0028). The repository is private; publication follows the owner's decision to make it public.
 
 ## The deal
 

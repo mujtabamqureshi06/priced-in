@@ -36,5 +36,5 @@ Phase 0 exit criteria are met except the owner's walk-through. Phase 1 core is b
 ## Owner
 
 - Walk-through of the design (Phase 0 exit criterion); the design walk-through document ends with self-test questions.
-- Approve the South Railroad wording (section "Reading the result" in `docs/cases/south_railroad.md`) before anything is published (ADR 0028).
-- Optional: whether the Mastermind may use the University of Toronto library session for data searches, and whether the database terms allow derived values in a public project (ADR 0027). The Bloomberg check is replaced (ADR 0027).
+- South Railroad wording approved by the owner on 2026-11-16 (ADR 0028). Library session permitted, not a blocker (ADR 0027). See `docs/AUTONOMY_LOG.md`.
+- Making the repository public remains the owner's decision.
