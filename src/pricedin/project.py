@@ -134,14 +134,25 @@ def _adjusted_tax(study_tax: FloatArray, change: FloatArray) -> FloatArray:
     return tax
 
 
-def discount_factors(case: Case, rate: float) -> FloatArray:
-    """End-of-year discount factors on the study's own timing.
+def period_times(case: Case) -> FloatArray:
+    """Years from the t0 column to each period's cash flow, on the study's convention.
 
-    The period named by ``case.study.discounting.t0_column`` has factor 1.0.
+    The period named by ``case.study.discounting.t0_column`` is at 0. Later periods are
+    at whole years (``end_of_year``) or half a year earlier (``mid_year``).
     """
     t0 = case.schedule.periods.index(case.study.discounting.t0_column)
     t = np.arange(len(case.schedule.periods), dtype=np.float64) - t0
-    factors: FloatArray = (1.0 + rate) ** -t
+    if case.study.discounting.convention == "mid_year":
+        t = np.where(t > 0, t - 0.5, t)
+    return t
+
+
+def discount_factors(case: Case, rate: float) -> FloatArray:
+    """Discount factors on the study's own timing (see ``period_times``).
+
+    The period named by ``case.study.discounting.t0_column`` has factor 1.0.
+    """
+    factors: FloatArray = (1.0 + rate) ** -period_times(case)
     return factors
 
 

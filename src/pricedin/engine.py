@@ -28,7 +28,9 @@ first step of the waterfall and is tested.
 Simplifications, stated:
 
 - Time is in whole years. The study's first schedule period falls ``years_to_start`` years
-  after the valuation date when there is no delay.
+  after the valuation date when there is no delay. Cash flows are discounted on the
+  study's own convention (``pricedin.project.period_times``); prices are sampled at the
+  whole year of each period.
 - A path that fails a stage gate fails at the build-ready year.
 - The extra capital from an overrun carries no tax shield. This understates value
   slightly on overrun paths.
@@ -48,7 +50,7 @@ from pricedin import lsm
 from pricedin.inputs import Case
 from pricedin.price_models import GBM
 from pricedin.priors import ShiftedLognormal
-from pricedin.project import schedule_cash_flows
+from pricedin.project import period_times, schedule_cash_flows
 from pricedin.snapshots import Snapshot
 
 FloatArray = NDArray[np.float64]
@@ -344,7 +346,7 @@ def _decision_npv(case: Case, price: FloatArray, rate: float) -> FloatArray:
     n = len(case.schedule.periods)
     flat = np.repeat(price[:, None], n, axis=1)
     cf = schedule_cash_flows(case, flat)
-    values: FloatArray = cf.after_tax @ _discount(rate, np.arange(n, dtype=np.float64))
+    values: FloatArray = cf.after_tax @ _discount(rate, period_times(case))
     return values
 
 
@@ -360,7 +362,7 @@ def _build_value(case: Case, market: Market, price: FloatArray, rate: float) -> 
     t = np.arange(n, dtype=np.float64)
     path = price[:, None] * np.exp(market.drift * t)[None, :]
     cf = schedule_cash_flows(case, path)
-    values: FloatArray = cf.after_tax @ _discount(rate, t)
+    values: FloatArray = cf.after_tax @ _discount(rate, period_times(case))
     return values
 
 
@@ -475,12 +477,13 @@ def simulate(
     stream_value = np.zeros(n_paths) if stream is not None else None
     advance_value = np.zeros(n_paths) if royalty is not None else None
     periods = np.arange(n_periods)
+    times = period_times(case)
     for b in np.unique(build_year[built]):
         idx = np.flatnonzero(build_year == b)
         path_prices = prices[np.ix_(idx, b + periods)]
         cf = schedule_cash_flows(case, path_prices)
         after_tax = cf.after_tax - (ratio[idx, None] - 1.0) * capex
-        years = (b + periods).astype(np.float64)
+        years = b + times
         project_value[idx] = after_tax @ _discount(market.discount_rate, years)
         if financing is not None and equity_value is not None:
             raised = np.maximum(ratio[idx, None] * initial - financing.debt_fraction * initial, 0.0)

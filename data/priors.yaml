@@ -199,6 +199,29 @@ priors:
       The 2020 PFS gives no calendar schedule (s. 1.11, p. 1-17; s. 26). Dates
       published after the valuation date are used only for outcome tracking.
 
+  - id: timing.years_to_start.south_railroad_fs2022
+    description: >-
+      Whole years from the Gold Standard Ventures offer date (2022-06-10) to the
+      2022 FS Year -1 (construction and pre-strip year), with no added delay.
+    distribution: {kind: fixed, value: 4}
+    units: years
+    applies_to: {stage: FS, jurisdiction: "Nevada, United States"}
+    source: Council on Environmental Quality (June 12, 2020), Environmental Impact Statement Timelines (2010-2018)
+    location: Figure 6, p. 13 (BLM median NOI to ROD 3.79 years, 143 EISs)
+    status: V
+    flag: >-
+      Same rule as the 2021 case (ADR 0023): the Notice of Intent had not been
+      published by the valuation date (Gold Standard expected it in Q1 2022), so
+      the clock starts at the BLM median. The company's schedule (construction from
+      Q2 2023) is the sensitivity.
+    sensitivity:
+      - {label: "1 year (company schedule, FS news release of February 23, 2022)", value: 1, source: "Gold Standard Ventures news release, February 23, 2022 (SEC 6-K exhibit 99.1)", status: V}
+      - {label: "5 years (BLM mean plus time before the Notice of Intent)", value: 5, source: judgment}
+    decision: ADR 0043
+    notes: >-
+      The Notice of Intent was published in August 2025 and the Record of Decision
+      in August 2026; both are after the valuation date and are used only for
+      outcome tracking.
   - id: timing.years_to_start.osino_twin_hills
     description: >-
       Whole years from the Osino valuation date (2023-07-13) to the DFS Year 0
