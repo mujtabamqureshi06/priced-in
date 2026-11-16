@@ -12,7 +12,7 @@ from typing import Any
 from pricedin.engine import Financing, Market, Overrun, Risks, Timing, simulate
 from pricedin.inputs import load_case
 from pricedin.priors import ShiftedLognormal, load_priors
-from pricedin.report import project_waterfall
+from pricedin.report import project_waterfall, shapley_waterfall
 from pricedin.sensitivity import build_year_distribution, project_readout, tornado
 from pricedin.snapshots import load_snapshot
 
@@ -68,6 +68,11 @@ def main() -> None:
         note = f" ({s.note})" if s.note else ""
         print(f"| {s.label}{note} | {s.value:,.1f} | {s.change:+,.1f} | {s.standard_error:.1f} |")
     print("\n" + project_readout("Osino Twin Hills", "US$ million", steps))
+    shapley = shapley_waterfall(case, market, timing, risks, n_paths=N, seed=SEED)
+    print("\n| Risk step | Sequential change | Shapley change (std. error) |\n|---|---|---|")
+    seq = {s.label: s.change for s in steps}
+    for s in shapley[3:]:
+        print(f"| {s.label} | {seq[s.label]:+,.1f} | {s.change:+,.1f} ({s.standard_error:.1f}) |")
 
     assert res.equity_value is not None
     eq, eq_se = res.estimate(res.equity_value)
