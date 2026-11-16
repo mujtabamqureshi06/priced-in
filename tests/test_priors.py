@@ -180,3 +180,13 @@ def test_ramp_up_curves_are_complete_and_ordered() -> None:
         assert values == sorted(values)
     for m in (6, 12, 18, 24, 30, 36):
         assert curve[1][m] > curve[2][m] > curve[3][m] > curve[4][m]
+
+
+def test_oxide_class_weights_match_table_2() -> None:
+    registry = load_priors(Path(__file__).resolve().parents[1] / "data" / "priors.yaml")
+    s1 = registry.get("rampup.weight.oxide.series1").distribution
+    s2 = registry.get("rampup.weight.oxide.series2").distribution
+    assert s1.kind == "fixed" and s2.kind == "fixed"
+    assert s1.value == pytest.approx(6 / 7, abs=1e-6)
+    assert s2.value == pytest.approx(1 / 7, abs=1e-6)
+    assert s1.value + s2.value == pytest.approx(1.0, abs=1e-6)
