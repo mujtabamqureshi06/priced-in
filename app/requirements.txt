@@ -1,0 +1,3 @@
+# Dependencies for Streamlit Community Cloud. Installs this package (from the
+# repository root) with the app extra.
+.[app]
