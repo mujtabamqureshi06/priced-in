@@ -9,6 +9,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- Sum-of-parts adapter (#75, ADR 0044): `pricedin.sum_of_parts` (producing-asset value at the expected gold price, residual band, treasury method); Orla Mining at August 12, 2022 in `data/sum_of_parts/orla_2022-08-12.yaml`, `scripts/orla_sum_of_parts.py` and `docs/cases/orla_sum_of_parts.md`; market snapshot for 2022-08-12.
 - Gold Standard Ventures takeover case (#81, ADR 0043): `cases/south_railroad_fs2022.yaml` (the 2022 feasibility study, Table 22-7), market snapshot for 2022-06-10, `scripts/gsv_takeover.py` and the write-up `docs/cases/gold_standard_takeover.md`. Schedule-mode cases can now use mid-year discounting (`project.period_times`). New timing prior `timing.years_to_start.south_railroad_fs2022`.
 - Schwartz-Smith two-factor model (#77, ADR 0042): `pricedin.schwartz_smith` with futures pricing, exact state transition, Kalman-filter likelihood and maximum-likelihood fitting; synthetic-recovery test. SciPy added as a dependency. Phase 3 exit amended (ADR 0042).
 - Gold streams (#80, ADR 0041): `engine.StreamClaim` and `Results.stream_value` (delivered ounces worth max(P - c, 0), a strip of calls) and `inversion.stream_frontier`; tests against the Black-Scholes strip and synthetic recovery. Methodology updated for Phase 3.

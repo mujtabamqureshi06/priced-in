@@ -58,7 +58,7 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 
 | Issue | Content | Status |
 |---|---|---|
-| #75 | Multi-asset sum-of-parts adapter (Orla Mining) | Open |
+| #75 | Multi-asset sum-of-parts adapter (Orla Mining) | Done (ADR 0044) |
 | #76 | Optimal build decision by least-squares Monte Carlo | Done (ADRs 0037, 0038, 0040) |
 | #77 | Copper price model | Done with synthetic recovery; real-futures calibration in #91 |
 | #78 | Uranium price model | Moved to after v1.0 (ADR 0042) |

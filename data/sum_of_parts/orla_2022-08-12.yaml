@@ -1,0 +1,89 @@
+# Orla Mining sum-of-parts inputs at 2022-08-12, the day Orla closed its acquisition of
+# Gold Standard Ventures (#75, ADR 0044). Money in US$ thousands unless stated.
+# Documents are those public on the valuation date (ADR 0007). The only later document,
+# Orla's Q3 2022 statements, is used for one market observation on the date: the fair
+# value of the shares issued at closing.
+
+as_of: 2022-08-12
+
+documents:
+  orla_q2_2022:
+    title: Orla Mining Ltd., Condensed Interim Consolidated Financial Statements, three and six months ended June 30, 2022
+    date: 2022-08-08
+    url: https://www.sec.gov/Archives/edgar/data/1680056/000110465922087413/tm2222228d1_ex99-1.htm
+  orla_q3_2022:
+    title: Orla Mining Ltd., Condensed Interim Consolidated Financial Statements, three and nine months ended September 30, 2022
+    date: 2022-11-10
+    url: https://www.sec.gov/Archives/edgar/data/1680056/000110465922117281/tm2227581d1_ex99-1.htm
+  gsv_q1_2022:
+    title: Gold Standard Ventures Corp., Condensed Interim Consolidated Financial Statements, three months ended March 31, 2022
+    date: 2022-05-09
+    url: https://www.sec.gov/Archives/edgar/data/1321847/000117625622000141/exhibit99-1.htm
+  camino_rojo_fs_2021:
+    title: Unconstrained Feasibility Study NI 43-101 Technical Report on the Camino Rojo Gold Project (Kappes, Cassiday & Associates)
+    date: 2021-02-05
+    url: https://www.sec.gov/Archives/edgar/data/1680056/000110465921016703/tm215514d1_ex99-1.htm
+  cerro_quema_pfs_2021:
+    title: Orla Mining material change report, Cerro Quema pre-feasibility study results
+    date: 2021-07-28
+    url: https://www.sec.gov/Archives/edgar/data/1680056/000110465921102193/tm2124466d1_ex99-1.htm
+
+equity:
+  share_price_usd:
+    value: 3.4188
+    source: "orla_q3_2022, note 12: 43,688,556 shares issued at closing with a fair value of US$149,363 thousand"
+  basic_shares_millions:
+    value: 302.167
+    source: "orla_q2_2022: 258.478 million at June 30, 2022, plus 43.689 million issued at closing (orla_q3_2022, note 12)"
+  options: {count_millions: 7.819, strike_cad: 2.53, source: "orla_q2_2022: weighted average exercise price"}
+  warrants:
+    - {count_millions: 3.000, strike_cad: 1.40, source: "orla_q2_2022: expire November 7, 2022"}
+    - {count_millions: 29.545, strike_cad: 3.00, source: "orla_q2_2022: expire December 18, 2026"}
+  share_units_millions: {value: 1.108, source: "orla_q2_2022: 0.443 million RSUs and 0.664 million DSUs"}
+  replacement_options: "1.758 million at C$4.78 to C$18.87 (orla_q3_2022, note 12); out of the money, left out"
+
+net_debt:
+  credit_facility: {value: 129201, source: "orla_q2_2022, note 21"}
+  fresnillo_obligation: {value: 37800, source: "orla_q2_2022, note 22"}
+  leases: {value: 1292, source: "orla_q2_2022, note 23"}
+  cash: {value: 66743, source: "orla_q2_2022, balance sheet"}
+  gsv_cash_less_leases_cad: {value: 17128, source: "gsv_q1_2022: cash C$17,491 thousand less leases C$364 thousand"}
+  notes: >-
+    Restricted cash (US$3.7 million) is left out as tied to closure. Gold Standard's
+    cash is its last published balance; its spending to the closing date is not
+    deducted.
+
+corporate_ga:
+  per_year: {value: 11660, source: "orla_q2_2022: general and administrative expenses US$5,830 thousand for six months, annualised"}
+
+camino_rojo:
+  status: producing; commercial production from April 2022
+  periods: ["Y1 Total", "Y2 Total", "Year 3", "Year 4", "Year 5", "Year 6", "Year 7", "Year 8", "Year 9", "Year 10", "Year 11", "Year 12", "Year 13", "Year 14"]
+  calendar: "Y1 is 2022 (Year -1, construction, was 2021). Only the 141 days of 2022 after the valuation date count: 0.386 of Y1, at 0.193 years. Later years are at mid-year: Y2 at 0.888 years, then whole-year steps."
+  y1_fraction: 0.386
+  y1_time: 0.193
+  y2_time: 0.888
+  deck: {gold: 1600.0, silver: 20.0, source: "camino_rojo_fs_2021, Section 22"}
+  gold_revenue:
+    values: [150991.7, 208040.9, 201971.1, 203898.3, 170054.7, 156618.2, 126243.3, 112005.3, 114536.6, 70432.2, 36658.5, 0.0, 0.0, 0.0]
+    source: "camino_rojo_fs_2021, cash-flow table p. 22-13: NET REVENUE less silver payable ounces x US$20 (derived; refining charges stay with gold)"
+  after_tax:
+    values: [115879.1, 98354.7, 100968.7, 108348.7, 78648.2, 81687.9, 60518.2, 54893.2, 61070.1, 34477.3, 13356.3, -6915.1, -5500.3, -6472.0]
+    source: "camino_rojo_fs_2021, cash-flow table p. 22-14: After-Tax net annual Cash Flow"
+  linked_share: {value: 0.025, source: "camino_rojo_fs_2021, p. 22-14: 2.0% royalty and 0.5% extraordinary mining duty on revenue"}
+  tax_rate: {value: 0.3525, source: "Mexican special mining duty 7.5% plus 30% income tax on the remainder: 0.075 + 0.30 x 0.925"}
+  check: >-
+    The annual after-tax row discounted at 5% from Year -1 gives US$471.6 million
+    (end-year) or US$487.4 million (mid-year), against the published US$452 million.
+    The study states that capital already spent is in Year -1 undiscounted but does not
+    give its timing convention, so the published NPV is not reproduced. Only flows after
+    the valuation date are used here.
+
+cerro_quema:
+  status: pre-feasibility study (July 2021)
+  after_tax_npv5_by_gold_price: {1250: 79, 1425: 127, 1600: 176, 1775: 224, 1950: 272}
+  units: US$ million
+  source: "cerro_quema_pfs_2021, gold price sensitivity table (silver US$20)"
+  notes: >-
+    Entered as a range from zero (never built) to the study NPV at the spot gold price,
+    unrisked. No schedule is transcribed.
