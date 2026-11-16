@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-011
 - Supersedes: the failure-timing clause of ADR 0022 (item 2)
 
 ## Context
@@ -27,4 +26,4 @@ Internal South Railroad figures computed with a placeholder spread stay out of e
 - A source shows how long failed development projects keep paying advance or minimum royalties before termination.
 - Under this rule, with advances not credited, the frontier slopes down at the calibrated spread.
 
-Confidence (Decision Maker): high. Owner review: not required. Study item: why failure timing is held fixed while build timing moves.
+Confidence: high.

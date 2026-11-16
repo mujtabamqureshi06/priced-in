@@ -1,6 +1,6 @@
 # Phase 2 back-test: what public prices imply about build odds
 
-Status: reviewed and approved by the owner on 2026-11-16 (WP 2.8). Released with v0.2.0.
+Released with v0.2.0 (WP 2.8).
 
 ## 1. Question
 

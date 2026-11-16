@@ -4,6 +4,9 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Changed
+- Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
+
 ### Added
 - Least-squares Monte Carlo core (WP 3.2, ADR 0037): `pricedin.lsm` (Longstaff and Schwartz 2001), validated on the American put against QuantLib; QuantLib added as the `validation` dependency group.
 
@@ -12,13 +15,13 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 Phase 2: price adapters, inversion and the public back-test.
 
 ### Added
-- Back-test write-up (WP 2.8): `docs/backtest.md`, approved by the owner, and `scripts/backtest.py`, which regenerates every number in it.
+- Back-test write-up (WP 2.8): `docs/backtest.md`, and `scripts/backtest.py`, which regenerates every number in it.
 - Multi-metal royalty cases (WP 2.6, ADR 0036): `pricedin.royalty_cases` (closed-form market-consistent royalty value on a multi-metal study table, correlated Monte Carlo check, implied odds of reaching production, break-even spread) and `price_models.CorrelatedGBM`.
-- Sorby Hills royalty case (ADR 0035, Decision Maker, DR-020): `cases/sorby_hills.yaml` (FEED Table 10), market snapshot for 2026-09-28, `scripts/sorby_hills_case.py` and the write-up `docs/cases/sorby_hills.md` (wording approved by the owner). The price equals the on-schedule value at a 2.3% real spread.
+- Sorby Hills royalty case (ADR 0035): `cases/sorby_hills.yaml` (FEED Table 10), market snapshot for 2026-09-28, `scripts/sorby_hills_case.py` and the write-up `docs/cases/sorby_hills.md`. The price equals the on-schedule value at a 2.3% real spread.
 - Royalty transaction dataset (WP 2.7): `data/transactions.csv` with its loader and checks (`pricedin.transactions`). Six disclosed deals: South Railroad (modelled), Sorby Hills (modelled), the Wharf control, and three deals listed but out of scope with the reason stated (White Dam, Kalman and Sylvania, and the February 2026 Australian portfolio).
-- ADR 0033 (Decision Maker, DR-019): Osino corporate G&A and the fairness-opinion reference band. Osino prices re-run on Osino's own September 30, 2023 statements, with the December 15, 2023 undisturbed value as headline (`scripts/osino_prices.py`, replacing `scripts/osino_bids.py`).
-- ADR 0032 (Decision Maker, DR-018): Osino bids shown against a project-level spread with the break-even marked; provisional bid section in the Osino write-up and `scripts/osino_bids.py`.
-- ADR 0031 (Decision Maker, DR-017): Osino takeover and developer adapters. Market snapshots for 2023-12-15, 2023-12-18 and 2024-02-23.
+- ADR 0033: Osino corporate G&A and the fairness-opinion reference band. Osino prices re-run on Osino's own September 30, 2023 statements, with the December 15, 2023 undisturbed value as headline (`scripts/osino_prices.py`, replacing `scripts/osino_bids.py`).
+- ADR 0032: Osino bids shown against a project-level spread with the break-even marked; provisional bid section in the Osino write-up and `scripts/osino_bids.py`.
+- ADR 0031: Osino takeover and developer adapters. Market snapshots for 2023-12-15, 2023-12-18 and 2024-02-23.
 - `inversion.equity_frontier`: implied gate odds from an equity-based price (developer and takeover adapters), with synthetic recovery test.
 
 ### Fixed
@@ -32,22 +35,22 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 - App (WP 1.12): `app/streamlit_app.py` with valuation, royalty price, timing and assumptions views; optional extra `app` (`uv sync --extra app`). Smoke test runs both cases when Streamlit is installed.
 - Sensitivities and readout (WP 1.10): `pricedin.sensitivity` (tornado, build-year distribution, template readout). Osino Twin Hills forward valuation write-up (`docs/cases/osino_twin_hills.md`) and `scripts/osino_case.py` (WP 1.11).
 - Equity claim (WP 1.8, ADR 0030): `engine.Financing` and `Results.equity_value`; priors `equity.issue_discount` (Carpentier and Suret 2009) and `equity.debt_fraction`. ADR 0029: ramp-up not modelled in the public cases (DR-006 fallback).
-- ADR 0028 (Decision Maker, DR-014 and DR-015): South Railroad presented as an illustration across the buyer's spread, with the Osisko impairment rate and the Wharf control as reference points. `inversion.break_even_spread`, `zero_delay_value`, `zero_delay_odds_curve`. Draft case write-up `docs/cases/south_railroad.md` (owner review before publication) and `scripts/south_railroad_case.py`.
+- ADR 0028: South Railroad presented as an illustration across the buyer's spread, with the Osisko impairment rate and the Wharf control as reference points. `inversion.break_even_spread`, `zero_delay_value`, `zero_delay_odds_curve`. Draft case write-up `docs/cases/south_railroad.md` (owner review before publication) and `scripts/south_railroad_case.py`.
 - Waterfall (WP 1.9): `pricedin.report.project_waterfall` steps from the study NPV through discounting, market prices, base timing, overrun, ramp-up (labelled not modelled), stage failure, and price uncertainty with the build decision, on common paths. Steps sum exactly to the total.
-- Producing-royalty controls (`pricedin.controls`): implied real spread in market-consistent mode, analyst-mode implied rate, Tier 2 schedules from reserves and rate. First control file `controls/wharf.yaml` (Metalla, 2020), all values sourced. ADR 0027 (Decision Maker, DR-013): the futures check is replaced by the same-y gold-control condition.
-- ADR 0026 (Decision Maker, DR-012): control criteria amended (share consideration at closing-date fair value; two-tier mine-plan test; one-control rule).
-- Inversion (WP 2.5): `pricedin.inversion.royalty_frontier` solves implied gate odds for each added delay in closed form (value is linear in the odds), with Monte Carlo standard errors, a noise-aware shape test, the zero-delay odds and the certain-build delay. Synthetic recovery tests. ADR 0025 (Decision Maker, DR-011): failing paths fail at the base build-ready year; `Timing.failure_after_delay` keeps the old rule as a sensitivity.
-- ADR 0024 (Decision Maker, DR-010): market inputs. `Market.from_snapshot`, prior `market.convenience_yield.gold`, Bank of Canada 10-year yield in the 2021 snapshot, and `engine.fixed_nominal_advance` (covered interest parity valuation of the fixed C$ advances). Test that the royalty value is independent of the real rate in market-consistent mode.
+- Producing-royalty controls (`pricedin.controls`): implied real spread in market-consistent mode, analyst-mode implied rate, Tier 2 schedules from reserves and rate. First control file `controls/wharf.yaml` (Metalla, 2020), all values sourced. ADR 0027: the futures check is replaced by the same-y gold-control condition.
+- ADR 0026: control criteria amended (share consideration at closing-date fair value; two-tier mine-plan test; one-control rule).
+- Inversion (WP 2.5): `pricedin.inversion.royalty_frontier` solves implied gate odds for each added delay in closed form (value is linear in the odds), with Monte Carlo standard errors, a noise-aware shape test, the zero-delay odds and the certain-build delay. Synthetic recovery tests. ADR 0025: failing paths fail at the base build-ready year; `Timing.failure_after_delay` keeps the old rule as a sensitivity.
+- ADR 0024: market inputs. `Market.from_snapshot`, prior `market.convenience_yield.gold`, Bank of Canada 10-year yield in the 2021 snapshot, and `engine.fixed_nominal_advance` (covered interest parity valuation of the fixed C$ advances). Test that the royalty value is independent of the real rate in market-consistent mode.
 - Market snapshots (`pricedin.snapshots`, `data/snapshots/2021-06-07.yaml`, `2023-07-13.yaml`): gold spot, TIPS real yields (5, 7, 10 years), 10-year breakeven, USD/CAD, GVZ and realised volatility, each with source, series, observation date and status; observations after the valuation date are rejected. `scripts/realised_vol.py` reproduces the realised volatility figures.
 - Advance minimum royalties as a fixed nominal amount (ADR 0021): `RoyaltyClaim.amr_inflation` deflates each advance to real terms, and credited advances are recovered as the same nominal total.
-- ADR 0023 (Decision Maker, DR-009): base timing per case (South Railroad 4 years from CEQ BLM EIS data; Osino 1 year from DFS guidance), no timing prior for the reported point, build hurdle and 5-year window. Priors `timing.years_to_start.*`, `build.hurdle`, `build.window_years`; registry status `J` for stated judgments. Engine: `Risks.decision_rate`, and `Results.window_expired_share` and `advance_share` diagnostics.
+- ADR 0023: base timing per case (South Railroad 4 years from CEQ BLM EIS data; Osino 1 year from DFS guidance), no timing prior for the reported point, build hurdle and 5-year window. Priors `timing.years_to_start.*`, `build.hurdle`, `build.window_years`; registry status `J` for stated judgments. Engine: `Risks.decision_rate`, and `Results.window_expired_share` and `advance_share` diagnostics.
 - Simulation engine (WP 1.4 to 1.6, part of 1.8): `pricedin.engine.simulate` draws gold paths, stage gates, the capital cost ratio and the build year, and values the project and a royalty with advance minimum royalties on the same paths. Every risk has a switch; with all off the engine returns the study NPV exactly. ADR 0022 records the timing conventions.
 
 ### Fixed
 - mypy no-any-return on Python 3.11 in `price_models` (#4).
 
 ### Added
-- ADRs 0018 to 0021: tax approximation (Mastermind); ramp-up by plant class, superseding 0017; royalty price basis, clarifying 0014; advance royalties and buy-down for South Railroad. Oxide-class ramp-up weights (`rampup.weight.oxide.*`).
+- ADRs 0018 to 0021: tax approximation; ramp-up by plant class, superseding 0017; royalty price basis, clarifying 0014; advance royalties and buy-down for South Railroad. Oxide-class ramp-up weights (`rampup.weight.oxide.*`).
 - Schedule-mode project cash flow (WP 1.3): `pricedin.project` recomputes revenue, revenue-linked costs and tax for any gold price path; reproduces both study tables exactly at the deck and the published price sensitivities within the errors in ADR 0018. Cases gain `gold_revenue`, `revenue_linked` and a sourced `marginal_tax_rate`.
 - McNulty (1998) ramp-up curves digitised from the original Figure 1 (`data/ramp_up_mcnulty_1998.csv`) and series weights from its Table 2 (`rampup.weight.series1` to `series4`).
 - Osino Twin Hills case (`cases/osino_twin_hills.yaml`) from DFS Table 22.3.2, reproducing the published NPV5 within cell rounding; two internal DFS inconsistencies documented.
@@ -57,11 +60,11 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 
 ### Added (earlier)
 - Vox South Railroad terms from Vox's audited statements and AIF recorded in `docs/sources.md`; project state updated.
-- ADRs 0015 (PFS overrun), 0016 (South Railroad royalty coverage) and 0017 (ramp-up in schedule mode), from Decision Maker records DR-003 to DR-005; `capex.overrun.pfs` prior with its flag and a mean-preserving sensitivity.
+- ADRs 0015 (PFS overrun), 0016 (South Railroad royalty coverage) and 0017 (ramp-up in schedule mode); `capex.overrun.pfs` prior with its flag and a mean-preserving sensitivity.
 - Gold price model (WP 1.2): `pricedin.price_models.GBM`, exact-solution annual paths with optional antithetic draws, and `flat_deck` for study-deck reconciliation. Tests check reproducibility, log-return moments, E[S_t] = S_0 e^(drift t), and the 1/sqrt(n) fall in standard error.
 - Repository scaffold: `src/` package layout, uv and hatchling packaging, ruff, mypy (strict), pytest with coverage, pre-commit, GitHub Actions CI on Python 3.11 and 3.12.
 - Project documents: README, licence, citation file, contributing guide, roadmap, project state, methodology and calibration outlines, sources register.
 - Founding decision records 0001 to 0012.
-- Decision records 0013 (stage-transition priors) and 0014 (producing-royalty controls; amends 0008), made by the Independent Decision Maker.
+- Decision records 0013 (stage-transition priors) and 0014 (producing-royalty controls; amends 0008).
 - Case input template (schedule mode): `pricedin.inputs` schema and loader, `cases/_template.yaml`, and `cases/south_railroad.yaml` transcribed from the 2020 PFS Table 22-7. Every value carries a document and page reference; row totals, the cash-flow identity and the published NPVs (pre-tax and after-tax, 5%) are reproduced in tests. Documents dated after the valuation date are rejected.
 - Priors registry: `data/priors.yaml` and a validating loader in `pricedin.priors`. Entries without a source, location, units or status are rejected; secondary-source entries must carry a flag. First entries: `stage.pfs_to_fs`, `stage.fs_to_build`.

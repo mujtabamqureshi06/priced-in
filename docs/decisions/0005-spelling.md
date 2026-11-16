@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-15
-- Decided by: owner
 
 ## Decision
 

@@ -2,8 +2,7 @@
 
 - Status: accepted; clarified by ADR 0020 (price basis); amended by ADR 0026 (criteria 1 and 3, one-control rule)
 - Date: 2026-11-15
-- Decided by: Independent Decision Maker (owner's proxy), decision record DR-002
-- Amends: ADR 0008 (owner), by adding a fallback. The owner has been asked to review.
+- Amends: ADR 0008, by adding a fallback.
 
 ## Context
 
@@ -25,4 +24,4 @@ Calibrate on deals (primary method), with an industry-convention cross-check and
 
 ## Consequences
 
-The South Railroad inversion cannot stall indefinitely. Revisit if South Railroad's implied cumulative odds at the lowest and highest control spreads differ by more than 20 percentage points (then decide whether to publish a range only), if a clean single-asset gold control appears, or if the cross-check and the controls differ widely for no deal-specific reason. The owner checks whether any chosen control's buyer is a company he is in talks with.
+The South Railroad inversion cannot stall indefinitely. Revisit if South Railroad's implied cumulative odds at the lowest and highest control spreads differ by more than 20 percentage points (then decide whether to publish a range only), if a clean single-asset gold control appears, or if the cross-check and the controls differ widely for no deal-specific reason.

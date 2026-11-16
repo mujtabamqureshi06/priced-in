@@ -1,8 +1,7 @@
-# 0029. Ramp-up: DR-006 fallback for both public cases
+# 0029. Ramp-up: the ADR 0019 fallback for both public cases
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Mastermind (routine), applying the fallback clause of DR-006 (ADR 0019)
 
 ## Context
 

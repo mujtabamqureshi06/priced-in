@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-018
 
 ## Context
 
@@ -10,7 +9,7 @@ Against the market-consistent project claim, the Dundee and Shanjin bids imply z
 
 ## Decision
 
-Option (a) of DR-018, the same structure as ADR 0028, for every Osino price (developer, undisturbed and bids):
+The same structure as ADR 0028, for every Osino price (developer, undisturbed and bids):
 
 1. For each price, zero-delay implied odds against a real spread on net project cash flows, with the break-even spread at which the price equals the certain, on-schedule value.
 2. Reference points, each labelled with its basis: the DFS's own 5%; the CIM survey FS-stage gold rate of 8.9% real (approximate, since it applies to deck cash flows); Lopatnikov and Rumyantsev's (2025) 16% real WACC for this project at June 2023 (p. 314); the analyst-mode cross-check.

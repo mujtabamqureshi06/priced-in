@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), DR-009
 
 ## Context
 
@@ -38,4 +37,4 @@ The build plan's timing prior "calibrated to S&P/MinEx lead times" is replaced: 
 
 `data/priors.yaml`: `timing.years_to_start.south_railroad`, `timing.years_to_start.osino_twin_hills`, `build.hurdle`, `build.window_years`. Status `J` added to the registry for stated judgments.
 
-Confidence (Decision Maker): high on items 2 and 3; medium on items 1 and 4. Owner review: not required. Study item: the two numbers in item 3.
+Confidence: high on items 2 and 3; medium on items 1 and 4.

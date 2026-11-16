@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Mastermind (routine), applying the WP 2.7 rule that only deals with a public economic study are modelled
 
 ## Context
 

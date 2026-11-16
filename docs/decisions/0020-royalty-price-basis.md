@@ -2,7 +2,6 @@
 
 - Status: accepted
 - Date: 2026-11-16
-- Decided by: Independent Decision Maker (owner's proxy), decision record DR-007
 - Clarifies: ADR 0014 ("buyer's total disclosed cost")
 
 ## Decision

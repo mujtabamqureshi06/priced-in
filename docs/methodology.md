@@ -65,6 +65,6 @@ Two numbers summarise the frontier without a timing prior (ADR 0023): the zero-d
 - Davis, G. A. (1995). (Mis)use of Monte Carlo simulations in NPV analysis. Mining Engineering 47(1): 75-79.
 - Lopatnikov, A. and Rumyantsev, A. (2025). Mining Science and Technology 10(3) (reporting Sykes and Trench 2014 and Smith 2013).
 - McNulty, T. (1998). Developing innovative technology. Mining Engineering 50(10): 50-55.
-- Samis et al. (2006) and Schwartz (1997): cited as in the project's literature dossier; full references to be verified in the sources register.
+- Samis et al. (2006) and Schwartz (1997): cited from secondary sources for now; full references to be verified in the sources register.
 
 Full bibliography with verification status: [sources.md](sources.md).

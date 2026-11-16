@@ -1,6 +1,6 @@
-## Work order
+## Work package
 
-WO [phase].[number]: [title]
+WP [phase].[number]: [title]
 
 ## Summary
 
@@ -13,7 +13,7 @@ What changed and why, in two or three sentences.
 - [ ] Every number comes from case inputs or `data/priors.yaml`, with a source
 - [ ] No confidential material; no third-party documents committed
 - [ ] Significant decisions recorded as ADRs
-- [ ] Task-specific acceptance criteria from the work order met
+- [ ] Acceptance criteria for the work package met
 
 ## Test output
 

@@ -2,11 +2,10 @@
 
 - Status: accepted
 - Date: 2026-11-15
-- Decided by: owner
 
 ## Context
 
-The full roadmap runs to seven phases. The owner needs a working, defensible result early. The contribution of the project is the comparison layer, not the forward simulator, so a release with only the forward engine shows little that is new.
+The full roadmap runs to seven phases. A working, defensible result is needed early. The contribution of the project is the comparison layer, not the forward simulator, so a release with only the forward engine shows little that is new.
 
 ## Decision
 

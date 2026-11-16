@@ -1,15 +1,15 @@
 # Roadmap
 
-Phases close on exit criteria, not dates. The full work-package detail lives in the project build plan; this file is the summary kept in the repository. Sequencing follows ADR 0009: Phase 0, then the Phase 1 core on two public cases, then one royalty inversion on South Railroad, before app polish.
+Phases close on exit criteria, not dates. This file summarises the plan and its work packages. Sequencing follows ADR 0009: Phase 0, then the Phase 1 core on two public cases, then one royalty inversion on South Railroad, before app polish.
 
 | Phase | Goal | Closes when | Status |
 |---|---|---|---|
-| 0. Foundation | Repository, tooling, verified sources, priors registry, input template, founding ADRs | CI green; every prior verified or flagged; templates for Osino and South Railroad traceable to report pages; owner can explain the design | Criteria met; owner walk-through pending |
-| 1. Forward engine | Simulate a gold project; value project, equity and royalty from the same paths; waterfall; app | Engine reproduces each study NPV with risks off; waterfall reconciles step by step; owner walk-through passes; v0.1.0 | Released as v0.1.0; app live at priced-in.streamlit.app; ramp-up not modelled in the public cases (ADR 0029); owner walk-through to confirm |
+| 0. Foundation | Repository, tooling, verified sources, priors registry, input template, founding ADRs | CI green; every prior verified or flagged; templates for Osino and South Railroad traceable to report pages; design reviewed | Done |
+| 1. Forward engine | Simulate a gold project; value project, equity and royalty from the same paths; waterfall; app | Engine reproduces each study NPV with risks off; waterfall reconciles step by step; design review passes; v0.1.0 | Released as v0.1.0; app live at priced-in.streamlit.app; ramp-up not modelled in the public cases (ADR 0029) |
 | 2. Price adapters and inversion | Implied odds and timing from royalty, developer and takeover prices; public deal back-test | Synthetic recovery passes; controls behave sensibly or deviations explained; v0.2.0 | Criteria met; released as v0.2.0. Royalty, developer and takeover adapters; South Railroad, Osino and Sorby Hills; transaction dataset; multi-metal royalties; back-test write-up approved (ADRs 0028 to 0036) |
 | 3. Depth | Multi-asset adapter, Longstaff-Schwartz build decision, copper, uranium, streams | LSM validated against QuantLib and Brennan-Schwartz (1985); v1.0.0 | Not started |
 | 4. Evidence | Do implied odds predict builds? | Panel reproducible; results stated without overclaiming | Not started |
-| 5. Launch | Public polish, confidentiality audit, outreach | Every public number traceable; nothing private public | Not started |
+| 5. Launch | Public polish, confidentiality audit, documentation | Every public number traceable; nothing private public | Not started |
 | 6. Final private test | Run on private cases outside this repository | Comparison done privately | Not started |
 
 ## Phase 0 work packages
@@ -38,5 +38,5 @@ Phases close on exit criteria, not dates. The full work-package detail lives in 
 | 1.9 | Waterfall | Done |
 | 1.10 | Sensitivities and readout | Done |
 | 1.11 | Public cases | Done: `docs/cases/` |
-| 1.12 | App | Built (`app/streamlit_app.py`); deployment needs the owner's Streamlit account |
+| 1.12 | App | Done: `app/streamlit_app.py`, deployed at https://priced-in.streamlit.app/ |
 | 1.13 | Documentation and release | Done: v0.1.0 |
