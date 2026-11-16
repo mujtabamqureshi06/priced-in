@@ -1,6 +1,6 @@
 # Project state
 
-Updated: 2026-11-16 by the Mastermind.
+Updated: 2026-11-16 (evening) by the Mastermind.
 
 ## Where we are
 
@@ -23,12 +23,17 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 
 - ADRs 0029 to 0032; equity claim with dilution; sensitivities and readout; Osino write-up; Streamlit app; methodology and calibration complete; README rewritten; v0.1.0 released; equity-based inversion; Osino bids across a project-level spread. See `docs/AUTONOMY_LOG.md` for actions taken in place of the owner.
 
+## Done (2026-11-16, afternoon)
+
+- WP 2.7: `data/transactions.csv` with loader and checks; White Dam listed, not a control (ADR 0034).
+- WP 2.6: `pricedin.royalty_cases` and `CorrelatedGBM` (ADR 0036). Sorby Hills royalty case on the FEED schedule (ADR 0035, DR-020); draft write-up `docs/cases/sorby_hills.md` awaiting the owner's wording review. The price equals the on-schedule value at a 2.3% real spread.
+
 ## Next
 
-1. Osino July 2023 developer value: a primary daily share price for 2023-07-13 and the Q1 2023 statements (archived company website).
-2. A project-level spread calibrated on producing-mine transactions (ADR 0032 revisit), and a second producing-royalty control (ADR 0028).
-3. Phase 2 back-test across the Vox deals (Sorby Hills, White Dam) once their cases are built.
-4. Phase 3 planning: Longstaff-Schwartz build decision and the multi-asset adapter.
+1. WP 2.8 back-test write-up across South Railroad, Sorby Hills, Osino and the Wharf control; then v0.2.0.
+2. Osino July 2023 developer value: the circular (p. 109) gives the July 2023 range, C$1.07 to C$1.20; the Q1 2023 statements (the last balance sheet public before July 13, 2023) are still to be retrieved from the archived company website.
+3. A project-level spread calibrated on producing-mine transactions (ADR 0032 revisit), and a second producing-royalty control (ADR 0028).
+4. Phase 3 planning: Longstaff-Schwartz build decision, multi-asset adapter, multi-metal project engine (ADR 0036).
 
 ## Open
 
@@ -40,6 +45,7 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 ## Owner
 
 - Walk-through of the design (Phase 0 exit criterion); the design walk-through document ends with self-test questions.
+- Review the Sorby Hills write-up wording (`docs/cases/sorby_hills.md`, ADR 0035).
 - South Railroad wording approved by the owner on 2026-11-16 (ADR 0028). Library session permitted, not a blocker (ADR 0027). See `docs/AUTONOMY_LOG.md`.
 - Making the repository public remains the owner's decision; it stays private for now (owner, 2026-11-16).
 - Deploy the app on Streamlit Community Cloud: steps in `docs/deploying_the_app.md` (needs the owner's sign-in).
