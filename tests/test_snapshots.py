@@ -34,3 +34,10 @@ def test_missing_observation_names_the_snapshot() -> None:
     snap = load_snapshot(SNAPSHOTS / "2023-07-13.yaml")
     with pytest.raises(KeyError, match="2023-07-13"):
         snap.value("usdcad")
+
+
+@pytest.mark.parametrize("name", ["2023-12-15", "2023-12-18", "2024-02-23"])
+def test_osino_deal_snapshots(name: str) -> None:
+    snap = load_snapshot(SNAPSHOTS / f"{name}.yaml")
+    for key in ("gold_spot", "real_yield_10y", "usdcad", "realised_vol_10y"):
+        assert snap.value(key) > 0

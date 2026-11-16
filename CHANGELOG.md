@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- ADR 0031 (Decision Maker, DR-017): Osino takeover and developer adapters. Market snapshots for 2023-12-15, 2023-12-18 and 2024-02-23.
 - `inversion.equity_frontier`: implied gate odds from an equity-based price (developer and takeover adapters), with synthetic recovery test.
 
 ## [0.1.0] - 2026-11-16
