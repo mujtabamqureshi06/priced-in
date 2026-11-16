@@ -5,7 +5,7 @@
 
 ## Context
 
-Streams are the other main claim royalty companies buy (WP 3.6). In a standard stream, the holder pays an upfront deposit. It then receives a share of payable metal and pays, per ounce, the lesser of a fixed transfer price and spot.
+Streams are the other main claim royalty companies buy (#80). In a standard stream, the holder pays an upfront deposit. It then receives a share of payable metal and pays, per ounce, the lesser of a fixed transfer price and spot.
 
 ## Decision
 

@@ -1,4 +1,4 @@
-"""Tests for the Schwartz-Smith two-factor model and its Kalman filter (WP 3.3)."""
+"""Tests for the Schwartz-Smith two-factor model and its Kalman filter (#77)."""
 
 from __future__ import annotations
 

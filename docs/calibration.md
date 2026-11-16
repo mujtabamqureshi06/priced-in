@@ -1,6 +1,6 @@
 # Calibration
 
-Every prior the engine uses lives in `data/priors.yaml` (WP 0.4) with its value, units, source, location and status. This document explains each group of priors and its limits. Sections are completed as the priors are entered.
+Every prior the engine uses lives in `data/priors.yaml` (#51) with its value, units, source, location and status. This document explains each group of priors and its limits. Sections are completed as the priors are entered.
 
 ## 1. Stage transitions
 

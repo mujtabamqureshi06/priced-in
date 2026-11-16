@@ -1,6 +1,6 @@
 # Roadmap
 
-Phases close on exit criteria, not dates. This file summarises the plan and its work packages. Sequencing follows ADR 0009: Phase 0, then the Phase 1 core on two public cases, then one royalty inversion on South Railroad, before app polish.
+Phases close on exit criteria, not dates. This file summarises the plan; each item is a GitHub issue. Sequencing follows ADR 0009: Phase 0, then the Phase 1 core on two public cases, then one royalty inversion on South Railroad, before app polish.
 
 | Phase | Goal | Closes when | Status |
 |---|---|---|---|
@@ -12,31 +12,58 @@ Phases close on exit criteria, not dates. This file summarises the plan and its 
 | 5. Launch | Public polish, confidentiality audit, documentation | Every public number traceable; nothing private public | Not started |
 | 6. Final private test | Run on private cases outside this repository | Comparison done privately | Not started |
 
-## Phase 0 work packages
+## Phase 0
 
-| WP | Content | Status |
+| Issue | Content | Status |
 |---|---|---|
-| 0.1 | Repository and tooling | Done (branch protection not available from this session) |
-| 0.2 | Project documents | Done |
-| 0.3 | Source verification (`docs/sources.md`) | Case facts done; Bertisen and Davis read in full; others in progress |
-| 0.4 | Priors registry (`data/priors.yaml`, loader) | In progress: loader, stage priors, FS overrun |
-| 0.5 | Input template and hand-filled cases | Done: South Railroad (exact) and Osino (within cell rounding) |
-| 0.6 | Founding ADRs | Done (0001 to 0012) |
+| #48 | Repository and tooling | Done |
+| #49 | Project documents | Done |
+| #50 | Source verification (`docs/sources.md`) | Open: case facts and the main method sources verified; remaining items listed in the sources register |
+| #51 | Priors registry (`data/priors.yaml`, loader) | Done |
+| #52 | Input template and hand-filled cases | Done: South Railroad (exact) and Osino (within cell rounding) |
+| #53 | Founding decision records | Done (ADRs 0001 to 0012) |
 
-## Phase 1 work packages
+## Phase 1
 
-| WP | Content | Status |
+| Issue | Content | Status |
 |---|---|---|
-| 1.1 | Simulation core and runner | Done (`engine.simulate`, seeds, standard errors) |
-| 1.2 | Gold price model | Done |
-| 1.3 | Project cash flow | Done (schedule mode, ADR 0018) |
-| 1.4 | Stage gates and delays | Done (ADRs 0013, 0022, 0023, 0025) |
-| 1.5 | Overrun and ramp-up | Overrun done (ADR 0015); ramp-up not modelled in the public cases (ADR 0029) |
-| 1.6 | Build decision | Done (fixed rule, ADR 0023) |
-| 1.7 | Discounting | Done (ADRs 0012, 0024) |
-| 1.8 | Claims | Done: project, royalty with advances, equity with dilution (ADRs 0021, 0030) |
-| 1.9 | Waterfall | Done |
-| 1.10 | Sensitivities and readout | Done |
-| 1.11 | Public cases | Done: `docs/cases/` |
-| 1.12 | App | Done: `app/streamlit_app.py`, deployed at https://priced-in.streamlit.app/ |
-| 1.13 | Documentation and release | Done: v0.1.0 |
+| #54 | Simulation core and runner | Done |
+| #55 | Gold price model | Done |
+| #56 | Project cash flow | Done (ADR 0018) |
+| #57 | Stage gates and delays | Done |
+| #58 | Capital overrun and ramp-up | Overrun done; ramp-up not modelled in the public cases (ADR 0029) |
+| #59 | Build decision | Done (ADR 0023) |
+| #60 | Discounting | Done (ADRs 0012, 0024) |
+| #61 | Claims | Done (ADRs 0021, 0030) |
+| #62 | Waterfall | Done |
+| #63 | Sensitivities and readout | Done |
+| #64 | Public cases | Done |
+| #65 | App | Done: https://priced-in.streamlit.app/ |
+| #66 | Documentation and release | Done: v0.1.0 |
+
+## Phase 2
+
+| Issue | Content | Status |
+|---|---|---|
+| #67 | Adapter interface | Done (ADR 0031) |
+| #68 | Royalty adapter | Done |
+| #69 | Single-asset developer adapter | Done; Osino July 2023 value in #90 |
+| #70 | Takeover adapter | Done |
+| #71 | Inversion and odds-timing frontier | Done |
+| #72 | Multi-commodity revenue | Done (ADR 0036) |
+| #73 | Royalty transaction dataset | Done (ADR 0034) |
+| #74 | Back-test and write-up | Done: v0.2.0 |
+
+## Phase 3
+
+| Issue | Content | Status |
+|---|---|---|
+| #75 | Multi-asset sum-of-parts adapter (Orla Mining) | Open |
+| #76 | Optimal build decision by least-squares Monte Carlo | Done (ADRs 0037, 0038, 0040) |
+| #77 | Copper price model | Done with synthetic recovery; real-futures calibration in #91 |
+| #78 | Uranium price model | Moved to after v1.0 (ADR 0042) |
+| #79 | Order-independent waterfall | Done (ADR 0039) |
+| #80 | Streams | Done (ADR 0041) |
+| #81 | Gold Standard Ventures takeover case | Open |
+
+Later phases are tracked by the `phase-4` and `phase-5` labels on the issue tracker.

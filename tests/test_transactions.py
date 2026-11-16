@@ -1,4 +1,4 @@
-"""Tests for the royalty transaction dataset (WP 2.7)."""
+"""Tests for the royalty transaction dataset (#73)."""
 
 from __future__ import annotations
 

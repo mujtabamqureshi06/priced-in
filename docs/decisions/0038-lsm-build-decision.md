@@ -5,7 +5,7 @@
 
 ## Context
 
-ADR 0023 builds a project in the first year its after-tax NPV clears zero, at the study's discount rate and the path's current gold price held flat. The fixed rule ignores the value of waiting. Phase 3 adds the optimal rule by least-squares Monte Carlo (WP 3.2), using the core validated in ADR 0037.
+ADR 0023 builds a project in the first year its after-tax NPV clears zero, at the study's discount rate and the path's current gold price held flat. The fixed rule ignores the value of waiting. Phase 3 adds the optimal rule by least-squares Monte Carlo (#76), using the core validated in ADR 0037.
 
 ## Decision
 

@@ -1,4 +1,4 @@
-"""Tests for royalty cases on multi-metal schedules (WP 2.6)."""
+"""Tests for royalty cases on multi-metal schedules (#72)."""
 
 from __future__ import annotations
 

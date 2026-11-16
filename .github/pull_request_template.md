@@ -1,6 +1,6 @@
-## Work package
+## Issue
 
-WP [phase].[number]: [title]
+Closes #
 
 ## Summary
 
@@ -13,7 +13,7 @@ What changed and why, in two or three sentences.
 - [ ] Every number comes from case inputs or `data/priors.yaml`, with a source
 - [ ] No confidential material; no third-party documents committed
 - [ ] Significant decisions recorded as ADRs
-- [ ] Acceptance criteria for the work package met
+- [ ] Acceptance criteria in the issue met
 
 ## Test output
 

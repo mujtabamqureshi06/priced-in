@@ -1,4 +1,4 @@
-"""Royalty cases on multi-metal schedules (WP 2.6, ADRs 0035 and 0036).
+"""Royalty cases on multi-metal schedules (#72, ADRs 0035 and 0036).
 
 A royalty case values one royalty on a project whose construction decision has been made,
 from the study's own annual table of revenue by metal. It is used where the full project

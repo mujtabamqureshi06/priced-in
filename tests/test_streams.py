@@ -1,4 +1,4 @@
-"""Tests for the gold stream claim (WP 3.6)."""
+"""Tests for the gold stream claim (#80)."""
 
 from __future__ import annotations
 

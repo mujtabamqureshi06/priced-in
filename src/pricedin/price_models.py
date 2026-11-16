@@ -91,7 +91,7 @@ class GBM:
 
 @dataclass(frozen=True)
 class CorrelatedGBM:
-    """Geometric Brownian motion for several commodities with correlated shocks (WP 2.6).
+    """Geometric Brownian motion for several commodities with correlated shocks (#72).
 
     Each price follows its own GBM; the annual normal shocks are correlated through the
     Cholesky factor of ``correlation``. With one commodity this is ``GBM``.

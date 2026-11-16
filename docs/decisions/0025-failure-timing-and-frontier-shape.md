@@ -6,7 +6,7 @@
 
 ## Context
 
-The inversion (WP 2.5) solves, for each added delay d, the gate odds q(d) at which the royalty value equals the price. Value is exactly linear in q, so q(d) = (price - V_fail(d)) / (V_pass(d) - V_fail(d)). Under ADR 0022 a failing path failed at the delayed build-ready year, so added delay also lengthened the advance royalties on paths that are never built. That mixed the two beliefs the frontier is meant to separate and could make the frontier slope down for reasons unrelated to timing.
+The inversion (#71) solves, for each added delay d, the gate odds q(d) at which the royalty value equals the price. Value is exactly linear in q, so q(d) = (price - V_fail(d)) / (V_pass(d) - V_fail(d)). Under ADR 0022 a failing path failed at the delayed build-ready year, so added delay also lengthened the advance royalties on paths that are never built. That mixed the two beliefs the frontier is meant to separate and could make the frontier slope down for reasons unrelated to timing.
 
 ## Decision
 

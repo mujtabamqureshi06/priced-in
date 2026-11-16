@@ -1,4 +1,4 @@
-"""Sensitivities, build-year distribution and a plain-English readout (WP 1.10).
+"""Sensitivities, build-year distribution and a plain-English readout (#63).
 
 The tornado changes one input at a time from a base set of parameters and records the
 output each time. The readout is filled from fixed templates and computed numbers only;

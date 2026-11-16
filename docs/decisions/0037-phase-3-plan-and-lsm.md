@@ -5,24 +5,24 @@
 
 ## Context
 
-Phase 3 has one hard exit criterion: the Longstaff-Schwartz build decision, validated against QuantLib and against a replication of the Brennan and Schwartz (1985) copper mine. The other work packages add breadth:
+Phase 3 has one hard exit criterion: the Longstaff-Schwartz build decision, validated against QuantLib and against a replication of the Brennan and Schwartz (1985) copper mine. The other items add breadth:
 
-- WP 3.1: multi-asset adapter.
-- WP 3.3: copper.
-- WP 3.4: uranium.
-- WP 3.5: Shapley-value waterfall.
-- WP 3.6: streams.
+- #75: multi-asset adapter.
+- #77: copper.
+- #78: uranium.
+- #79: Shapley-value waterfall.
+- #80: streams.
 
 ADR 0036 also moved the multi-metal project engine here.
 
 ## Decision
 
 1. **Order.**
-   1. WP 3.2: the LSM core and its validation.
-   2. WP 3.2: the LSM build decision in the engine, replacing the fixed rule as an option. The fixed rule stays as the reference (ADR 0023).
-   3. WP 3.5: Shapley attribution. It is small, and the LSM changes the waterfall's last step.
-   4. WP 3.3 with the multi-metal project engine, then the Brennan and Schwartz replication, which needs copper.
-   5. WP 3.1, WP 3.6, WP 3.4.
+   1. #76: the LSM core and its validation.
+   2. #76: the LSM build decision in the engine, replacing the fixed rule as an option. The fixed rule stays as the reference (ADR 0023).
+   3. #79: Shapley attribution. It is small, and the LSM changes the waterfall's last step.
+   4. Issue #77 with the multi-metal project engine, then the Brennan and Schwartz replication, which needs copper.
+   5. #75, #80, #78.
 2. **The LSM core** (`pricedin.lsm`) is generic optimal stopping, as in Longstaff and Schwartz (2001):
    - Regression only on in-the-money paths.
    - Polynomial basis in the scaled state.

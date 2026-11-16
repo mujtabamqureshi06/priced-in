@@ -7,14 +7,14 @@
 
 The Phase 3 exit was: least-squares Monte Carlo validated, multi-asset outputs shown as bands, v1.0.0 tagged. The phase also lists copper and uranium.
 
-- **Copper (WP 3.3):** the Schwartz-Smith two-factor model calibrated to futures by the Kalman filter.
-- **Uranium (WP 3.4):** a term price and a consensus deck.
+- **Copper (#77):** the Schwartz-Smith two-factor model calibrated to futures by the Kalman filter.
+- **Uranium (#78):** a term price and a consensus deck.
 
 No free historical panel of copper futures curves is available. One site keeps two years of expired contracts; another is not reachable. A calibration on real futures is therefore not feasible now.
 
 ## Decision
 
-1. **Multi-asset test company (WP 3.1):** Orla Mining, after it closed the Gold Standard Ventures acquisition in August 2022.
+1. **Multi-asset test company (#75):** Orla Mining, after it closed the Gold Standard Ventures acquisition in August 2022.
    - The band for South Railroad is enterprise value less three items: Camino Rojo (producing, valued by the engine from its feasibility study), Cerro Quema (a band from its pre-feasibility study, risked) and net cash.
    - Exploration ground is valued at zero, flagged.
    - Each asset uses the latest public plan before the valuation date.
@@ -24,7 +24,7 @@ No free historical panel of copper futures curves is available. One site keeps t
    - Schwartz and Smith estimated their model on oil, so their parameters are not used for copper.
    - Any copper illustration uses verified copper-specific parameters, or synthetic data only.
 4. **v1.0 exit, amended:** least-squares Monte Carlo validated (ADRs 0037, 0040); multi-asset outputs shown as bands (Orla); Schwartz-Smith with synthetic recovery. Calibration to real copper futures and the uranium price model move to after v1.0.
-5. **Benchmark status:** before v1.0, the Brennan and Schwartz (1985) values are to be checked against the original article, moving them from status S to V (ADR 0040).
+5. **Benchmark status:** the Brennan and Schwartz (1985) values were checked against the original article and moved from status S to V (ADR 0040).
 
 ## Synthetic recovery
 

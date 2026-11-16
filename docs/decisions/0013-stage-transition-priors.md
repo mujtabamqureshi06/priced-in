@@ -21,7 +21,7 @@ Option A, with these limits.
 4. Fixed values in the simulation, not random draws. Sensitivity only: FS to build has a named alternative of 0.75 (AMC, [P]) and stress bounds of 0.50 and 0.95 labelled as judgment; PFS to FS has stress bounds of 0.50 and 0.95 labelled as judgment. Both entries appear in the tornado chart, and each case write-up states the stage-risk step at 0.88 and at 0.75.
 5. The flag appears in waterfall step 5, the risked value, the readout and `calibration.md`.
 6. A cohort of about 20 gold projects is the first task of Phase 4. Its result replaces these priors through a new ADR.
-7. WP 2.5 adds a test: rerun the synthetic inversion with FS to build at 0.88 and at 0.75. The implied cumulative build probability must agree within Monte Carlo error. If it does not, the parameterisation is revisited before the South Railroad inversion is published.
+7. Issue #71 adds a test: rerun the synthetic inversion with FS to build at 0.88 and at 0.75. The implied cumulative build probability must agree within Monte Carlo error. If it does not, the parameterisation is revisited before the South Railroad inversion is published.
 8. Any public comparison of implied odds with this base rate calls the base rate a weak placeholder and never describes a price as implying odds above or below the "true" odds.
 
 ## Consequences

@@ -1,4 +1,4 @@
-"""A mine with options to close, reopen and abandon, by least-squares Monte Carlo (WP 3.2).
+"""A mine with options to close, reopen and abandon, by least-squares Monte Carlo (#76).
 
 This module replicates the copper mine of Brennan and Schwartz (1985), "Evaluating
 Natural Resource Investments", Journal of Business 58(2), 135-157, the standard test of

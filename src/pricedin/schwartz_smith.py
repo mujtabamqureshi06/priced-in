@@ -1,4 +1,4 @@
-"""Schwartz-Smith two-factor commodity price model with Kalman-filter calibration (WP 3.3).
+"""Schwartz-Smith two-factor commodity price model with Kalman-filter calibration (#77).
 
 Schwartz, E. S. and Smith, J. E. (2000), "Short-Term Variations and Long-Term Dynamics in
 Commodity Prices", Management Science 46(7), 893-911.

@@ -5,7 +5,7 @@
 
 ## Context
 
-The waterfall (WP 1.9) switches risks on one at a time. A risk's step therefore depends on the order. Stage failure, for example, scales every effect charged after it. WP 3.5 asks for an order-independent option.
+The waterfall (#62) switches risks on one at a time. A risk's step therefore depends on the order. Stage failure, for example, scales every effect charged after it. Issue #79 asks for an order-independent option.
 
 ## Decision
 

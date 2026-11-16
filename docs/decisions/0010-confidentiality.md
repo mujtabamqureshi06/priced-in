@@ -13,4 +13,4 @@
 
 ## Consequences
 
-A confidentiality audit (WP 5.2) searches the repository and its full history before any public release.
+A confidentiality audit (#89) searches the repository and its full history before any public release.
