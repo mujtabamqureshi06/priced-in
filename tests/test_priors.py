@@ -129,3 +129,22 @@ def test_overrun_prior_reproduces_published_moments() -> None:
     assert mean == pytest.approx(0.35, abs=5e-6)
     assert sd == pytest.approx(0.42, abs=5e-6)
     assert dist.shift == 0.91
+
+
+def test_pfs_overrun_uses_fs_distribution_with_flag() -> None:
+    registry = load_priors(Path(__file__).resolve().parents[1] / "data" / "priors.yaml")
+    fs = registry.get("capex.overrun.fs").distribution
+    pfs = registry.get("capex.overrun.pfs")
+    assert pfs.distribution == fs
+    assert "understates PFS cost risk" in pfs.flag
+
+
+def test_pfs_sensitivity_keeps_mean_and_widens_sd() -> None:
+    """ADR 0015: sensitivity B holds the lognormal mean at 0.35 and widens the SD to 0.70."""
+    import math
+
+    mu, sigma = -1.854541, 1.268636
+    mean = math.exp(mu + sigma**2 / 2)
+    sd = mean * math.sqrt(math.exp(sigma**2) - 1)
+    assert mean == pytest.approx(0.35, abs=5e-6)
+    assert sd == pytest.approx(0.70, abs=5e-6)

@@ -23,9 +23,13 @@ The values are fixed in the simulation, not drawn at random: the expected value 
 
 Why a shifted lognormal: the smallest observed ratio was 0.93, so costs rarely come in far under budget, while a few projects cost twice the estimate. A lognormal shifted to start near 0.91 captures both features.
 
-Limits, carried in the flag: the sample is 63 projects that were financed and built, with bankable-feasibility estimates. It says nothing about PFS-stage estimates, which are less precise, and projects that were never built are missing. There is no PFS default yet.
+Limits, carried in the flag: the sample is 63 projects that were financed and built, with bankable-feasibility estimates. It says nothing about PFS-stage estimates, which are less precise, and projects that were never built are missing.
+
+PFS cases (`capex.overrun.pfs`, ADR 0015) use the same distribution with a flag saying it probably understates PFS cost risk. Each PFS write-up also shows a sensitivity in which the lognormal part keeps its mean of 0.35 but its standard deviation widens from 0.42 to 0.70 (a judgment based on conventional accuracy bands of about ±25% at PFS and ±15% at FS).
 
 ## 4. Ramp-up
+
+Not modelled for heap-leach cases such as South Railroad: the study's own ramp-up profile is used and the waterfall labels the step "not modelled; study ramp-up profile used" (ADR 0017). Milled cases will use McNulty (1998) curves once the original paper is in hand; the curves replace the study's ramp-up years rather than adding to them.
 
 ## 5. Gold price volatility and the risk-free curve
 
