@@ -1,6 +1,6 @@
 # Phase 2 back-test: what public prices imply about build odds
 
-Status: draft for owner review (WP 2.8). It includes the Sorby Hills reading, whose wording the owner has not yet approved (ADR 0035). The repository is private.
+Status: reviewed and approved by the owner on 2026-11-16 (WP 2.8). Released with v0.2.0.
 
 ## 1. Question
 

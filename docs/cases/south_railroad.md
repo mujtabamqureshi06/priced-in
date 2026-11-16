@@ -1,6 +1,6 @@
 # South Railroad: what the Vox royalty price implies
 
-Status: wording approved by the owner on 2026-11-16 (ADR 0028). The repository is private; publication follows the owner's decision to make it public.
+Status: wording approved by the owner on 2026-11-16 (ADR 0028).
 
 ## The deal
 
@@ -76,7 +76,7 @@ All figures use 20,000 paths and seed 1; `scripts/south_railroad_case.py` regene
 
 ## Reading the result
 
-Wording for owner review (ADR 0028):
+Headline wording (approved, ADR 0028):
 
 > What this price implies about build odds depends mainly on the return the buyer required. At a royalty company's own valuation rate for producing royalties, it is consistent with odds of about 0.7 to 0.8 that the project is built on the schedule assumed at the valuation date. At the spread implied by the one qualifying producing-royalty purchase, the value of the PFS mine plan with certain, on-time construction is below the price, so odds and timing cannot account for the price on that plan alone. Possible reasons include value outside the PFS mine plan, since the royalty area includes resources beyond the PFS reserve, or different required returns across buyers and dates.
 

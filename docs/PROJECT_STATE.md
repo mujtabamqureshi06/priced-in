@@ -4,7 +4,7 @@ Updated: 2026-11-16 (evening) by the Mastermind.
 
 ## Where we are
 
-Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built and released as v0.1.0 (private); ramp-up is not modelled in the public cases (ADR 0029). Phase 2 is under way: the South Railroad royalty inversion (ADR 0028) and the Osino reading of the December 15, 2023 market value and both bids on Osino's own statements (ADRs 0031 to 0033) are done; the July 2023 developer value waits for a primary share price and the Q1 2023 balance sheet.
+Phase 2 closed with v0.2.0 on 2026-11-16: synthetic recovery passes for every adapter, the public back-test regenerates from one command, the control deviation is explained, and the owner approved the write-up and the Sorby Hills wording. The repository is public (owner, 2026-11-16) and the app is live at https://priced-in.streamlit.app/. Phase 3 is next.
 
 ## Done
 
@@ -30,7 +30,7 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 
 ## Next
 
-1. WP 2.8 back-test write-up across South Railroad, Sorby Hills, Osino and the Wharf control; then v0.2.0.
+1. Phase 3 plan: Longstaff-Schwartz build decision (validated against Brennan and Schwartz 1985 and a reference implementation), multi-asset adapter, multi-metal project engine (ADR 0036), copper.
 2. Osino July 2023 developer value: the circular (p. 109) gives the July 2023 range, C$1.07 to C$1.20; the Q1 2023 statements (the last balance sheet public before July 13, 2023) are still to be retrieved from the archived company website.
 3. A project-level spread calibrated on producing-mine transactions (ADR 0032 revisit), and a second producing-royalty control (ADR 0028).
 4. Phase 3 planning: Longstaff-Schwartz build decision, multi-asset adapter, multi-metal project engine (ADR 0036).
@@ -45,7 +45,7 @@ Phase 0 criteria are met apart from the owner's walk-through. Phase 1 is built a
 ## Owner
 
 - Walk-through of the design (Phase 0 exit criterion); the design walk-through document ends with self-test questions.
-- Review the Sorby Hills write-up wording (`docs/cases/sorby_hills.md`, ADR 0035).
 - South Railroad wording approved by the owner on 2026-11-16 (ADR 0028). Library session permitted, not a blocker (ADR 0027). See `docs/AUTONOMY_LOG.md`.
-- Making the repository public remains the owner's decision; it stays private for now (owner, 2026-11-16).
-- Deploy the app on Streamlit Community Cloud: steps in `docs/deploying_the_app.md` (needs the owner's sign-in).
+- Repository made public by the owner on 2026-11-16, after the full-history confidentiality check recorded in `docs/AUTONOMY_LOG.md`.
+- App deployed by the owner on Streamlit Community Cloud: https://priced-in.streamlit.app/.
+- Sorby Hills wording and the back-test write-up approved by the owner on 2026-11-16.

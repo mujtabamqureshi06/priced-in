@@ -101,4 +101,4 @@ At the rates the fairness opinion used, the prices are consistent with odds of r
 
 ## What this is not
 
-This is a forward value under stated assumptions, not a view on Osino's share price or on the takeover terms. The Phase 2 inversion will ask what the July 2023 market value, the Dundee bid and the Shanjin agreement imply about build odds and timing.
+This is a value under stated assumptions, not a view on Osino's share price or on the takeover terms. The July 2023 market value is not yet read: the last balance sheet published before that date is still to be retrieved (`docs/backtest.md`, limit 7).
