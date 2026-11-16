@@ -8,6 +8,12 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - mypy no-any-return on Python 3.11 in `price_models` (#4).
 
 ### Added
+- Osino Twin Hills case (`cases/osino_twin_hills.yaml`) from DFS Table 22.3.2, reproducing the published NPV5 within cell rounding; two internal DFS inconsistencies documented.
+
+### Changed
+- Case schema: money units declared once per case (`schedule.money_units`, US$ thousands or millions); NPV fields renamed `npv_pre_tax` and `npv_after_tax`; per-row `resolution` for total checks.
+
+### Added (earlier)
 - Vox South Railroad terms from Vox's audited statements and AIF recorded in `docs/sources.md`; project state updated.
 - ADRs 0015 (PFS overrun), 0016 (South Railroad royalty coverage) and 0017 (ramp-up in schedule mode), from Decision Maker records DR-003 to DR-005; `capex.overrun.pfs` prior with its flag and a mean-preserving sensitivity.
 - Gold price model (WP 1.2): `pricedin.price_models.GBM`, exact-solution annual paths with optional antithetic draws, and `flat_deck` for study-deck reconciliation. Tests check reproducibility, log-return moments, E[S_t] = S_0 e^(drift t), and the 1/sqrt(n) fall in standard error.

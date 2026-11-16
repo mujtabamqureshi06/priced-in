@@ -5,13 +5,14 @@
 #   before as_of may be listed (no look-ahead, ADR 0007).
 # - Every number carries a source: a document id from `documents` plus a location
 #   (section, table, page). A reader must be able to find each value in the report.
-# - Enter money in the report's own units and say so in the column name (_usd_k for
-#   US$ thousands). Do not convert while transcribing.
+# - Enter money in the report's own units and declare them once in schedule.money_units
+#   ("US$ thousands" or "US$ millions"). Do not convert while transcribing. Set a row's
+#   resolution to the smallest digit the report shows (1, or 0.1 for one decimal).
 # - Schedule mode: copy the report's annual cash-flow table row by row, including the
 #   report's own total for each row. The loader rejects a row whose values do not add up
 #   to the stated total, and the tests require the table to reproduce the study NPV.
-# - Required schedule columns: payable_gold_koz, initial_capex_usd_k,
-#   cash_flow_pre_tax_usd_k, cash_flow_after_tax_usd_k. Add the cost, capex, working
+# - Required schedule columns: payable_gold_koz, initial_capex,
+#   cash_flow_pre_tax, cash_flow_after_tax. Add the cost, capex, working
 #   capital and tax rows the report shows so the cash-flow identity can be checked.
 # - Third-party documents are never committed; the url field points to the public copy.
 
@@ -32,8 +33,8 @@ study:
   effective_date:
   price_deck:           # commodity -> {value, units, source}
   discount_rate:        # {value (fraction), units, source}
-  npv_pre_tax_usd_k:    # {value, units, source}
-  npv_after_tax_usd_k:
+  npv_pre_tax:          # {value, units, source}
+  npv_after_tax:
   irr_after_tax:
   discounting:          # {t0_column (period discounted with exponent 0), convention: end_of_year, source}
   tax_summary:          # one paragraph, with section references
@@ -42,6 +43,7 @@ status:                 # {permitted, financed, construction_decision, source}
 
 schedule:
   periods:              # the report's own period labels, in order
+  money_units:          # US$ thousands | US$ millions
   columns:              # name -> {values (one per period), total (report's own), source}
 
 royalties:              # list of {holder, kind (NSR|GRR|NPI|stream), rate, coverage_fraction,
