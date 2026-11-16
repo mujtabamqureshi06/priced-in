@@ -127,6 +127,8 @@ Reference rates are read the way their sources used them, with this engine's sta
 
 Spot gold was US$1,961 on July 13, 2023, and about US$2,020 to US$2,036 on the three later dates. The Eight Capital opinion is dated after the July and December 15 prices.
 
+**Price to net asset value.** The Eight Capital fairness opinion also set Osino against P/NAV multiples: 0.25x to 0.50x for comparable companies and 0.35x to 0.60x for precedent transactions (January 29, 2024 circular, Appendices C and D). Measured against the DFS after-tax NPV of US$480 million at 5%, the project prices above are about 0.27x to 0.31x for the July 2023 range, 0.31x for the December 15 value, 0.43x for Dundee and 0.56x for Shanjin. A multiple and a probability are different quantities and are not to be read as equivalent. A P/NAV multiple folds stage risk, timing, financing, the price deck and the required return into one number. The implied odds separate the build risk from the required return, which is why they are shown against the spread.
+
 The CIM survey's FS-stage gold rate of 8.9% already includes development risk, so it is shown as a value only. With gold flat at spot, the project is worth about US$410 million at 8.9% in July 2023 and US$449 to US$460 million on the later dates. The prices are US$131 to US$267 million.
 
 What the readings show:
