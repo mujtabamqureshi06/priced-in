@@ -76,6 +76,15 @@ class Market:
     volatility: float
     discount_rate: float
 
+    def __post_init__(self) -> None:
+        """Reject a non-positive price, negative volatility or a rate at or below -100%."""
+        if not self.gold_spot > 0:
+            raise ValueError(f"gold_spot must be positive, got {self.gold_spot}")
+        if self.volatility < 0:
+            raise ValueError(f"volatility must be non-negative, got {self.volatility}")
+        if not self.discount_rate > -1.0:
+            raise ValueError(f"discount_rate must be above -1, got {self.discount_rate}")
+
     @classmethod
     def market_consistent(
         cls, gold_spot: float, real_rate: float, convenience_yield: float, volatility: float
@@ -137,9 +146,13 @@ class Timing:
     failure_after_delay: bool = False
 
     def __post_init__(self) -> None:
-        """Reject negative years."""
-        if min(self.years_to_start, self.added_delay, self.max_wait) < 0:
-            raise ValueError("timing values must be non-negative whole years")
+        """Reject negative or fractional years."""
+        for name in ("years_to_start", "added_delay", "max_wait"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int | np.integer):
+                raise ValueError(f"{name} must be a whole number of years, got {value!r}")
+            if value < 0:
+                raise ValueError(f"{name} must be non-negative, got {value}")
 
     @property
     def build_ready(self) -> int:
@@ -219,6 +232,15 @@ class RoyaltyClaim:
     spread: float = 0.0
     amr_inflation: float = 0.0
 
+    def __post_init__(self) -> None:
+        """Reject fractions outside [0, 1] and negative advances."""
+        for name in ("rate", "coverage"):
+            value = getattr(self, name)
+            if not 0.0 <= value <= 1.0:
+                raise ValueError(f"royalty {name} must be a fraction in [0, 1], got {value}")
+        if self.amr_per_year < 0:
+            raise ValueError(f"amr_per_year must be non-negative, got {self.amr_per_year}")
+
 
 @dataclass(frozen=True)
 class StreamClaim:
@@ -243,6 +265,13 @@ class StreamClaim:
     transfer_price: float
     transfer_escalation: float = 0.0
     spread: float = 0.0
+
+    def __post_init__(self) -> None:
+        """Reject a share outside [0, 1] or a negative transfer price."""
+        if not 0.0 <= self.share <= 1.0:
+            raise ValueError(f"stream share must be a fraction in [0, 1], got {self.share}")
+        if self.transfer_price < 0:
+            raise ValueError(f"transfer_price must be non-negative, got {self.transfer_price}")
 
 
 #: Case money units per (thousand ounces x US$/oz), i.e. per US$ thousand.

@@ -1,4 +1,6 @@
-# Case input template (schema: src/pricedin/inputs.py; worked example: south_railroad.yaml).
+# Case input template (schema: src/pricedin/inputs.py; worked examples:
+# south_railroad.yaml for end-of-year discounting, south_railroad_fs2022.yaml for
+# mid-year discounting). tests/test_template.py fills this file and loads it.
 #
 # Rules
 # - One case = one project as of one valuation date (as_of). Only documents dated on or
@@ -11,16 +13,16 @@
 # - Schedule mode: copy the report's annual cash-flow table row by row, including the
 #   report's own total for each row. The loader rejects a row whose values do not add up
 #   to the stated total, and the tests require the table to reproduce the study NPV.
-# - Required schedule columns: payable_gold_koz, initial_capex,
-#   cash_flow_pre_tax, cash_flow_after_tax. Add the cost, capex, working
-#   capital and tax rows the report shows so the cash-flow identity can be checked.
+# - Required schedule columns: payable_gold_koz, gold_revenue, taxes, initial_capex,
+#   cash_flow_pre_tax, cash_flow_after_tax. Add the revenue, cost, capital, working
+#   capital and royalty rows the report shows, so the cash-flow identity can be checked.
 # - Third-party documents are never committed; the url field points to the public copy.
 
 id:                     # lower_snake_case, unique
 name:
 operator:               # operator on the as_of date
 jurisdiction:
-commodity:              # gold in Phase 1 (ADR 0006)
+commodity:              # gold (ADR 0006)
 currency:               # ISO code of the study's cash flows, e.g. USD
 as_of:                  # valuation date, YYYY-MM-DD
 operator_share:         # fraction owned by the operator, 0 to 1
@@ -30,23 +32,35 @@ documents:              # list of {id, title, issuer, date, url}
 study:
   stage:                # PEA | PFS | FS | construction | producing
   document:             # id of the study document
-  effective_date:
+  effective_date:       # YYYY-MM-DD
   price_deck:           # commodity -> {value, units, source}
   discount_rate:        # {value (fraction), units, source}
-  npv_pre_tax:          # {value, units, source}
-  npv_after_tax:
-  irr_after_tax:
-  discounting:          # {t0_column (period discounted with exponent 0), convention: end_of_year, source}
+  npv_pre_tax:          # {value, units, source}, in schedule.money_units
+  npv_after_tax:        # {value, units, source}
+  irr_after_tax:        # {value (fraction), units, source}
+  marginal_tax_rate:    # {value (fraction), units, source}. The change in tax per unit
+                        #   change in pre-tax profit when the gold price moves. Derive it
+                        #   from the statutory rates in the report's tax section, then
+                        #   check it against the report's gold-price sensitivity table.
+                        #   If the derived rate misses that table, fit the rate to the
+                        #   table and state both rates in the source (ADR 0043).
+  discounting:          # {t0_column (period discounted with exponent 0),
+                        #   convention: end_of_year | mid_year, source}. Choose the
+                        #   convention that reproduces the report's NPVs.
   tax_summary:          # one paragraph, with section references
 
 status:                 # {permitted, financed, construction_decision, source}
 
 schedule:
-  periods:              # the report's own period labels, in order
   money_units:          # US$ thousands | US$ millions
-  columns:              # name -> {values (one per period), total (report's own), source}
+  revenue_linked:       # list of column names that scale with revenue (royalties,
+                        #   refining charges, revenue-based duties); [] if none
+  periods:              # the report's own period labels, in order
+  columns:              # name -> {values (one per period), total (report's own),
+                        #   resolution (optional, default 1), source}
 
-royalties:              # list of {holder, kind (NSR|GRR|NPI|stream), rate, coverage_fraction,
-                        #   advance_minimum_per_year (optional), advance_minimum_credited (true|false|null), notes}
+royalties:              # optional: list of {holder, kind (NSR|GRR|NPI|stream), rate,
+                        #   coverage_fraction, advance_minimum_per_year (optional),
+                        #   advance_minimum_credited (true|false|null), notes}
 
-notes:
+notes:                  # optional free text
