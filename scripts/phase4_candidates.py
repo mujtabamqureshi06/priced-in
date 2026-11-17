@@ -62,7 +62,7 @@ def read_edition(path: Path) -> list[dict[str, str]]:
     out = []
     for r in rows[start + 1 :]:
         project = _clean(r[col["project"]]) if r else ""
-        if not project or project.lower().startswith("notes"):
+        if not project or project.lower().startswith("note"):
             continue
         row = {field: _clean(r[i]) for field, i in col.items()}
         row["edition"] = match.group(1)

@@ -9,8 +9,10 @@ Source: Department of Industry, Science and Resources, Office of the Chief Econo
 | Edition | Data file | Retrieved | Gold rows | At feasibility |
 |---|---|---|---|---|
 | 2020 (December 2020) | resources-and-energy-major-projects-report-2020-data.xlsx | 2026-11-16 | 39 | 16 |
+| 2021 (December 2021) | resources-and-energy-major-projects-report-2021-data.xlsx | 2026-11-16 | 43 | 17 |
 
 Reconciliation notes:
 - **2020:** the report text gives 17 gold projects at the feasibility stage. The Gold sheet and the Consolidated sheet both list 16. Two copper-gold projects at feasibility (Eva and Hillside) sit in the Copper sheet and are outside the gold panel.
+- **2021:** 17 gold projects at the feasibility stage, matching the report text.
 
 Rows are as published. Company names are not corrected; status labels differ between editions ("Feasible", "Feasibility"). The protocol's inclusion rules, not this file, decide which projects enter the panel.
