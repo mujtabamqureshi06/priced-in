@@ -3,7 +3,9 @@
 Phase 4 needs a mine plan at every snapshot of every project in the panel, and most
 studies cannot be hand-transcribed at that scale. This module builds an annual
 cash-flow schedule from the figures nearly every study reports, and calibrates it so
-that it reproduces the study's own after-tax NPV and IRR exactly.
+that it reproduces the study's own NPV and IRR exactly: after-tax figures where the study
+reports them, otherwise its pre-tax figures, with tax then modelled from a regime written
+down in advance (ADR 0054).
 
 The schedule:
 
@@ -50,10 +52,16 @@ class Headline:
         payable_koz_per_year: average payable gold per year, thousand ounces.
         aisc_per_oz: all-in sustaining cost, US$ per ounce.
         gold_deck: the study's gold price, US$ per ounce.
-        tax_rate: marginal income-tax rate used for the study.
+        tax_rate: marginal income-tax rate: the study's own where it reports after-tax
+            figures, otherwise the modelled regime's combined rate.
         discount_rate: the study's real discount rate.
-        npv_after_tax: after-tax NPV at ``discount_rate``, US$ millions.
-        irr_after_tax: after-tax IRR.
+        npv_after_tax: after-tax NPV at ``discount_rate``, US$ millions, if reported.
+        irr_after_tax: after-tax IRR, if reported.
+        npv_pre_tax: pre-tax NPV at ``discount_rate``, US$ millions, if reported.
+        irr_pre_tax: pre-tax IRR, if reported.
+
+    At least one complete pair (NPV and IRR on the same basis) is required. When both
+    are given, the schedule is calibrated to the after-tax pair.
 
     """
 
@@ -65,8 +73,25 @@ class Headline:
     gold_deck: float
     tax_rate: float
     discount_rate: float
-    npv_after_tax: float
-    irr_after_tax: float
+    npv_after_tax: float | None = None
+    irr_after_tax: float | None = None
+    npv_pre_tax: float | None = None
+    irr_pre_tax: float | None = None
+
+    @property
+    def basis(self) -> str:
+        """The basis the schedule is calibrated to: ``after-tax`` or ``pre-tax``."""
+        if self.npv_after_tax is not None and self.irr_after_tax is not None:
+            return "after-tax"
+        return "pre-tax"
+
+    def target(self) -> tuple[float, float]:
+        """Return the (NPV, IRR) pair the schedule is calibrated to."""
+        if self.basis == "after-tax":
+            assert self.npv_after_tax is not None and self.irr_after_tax is not None
+            return self.npv_after_tax, self.irr_after_tax
+        assert self.npv_pre_tax is not None and self.irr_pre_tax is not None
+        return self.npv_pre_tax, self.irr_pre_tax
 
     def __post_init__(self) -> None:
         """Reject inputs no schedule could match."""
@@ -77,7 +102,12 @@ class Headline:
                 raise ValueError(f"{name} must be positive")
         if not 0.0 <= self.tax_rate < 1.0:
             raise ValueError("tax_rate must be in [0, 1)")
-        if self.irr_after_tax <= self.discount_rate and self.npv_after_tax > 0:
+        after = self.npv_after_tax is not None and self.irr_after_tax is not None
+        pre = self.npv_pre_tax is not None and self.irr_pre_tax is not None
+        if not (after or pre):
+            raise ValueError("need an NPV and IRR on the same basis (after-tax or pre-tax)")
+        npv, irr = self.target()
+        if irr <= self.discount_rate and npv > 0:
             raise ValueError("a positive NPV needs an IRR above the discount rate")
 
 
@@ -124,6 +154,9 @@ def _irr(flows: FloatArray) -> float:
 def calibrate(h: Headline) -> Schedule:
     """Solve the cost factor and tilt so the schedule reproduces the study NPV and IRR.
 
+    The fit is to the after-tax pair when the study reports it, otherwise to the pre-tax
+    pair; in the second case the schedule's after-tax flows are modelled with ``tax_rate``.
+
     Raises:
         ValueError: if no schedule within the bounds matches both figures to within
             0.1% of initial capital (NPV) and 0.05 points (IRR).
@@ -131,11 +164,15 @@ def calibrate(h: Headline) -> Schedule:
     """
     g_max = 1.0 - MIN_PRODUCTION_SHARE
 
+    target_npv, target_irr = h.target()
+    pre = h.basis == "pre-tax"
+
     def residual(x: FloatArray) -> FloatArray:
         s = _schedule(h, x[0], x[1])
-        npv_err = (_npv(s.after_tax, h.discount_rate) - h.npv_after_tax) / h.initial_capex
+        flows = s.pre_tax if pre else s.after_tax
+        npv_err = (_npv(flows, h.discount_rate) - target_npv) / h.initial_capex
         try:
-            irr_err = _irr(s.after_tax) - h.irr_after_tax
+            irr_err = _irr(flows) - target_irr
         except ValueError:
             irr_err = 1.0
         return np.array([npv_err, irr_err])
@@ -205,12 +242,18 @@ def build_case(
             "price_deck": {"gold": qty(h.gold_deck, "US$/oz")},
             "discount_rate": qty(h.discount_rate, "fraction per year"),
             "npv_pre_tax": qty(_npv(s.pre_tax, h.discount_rate), "US$ millions"),
-            "npv_after_tax": qty(h.npv_after_tax, "US$ millions"),
-            "irr_after_tax": qty(h.irr_after_tax, "fraction"),
+            "npv_after_tax": qty(_npv(s.after_tax, h.discount_rate), "US$ millions"),
+            "irr_after_tax": qty(_irr(s.after_tax), "fraction"),
             "marginal_tax_rate": qty(h.tax_rate, "fraction"),
             "discounting": {"t0_column": "Y0", "convention": "end_of_year", "source": src},
-            "tax_summary": "Marginal rate on revenue less operating cost less straight-line "
-            "depreciation; parametric schedule (ADR 0051).",
+            "tax_summary": (
+                "Marginal rate on revenue less operating cost less straight-line "
+                "depreciation; parametric schedule (ADR 0051)."
+                if h.basis == "after-tax"
+                else "Study reports pre-tax figures only; tax modelled at the stated "
+                "regime rate on revenue less operating cost less straight-line "
+                "depreciation (ADR 0054)."
+            ),
         },
         "status": {
             "permitted": False,
