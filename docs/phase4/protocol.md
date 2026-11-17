@@ -1,7 +1,7 @@
 # Phase 4 panel protocol
 
-- Status: draft. It freezes when the two open checks in section 8 are closed and this line changes to "frozen"; the freezing commit hash is then recorded in section 9. No outcome data is collected before then.
-- Decision record: ADR 0051.
+- Status: draft. It freezes when the open checks in section 8 are closed and this line changes to "frozen"; the freezing commit hash is then recorded in section 9. No outcome data is collected before then.
+- Decision records: ADR 0051, amended by ADRs 0052 and 0053.
 
 ## 1. Question
 
@@ -11,16 +11,18 @@ The test is descriptive. A positive result would not show that prices are right 
 
 ## 2. Universe
 
-**Core panel.** The candidate route in section 8 item 2 may widen this to TSX and TSXV owners (ADR 0052). As first designed: ASX-listed companies whose main asset is a single gold project, and that published a first scoping study (PEA), pre-feasibility study (PFS) or feasibility study (FS) between January 1, 2012 and December 31, 2021. The 36-month outcome window then closes by December 31, 2024.
+**Panel.** Gold development projects whose owner was listed on the ASX, the TSX or the TSXV, pooled in one panel (ADR 0053). Canadian filings for issuers no longer active remain public through SEDAR+ and its archive of legacy SEDAR filings, so TSX and TSXV names do not select on survival the way company-website archives would.
 
-**Candidate list.** The list is built from a stated, complete source that includes companies later delisted, acquired or wound up, before any documents are checked. The source is an open check (section 8). Inclusion is decided from the candidate list alone. Every candidate dropped later, for example for missing documents, is recorded with its reason, and drop rates are reported by outcome.
+**Entry rule.** A project enters at the first economic study (scoping study or preliminary economic assessment (PEA), pre-feasibility study (PFS) or feasibility study (FS)) that its listed owner published between January 1, 2012 and December 31, 2021 and that reports an after-tax NPV and IRR. A study that reports pre-tax figures only does not open an entry; the project may enter at a later study in the window that does. Studies published before 2012, by the same or an earlier owner, do not exclude the project. They are recorded as covariates: the number of earlier studies and the years since the project's first study. A project enters once. If it is sold, it is followed under its new owner and does not re-enter. The 36-month outcome window closes by December 31, 2024.
 
-**Supplementary set.** TSX and TSXV gold developers whose own websites archive their filings (as Osino's did) are kept in a separate, labelled set. Archives survive mainly for companies that survived, so these names would select on the outcome and do not enter the core test.
+**Candidate list.** Built before any outcome is examined, from two named sources (section 8 item 2): a company screen that includes delisted, acquired and wound-up companies, and, for ASX developers the screen missed, the government's major-projects lists. Inclusion is decided only from documents dated on or before the entry study. Every candidate dropped later, for example for missing documents, is recorded with its reason, and drop rates are reported by outcome.
 
-**Exclusions, decided before outcomes are seen.**
-- Companies with more than one project at study stage at the snapshot date.
-- Projects whose study does not report an after-tax NPV and IRR.
-- Byproduct credits above 20% of study revenue.
+**Exclusions, judged at the entry study's date.**
+- The owner had more than one project at study stage. Projects at pure exploration stage do not count.
+- The owner was producing: commercial production, or trial, test or bulk-sample mining at any mine it owned.
+- The owner held less than 50% of the project. An earn-in toward a stake does not count as holding it.
+- By-product revenue (silver, copper and others together) above 20% of study revenue.
+- Royalty and streaming companies, and projects that are not metal mines.
 
 ## 3. Snapshots
 
@@ -66,6 +68,13 @@ The labelling form, field definitions and search procedure are in `docs/phase4/l
 - **Comparators:** P/NAV at the same snapshot (price over the study's after-tax NPV) and study-stage indicators.
 - **Model:** logit of the event on implied odds, with P/NAV and stage as controls. Takeover is treated as a competing outcome (Fine and Gray subdistribution hazard as a robustness check).
 - **Clustering:** quarterly snapshots of one project are not independent, so standard errors are clustered by project, and the primary test uses one snapshot per project.
+- **Covariates:** an exchange indicator (ASX against TSX and TSXV), the number of studies before entry and the years since the project's first study.
+- **Checks specified now, before any outcome is labelled (ADR 0053):**
+  - ASX projects only, and TSX and TSXV projects only.
+  - Projects whose first economic study by any owner falls in the window (the strict entry rule).
+  - With and without the candidates added from the government lists.
+  - The number of projects that entered later than their first in-window study because that study reported pre-tax figures only, by exchange and stage.
+- **Selection:** the candidate screen's recall is reported by outcome (section 8 item 2). If recall differs between built and unbuilt projects by more than about 20 percentage points, results are shown adjusted for selection, or presented as descriptive only.
 
 ## 7. Power
 
@@ -86,15 +95,16 @@ A comparison of implied odds against P/NAV needs a difference in AUC, which thes
    - S&P's academic licence permits publishing derived results, such as implied probabilities and test statistics, provided the underlying data cannot be reconstructed from them. Raw prices and share counts are never committed; the repository holds identifiers, dates, derived values and the extraction steps. Readers without Capital IQ cannot fully reproduce the panel, and the paper says so and credits S&P.
    - S&P's terms prohibit automated access to authenticated content, including access by AI agents. All exports are therefore run by the licensed user, by hand or through S&P's own Excel plug-in. No browser automation is used.
    - Market Index is ruled out: its snapshots are for personal use only, its terms forbid robot access and scraping, and reuse needs its written consent. The free end-of-day archive is ruled out for the reasons recorded in #110.
-2. **Candidate list: route depends on the property database.** The REMP data files exist for the 2017 to 2021 editions only (the December 2016 report has no project list; an April 2015 list is archived on data.gov.au; none was found for 2012 to 2014). They give 32 gold projects at the feasibility stage, but only about 16 ASX-listed single-project developers, below the 30-project floor.
-   - **Preferred:** a screen of S&P's mining property database, if the licence includes it. The screen covers gold properties whose stage reached scoping, PFS or FS between 2012 and 2021, with ASX, TSX or TSXV owners, inactive properties included. Its criteria and run date are recorded here, and the inclusion list is frozen before any outcome is examined. Stage dates are checked on a sample against company announcements, so they are known to have been recorded at the time. With a complete third-party list, TSX and TSXV names enter the core panel. Each snapshot uses the study in force on its date.
-   - **Fallback:** the REMP frame (2015 and 2017 to 2021 lists), ASX only, run as a pilot case series. No significance test is claimed.
-   - Either way, at least 20% of construction-decision dates are verified against company announcements.
+2. **Candidate list (built 2026-11-17; to be frozen).** The licence does not include a usable property database, so the list is built from a company screen in S&P Capital IQ Pro, run by hand by the licensed user on 2026-11-17.
+   - **Frame:** Primary Industry = Gold; every company status (operating, acquired, out of business, liquidating and others); Exchange [Current & Historical] in TSX, TSXV and ASX. 1,240 companies, of which 1,003 reported at some point in 2012 to 2021 or have no report date. Two lessons from building it are recorded so the screen can be repeated: the older "Gold Ores" industry code misses most listed parent companies, and "Exchange [Historical]" alone returns only companies that have since left those exchanges.
+   - **Study flags:** two further screens on the same frame flag companies whose Key Development headlines dated 2012 to 2021 contain "feasibility", "preliminary economic assessment" or "scoping study" (246 companies), or "study", "NPV" or "reserve" (254); 301 in total. Business descriptions that mention a study add further candidates.
+   - **Review:** 443 candidates were coded IN, CHECK or OUT, each with a recorded reason. CHECK cases are resolved only from documents dated on or before the study. Exclusions were re-checked on a random 10% sample (27 of 268, seed 20261117) by the same analyst, with 27 upheld; that is a self-check and is reported as one. An independent blind check of the same 27 exclusions and a random 10% of inclusions, by a reviewer given only the rules and public sources, must be completed and every disagreement resolved under these rules before the list is frozen.
+   - **Recall audit (ASX):** the audit set is every ASX-listed company in the government's major-projects gold lists for 2017 to 2021 whose project was a new or redeveloped mine and that was not producing when first listed; companies later renamed count once (Spitfire Materials became Bardoc Gold). That gives 20 companies. The screen caught 15 (75%): 5 of the 6 whose projects the lists show as committed or completed by 2021, and 10 of the other 14. The difference is about 12 percentage points (about 17 if the two expansion projects of producing companies, Blackham and Citigold, are counted), rough at this size and below the 20-point threshold in section 6. Missed: Calidus, Barton and Medallion (in the frame without a study flag), and Kin Mining and Explaurum (not in the frame).
+   - **Second source:** government-listed ASX developers the screen missed are added by name, and results are reported with and without them. Of the five misses, Calidus, Kin Mining and Explaurum are candidates; Barton's and Medallion's first studies were published after 2021.
+   - **TSX and TSXV recall: unmeasured.** One attempt was made, with Natural Resources Canada's Major Projects Inventory. Its published reports for the window give provincial totals, not a project-level list, and its project-level open data covers only projects active today, which would select on the outcome. No other free independent list was found, so the paper states that TSX and TSXV recall is unmeasured.
+   - At least 20% of construction-decision dates are verified against company announcements.
 
-3. **REMP frame (checked).** The Australian Government's Resources and Energy Major Projects reports. They form an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Earlier editions (BREE, 2012 and 2013) were twice yearly.
-   - The core panel takes every gold project listed at the feasibility stage in any edition from 2012 to 2021, including projects later removed from the list.
-   - Two consequences become inclusion rules: projects below A$50 million in capital are outside the core panel, and the 2023 change from "feasibility" to "advanced feasibility" does not affect the 2012 to 2021 entry window.
-   - Each edition used is recorded with its URL and retrieval date.
+3. **Government major-projects lists (checked).** The Australian Government's Resources and Energy Major Projects reports: an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Data files exist for the 2017 to 2021 editions (`data/phase4/remp_gold.csv`); an April 2015 list is archived on data.gov.au; none was found for 2012 to 2014. They serve as the recall audit and the second source in item 2, not as the frame.
 
 ## 9. Freeze
 
