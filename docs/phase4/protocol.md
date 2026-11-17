@@ -46,7 +46,7 @@ For each project, with the date and source document:
 - **Observed non-event:** no construction decision by the end of the window, including abandonment, impairment to nil or a change of business. Abandonment is not censoring; coding it as censored would bias the test toward success.
 - **Censored:** only when the project cannot be tracked after a stated search (company announcements, the acquirer's disclosures, news).
 
-A random 20% of outcome labels are coded a second time from the source documents, blind to the first coding. Disagreements are reported and resolved by a stated rule.
+The labelling form, field definitions and search procedure are in `docs/phase4/labelling.md`. A random 20% of outcome labels are coded a second time from the source documents, blind to the first coding. Disagreements are reported and resolved by a stated rule.
 
 **Financings.** Each equity raise in the window is recorded with its price, the closing price before announcement, and any attached warrants. That sample replaces or confirms the 10.54% issue-discount prior (ADR 0030, #94).
 
