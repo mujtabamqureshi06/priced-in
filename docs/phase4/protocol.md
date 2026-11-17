@@ -56,6 +56,8 @@ A random 20% of outcome labels are coded a second time from the source documents
 
 **Validation.** A subsample is drawn at random with a recorded seed: the larger of 10 projects or 20% of the panel. Each project in it has its study cash-flow table hand-transcribed with the existing case template. The builder's error against the transcription (in project value at the snapshot's market inputs) is reported, and that tolerance is carried into every result. The existing four cases are not used for validation; three of them are not ASX gold.
 
+**Implemented.** `pricedin.parametric` builds the schedule: initial capital over the pre-production years, a production profile tilted by one parameter with the life-of-mine total fixed, operating cost as a calibrated factor times all-in sustaining cost, and tax at the marginal rate after straight-line depreciation. The cost factor and tilt are solved to match the study's after-tax NPV and IRR. As an informative check only, the builder applied to Osino's DFS headline figures gives project values within 0.6% of the hand-transcribed case at market prices and spreads of 0%, 5% and 10%. This is not the validation set.
+
 **Inversion.** The existing developer adapter and inversion read the equity claim at each snapshot (ADRs 0030, 0031, 0047). Results are reported at the break-even spread and at stated reference spreads, with the timing prior stated (ADR 0023).
 
 ## 6. Test
