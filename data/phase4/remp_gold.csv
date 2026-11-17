@@ -1,4 +1,77 @@
 edition,project,company,state,type,status,capacity,unit,cost
+2017,Aphrodite Gold Project,Aphrodite Gold,WA,New project,Feasibility,1261000,oz,0-249
+2017,Bullabulling,Norton Gold Fields,WA,Redevelopment,Feasibility,175000,oz,346
+2017,Charters Towers,Citigold,Qld,Expansion,Committed,220000,oz,246
+2017,Dalgaranga Project,Gascoyne Resources,WA,New project,Committed,100000,oz,86
+2017,Dargues Reef (Majors Creek),Unity Mining,NSW,New project,Committed,50000,oz,80
+2017,Deflector,Doray Minerals,WA,New project,Completed,591000,oz,0-249
+2017,Glenburgh,Gascoyne Resources,WA,New project,Feasibility,100000,oz,68
+2017,Gruyere Project,Gold Road Resources,WA,New project,Committed,270000,oz,532
+2017,Gum Creek Gold,Horizon Gold (previously Panoramic Resources),WA,New project,Feasibility,90000,oz,0-249
+2017,Kalgoorlie North,Excelsior Gold,WA,New project,Feasibility,52600,oz,0-249
+2017,Karlawinda,Capricorn Metals,WA,New project,Committed,100000,oz,133
+2017,McPhillamys,Regis Resources,NSW,New project,Feasibility,192000,oz,0-249
+2017,Mt Henry,Metals X,WA,New project,Completed,116000,oz,195
+2017,MT Morgans,Dacian Gold Limited,WA,Redevelopment,Committed,200000,oz,197
+2017,Mt Todd,Vista Gold,NT,Expansion,Feasibility,370000,oz,1046
+2017,Ravenswood (Sarsfield open pit),Resolute Mining,Qld,Expansion,Feasibility,120000,oz,134
+2017,Rover 1,Westgold (prev Metals X),NT,New project,Publicly announced,60000,oz,100
+2017,Tanami Operations,Newmont Mining,NT,Expansion,Completed,450000,oz,120
+2017,Thunderbox,Saracen Mineral Holdings Limited,WA,New project,Completed,140000,oz,65
+2017,Wiluna/Matilda,Blackham Resources,WA,Expansion,Publicly announced,200000,oz,114
+2018,Aphrodite Gold Project,Spitfire Materials Limited,WA,New project,Feasible,126100,oz,244
+2018,Bullabulling,Norton Gold Fields (a subsidiary of Zijin Mining Group),WA,Redevelopment,Feasible,175000,oz,346
+2018,Cadia,Newcrest,NSW,Expansion,Feasible,650000,oz,598
+2018,Charters Towers,Citigold,QLD,Expansion,Committed,218000,oz,246
+2018,Dalgaranga Project,Gascoyne Resources,WA,New project,Completed,100000,oz,86
+2018,Dargues Reef (Majors Creek),Diversified Minerals,NSW,New project,Committed,50000,oz,80
+2018,Glenburgh,Gascoyne Resources,WA,New project,Feasible,200000,oz,60
+2018,Gruyere Project,Gold Road (50%) and Gold Fields (50%),WA,New project,Committed,270000,oz,621
+2018,Gum Creek Gold,Horizon Gold (previously Panoramic Resources),WA,New project,Feasible,90000,oz,55
+2018,Gwalia Extension,St Barbara,WA,Expansion,Committed,255000,oz,100
+2018,Kalgoorlie North,Excelsior Gold,WA,New project,Feasible,52600,oz,76
+2018,Karlawinda,Capricorn Metals,WA,New project,Feasible,100000,oz,132
+2018,McPhillamys,Regis Resources,NSW,New project,Feasible,192000,oz,250
+2018,Mt Carlton,Evolution,QLD,Expansion,Committed,135000,oz,60
+2018,Mt Morgans,Dacian Gold Limited,WA,Redevelopment,Completed,200000,oz,197
+2018,Mt Todd,Vista Gold,NT,Expansion,Feasible,370000,oz,1046
+2018,Ravenswood (Sarsfield open pit),Resolute Mining,QLD,Expansion,Feasible,115000,oz,134
+2018,Rover 1,Westgold (prev Metals X),NT,New project,Publicly announced,60000,oz,0–249
+2018,Superpit Goldenpile Cutback,Barrick,WA,Expansion,Committed,2590673,oz,500
+2018,Tampia,Explaurum,WA,New project,Feasible,104000,oz,119
+2018,Tanami Operations,Newmont Mining,NT,Expansion,Completed,450000,oz,120
+2018,Telfer - West Dome Stage 2,Newcrest,WA,Expansion,Completed,411000,oz,93
+2018,Tunkillia,WPG Resources,SA,New project,Feasible,70000,oz,114
+2018,Wiluna/Matilda,Blackham Resources,WA,Expansion,Committed,207000,oz,114
+2019,Aphrodite Gold Project,Bardoc Gold Lmited,WA,New project,Feasible,126100,oz,123
+2019,Bardoc Gold Project,Bardoc Gold Lmited,WA,New project,Feasible,52600,oz,76
+2019,Bellevue Gold Project,Bellevue Gold Limited,WA,new project,Feasible,66000,oz,0–249
+2019,Bullabulling,ZiJin Mining (Norton Gold Fields),WA,Expansion,Feasible,175000,oz,346
+2019,Cadia Expansion - Stage 1,Newcrest,NSW,Expansion,Committed,750000,oz,685
+2019,Cadia Expansion - Stage 2,Newcrest,NSW,Expansion,Feasible,750000,oz,180
+2019,Cardinia Gold Project,Kin Mining,WA,New project,Feasible,51000,oz,77
+2019,Charters Towers,Citigold,QLD,Expansion,Committed,218000,oz,246
+2019,Dargues Reef (Majors Creek),Diversified Minerals,NSW,New project,Committed,50000,oz,80
+2019,Glenburgh,Gascoyne Resources,WA,New project,Feasible,73000,oz,60
+2019,Golden PiKe Cutback,Kalgoorlie Consolidated Gold Mines (JV Newmont Mining & Barrick Gold),WA,Expansion,Committed,2590673,oz,500
+2019,Gum Creek Gold,Horizon Gold (previously Panoramic Resources),WA,New project,Feasible,90000,oz,55
+2019,Gwalia Extension,St Barbara,WA,Expansion,Committed,255000,oz,100
+2019,Karlawinda,Capricorn Metals,WA,New project,Committed,96800,oz,132
+2019,Katanning Gold Project,Ausgold,WA,New project,Publicly announced,50000,oz,0–249
+2019,King of the Hills,Red 5 Limited,WA,Expansion,Feasible,140000,oz,218
+2019,McPhillamys,Regis Resources,NSW,New project,Committed,192000,oz,250
+2019,Mount Morgan Tailings Project,Heritage Minerals Pty Ltd,QLD,Expansion,Feasible,36000,oz,60
+2019,Mt Carlton,Evolution,QLD,Expansion,Committed,135000,oz,60
+2019,Mt Todd,Vista Gold,NT,Expansion,Feasible,370000,oz,1232
+2019,Ravensthorpe Gold Project,ACH Global,WA,New project,Feasible,70000,oz,0–249
+2019,Ravenswood (Sarsfield open pit),Resolute Mining,QLD,Expansion,Committed,115000,oz,134
+2019,Rover 1,Westgold (prev Metals X),NT,New project,Publicly announced,60000,oz,0–249
+2019,Tampia,Explaurum,WA,New project,Feasible,104000,oz,119
+2019,Tanami Expansion 2,Newmont Mining,NT,Expansion,Committed,475000,oz,700
+2019,Toms Gully - Phase 2,Primary Gold Pty Ltd,NT,New project,Feasible,40000,oz,165
+2019,Tropicana Expansion (Boston Shaker),AngloGold Ashanti and Independence Group,WA,Expansion,Committed,100000,oz,95
+2019,Tunkillia,WPG Resources,SA,New project,Feasible,70000,oz,114
+2019,Wiluna/Matilda,Blackham Resources,WA,Expansion,Committed,120000,oz,114
 2020,Bardoc Gold Project (prev Aphroditie),Bardoc Gold Lmited,WA,New project,Feasible,135000,oz,140
 2020,Bellevue Gold Project,Bellevue Gold Limited,WA,New project,Publicly announced,,oz,
 2020,Binduli Heap Leaching Project Phase 2,Zijin Mining Group (Norton Gold Fields Pty Limited),WA,Expansion,Committed,225000,oz,276

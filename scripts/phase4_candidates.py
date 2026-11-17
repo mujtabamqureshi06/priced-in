@@ -27,15 +27,22 @@ import openpyxl  # type: ignore[import-untyped]
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "phase4" / "remp_gold.csv"
 FIELDS = ("edition", "project", "company", "state", "type", "status", "capacity", "unit", "cost")
-HEADERS = {
-    "project": "project",
-    "company": "company",
-    "state": "state",
-    "type": "type",
-    "status": "status",
-    "capacity": "annual estimated new capacity",
-    "unit": "capacity unit",
-    "cost": "cost estimate",
+HEADERS: dict[str, tuple[str, ...]] = {
+    "project": ("project",),
+    "company": ("company",),
+    "state": ("state",),
+    "type": ("type",),
+    "status": ("status",),
+    "capacity": ("annual estimated new capacity", "estimated new capacity"),
+    "unit": ("capacity unit",),
+    "cost": ("cost estimate", "indicative cost estimate"),
+}
+#: Editions before 2018 mark the stage with a "y" in one of these columns instead.
+STAGE_FLAGS = {
+    "publicly announced": "Publicly announced",
+    "feasibility stage": "Feasibility",
+    "committed": "Committed",
+    "completed": "Completed",
 }
 
 
@@ -53,18 +60,25 @@ def read_edition(path: Path) -> list[dict[str, str]]:
     rows = [tuple(r) for r in sheet.iter_rows(values_only=True)]
     start = next(i for i, r in enumerate(rows) if r and _clean(r[0]).lower() == "project")
     header = [_clean(h).lower() for h in rows[start]]
-    col = {}
-    for field, name in HEADERS.items():
-        hits = [i for i, h in enumerate(header) if h.startswith(name)]
-        if not hits:
-            raise ValueError(f"{path.name}: no '{name}' column in the Gold sheet")
-        col[field] = hits[0]
+    col: dict[str, int] = {}
+    for field, names in HEADERS.items():
+        hits = [i for i, h in enumerate(header) if h.startswith(names)]
+        if hits:
+            col[field] = hits[0]
+        elif field != "status":
+            raise ValueError(f"{path.name}: no '{names[0]}' column in the Gold sheet")
+    flags = {i: label for i, h in enumerate(header) for k, label in STAGE_FLAGS.items() if h == k}
+    if "status" not in col and not flags:
+        raise ValueError(f"{path.name}: no status column and no stage columns")
     out = []
     for r in rows[start + 1 :]:
         project = _clean(r[col["project"]]) if r else ""
         if not project or project.lower().startswith("note"):
             continue
         row = {field: _clean(r[i]) for field, i in col.items()}
+        if "status" not in col:
+            marked = [label for i, label in flags.items() if _clean(r[i]).lower() == "y"]
+            row["status"] = marked[0] if len(marked) == 1 else ""
         row["edition"] = match.group(1)
         out.append(row)
     return out

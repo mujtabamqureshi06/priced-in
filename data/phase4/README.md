@@ -8,10 +8,15 @@ Source: Department of Industry, Science and Resources, Office of the Chief Econo
 
 | Edition | Data file | Retrieved | Gold rows | At feasibility |
 |---|---|---|---|---|
+| 2017 (December 2017) | resources-and-energy-major-projects-2017-data.xlsx | 2026-11-17 | 20 | 8 |
+| 2018 (December 2018) | resources-and-energy-major-projects-2018-data.xlsx | 2026-11-17 | 24 | 12 |
+| 2019 (December 2019) | resources-and-energy-major-projects-2019-data.xlsx | 2026-11-17 | 29 | 15 |
 | 2020 (December 2020) | resources-and-energy-major-projects-report-2020-data.xlsx | 2026-11-16 | 39 | 16 |
 | 2021 (December 2021) | resources-and-energy-major-projects-report-2021-data.xlsx | 2026-11-16 | 43 | 17 |
 
 Reconciliation notes:
+- **2017:** the edition marks each project's stage with a "y" in one of four stage columns; the script reads it as the status.
+- **Before 2017:** the December 2016 report's Word and PDF versions carry only summary tables, not the project list. An April 2015 list is archived on data.gov.au. No 2012 to 2014 listing has been found.
 - **2020:** the report text gives 17 gold projects at the feasibility stage. The Gold sheet and the Consolidated sheet both list 16. Two copper-gold projects at feasibility (Eva and Hillside) sit in the Copper sheet and are outside the gold panel.
 - **2021:** 17 gold projects at the feasibility stage, matching the report text.
 
