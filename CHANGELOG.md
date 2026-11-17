@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Phase 4 sources (ADR 0052): Capital IQ for prices and share counts, exported by the licensed user, with only derived results published; a mining property screen as the preferred candidate frame, with the government list as a pilot fallback. Candidate list extended to the 2017 to 2019 editions.
 - Parametric study builder (`pricedin.parametric`, ADR 0051): an annual schedule from a study's headline figures, calibrated to its after-tax NPV and IRR. On Osino's DFS headline it tracks the transcribed case within 0.6% at market prices (informative; the Phase 4 validation uses a random ASX subsample).
 - Phase 4 panel protocol, draft (`docs/phase4/protocol.md`, ADR 0051): ASX core panel, outcome coding, parametric mine plans with a hand-transcribed validation subsample, power table. Frozen before any outcome data is collected.
 

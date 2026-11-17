@@ -11,7 +11,7 @@ The test is descriptive. A positive result would not show that prices are right 
 
 ## 2. Universe
 
-**Core panel.** ASX-listed companies whose main asset is a single gold project, and that published a first scoping study (PEA), pre-feasibility study (PFS) or feasibility study (FS) between January 1, 2012 and December 31, 2021. The 36-month outcome window then closes by December 31, 2024.
+**Core panel.** The candidate route in section 8 item 2 may widen this to TSX and TSXV owners (ADR 0052). As first designed: ASX-listed companies whose main asset is a single gold project, and that published a first scoping study (PEA), pre-feasibility study (PFS) or feasibility study (FS) between January 1, 2012 and December 31, 2021. The 36-month outcome window then closes by December 31, 2024.
 
 **Candidate list.** The list is built from a stated, complete source that includes companies later delisted, acquired or wound up, before any documents are checked. The source is an open check (section 8). Inclusion is decided from the candidate list alone. Every candidate dropped later, for example for missing documents, is recorded with its reason, and drop rates are reported by outcome.
 
@@ -82,13 +82,16 @@ A comparison of implied odds against P/NAV needs a difference in AUC, which thes
 
 ## 8. Open checks before freezing
 
-1. **Delisted share prices (open; needs the owner).** A source of daily or quarter-end closing prices that covers ASX companies later delisted, from 2012 to 2024.
-   - The free end-of-day archive at asxhistoricaldata.asx20list.com is ruled out. It removes "illiquid stocks" without stating a threshold. Its site reports a 2020 cease-and-desist from the ASX, with no confirmed licence since, and its recent files end in 2020.
-   - Market Index is ruled out. Its snapshots are for personal use only, its terms forbid robot access and scraping, and reuse needs its written consent.
-   - Remaining options, all licensed and all needing the owner: S&P Capital IQ, FactSet or Bloomberg through the university, or Morningstar DatAnalysis through a library that holds it. The licence must allow derived results to be published.
-   - Raw prices from a licensed source are not committed. The repository holds identifiers, dates, derived values and the extraction steps, so anyone with the same licence can reproduce the panel.
-   - Until one is in place, no snapshot is priced.
-2. **Candidate list (checked).** The Australian Government's Resources and Energy Major Projects reports. They form an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Earlier editions (BREE, 2012 and 2013) were twice yearly.
+1. **Share prices and shares outstanding (source chosen).** S&P Capital IQ through the University of Toronto's academic licence. It covers listed and delisted ASX and TSX/TSXV companies.
+   - S&P's academic licence permits publishing derived results, such as implied probabilities and test statistics, provided the underlying data cannot be reconstructed from them. Raw prices and share counts are never committed; the repository holds identifiers, dates, derived values and the extraction steps. Readers without Capital IQ cannot fully reproduce the panel, and the paper says so and credits S&P.
+   - S&P's terms prohibit automated access to authenticated content, including access by AI agents. All exports are therefore run by the licensed user, by hand or through S&P's own Excel plug-in. No browser automation is used.
+   - Market Index is ruled out: its snapshots are for personal use only, its terms forbid robot access and scraping, and reuse needs its written consent. The free end-of-day archive is ruled out for the reasons recorded in #110.
+2. **Candidate list: route depends on the property database.** The REMP data files exist for the 2017 to 2021 editions only (the December 2016 report has no project list; an April 2015 list is archived on data.gov.au; none was found for 2012 to 2014). They give 32 gold projects at the feasibility stage, but only about 16 ASX-listed single-project developers, below the 30-project floor.
+   - **Preferred:** a screen of S&P's mining property database, if the licence includes it. The screen covers gold properties whose stage reached scoping, PFS or FS between 2012 and 2021, with ASX, TSX or TSXV owners, inactive properties included. Its criteria and run date are recorded here, and the inclusion list is frozen before any outcome is examined. Stage dates are checked on a sample against company announcements, so they are known to have been recorded at the time. With a complete third-party list, TSX and TSXV names enter the core panel. Each snapshot uses the study in force on its date.
+   - **Fallback:** the REMP frame (2015 and 2017 to 2021 lists), ASX only, run as a pilot case series. No significance test is claimed.
+   - Either way, at least 20% of construction-decision dates are verified against company announcements.
+
+3. **REMP frame (checked).** The Australian Government's Resources and Energy Major Projects reports. They form an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Earlier editions (BREE, 2012 and 2013) were twice yearly.
    - The core panel takes every gold project listed at the feasibility stage in any edition from 2012 to 2021, including projects later removed from the list.
    - Two consequences become inclusion rules: projects below A$50 million in capital are outside the core panel, and the 2023 change from "feasibility" to "advanced feasibility" does not affect the 2012 to 2021 entry window.
    - Each edition used is recorded with its URL and retrieval date.
