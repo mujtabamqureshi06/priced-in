@@ -84,7 +84,9 @@ A comparison of implied odds against P/NAV needs a difference in AUC, which thes
 
 1. **Delisted share prices (open; needs the owner).** A source of daily or quarter-end closing prices that covers ASX companies later delisted, from 2012 to 2024.
    - The free end-of-day archive at asxhistoricaldata.asx20list.com is ruled out. It removes "illiquid stocks" without stating a threshold. Its site reports a 2020 cease-and-desist from the ASX, with no confirmed licence since, and its recent files end in 2020.
-   - Remaining options, both needing the owner: Market Index daily snapshots, which are as traded and include delisted companies, through a free account; or Morningstar DatAnalysis, which has daily prices for listed and delisted ASX companies from 2000, through a library login.
+   - Market Index is ruled out. Its snapshots are for personal use only, its terms forbid robot access and scraping, and reuse needs its written consent.
+   - Remaining options, all licensed and all needing the owner: S&P Capital IQ, FactSet or Bloomberg through the university, or Morningstar DatAnalysis through a library that holds it. The licence must allow derived results to be published.
+   - Raw prices from a licensed source are not committed. The repository holds identifiers, dates, derived values and the extraction steps, so anyone with the same licence can reproduce the panel.
    - Until one is in place, no snapshot is priced.
 2. **Candidate list (checked).** The Australian Government's Resources and Energy Major Projects reports. They form an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Earlier editions (BREE, 2012 and 2013) were twice yearly.
    - The core panel takes every gold project listed at the feasibility stage in any edition from 2012 to 2021, including projects later removed from the list.
