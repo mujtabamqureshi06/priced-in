@@ -1,7 +1,7 @@
 # Phase 4 panel protocol
 
 - Status: frozen (2026-11-17). The candidate list, both panels and this protocol were fixed before any outcome was labelled; the freezing commit is recorded in section 9.
-- Decision records: ADR 0051, amended by ADRs 0052, 0053 and 0054.
+- Decision records: ADR 0051, amended by ADRs 0052, 0053, 0054 and 0055 (analysis amendments of 2026-11-17, made before any implied odds or prices were computed).
 
 ## 1. Question
 
@@ -142,6 +142,10 @@ A comparison of implied odds against P/NAV needs a difference in AUC, which thes
    - At least 20% of construction-decision dates are verified against company announcements.
 
 3. **Government major-projects lists (checked).** The Australian Government's Resources and Energy Major Projects reports: an annual census of resources and energy projects worth over A$50 million, published with a project-level data file under a Creative Commons licence. Data files exist for the 2017 to 2021 editions (`data/phase4/remp_gold.csv`); an April 2015 list is archived on data.gov.au; none was found for 2012 to 2014. They serve as the recall audit and the second source in item 2, not as the frame.
+
+## 8a. Amendments after the freeze
+
+On 2026-11-17, after outcomes were labelled and before any implied odds, prices or test statistics were computed, ADR 0055 fixed: the dating of construction decisions and takeovers; the exclusion of snapshots while a takeover offer is outstanding; the scope of the second coding; takeovers as non-events in the primary test, with checks; single-predictor comparison as the primary test with project-level bootstrap intervals; and implied odds at a 0% spread, used as a ranking, as the primary predictor, with 5%, 10% and break-even spreads as checks.
 
 ## 9. Freeze
 
