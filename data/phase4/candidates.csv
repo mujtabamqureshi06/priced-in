@@ -1,0 +1,448 @@
+company,ticker,exchange,source,stage,decision,reason,project,primary_panel,primary_owner,primary_entry_study,primary_entry_date,primary_source,primary_reason,check_panel,check_entry_study,check_entry_date,check_basis,check_source
+African Gold Limited,ASX:A1G,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Alchemy Resources Limited,ASX:ALY,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Alkane Resources Ltd,ASX:ALK,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Alliance Resources Limited,ASX:AGS,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Weednanna (Wilcherry),,,,,,,,,,,
+Alt Resources Limited,ASX:ARS,ASX,Capital IQ Pro screen,verified from study documents,IN,,Mt Ida and Bottle Creek,IN,,PFS,2020-07-10,https://minedocs.com/21/Mt-Ida-and-Bottle-Creek-PFS-07102020.pdf,,IN,PFS,2020-07-10,after-tax,https://minedocs.com/21/Mt-Ida-and-Bottle-Creek-PFS-07102020.pdf
+Amani Gold Limited,ASX:ANL,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,,,,,,,,,,,,
+Aphrodite Gold Pty Ltd,ASX:AQQ,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Aphrodite,,,,,,,,,,,
+Aruma Resources Limited,ASX:AAJ,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Asara Resources Limited,ASX:AS1,ASX,Capital IQ Pro screen,first review,OUT,scoping commenced 2017; no completed study found,,,,,,,,,,,,
+Astral Resources NL,ASX:AAR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Auric Mining Limited,ASX:AWJ,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Aurum Resources Limited,ASX:AUE,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Ausgold Limited,ASX:AUC,ASX,Capital IQ Pro screen,verified from study documents,IN,,Katanning,OUT,,,,,no in-window study with after-tax NPV and IRR,IN,Scoping,2019-11-01,pre-tax,https://financialfilings.com/filings/ausgold-limited/capitalfinancing-update/2019/38369077/
+Australasian Metals Limited,ASX:A8G,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Australian Gold and Copper Limited,ASX:AGC,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Azumah Resources Limited,ASX:AZM,ASX,Capital IQ Pro screen,verified from study documents,IN,,Wa Gold Project,IN,,FS,2012-08-27,https://newswire.ca/news-releases/azumah-resources-limited---feasibility-study-and-maiden-reserve-provide-solid-foundation-for-development-of-wa-gold-project-510621471.html,,IN,FS,2012-08-27,after-tax,https://newswire.ca/news-releases/azumah-resources-limited---feasibility-study-and-maiden-reserve-provide-solid-foundation-for-development-of-wa-gold-project-510621471.html
+Bardoc Gold Pty Ltd,ASX:BDC,ASX,Capital IQ Pro screen,first review,OUT,combined Bardoc project: Aphrodite and Kalgoorlie North already enter under Aphrodite Gold and Excelsior Gold and are followed under Bardoc,,,,,,,,,,,,
+Bassari Resources Limited,ASX:BSR,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Makabingui,,,,,,,,,,,
+Beacon Minerals Limited,ASX:BCN,ASX,Capital IQ Pro screen,verified from study documents,OUT,construction started before entry study (interp 10),Jaurdi,,,,,,,,,,,
+Bellevue Gold Limited,ASX:BGL,ASX,Capital IQ Pro screen,verified from study documents,IN,,Bellevue,IN,,FS,2021-02-18,https://wcsecure.weblink.com.au/pdf/BGL/02416882.pdf,,IN,FS,2021-02-18,after-tax,https://wcsecure.weblink.com.au/pdf/BGL/02416882.pdf
+Besra Gold Inc.,ASX:BEZ,ASX,Capital IQ Pro screen,first review,OUT,producer (Vietnam mines),,,,,,,,,,,,
+Big River Gold Limited,ASX:BRV,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Borborema,,,,,,,,,,,
+Black Cat Syndicate Limited,ASX:BC8,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,Kal East,,,,,,,,,,,
+Brightstar Resources Limited,ASX:BTR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Broken Hill Gold Ltd.,ASX:BH6,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Bullabulling Gold Pty Ltd,ASX:BAB,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Bullabulling,,,,,,,,,,,
+Calidus Resources Limited,ASX:CAI,ASX,government major-projects list,verified from study documents,IN,,Warrawoona,IN,,PFS,2019-07-17,https://www.investi.com.au/api/announcements/cai/e8eb8026-685.pdf,,IN,PFS,2019-07-17,after-tax,https://www.investi.com.au/api/announcements/cai/e8eb8026-685.pdf
+Capricorn Metals Ltd,ASX:CMM,ASX,Capital IQ Pro screen,verified from study documents,IN,,Karlawinda (Bibra),OUT,,,,,no in-window study with after-tax NPV and IRR (Jun 2018 optimisation study gives after-tax NPV without IRR),IN,FS,2017-10-23,pre-tax,https://financialfilings.com/filings/capricorn-metals-ltd/capitalfinancing-update/2017/39299538/
+Cardinal Resources Limited,ASX:CDV,ASX,Capital IQ Pro screen,verified from study documents,IN,,Namdini,IN,,Scoping (PEA),2018-02-05,https://www.rohstoff-welt.de/news/289770--Namdini-Gold-Project-Preliminary-Economic-Assessment.html,,IN,Scoping (PEA),2018-02-05,after-tax,https://www.rohstoff-welt.de/news/289770--Namdini-Gold-Project-Preliminary-Economic-Assessment.html
+Catalyst Metals Limited,ASX:CYL,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Catalyst Pty Ltd,ASX:VAN,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study: DFS update states no gold price and none derivable from the release (DR-037),Plutonic Dome / Marymia (K2),,,,,,,,,,,
+Cavalier Resources Ltd,ASX:CVR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Citigold Corporation Limited,ASX:CTO,ASX,Capital IQ Pro screen,first review,OUT,Charters Towers produced and was studied before 2012,,,,,,,,,,,,
+Cosmo Gold Limited,ASX:CSM,ASX,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Cygnus Metals Limited,ASX:CY5,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+DGR Global Limited,ASX:DGR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Dateline Resources Limited,ASX:DTR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+De Grey Mining Limited,ASX:DEG,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Pilbara Gold Project (Turner River and Indee),,,,,,,,,,,
+E79 Gold Mines Limited,ASX:E79,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+EMC Gold Corporation,ASX:EM3,ASX,Capital IQ Pro screen,verified from study documents,IN,,Salave,IN,,PEA,2019-02-11,https://www.rohstoff-welt.de/news/318915--Black-Dragon-Gold-Corp.~-Positive-Preliminary-Economic-Assessment-for-Salave-Underground.html,,IN,PEA,2019-02-11,after-tax,https://www.rohstoff-welt.de/news/318915--Black-Dragon-Gold-Corp.~-Positive-Preliminary-Economic-Assessment-for-Salave-Underground.html
+Egan Street Resources Limited,ASX:EGA,ASX,Capital IQ Pro screen,verified from study documents,IN,,Rothsay,OUT,,,,,after-tax study not established: Jul 2018 DFS and Feb 2019 update not readable (company delisted),IN,Scoping,2016-12-13,pre-tax,https://announcements.asx.com.au/asxpdf/20161213/pdf/43dnx6cs60jsjx.pdf
+Emerald Resources NL,ASX:EMR,ASX,Capital IQ Pro screen,verified from study documents,OUT,"duplicate project (earlier owner study opened entry, interp 4)",Okvau,,,,,,,,,,,
+Emmerson Resources Limited,ASX:ERM,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Emperor Mines Pty Limited,ASX:EMP,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Evolution Mining Limited,ASX:EVN,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Excelsior Gold Pty Ltd,ASX:EXG,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Kalgoorlie North,,,,,,,,,,,
+Explaurum Limited,ASX:EXU,ASX,government major-projects list,verified from study documents,IN,,Tampia,OUT,,,,,after-tax study not established: 30 May 2018 FS announcement not readable; after-tax figures first seen in a Sep 2018 company document,IN,Scoping,2017-11-03,pre-tax,https://web.archive.org/web/20180313192105id_/http://www.explaurum.com.au/irm/PDF/1878_0/EXCELLENTECONOMICSFORTAMPIAGOLDPROJECTSCOPINGSTUDY
+Focus Minerals Limited,ASX:FML,ASX,Capital IQ Pro screen,first review,OUT,former producer with several projects,,,,,,,,,,,,
+G11 Resources Limited,ASX:G11,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+GBM Resources Limited,ASX:GBM,ASX,Capital IQ Pro screen,first review,OUT,several projects; study only commissioned,,,,,,,,,,,,
+GWR Group Limited,ASX:GWR,ASX,Capital IQ Pro screen,first review,OUT,not gold-led (iron ore),,,,,,,,,,,,
+Gateway Mining Limited,ASX:GML,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Genesis Minerals Limited,ASX:GMD,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,Ulysses,,,,,,,,,,,
+Genesis Minerals Pty Ltd,ASX:DCN,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Mt Morgans,,,,,,,,,,,
+Geopacific Resources Limited,ASX:GPR,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); earlier owner study may have opened entry (interp 4),Woodlark,,,,,,,,,,,
+Global Uranium and Enrichment Limited,ASX:GUE,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Gold Mountain Limited,ASX:GMN,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Gold One International Ltd.,ASX:GDO,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Gold Road Resources Limited,ASX:GOR,ASX,Capital IQ Pro screen,verified from study documents,IN,,"Yamarna (Central Bore UG, Attila South and Alaric pits)",IN,,Scoping,2012-09-26,https://web.archive.org/web/20150310171913id_/http://goldroad.com.au/reports/120926YamarnaProjectScopingStudyFinal.pdf,,IN,Scoping,2012-09-26,after-tax,https://web.archive.org/web/20150310171913id_/http://goldroad.com.au/reports/120926YamarnaProjectScopingStudyFinal.pdf
+GoldArc Resources Limited,ASX:GA8,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,,,,,,,,,,,,
+Golden Cross Resources Limited,ASX:GCR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Great Boulder Resources Limited,ASX:GBR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Greatland Resources Limited,ASX:GGP,ASX,Capital IQ Pro screen,first review,OUT,minority interest in Havieron,,,,,,,,,,,,
+Gullewa Limited,ASX:GUL,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Hamelin Gold Limited,ASX:HMG,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Hammer Metals Limited,ASX:HMX,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Hawthorn Resources Limited,ASX:HAW,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Horizon Gold Limited,ASX:HRN,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,Gum Creek,,,,,,,,,,,
+Iondrive Limited,ASX:ION,ASX,Capital IQ Pro screen,first review,OUT,joint ventures; several projects,,,,,,,,,,,,
+Kin Mining NL,ASX:KIN,ASX,government major-projects list,verified from study documents,OUT,no qualifying study: May 2016 scoping states no discount rate (DR-037),"Leonora Gold Project (Mertondale, Cardinia, Raeside)",,,,,,,,,,,
+Kingsgate Consolidated Limited,ASX:KCN,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Kingsrose Mining Limited,ASX:KRM,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Kingwest Resources Pty Ltd,ASX:KWR,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Menzies; Goongarrie Lady,,,,,,,,,,,
+Krakatoa Resources Limited,ASX:KTA,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Latitude 66 Limited,ASX:LAT,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Lion Rock Minerals Ltd,ASX:LRM,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Manhattan Gold Corporation Limited,ASX:MHC,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Maritana Minerals Limited,ASX:MRT,ASX,Capital IQ Pro screen,verified from study documents,OUT,owner producing (Teal mine); study had no NPV or IRR,Goongarrie Lady,,,,,,,,,,,
+Matsa Resources Limited,ASX:MAT,ASX,Capital IQ Pro screen,first review,OUT,former producer; several projects,,,,,,,,,,,,
+Medallion Metals Limited,ASX:MM8,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Meeka Metals Limited,ASX:MEK,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,"not established at the freeze: ownership not confirmed from a quarterly tenement schedule (interpretation 14); its only in-window study (Dec 2021 scoping) is pre-tax, so it could enter only the check panel",Murchison,,,,,,,,,,,
+Metals Australia Ltd,ASX:MLS,ASX,Capital IQ Pro screen,first review,OUT,not a gold study,,,,,,,,,,,,
+Middle Island Resources Limited,ASX:MDI,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,not established at the freeze: earlier Sandstone studies (2016 to 2020) not read; the Apr 2021 feasibility study reports no NPV or IRR,Sandstone,,,,,,,,,,,
+Millennium Minerals Limited,ASX:MOY,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Mont Royal Resources Limited,ASX:MRZ,ASX,Capital IQ Pro screen,first review,OUT,no completed study in window,,,,,,,,,,,,
+Mt Malcolm Mines NL,ASX:M2M,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Nelson Resources Limited,ASX:NES,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+New Murchison Gold Limited,ASX:NMG,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Crown Prince (Garden Gully),,,,,,,,,,,
+NewPeak Metals Limited,ASX:NPM,ASX,Capital IQ Pro screen,first review,OUT,tungsten,,,,,,,,,,,,
+Newcrest Mining Limited,ASX:NCM,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Nexus Minerals Limited,ASX:NXM,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,Crusader-Templar (Pinnacles),,,,,,,,,,,
+Northern Star Pty Ltd,ASX:EAR,ASX,Capital IQ Pro screen,verified from study documents,IN,,Julius (Yandal),IN,,BFS (Stage 1),2017-01-18,https://announcements.asx.com.au/asxpdf/20170118/pdf/43fcpjh2vl4wz0.pdf,,IN,BFS (Stage 1),2017-01-18,after-tax,https://announcements.asx.com.au/asxpdf/20170118/pdf/43fcpjh2vl4wz0.pdf
+Northern Star Resources Limited,ASX:NST,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Nusantara Resources Limited,ASX:NUS,ASX,Capital IQ Pro screen,verified from study documents,IN,,Awak Mas,IN,,FS,2018-10-04,https://static1.squarespace.com/static/590ff67b440243109d2aed50/t/5ef94beebcd92c70db733989/1593396244093/2078800.pdf,,IN,FS,2018-10-04,after-tax,https://static1.squarespace.com/static/590ff67b440243109d2aed50/t/5ef94beebcd92c70db733989/1593396244093/2078800.pdf
+Ora Banda Mining Limited,ASX:OBM,ASX,Capital IQ Pro screen,verified from study documents,IN,,Davyhurst,IN,,FS,2020-06-30,https://financialfilings.com/filings/ora-banda-mining-ltd/capitalfinancing-update/2020/42384017/,,IN,FS,2020-06-30,after-tax,https://financialfilings.com/filings/ora-banda-mining-ltd/capitalfinancing-update/2020/42384017/
+OzAurum Resources Limited,ASX:OZM,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Ozz Resources Limited,ASX:OZZ,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Pantoro Gold Limited,ASX:PNR,ASX,Capital IQ Pro screen,verified from study documents,OUT,owner held less than 50%,Nicolsons (Halls Creek),,,,,,,,,,,
+Papillon Resources Pty Ltd.,ASX:PIR,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Fekola,,,,,,,,,,,
+Perpetual Resources Limited,ASX:PEC,ASX,Capital IQ Pro screen,first review,OUT,mineral sands,,,,,,,,,,,,
+Perseus Mining Limited,ASX:PRU,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Primary Gold Limited,ASX:PGO,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Toms Gully,,,,,,,,,,,
+Prodigy Gold NL,ASX:PRX,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Ramelius Resources Limited,ASX:RMS,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Reach Resources Limited,ASX:RR1,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Redcastle Resources Limited,ASX:RC1,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Regener8 Resources NL,ASX:R8R,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Regis Resources Limited,ASX:RRL,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Renaissance Minerals Limited,ASX:RNS,ASX,added by name (earlier listed owner of a project found in the screen),verified from study documents,DROPPED,"dropped: not established after final search (owner decision 2026-11-17); entry study (29 Oct 2014 scoping, reported NPV(5%) and IRR per the company 27 Jul 2015 PFS release) not readable",Okvau,,,,,,,,,,,
+Resolute Mining Limited,ASX:RSG,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Resources & Energy Group Limited,ASX:REZ,ASX,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,,,,,,,,,,,,
+Santana Minerals Limited,ASX:SMI,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Savannah Goldfields Limited,ASX:SVG,ASX,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Sihayo Gold Limited,ASX:SIH,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Sihayo Pungkut,,,,,,,,,,,
+Silver Lake Pty Ltd,ASX:MYG,ASX,Capital IQ Pro screen,first review,OUT,iron ore,,,,,,,,,,,,
+Silver Lake Resources Limited,ASX:SLR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Siren Gold Limited,ASX:SNG,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Solstice Minerals Limited,ASX:SLS,ASX,Capital IQ Pro screen,first review,OUT,no completed study in window,,,,,,,,,,,,
+Spartan Resources Limited,ASX:SPR,ASX,Capital IQ Pro screen,first review,OUT,two projects at study stage (Glenburgh and Dalgaranga),,,,,,,,,,,,
+St Barbara Limited,ASX:SBM,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Sumatra Copper & Gold Plc,ASX:SUM,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Tembang,,,,,,,,,,,
+Terra Metals Limited,ASX:TM1,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Terrain Minerals Limited,ASX:TMX,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Tesoro Gold Ltd,ASX:TSO,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Theta Gold Mines Limited,ASX:TGM,ASX,Capital IQ Pro screen,first review,OUT,several South African projects,,,,,,,,,,,,
+Titan Minerals Limited,ASX:TTM,ASX,Capital IQ Pro screen,first review,OUT,small producer; several projects,,,,,,,,,,,,
+Tolu Minerals Limited,ASX:TOK,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Toubani Resources Limited,ASX:TRE,ASX,Capital IQ Pro screen,verified from study documents,IN,,Kobada,IN,African Gold Group Inc. (TSXV:AGG),Updated PEA (filing release),2014-12-23,https://www.rohstoff-welt.de/news/189049--African-Gold-Group-Inc.-Announces-Filing-of-Preliminary-Economic-Assessment-and-Year-End-Progress-Report.html,,IN,Updated PEA,2014-11-25,pre-tax,https://www.globenewswire.com/news-release/2014/11/25/1396957/0/en/African-Gold-Group-Inc-Updated-Preliminary-Economic-Assessment-Establishes-Low-Capex-and-High-Returns-for-the-Kobada-Gold-Project.html
+Troy Resources Limited,ASX:TRY,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Tulla Resources Plc,ASX:TUL,ASX,Capital IQ Pro screen,verified from study documents,OUT,owner not listed at study date (interp 2),Central Norseman,,,,,,,,,,,
+Union Star Metals Ltd,ASX:USM,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Vault Minerals Limited,ASX:VAU,ASX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Vertex Minerals Limited,ASX:VTX,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+WIA Gold Limited,ASX:WIA,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+WPG Resources Limited,ASX:WPG,ASX,Capital IQ Pro screen,first review,OUT,two projects (Tarcoola and Tunkillia),,,,,,,,,,,,
+Warriedar Resources Limited,ASX:WA8,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+West African Resources Limited,ASX:WAF,ASX,Capital IQ Pro screen,verified from study documents,IN,,Mankarga 5 (Tanlouka permit),IN,West African Resources Limited,PFS,2015-02-23,https://announcements.asx.com.au/asxpdf/20150223/pdf/42ws8mc861jhwv.pdf,,IN,Scoping,2014-07-29,pre-tax,https://abnnewswire.net/press/en/77709/West-African-Resources-Limited-(ASX-CVE-WAF)-Delivers-Pre-Tax-57-IRR-Stage-1-Gold-Project.html
+West Wits Mining Limited,ASX:WWI,ASX,Capital IQ Pro screen,verified from study documents,IN,,Witwatersrand Basin Project (Qala Shallows Stage 1),IN,,FS,2021-09-02,https://financialfilings.com/filings/west-wits-mining-limited/capitalfinancing-update/2021/45026728/,,IN,FS,2021-09-02,after-tax,https://financialfilings.com/filings/west-wits-mining-limited/capitalfinancing-update/2021/45026728/
+Westar Resources Limited,ASX:WSR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Western Gold Resources Limited,ASX:WGR,ASX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Westgold Resources Limited,ASX:WGX,ASX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Wiluna Mining Corporation Limited,ASX:WMC,ASX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); announcement not readable,Matilda / Wiluna,,,,,,,,,,,
+Yandal Resources Limited,ASX:YRL,ASX,Capital IQ Pro screen,first review,OUT,no completed economic study found,,,,,,,,,,,,
+Alacer Gold Corp.,TSX:ASR,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Alamos Gold Inc.,TSX:AGI,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+"Alamos Gold, Inc.",TSX:AGI,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Alio Gold Inc.,TSX:ALO,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Argonaut Gold Inc.,TSX:AR,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Aris Mining Corporation,TSX:ARIS,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Aris Mining Holdings Corp.,TSX:ARIS,TSX,Capital IQ Pro screen,first review,OUT,producer; expansion study on operating mine,,,,,,,,,,,,
+AuRico Metals Inc.,TSX:AMI,TSX,Capital IQ Pro screen,first review,OUT,gold-copper; by-product above 20%; royalty holder,,,,,,,,,,,,
+Avesoro Resources Inc.,TSX:ASO,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Avion Gold Corporation,TSX:AVR,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Avnel Gold Mining Limited,TSX:AVK,TSX,Capital IQ Pro screen,verified from study documents,OUT,owner producing,Kalana,,,,,,,,,,,
+B2Gold Corp.,TSX:BTO,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Banro Corporation Ltd.,TSX:BAA,TSX,Capital IQ Pro screen,first review,OUT,producer from 2012 (Twangiza); several projects,,,,,,,,,,,,
+Barrick Mining Corporation,TSX:ABX,TSX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Battle North Gold Corporation,TSX:BNAU,TSX,Capital IQ Pro screen,verified from study documents,OUT,construction started before entry study (interp 10),Phoenix,,,,,,,,,,,
+Belo Sun Mining Corp,TSX:BSX,TSX,Capital IQ Pro screen,verified from study documents,IN,,Volta Grande,IN,,PFS,2013-05-06,https://www.belosun.com/_resources/news/nr_20130506.pdf,,IN,PFS,2013-05-06,after-tax,https://www.belosun.com/_resources/news/nr_20130506.pdf
+Brio Gold Inc.,TSX:BRIO,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Calibre Mining Corp.,TSX:CXB,TSX,Capital IQ Pro screen,first review,OUT,producer; no development-stage study in window,,,,,,,,,,,,
+Canagold Resources Ltd.,TSX:CCM,TSX,Capital IQ Pro screen,verified from study documents,IN,,New Polaris,IN,,PEA,2019-03-04,https://capedge.com/filing/868822/0001654954-19-003474/CRCUF-6K/file/3,,IN,PEA,2019-03-04,after-tax,https://capedge.com/filing/868822/0001654954-19-003474/CRCUF-6K/file/3
+Carlisle Goldfields Limited,TSX:CGJ,TSX,Capital IQ Pro screen,verified from study documents,IN,,Lynn Lake Gold Camp,IN,,PEA,2013-12-02,https://www.globenewswire.com/news-release/2013/12/02/593775/26482/en/Carlisle-Announces-Preliminary-Economic-Assessment-for-the-Lynn-Lake-Gold-Camp.html,,IN,PEA,2013-12-02,after-tax,https://www.globenewswire.com/news-release/2013/12/02/593775/26482/en/Carlisle-Announces-Preliminary-Economic-Assessment-for-the-Lynn-Lake-Gold-Camp.html
+Centerra Gold Inc.,TSX:CG,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+China Gold International Resources Corp. Ltd.,TSX:CGG,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Continental Gold Inc.,TSX:CNL,TSX,Capital IQ Pro screen,verified from study documents,IN,,Buritica,IN,,PEA,2014-11-17,https://rss.globenewswire.com/news-release/2014/11/17/1393668/0/en/Continental-Gold-Announces-a-Positive-Preliminary-Economic-Assessment-for-the-Buritica-Project.html,,IN,PEA,2014-11-17,after-tax,https://rss.globenewswire.com/news-release/2014/11/17/1393668/0/en/Continental-Gold-Announces-a-Positive-Preliminary-Economic-Assessment-for-the-Buritica-Project.html
+Corvus Gold Inc.,TSX:KOR,TSX,Capital IQ Pro screen,verified from study documents,IN,,North Bullfrog,IN,Corvus Gold Inc.,PEA update (with tax and royalty),2013-10-28,,,IN,PEA,2012-02-28,pre-tax,https://www.rohstoff-welt.de/news/120375--Corvus-Gold~-Initial-North-Bullfrog-PEA-Indicates-Recovery-of-747000-ounces-of-Gold-Producing-a-28.8Prozent-IRR-with-Total-Initial-Capex-of-68.8M-and-a-2.6-Year-Payback.html
+DPM Metals Inc.,TSX:DPM,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Dalradian Resources Inc.,TSX:DNA,TSX,Capital IQ Pro screen,verified from study documents,IN,,Curraghinalt,IN,,PEA,2012-07-25,https://www.globenewswire.com/news-release/2012/07/25/1477888/0/en/Dalradian-Resources-Reports-Positive-Preliminary-Economic-Assessment-for-the-Curraghinalt-Gold-Project-in-Northern-Ireland.html,,IN,PEA,2012-07-25,after-tax,https://www.globenewswire.com/news-release/2012/07/25/1477888/0/en/Dalradian-Resources-Reports-Positive-Preliminary-Economic-Assessment-for-the-Curraghinalt-Gold-Project-in-Northern-Ireland.html
+Detour Gold Corporation,TSX:DGC,TSX,Capital IQ Pro screen,first review,OUT,producer; first study before 2012,,,,,,,,,,,,
+Eldorado Gold Corporation,TSX:ELD,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Endeavour Canada Holdings Corporation,TSX:TGZ,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Endeavour Mining plc,TSX:EDV,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Equinox Gold Corp.,TSX:EQX,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Exeter Resource Corporation,TSX:XRC,TSX,Capital IQ Pro screen,first review,OUT,Caspiche gold-copper with copper above 20%; first PEA before 2012,,,,,,,,,,,,
+Extorre Gold Mines Limited,TSX:XG,TSX,Capital IQ Pro screen,first review,OUT,gold-silver; silver above 20%,,,,,,,,,,,,
+First Mining Gold Corp.,TSX:FF,TSX,Capital IQ Pro screen,first review,OUT,several projects,,,,,,,,,,,,
+Fortuna Mining Corp.,TSX:FVI,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Fury Gold Mines Limited,TSX:FURY,TSX,Capital IQ Pro screen,first review,OUT,several projects,,,,,,,,,,,,
+Galiano Gold Inc.,TSX:GAU,TSX,Capital IQ Pro screen,first review,OUT,Asanko held two projects at study stage (Esaase and Obotan); Esaase studies before 2012,,,,,,,,,,,,
+Gold Springs Resource Corp.,TSX:GRC,TSX,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); by-product share unconfirmed,Gold Springs,,,,,,,,,,,
+Gold Standard Ventures Corp,TSX:GSV,TSX,Capital IQ Pro screen,verified from study documents,IN,,South Railroad (Railroad-Pinion),IN,,PFS,2019-09-10,https://www.rohstoff-welt.de/news/337063--Gold-Standard-Files-South-Railroad-Pre-Feasibility-Study.html,,IN,PFS,2019-09-10,after-tax,https://www.rohstoff-welt.de/news/337063--Gold-Standard-Files-South-Railroad-Pre-Feasibility-Study.html
+GoldMining Inc.,TSX:GOLD,TSX,Capital IQ Pro screen,first review,OUT,multi-project portfolio,,,,,,,,,,,,
+Goldcorp Incorporated,TSX:G,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Golden Star Resources Ltd.,TSX:GSS,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Guyana Goldfields Inc.,TSX:GUY,TSX,Capital IQ Pro screen,verified from study documents,IN,,Aurora,IN,,FS,2012-02-24,https://www.newswire.ca/news-releases/guyana-goldfields-completes-positive-feasibility-study-for-its-aurora-gold-project-in-guyana-509704311.html,,IN,FS,2012-02-24,after-tax,https://www.newswire.ca/news-releases/guyana-goldfields-completes-positive-feasibility-study-for-its-aurora-gold-project-in-guyana-509704311.html
+Hemlo Mining Corp.,TSX:HMMC,TSX,Capital IQ Pro screen,first review,OUT,not a gold company in the window (oil and gas reserves),,,,,,,,,,,,
+High River Gold Mines Ltd.,TSX:HRG,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+IAMGOLD Corporation,TSX:IMG,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+International Minerals Corporation,TSX:IMZ,TSX,Capital IQ Pro screen,first review,OUT,producer; gold-silver; several projects,,,,,,,,,,,,
+International Tower Hill Mines Ltd.,TSX:ITH,TSX,Capital IQ Pro screen,verified from study documents,IN,,Livengood,IN,,FS,2013-07-23,https://capedge.com/filing/1134115/0001062993-13-003552/THM-8K/file/2,,IN,FS,2013-07-23,after-tax,https://capedge.com/filing/1134115/0001062993-13-003552/THM-8K/file/2
+Jaguar Mining Inc.,TSX:JAG,TSX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+K92 Mining Inc.,TSX:KNT,TSX,Capital IQ Pro screen,first review,OUT,trial mining under way at Kainantu when the 2016 PEA was published,,,,,,,,,,,,
+Karora Resources Inc.,TSX:KRR,TSX,Capital IQ Pro screen,first review,OUT,not gold-led (nickel) at study date,,,,,,,,,,,,
+Kinross Gold Corporation,TSX:K,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Kirkland Lake Gold Ltd.,TSX:KL,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Klondex Mines Unlimited Liability Company,TSX:KLDX,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+La Mancha Resources Inc.,TSX:LMA,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Lake Shore Gold Corporation,TSX:LSG,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Leagold Mining Corporation,TSX:LMC,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Lexam VG Gold Inc.,TSX:LEX,TSX,Capital IQ Pro screen,verified from study documents,IN,,"Timmins open pit projects (Buffalo Ankerite, Fuller, Davidson Tisdale, Paymaster)",IN,,PEA,2014-04-23,https://marketscreener.com/quote/stock/LEXAM-VG-GOLD-INC-1410636/news/VG-Gold-Lexam-Announces-Positive-Preliminary-Economic-Assessment-Results-for-the-Open-Pit-Projects-18310740,,IN,PEA,2014-04-23,after-tax,https://marketscreener.com/quote/stock/LEXAM-VG-GOLD-INC-1410636/news/VG-Gold-Lexam-Announces-Positive-Preliminary-Economic-Assessment-Results-for-the-Open-Pit-Projects-18310740
+Liberty Gold Corp.,TSX:LGD,TSX,Capital IQ Pro screen,verified from study documents,IN,,Goldstrike,IN,,PEA,2018-07-10,https://app.researchpool.com/provider/globenewswire/brfpra-liberty-gold-announces-positive-preliminary-economic-assessment-for-th,,IN,PEA,2018-07-10,after-tax,https://app.researchpool.com/provider/globenewswire/brfpra-liberty-gold-announces-positive-preliminary-economic-assessment-for-th
+Luna Gold Corporation,TSX:LGC,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Lundin Gold Inc.,TSX:LUG,TSX,Capital IQ Pro screen,verified from study documents,IN,,Fruta del Norte,IN,,FS,2016-06-06,https://www.globenewswire.com/news-release/2016/06/06/1299998/0/en/Lundin-Gold-Announces-a-Positive-Feasibility-Study-for-the-Fruta-Del-Norte-Project-and-Conference-Call.html,,IN,FS,2016-06-06,after-tax,https://www.globenewswire.com/news-release/2016/06/06/1299998/0/en/Lundin-Gold-Announces-a-Positive-Feasibility-Study-for-the-Fruta-Del-Norte-Project-and-Conference-Call.html
+Lydian International Limited,TSX:LYD,TSX,Capital IQ Pro screen,verified from study documents,IN,,Amulsar,IN,Lydian International Limited,Updated FS,2014-09-11,,,IN,FS,2012-09-05,pre-tax,https://www.globenewswire.com/news-release/2012/09/05/1389465/0/en/Lydian-International-Announces-Robust-Feasibility-Study-for-Its-Low-Cost-Amulsar-Gold-Project-in-Armenia.html
+Mandalay Resources Corporation,TSX:MND,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Marathon Gold Corporation,TSX:MOZ,TSX,Capital IQ Pro screen,verified from study documents,IN,,Valentine Lake Gold Camp,IN,,PEA,2018-05-17,https://www.rohstoff-welt.de/news/300234--Marathon-Gold-Files-Positive-NI-43-101-Technical-Report-PEAfor-the-Valentine-Lake-Gold-Project-Newfoundland.html,,IN,PEA,2018-05-17,after-tax,https://www.rohstoff-welt.de/news/300234--Marathon-Gold-Files-Positive-NI-43-101-Technical-Report-PEAfor-the-Valentine-Lake-Gold-Project-Newfoundland.html
+Mining Americas Inc.,TSX:MAI,TSX,Capital IQ Pro screen,first review,OUT,several projects (Minera Alamos),,,,,,,,,,,,
+Monarch Gold Corporation,TSX:MQR,TSX,Capital IQ Pro screen,first review,OUT,producer; several projects,,,,,,,,,,,,
+Montage Gold Corp.,TSX:MAU,TSX,Capital IQ Pro screen,verified from study documents,IN,,Kone,IN,,PEA,2021-05-25,https://newswire.ca/news-releases/montage-announces-kone-gold-project-pea-with-after-tax-npv-of-652m-and-31-irr-828544322.html,,IN,PEA,2021-05-25,after-tax,https://newswire.ca/news-releases/montage-announces-kone-gold-project-pea-with-after-tax-npv-of-652m-and-31-irr-828544322.html
+New Dawn Mining Corp.,TSX:ND,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+New Found Gold Corp.,TSX:NFGC,TSX,Capital IQ Pro screen,first review,OUT,no completed study in window,,,,,,,,,,,,
+New Gold Inc.,TSX:NGD,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+NewCastle Gold Ltd.,TSX:NCA,TSX,Capital IQ Pro screen,verified from study documents,IN,,Castle Mountain,IN,,PEA,2014-04-24,https://www.globenewswire.com/press-release/castle-mountain-minings-preliminary-economic-assessment-delivers-production-plans-176000-tsx-venture-cmm-1902696.htm,,IN,PEA,2014-04-24,after-tax,https://www.globenewswire.com/press-release/castle-mountain-minings-preliminary-economic-assessment-delivers-production-plans-176000-tsx-venture-cmm-1902696.htm
+Newmarket Gold Inc.,TSX:NMI,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+NovaGold Resources Inc.,TSX:NG,TSX,Capital IQ Pro screen,first review,OUT,joint ventures at 50% or less; first studies before 2012,,,,,,,,,,,,
+OceanaGold Corporation,TSX:OGC,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Orezone Gold Corporation,TSX:ORE,TSX,Capital IQ Pro screen,verified from study documents,IN,,Bombore,IN,,PEA,2014-01-22,https://orezone.com/en/news/press-releases/orezone-announces-positive-preliminary-economic-assessment,,IN,PEA,2014-01-22,after-tax,https://orezone.com/en/news/press-releases/orezone-announces-positive-preliminary-economic-assessment
+Orezone Quebec Inc.,TSX:ARZ,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Orla Mining Ltd.,TSX:OLA,TSX,Capital IQ Pro screen,first review,OUT,two projects at study stage (Camino Rojo and Cerro Quema),,,,,,,,,,,,
+Oromin Explorations Limited,TSX:OLE,TSX,Capital IQ Pro screen,first review,OUT,OJVG interest below 50%,,,,,,,,,,,,
+Orvana Minerals Corp.,TSX:ORV,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Osisko Mining Inc.,TSX:OSK,TSX,Capital IQ Pro screen,first review,OUT,Windfall first studied by Eagle Hill (2015); several projects,,,,,,,,,,,,
+PMI Gold Corporation,TSX:PMV,TSX,Capital IQ Pro screen,verified from study documents,IN,,Obotan,IN,,PFS,2012-01-12,https://www.newswire.ca/news-releases/pmi-set-for-q3-2012-development-decision-on-205600ozpa-obotan-gold-project-following-outstanding-pre-feasibility-study-results-509438291.html,,IN,PFS,2012-01-12,after-tax,https://www.newswire.ca/news-releases/pmi-set-for-q3-2012-development-decision-on-205600ozpa-obotan-gold-project-following-outstanding-pre-feasibility-study-results-509438291.html
+Pan American Silver Corp.,TSX:PAAS,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Perpetua Resources Corp.,TSX:PPTA,TSX,Capital IQ Pro screen,verified from study documents,IN,,Golden Meadows (Stibnite),IN,,PEA,2012-09-04,https://www.investors.perpetuaresources.com/investors/news/2012/midas-gold-completes-positive-preliminary-economic-assessment-for-golden-meadows-project-idaho,,IN,PEA,2012-09-04,after-tax,https://www.investors.perpetuaresources.com/investors/news/2012/midas-gold-completes-positive-preliminary-economic-assessment-for-golden-meadows-project-idaho
+Premier Gold Mines Limited,TSX:PG,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Pretium Resources Inc.,TSX:PVG,TSX,Capital IQ Pro screen,verified from study documents,IN,,Brucejack,IN,,PEA,2012-02-22,https://www.globenewswire.com/news-release/2012/02/22/1356219/0/en/Pretium-Resources-Inc-Updated-PEA-for-Brucejack-High-Grade-Gold-Project.html,,IN,PEA,2012-02-22,after-tax,https://www.globenewswire.com/news-release/2012/02/22/1356219/0/en/Pretium-Resources-Inc-Updated-PEA-for-Brucejack-High-Grade-Gold-Project.html
+Primero Mining Corp.,TSX:P,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Probe Gold Inc.,TSX:PRB,TSX,Capital IQ Pro screen,verified from study documents,IN,,Val-d'Or East (Novador),IN,,PEA,2021-09-07,https://ca.marketscreener.com/quote/stock/PROBE-GOLD-INC-21269103/news/Probe-Metals-Announces-Positive-PEA-for-Val-d-Or-East-Project-Average-Annual-Production-of-207-36361007/,,IN,PEA,2021-09-07,after-tax,https://ca.marketscreener.com/quote/stock/PROBE-GOLD-INC-21269103/news/Probe-Metals-Announces-Positive-PEA-for-Val-d-Or-East-Project-Average-Annual-Production-of-207-36361007/
+RTG Mining Inc.,TSX:RTG,TSX,Capital IQ Pro screen,first review,OUT,copper-gold; by-product above 20%,,,,,,,,,,,,
+Richmont Mines Incorporated,TSX:RIC,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Rio Alto Mining Limited,TSX:RIO,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Rio Novo Gold Inc.,TSX:RN,TSX,Capital IQ Pro screen,verified from study documents,IN,,Almas,IN,,PEA,2012-04-03,https://www.benzinga.com/pressreleases/12/04/m2470449/rio-novo-gold-receives-positive-preliminary-economic-assessment-for-its,,IN,PEA,2012-04-03,after-tax,https://www.benzinga.com/pressreleases/12/04/m2470449/rio-novo-gold-receives-positive-preliminary-economic-assessment-for-its
+Rio2 Limited,TSX:RIO,TSX,Capital IQ Pro screen,first review,OUT,duplicate project (Fenix first studied by Atacama Pacific),,,,,,,,,,,,
+Rockgate Capital Corp.,TSX:RGT,TSX,Capital IQ Pro screen,first review,OUT,not gold-led,,,,,,,,,,,,
+Roxgold Inc.,TSX:ROXG,TSX,Capital IQ Pro screen,verified from study documents,IN,,Yaramoko (55 Zone),IN,,PEA,2013-09-16,https://newswire.ca/news-releases/roxgold-announces-an-after-tax-irr-of-477-in-its-preliminary-economic-assessment-on-the-yaramoko-gold-project-512942021.html,,IN,PEA,2013-09-16,after-tax,https://newswire.ca/news-releases/roxgold-announces-an-after-tax-irr-of-477-in-its-preliminary-economic-assessment-on-the-yaramoko-gold-project-512942021.html
+Rupert Resources Ltd.,TSX:RUP,TSX,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+SEMAFO Inc.,TSX:SMF,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+SGO Mining Inc.,TSX:CRJ,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+SSR Mining Inc.,TSX:SSRM,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+STLLR Gold Inc.,TSX:STLR,TSX,Capital IQ Pro screen,verified from study documents,IN,,Golden Highway,IN,Moneta Porcupine Mines Inc.,PEA (South West deposit),2020-09-09,,,IN,PEA,2012-11-01,pre-tax,https://newswire.ca/news-releases/moneta-announces-positive-preliminary-economic-assessment-on-golden-highway-project-with-244-irr-and-748m-npv-511083741.html
+Sabina Gold & Silver Corp.,TSX:SBB,TSX,Capital IQ Pro screen,verified from study documents,IN,,Back River,IN,,PEA,2012-05-29,https://www.globenewswire.com/news-release/2012/05/29/1398736/0/en/Sabina-Gold-Silver-Announces-Positive-Preliminary-Economic-Assessment-at-Back-River-Gold-Project-Nunavut.html,,IN,PEA,2012-05-29,after-tax,https://www.globenewswire.com/news-release/2012/05/29/1398736/0/en/Sabina-Gold-Silver-Announces-Positive-Preliminary-Economic-Assessment-at-Back-River-Gold-Project-Nunavut.html
+Sabre Gold Mines Corp.,TSX:SGLD,TSX,Capital IQ Pro screen,verified from study documents,IN,,Copperstone,IN,,PFS,2018-04-10,https://www.sabre.gold/kerr-mines-releases-highlights-pre-feasibility-study/,,IN,PFS,2018-04-10,after-tax,https://www.sabre.gold/kerr-mines-releases-highlights-pre-feasibility-study/
+Sandstorm Gold Ltd.,TSX:SAND,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Seabridge Gold Inc.,TSX:SEA,TSX,Capital IQ Pro screen,first review,OUT,several gold-copper projects,,,,,,,,,,,,
+Shahuindo Gold Limited,TSX:SUE,TSX,Capital IQ Pro screen,verified from study documents,IN,,Shahuindo,IN,,FS,2012-09-26,https://newswire.ca/news-releases/sulliden-announces-results-of-shahuindo-feasibility-study-510827251.html,,IN,FS,2012-09-26,after-tax,https://newswire.ca/news-releases/sulliden-announces-results-of-shahuindo-feasibility-study-510827251.html
+Signal Gold Inc.,TSX:SGNL,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Silver Lake Ontario Inc.,TSX:HRT,TSX,Capital IQ Pro screen,verified from study documents,IN,,Sugar Zone,IN,,PEA,2012-05-31,https://www.globenewswire.com/news-release/2012/05/31/1355249/0/en/Positive-Preliminary-Economic-Assessment-Report-on-Sugar-Zone-Deposit-Completed.html,,IN,PEA,2012-05-31,after-tax,https://www.globenewswire.com/news-release/2012/05/31/1355249/0/en/Positive-Preliminary-Economic-Assessment-Report-on-Sugar-Zone-Deposit-Completed.html
+Skeena Resources Limited,TSX:SKE,TSX,Capital IQ Pro screen,first review,OUT,several projects including copper-gold Spectrum,,,,,,,,,,,,
+St. Augustine Gold and Copper Limited,TSX:SAU,TSX,Capital IQ Pro screen,first review,OUT,gold-copper; by-product above 20%,,,,,,,,,,,,
+Starcore International Mines Ltd.,TSX:SAM,TSX,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+TMAC Resources Inc.,TSX:TMR,TSX,Capital IQ Pro screen,verified from study documents,OUT,owner not listed at study date,Hope Bay,,,,,,,,,,,
+TRX Gold Corporation,TSX:TRX,TSX,Capital IQ Pro screen,verified from study documents,IN,,Buckreef,IN,,PEA,2012-04-25,https://www.rohstoff-welt.de/news/124371--Tanzanian-Royalty-Positive-Buckreef-Preliminary-Economic-Assessment-Pre-Tax-NPV-US392-Million-Post-Tax-IRR-48Prozent.html,,IN,PEA,2012-04-25,after-tax,https://www.rohstoff-welt.de/news/124371--Tanzanian-Royalty-Positive-Buckreef-Preliminary-Economic-Assessment-Pre-Tax-NPV-US392-Million-Post-Tax-IRR-48Prozent.html
+Tahoe Resources Inc.,TSX:TAHO,TSX,Capital IQ Pro screen,first review,OUT,silver project,,,,,,,,,,,,
+Torex Resources Inc.,TSX:TXR,TSX,Capital IQ Pro screen,verified from study documents,IN,,Morelos,IN,,FS,2012-09-04,https://www.globenewswire.com/news-release/2012/09/04/1477960/0/en/Torex-Completes-Bankable-Feasibility-Study-for-Its-Morelos-Project.html,,IN,FS,2012-09-04,after-tax,https://www.globenewswire.com/news-release/2012/09/04/1477960/0/en/Torex-Completes-Bankable-Feasibility-Study-for-Its-Morelos-Project.html
+Troilus Mining Corp.,TSX:TLG,TSX,Capital IQ Pro screen,verified from study documents,IN,,Troilus,IN,,PEA,2020-08-31,https://troilusmining.com/news-and-media/news-releases/troilus-files-positive-preliminary-economic-assessment-technical-report-for-the-troilus-gold-project,,IN,PEA,2020-08-31,after-tax,https://troilusmining.com/news-and-media/news-releases/troilus-files-positive-preliminary-economic-assessment-technical-report-for-the-troilus-gold-project
+Volta Resources Inc.,TSX:VTR,TSX,Capital IQ Pro screen,verified from study documents,IN,,Kiaka,OUT,,,,,no in-window study with after-tax NPV and IRR,IN,PFS,2012-05-03,pre-tax,https://www.newswire.ca/news-releases/volta-resources-announces-robust-pre-feasibility-study-and-mandating-of-project-finance-advisor-for-its-kiaka-gold-project-in-burkina-faso-510165311.html
+Vox Royalty Corp.,TSX:VOXR,TSX,Capital IQ Pro screen,first review,OUT,royalty company,,,,,,,,,,,,
+Wesdome Gold Mines Ltd.,TSX:WDO,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Yamana Gold Inc.,TSX:AUY,TSX,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+1911 Gold Corporation,TSXV:AUMB,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+ATAC Resources Ltd.,TSXV:ATC,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Rackla Gold Project (Tiger deposit),IN,,PEA,2014-07-23,https://stockhouse.com/news/press-releases/2014/07/23/atac-announces-positive-pea-results-for-the-high-grade-oxide-gold-tiger-deposit,,IN,PEA,2014-07-23,after-tax,https://stockhouse.com/news/press-releases/2014/07/23/atac-announces-positive-pea-results-for-the-high-grade-oxide-gold-tiger-deposit
+Aben Gold Corp.,TSXV:ABM,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Akwaaba Mining Ltd.,TSXV:AML,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Alexandria Minerals Corporation,TSXV:AZX,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Algold Resources Ltd.,TSXV:ALG.H,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Tijirit,IN,,PEA,2018-05-22,https://www.rohstoff-welt.de/news/299418--Algold-Announces-Positive-Preliminary-Economic-Assessment-for-the-Tijirit-Gold-Project-with-Pre-Tax-NPV-of-US-94.9M-and-28.4Prozent-IRR.html,,IN,PEA,2018-05-22,after-tax,https://www.rohstoff-welt.de/news/299418--Algold-Announces-Positive-Preliminary-Economic-Assessment-for-the-Tijirit-Gold-Project-with-Pre-Tax-NPV-of-US-94.9M-and-28.4Prozent-IRR.html
+Alhambra Resources Limited,TSXV:ALH,TSXV,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Amarillo Gold Corporation,TSXV:AGC,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Mara Rosa (Posse),IN,,PFS,2017-03-07,https://www.globenewswire.com/news-release/2017/03/07/977027/0/en/Amarillo-Gold-s-Updated-Pre-Feasibility-Study-at-Mara-Rosa-delivers-Post-Tax-IRR-of-35-with-a-2-2-year-payback-1200-oz-Au.html,,IN,PFS,2017-03-07,after-tax,https://www.globenewswire.com/news-release/2017/03/07/977027/0/en/Amarillo-Gold-s-Updated-Pre-Feasibility-Study-at-Mara-Rosa-delivers-Post-Tax-IRR-of-35-with-a-2-2-year-payback-1200-oz-Au.html
+Americore Resources Corp.,TSXV:AMCO,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Anacortes Mining Corp.,TSXV:XYZ,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Angus Gold Inc.,TSXV:GUS,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Arc Mineral Royalties Ltd.,TSXV:ARO,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Aris Mining Guyana Holdings Corp.,TSXV:GLDX,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Toroparu,IN,,PEA,2012-01-30,https://www.rohstoff-welt.de/news/118518--Sandspring-Announces-Significant-Increases-in-Life-of-Mine-Grade-and-Cash-Flow-Reduces-Initial-Capex-for-Toroparu-Project.html,,IN,PEA,2012-01-30,after-tax,https://www.rohstoff-welt.de/news/118518--Sandspring-Announces-Significant-Increases-in-Life-of-Mine-Grade-and-Cash-Flow-Reduces-Initial-Capex-for-Toroparu-Project.html
+Artemis Gold Inc.,TSXV:ARTG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Blackwater,IN,,PFS,2020-08-26,https://newswire.ca/news-releases/artemis-announces-revised-pfs-for-blackwater-project-834845507.html,,IN,PFS,2020-08-26,after-tax,https://newswire.ca/news-releases/artemis-announces-revised-pfs-for-blackwater-project-834845507.html
+Asante Gold Corporation,TSXV:ASE,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Atacama Pacific Gold Corporation,TSXV:ATM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Cerro Maricunga,IN,,PEA,2013-01-28,https://www.rohstoff-welt.de/news/141792--Atacama-Pacific-Announces-Positive-Preliminary-Economic-Assessment-for-the-Cerro-Maricunga-Oxide-Gold-Project-Chile.html,,IN,PEA,2013-01-28,after-tax,https://www.rohstoff-welt.de/news/141792--Atacama-Pacific-Announces-Positive-Preliminary-Economic-Assessment-for-the-Cerro-Maricunga-Oxide-Gold-Project-Chile.html
+Atlantic Gold Corporation,TSXV:AGB,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Touquoy (later Moose River Consolidated),IN,Atlantic Gold Corporation,PEA (consolidated Touquoy and Beaver Dam),2014-09-29,,,IN,FS,2014-03-25,pre-tax,https://in.marketscreener.com/quote/stock/ATLANTIC-GOLD-NL-10354253/news/Atlantic-Gold-NL-Touquoy-update-re-affirms-project-s-robust-potential-18227851
+Avidian Gold Corp.,TSXV:AVG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+BULGOLD Inc.,TSXV:ZLTO,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Barkerville Gold Mines Ltd.,TSXV:BGM,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); producer status at study date unconfirmed,Cariboo Gold,,,,,,,,,,,
+Baru Gold Corporation,TSXV:BARU,TSXV,Capital IQ Pro screen,first review,OUT,no completed economic study found,,,,,,,,,,,,
+Batero Gold Corp.,TSXV:BAT,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Batero-Quinchia (La Cumbre),IN,,PEA,2013-11-04,https://www.rohstoff-welt.de/news/159903--Batero-Gold-Announces-Preliminary-Economic-Assessment-for-the-Batero-Quinchia-Gold-Project.html,,IN,PEA,2013-11-04,after-tax,https://www.rohstoff-welt.de/news/159903--Batero-Gold-Announces-Preliminary-Economic-Assessment-for-the-Batero-Quinchia-Gold-Project.html
+Beauce Gold Fields Inc.,TSXV:BGF,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Big Tree Carbon Inc.,TSXV:BIGT,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Bison Gold Resources Inc.,TSXV:BGE,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Bonterra Resources Inc.,TSXV:BTR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Bralorne Gold Mines Ltd.,TSXV:BPM,TSXV,Capital IQ Pro screen,first review,OUT,trial production under way at Bralorne when the 2012 PEA was published,,,,,,,,,,,,
+Brazilian Gold Corporation,TSXV:BGC,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Sao Jorge,IN,,PEA,2013-02-18,https://www.rohstoff-welt.de/news/141489--Sao-Jorge-Preliminary-Economic-Assessment-Returns-Robust-Economics-with-an-After-Tax-IRR-of-46.4Prozent-and-NPV5Prozent-of-US407.5-Million-Using-1500~oz-Gold.html,,IN,PEA,2013-02-18,after-tax,https://www.rohstoff-welt.de/news/141489--Sao-Jorge-Preliminary-Economic-Assessment-Returns-Robust-Economics-with-an-After-Tax-IRR-of-46.4Prozent-and-NPV5Prozent-of-US407.5-Million-Using-1500~oz-Gold.html
+Bullion Gold Discoveries Corp.,TSXV:BGD,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Cabral Gold Inc.,TSXV:CBR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Cambria Gold Mines Inc.,TSXV:CAMB,TSXV,Capital IQ Pro screen,verified from study documents,OUT,"combined 2020 study includes Red Mountain, already entered under IDM Mining (DR-036)",Premier and Red Mountain (PGP),,,,,,,,,,,
+Canadian Gold Corp.,TSXV:CGC,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Candelaria Mining Corp.,TSXV:CAND.H,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Cangold Limited,TSXV:CLD,TSXV,Capital IQ Pro screen,first review,OUT,no completed study in window,,,,,,,,,,,,
+Canoe Mining Ventures Corp.,TSXV:CLV,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Carlin Gold Corporation,TSXV:CGD,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Cartier Resources Inc.,TSXV:ECR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Central Iron Ore Limited,TSXV:CIO,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Cerrado Gold Inc.,TSXV:CERT,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Colibri Resource Corporation,TSXV:CBI,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Compass Gold Corporation,TSXV:CVB,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Conquest Resources Limited,TSXV:CQR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Coral Gold Resources Limited,TSXV:CLH,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Robertson,IN,,PEA,2012-01-18,https://www.globenewswire.com/news-release/2012/01/18/1370506/0/en/Coral-Gold-Resources-Receives-Positive-Preliminary-Economic-Assessment-for-Open-Pits-and-Heap-Leaching-Operation-at-Its-100-Owned-Robertson-Gold-Project-in-Nevada.html,,IN,PEA,2012-01-18,after-tax,https://www.globenewswire.com/news-release/2012/01/18/1370506/0/en/Coral-Gold-Resources-Receives-Positive-Preliminary-Economic-Assessment-for-Open-Pits-and-Heap-Leaching-Operation-at-Its-100-Owned-Robertson-Gold-Project-in-Nevada.html
+Desert Gold Ventures Inc.,TSXV:DAU,TSXV,Capital IQ Pro screen,first review,OUT,feasibility commenced 2014; no completed study found,,,,,,,,,,,,
+EGR Exploration Ltd.,TSXV:EGR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Eagle Hill Exploration Corporation,TSXV:EAG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Windfall Lake,IN,,PEA,2015-04-28,https://stockhouse.com/news/press-releases/2015/06/11/eagle-hill-exploration-files-preliminary-economic-assessment-technical-report,,IN,PEA,2015-04-28,after-tax,https://stockhouse.com/news/press-releases/2015/06/11/eagle-hill-exploration-files-preliminary-economic-assessment-technical-report
+Edgewater Exploration Ltd.,TSXV:EDW.H,TSXV,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window,Corcoesto,,,,,,,,,,,
+Eldorado Gold Inc.,TSXV:ICG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Lamaque South,IN,,PEA,2014-03-11,https://www.rohstoff-welt.de/news/168334--Integra-Gold-Announces-PEA-Results~-Pre-Tax-IRR-of-51Prozent-NPV-5Prozent-of-CAD146.0-M-After-Tax-88.5-M-and-Peak-Annual-Production-of-143300-Gold-Ounces.html,,IN,PEA,2014-03-11,after-tax,https://www.rohstoff-welt.de/news/168334--Integra-Gold-Announces-PEA-Results~-Pre-Tax-IRR-of-51Prozent-NPV-5Prozent-of-CAD146.0-M-After-Tax-88.5-M-and-Peak-Annual-Production-of-143300-Gold-Ounces.html
+Ely Gold Royalties Inc.,TSXV:ELY,TSXV,Capital IQ Pro screen,first review,OUT,royalty company; minority interest,,,,,,,,,,,,
+Eminent Gold Corp.,TSXV:EMNT,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Everton Resources Inc.,TSXV:EVR,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Falcon Gold Corp.,TSXV:FG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Fiore Gold Ltd.,TSXV:F,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+FireFox Gold Corp.,TSXV:FFOX,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Fokus Mining Corporation,TSXV:FKM,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Founders Metals Inc.,TSXV:FDR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Freeman Gold Corp.,TSXV:FMAN,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+GFG Resources Inc,TSXV:GFG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+GMV Minerals Inc.,TSXV:GMV,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Mexican Hat,IN,,PEA,2018-11-07,https://www.newsfilecorp.com/release/40932/GMV-Minerals-Inc.-Announces-Positive-Preliminary-Economic-Assessment-PEA-Study-on-Mexican-Hat-Gold-Project-Amended,,IN,PEA,2018-11-07,after-tax,https://www.newsfilecorp.com/release/40932/GMV-Minerals-Inc.-Announces-Positive-Preliminary-Economic-Assessment-PEA-Study-on-Mexican-Hat-Gold-Project-Amended
+Galantas Gold Corporation,TSXV:GAL,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Golconda Gold Ltd.,TSXV:GG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Gold Canyon Resources Inc.,TSXV:GCU,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Springpole,IN,First Mining Finance Corp. (acquired Gold Canyon 2015),PEA,2017-09-21,,,IN,PEA,2013-03-25,pre-tax,https://www.rohstoff-welt.de/news/145619--Gold-Canyon-Resources-Inc.~-Preliminary-Economic-Assessment-for-the-Springpole-Gold-Project-Generates-Pre-tax-25Prozent-IRR.html
+Gold Finder Resources Ltd.,TSXV:GLD,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Goldbank Mining Corporation,TSXV:GLB,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Golden Predator Mining Corp.,TSXV:GPY,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Brewery Creek,IN,,PEA,2014-11-12,https://stockhouse.com/news/press-releases/2014/11/12/golden-predator-announces-positive-preliminary-economic-assessment-pea-results,,IN,PEA,2014-11-12,after-tax,https://stockhouse.com/news/press-releases/2014/11/12/golden-predator-announces-positive-preliminary-economic-assessment-pea-results
+Golden Queen Mining Consolidated Ltd.,TSXV:GQM.H,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Soledad Mountain,IN,,FS,2012-09-06,https://www.newswire.ca/news-releases/golden-queen-announces-updated-feasibility-study-for-soledad-mountain-project-510696301.html,,IN,FS,2012-09-06,after-tax,https://www.newswire.ca/news-releases/golden-queen-announces-updated-feasibility-study-for-soledad-mountain-project-510696301.html
+Goldex Resources Corporation,TSXV:GDX,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Goldgroup Mining Inc.,TSXV:GORO,TSXV,Capital IQ Pro screen,first review,OUT,producer (Cerro Prieto); several projects,,,,,,,,,,,,
+Goldrock Mines Corporation,TSXV:GRM,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); entry study unread,Lindero,,,,,,,,,,,
+Goldsource Mines Inc.,TSXV:GXS,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Eagle Mountain,IN,,PEA,2014-07-31,https://www.newsfilecorp.com/release/11068/Goldsource-Mines-Announces-Results-of-Preliminary-Economic-Assessment-Report-for-Eagle-Mountain-Gold-Project-in-Guyana-Video-News-Alert-on-InvestmentPitch,,IN,PEA,2014-07-31,after-tax,https://www.newsfilecorp.com/release/11068/Goldsource-Mines-Announces-Results-of-Preliminary-Economic-Assessment-Report-for-Eagle-Mountain-Gold-Project-in-Guyana-Video-News-Alert-on-InvestmentPitch
+Gowest Gold Ltd.,TSXV:GWA,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Bradshaw (North Timmins),IN,,PFS,2015-06-09,https://www.globenewswire.com/news-release/2015/06/09/1279146/0/en/Gowest-Gold-Releases-Positive-Pre-Feasibility-Study-of-Initial-Portion-of-Bradshaw-Gold-Deposit-North-Timmins-Gold-Project.html,,IN,PFS,2015-06-09,after-tax,https://www.globenewswire.com/news-release/2015/06/09/1279146/0/en/Gowest-Gold-Releases-Positive-Pre-Feasibility-Study-of-Initial-Portion-of-Bradshaw-Gold-Deposit-North-Timmins-Gold-Project.html
+Granada Gold Mine Inc.,TSXV:GGM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Granada,IN,Gold Bullion Development Corp.,"PFS (Phase 1 open pit, rolling start)",2014-05-06,company release 6 May 2014 (copy on scribd); technical report 19 Jun 2014,,IN,PEA,2012-12-21,pre-tax,https://newswire.ca/news-releases/gold-bullion-receives-positive-preliminary-economic-assessment-for-granada-proceeding-to-preliminary-feasibility-study-511412971.html
+Grande Portage Resources Ltd.,TSXV:GPG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Halcones Precious Metals Corp.,TSXV:HPM,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Harfang Exploration Inc.,TSXV:HAR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Hayasa Metals Inc.,TSXV:HAY,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Heliostar Metals Ltd.,TSX:HSTR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+HighGold Mining Inc.,TSXV:HIGH,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+IDM Mining Ltd.,TSXV:IDM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Red Mountain,IN,,FS,2017-06-26,https://www.rohstoff-welt.de/news/270182--IDM-Mining-Announces-Positive-Feasibility-Study-Results-for-its-Red-Mountain-Gold-Project.html,,IN,FS,2017-06-26,after-tax,https://www.rohstoff-welt.de/news/270182--IDM-Mining-Announces-Positive-Feasibility-Study-Results-for-its-Red-Mountain-Gold-Project.html
+Inca One Gold Corp.,TSXV:INCA.H,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Integra Resources Corp.,TSXV:ITR,TSXV,Capital IQ Pro screen,verified from study documents,IN,,DeLamar,IN,,PEA,2019-09-09,https://integraresources.com/news/integra-announces-exceptional-project-economics-from-the-delamar-gold-silver-project-in-idaho-after-tax-npv-of-c472-million-and-irr-of-43/,,IN,PEA,2019-09-09,after-tax,https://integraresources.com/news/integra-announces-exceptional-project-economics-from-the-delamar-gold-silver-project-in-idaho-after-tax-npv-of-c472-million-and-irr-of-43/
+Inventus Mining Corp.,TSXV:IVS,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+JZR Gold Inc.,TSXV:JZR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Japan Gold Corp.,TSXV:JG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Jubilee Gold Exploration Ltd.,TSXV:JUB.H,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+KORE Mining Ltd.,TSXV:KORE,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Imperial,IN,,PEA,2020-04-06,https://www.newswire.ca/news-releases/kore-mining-announces-positive-preliminary-economic-assessment-for-imperial-oxide-gold-deposit-856907831.html,,IN,PEA,2020-04-06,after-tax,https://www.newswire.ca/news-releases/kore-mining-announces-positive-preliminary-economic-assessment-for-imperial-oxide-gold-deposit-856907831.html
+Kaminak Gold Corporation,TSXV:KAM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Coffee,IN,,PEA,2014-06-10,https://www.rohstoff-welt.de/news/175488--Kaminak-Reports-Robust-PEA-at-US-1250~oz-Gold-on-Coffee-Gold-Project.html,,IN,PEA,2014-06-10,after-tax,https://www.rohstoff-welt.de/news/175488--Kaminak-Reports-Robust-PEA-at-US-1250~oz-Gold-on-Coffee-Gold-Project.html
+Kapa Gold Inc.,TSXV:KAPA,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Kiboko Gold Inc.,TSXV:KIB,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Klondike Gold Corp.,TSXV:KG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Kubera Gold Corp.,TSXV:KBRA,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Lake Victoria Gold Ltd.,TSXV:LVG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Latin Metals Inc.,TSXV:LMS,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Laurion Mineral Exploration Inc.,TSXV:LME,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Lincoln Gold Mining Inc.,TSXV:LMG,TSXV,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window (interpretation 11): the Feb 2015 amended and restated report restates the Dec 2011 PEA after regulator comments and is not a new study,Pine Grove,,,,,,,,,,,
+Lion One Metals Limited,TSXV:LIO,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Tuvatu,IN,,PEA,2015-06-01,https://www.rohstoff-welt.de/news/206238--Lion-One-Files-Robust-PEA-NI-43-101-Technical-Report-for-Tuvatu.html,,IN,PEA,2015-06-01,after-tax,https://www.rohstoff-welt.de/news/206238--Lion-One-Files-Robust-PEA-NI-43-101-Technical-Report-for-Tuvatu.html
+Lode Gold Resources Inc.,TSXV:LOD,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Lumina Gold Corp.,TSXV:LUM,TSXV,Capital IQ Pro screen,verified from study documents,OUT,"by-products above 20% of study revenue (2018 PEA: copper 22.0%, molybdenum and silver 1.5%)",Cangrejos,,,,,,,,,,,
+MAS Gold Corp.,TSXV:MAS,TSXV,Capital IQ Pro screen,first review,OUT,no completed economic study found,,,,,,,,,,,,
+Magellan Minerals Ltd.,TSXV:MNM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Coringa,IN,,PEA,2012-11-01,https://www.rohstoff-welt.de/news/136447--Magellan-Announces-Positive-Preliminary-Economic-Assessment-for-the-Coringa-Project-Brazil.html,,IN,PEA,2012-11-01,after-tax,https://www.rohstoff-welt.de/news/136447--Magellan-Announces-Positive-Preliminary-Economic-Assessment-for-the-Coringa-Project-Brazil.html
+Mako Mining Corp.,TSXV:MKO,TSXV,Capital IQ Pro screen,verified from study documents,IN,,San Albino,IN,,PEA,2015-03-16,https://www.rohstoff-welt.de/news/194576--PEA-Results-for-San-Albino-OP~UG-Gold-Deposit-Indicates-All-In-Sustaining-Cash-Costs-of-US460~oz-Gold-und-Average-Grade-of-8.02-g~t-AuEq.html,,IN,PEA,2015-03-16,after-tax,https://www.rohstoff-welt.de/news/194576--PEA-Results-for-San-Albino-OP~UG-Gold-Deposit-Indicates-All-In-Sustaining-Cash-Costs-of-US460~oz-Gold-und-Average-Grade-of-8.02-g~t-AuEq.html
+Manitou Gold Inc.,TSXV:MTU,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Maritime Resources Corp.,TSXV:MAE,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Hammerdown (Green Bay Property),IN,,PFS,2017-03-02,https://www.newsfilecorp.com/release/25422/Maritimes-Prefeasibility-Study-on-the-Hammerdown-Gold-Mine-Returns-an-IRR-of-46.8-and-NPV-8-of-71.2M,,IN,PFS,2017-03-02,after-tax,https://www.newsfilecorp.com/release/25422/Maritimes-Prefeasibility-Study-on-the-Hammerdown-Gold-Mine-Returns-an-IRR-of-46.8-and-NPV-8-of-71.2M
+Mawson Gold Limited,TSXV:SXGC,TSXV,Capital IQ Pro screen,first review,OUT,several projects; no economic study in headlines,,,,,,,,,,,,
+Medgold Resources Corp.,TSXV:MED,TSXV,Capital IQ Pro screen,verified from study documents,OUT,owner below 50%,Tlamino (Barje),,,,,,,,,,,
+Metanor Resources Inc.,TSXV:MTO,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Mindoro Resources Limited,TSXV:MIO.H,TSXV,Capital IQ Pro screen,first review,OUT,joint venture; not gold-led,,,,,,,,,,,,
+Minnova Corp.,TSXV:MCI,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Maverick (PL and Nokomis),IN,Minnova Corp. (formerly Auriga Gold),Updated PEA,2014-07-09,,,IN,Updated PEA,2012-01-05,pre-tax,https://www.globenewswire.com/news-release/2012/02/22/1477313/0/en/Auriga-Gold-Files-Puffy-Lake-Mine-PEA-to-SEDAR-Drilling-at-Nokomis-Maverick-Gold-Project.html
+Monument Mining Limited,TSXV:MMY,TSXV,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+NSGold Corporation,TSXV:NSX,TSXV,Capital IQ Pro screen,first review,OUT,metallurgical study only,,,,,,,,,,,,
+NWM Mining Corporation,TSXV:NWM,TSXV,Capital IQ Pro screen,first review,OUT,producer status in 2013,,,,,,,,,,,,
+NeXGold Mining Corp.,TSXV:NEXG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Goliath,IN,,PEA,2012-07-19,https://newswire.ca/news-releases/treasury-metals-receives-updated-preliminary-economic-assessment-510495601.html,,IN,PEA,2012-07-19,after-tax,https://newswire.ca/news-releases/treasury-metals-receives-updated-preliminary-economic-assessment-510495601.html
+New Carolin Gold Corp.,TSXV:LAD,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); tax basis not stated; release not readable this pass,Ladner (tailings reclamation),,,,,,,,,,,
+Newcore Gold Ltd.,TSXV:NCAU,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Enchi,IN,,PEA,2015-03-02,https://www.globenewswire.com/news-release/2015/03/02/1351924/0/en/Pinecrest-Announces-Positive-Preliminary-Economic-Assessment-on-Enchi-Gold-Project-Ghana-Pre-Tax-NPV-of-US-102-Million-and-IRR-of-33.html,,IN,PEA,2015-03-02,after-tax,https://www.globenewswire.com/news-release/2015/03/02/1351924/0/en/Pinecrest-Announces-Positive-Preliminary-Economic-Assessment-on-Enchi-Gold-Project-Ghana-Pre-Tax-NPV-of-US-102-Million-and-IRR-of-33.html
+Nexus Gold Corp.,TSXV:NXS,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+North Country Gold Corporation,TSXV:NCG,TSXV,Capital IQ Pro screen,first review,OUT,engineering study is not a PEA,,,,,,,,,,,,
+Northern Gold Mining Inc.,TSXV:NGM,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Northern Lion Gold Corp.,TSXV:NL,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Northmark Metals Corp.,TSXV:NMRK,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+O3 Mining Inc.,TSXV:OIII,TSXV,Capital IQ Pro screen,first review,OUT,several projects,,,,,,,,,,,,
+Onyx Gold Corp.,TSXV:ONYX,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Opawica Explorations Inc.,TSXV:OPW,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Orca Gold Inc.,TSXV:ORG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Block 14 (Galat Sufar South),IN,,PEA,2016-07-26,https://www.rohstoff-welt.de/news/237885--Orca-Gold~-Preliminary-Economic-Assessment-of-Block-14-Strong-Economics-at-US1200~oz.html,,IN,PEA,2016-07-26,after-tax,https://www.rohstoff-welt.de/news/237885--Orca-Gold~-Preliminary-Economic-Assessment-of-Block-14-Strong-Economics-at-US1200~oz.html
+Orecap Invest Corp.,TSXV:OCI,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Mirado (South Zone open pit),IN,,PEA,2018-01-15,https://marketscreener.com/news/latest/Orefinders-Resources-January-15-2018-Orefinders-Reports-158-IRR-7-Month-Payback-on-its-Prelimi-25808189,,IN,PEA,2018-01-15,after-tax,https://marketscreener.com/news/latest/Orefinders-Resources-January-15-2018-Orefinders-Reports-158-IRR-7-Month-Payback-on-its-Prelimi-25808189
+Orosur Mining Inc.,TSXV:OMI,TSXV,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Orsu Metals Corporation,TSXV:OSU.H,TSXV,Capital IQ Pro screen,first review,OUT,copper VMS,,,,,,,,,,,,
+Osino Resources Corp.,TSXV:OSI,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Twin Hills,IN,,PEA,2021-07-14,https://www.miningstockeducation.com/2021/07/osino-announces-pea-results-for-twin-hills-gold-project-namibia/,,IN,PEA,2021-07-14,after-tax,https://www.miningstockeducation.com/2021/07/osino-announces-pea-results-for-twin-hills-gold-project-namibia/
+Otis Gold Corp.,TSXV:OOO,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Kilgore,IN,,PEA,2019-07-30,https://www.globenewswire.com/news-release/2019/07/30/1893656/0/en/Otis-Gold-Announces-Positive-Kilgore-Preliminary-Economic-Assessment.html,,IN,PEA,2019-07-30,after-tax,https://www.globenewswire.com/news-release/2019/07/30/1893656/0/en/Otis-Gold-Announces-Positive-Kilgore-Preliminary-Economic-Assessment.html
+Otso Gold Corp.,TSXV:OTSO.H,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Laiva,IN,,PEA,2018-07-13,https://www.thenewswire.com/press-releases/kZaFo7go-firesteel-resources-inc-files-economically-robust-pea-for-laiva-gold-mine-in-finland.html,,IN,PEA,2018-07-13,after-tax,https://www.thenewswire.com/press-releases/kZaFo7go-firesteel-resources-inc-files-economically-robust-pea-for-laiva-gold-mine-in-finland.html
+PEZM Gold Inc.,TSXV:PEZM.H,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+PPX Mining Corp.,TSXV:PPX,TSXV,Capital IQ Pro screen,first review,OUT,Igor silver share about a third of resource value; test mining under way,,,,,,,,,,,,
+Pasofino Gold Limited,TSXV:VEIN,TSXV,Capital IQ Pro screen,first review,OUT,Pasofino held an earn-in toward 49% at the 2021 PEA,,,,,,,,,,,,
+Patagonia Gold Corp.,TSXV:PGDC,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Plato Gold Corp.,TSXV:PGC,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Prosper Gold Corp.,TSXV:PGX,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Providence Gold Mines Inc.,TSXV:PHD,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Puma Exploration Inc.,TSXV:PUMA,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Q-Gold Resources Ltd.,TSXV:QGR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Quadro Resources Ltd.,TSXV:QRO,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Quebec Precious Metals Corporation,TSXV:QPM,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Rackla Metals Inc.,TSXV:RAK,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Radisson Mining Resources Inc.,TSXV:RDS,TSXV,Capital IQ Pro screen,verified from study documents,IN,,O'Brien,IN,,PEA,2015-12-15,https://rohstoff-welt.de/news/218449--Radisson-Announces-Results-of-Preliminary-Economic-Assessment-for-the-Ound039Brien-Gold-Project.html,,IN,PEA,2015-12-15,after-tax,https://rohstoff-welt.de/news/218449--Radisson-Announces-Results-of-Preliminary-Economic-Assessment-for-the-Ound039Brien-Gold-Project.html
+Radius Gold Inc.,TSXV:RDU,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Record Resources Inc.,TSXV:REC,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Renegade Gold Inc.,TSXV:RAGE,TSXV,Capital IQ Pro screen,verified from study documents,OUT,no qualifying study in window (no IRR reported),Newman Todd,,,,,,,,,,,
+Reunion Gold Corporation,TSXV:RGD,TSXV,Capital IQ Pro screen,first review,OUT,2013 PFS was a manganese project,,,,,,,,,,,,
+Revival Gold Inc.,TSXV:RVG,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,"not established at the freeze: at the Nov 2020 PEA Beartrack was held under an incomplete earn-in and Arnett 100%; the study gives no attributable share or production by property, so ownership of 50% or more cannot be shown (interpretations 8 and 14)",Beartrack-Arnett,,,,,,,,,,,
+Reyna Gold Corp.,TSXV:REYG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Rhyolite Resources Ltd.,TSXV:RYE,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Ridgestone Mining Inc.,TSXV:RMI,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Roscan Gold Corporation,TSXV:ROS,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Royal Road Minerals Limited,TSXV:RYR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Rusoro Mining Ltd.,TSXV:RML,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Rye Patch Gold Corp.,TSXV:RPM,TSXV,Capital IQ Pro screen,verified from study documents,OUT,by-products above 20%,Lincoln Hill,,,,,,,,,,,
+Scorpio Gold Corporation,TSXV:SGLD,TSXV,Capital IQ Pro screen,first review,OUT,producer (production news throughout window),,,,,,,,,,,,
+Seasif Exploration Inc.,TSXV:SAF.H,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Sirios Resources Inc.,TSXV:SOI,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Sitka Gold Corp.,TSXV:SIG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Solid Gold Resources Corp.,TSXV:SLD,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Solstice Gold Corp.,TSXV:SGC,TSXV,Capital IQ Pro screen,first review,OUT,no completed study in window,,,,,,,,,,,,
+Soma Gold Corp.,TSXV:SOMA,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Sonoro Gold Corp.,TSXV:SGO,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); ownership under unexercised purchase option,Cerro Caliche,,,,,,,,,,,
+South Atlantic Gold Inc.,TSXV:SAO,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+South Pacific Metals Corp.,TSXV:SPMC,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Spanish Mountain Gold Ltd.,TSXV:SPA,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Spanish Mountain,IN,,PEA,2012-11-15,https://www.rohstoff-welt.de/news/137638--Spanish-Mountain-Announces-Positive-Preliminary-Economic-Assessment-on-Spanish-Mountain-Project.html,,IN,PEA,2012-11-15,after-tax,https://www.rohstoff-welt.de/news/137638--Spanish-Mountain-Announces-Positive-Preliminary-Economic-Assessment-on-Spanish-Mountain-Project.html
+Stellar AfricaGold Inc.,TSXV:SPX,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Superior Gold Inc.,TSXV:SGI,TSXV,Capital IQ Pro screen,first review,OUT,producer,,,,,,,,,,,,
+Sylla Gold Corp.,TSXV:SYG,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+TNR Gold Corp.,TSXV:TNR,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Thor Explorations Ltd.,TSXV:THX,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Segilola,IN,,PFS,2017-09-27,https://globenewswire.com/news-release/2017/09/27/1133705/0/en/Thor-Explorations-Announces-Robust-Results-of-Independent-Preliminary-Feasibility-Study-and-Maiden-Probable-Mineral-Reserve-at-Segilola-Nigeria.html,,IN,PFS,2017-09-27,after-tax,https://globenewswire.com/news-release/2017/09/27/1133705/0/en/Thor-Explorations-Announces-Robust-Results-of-Independent-Preliminary-Feasibility-Study-and-Maiden-Probable-Mineral-Reserve-at-Segilola-Nigeria.html
+TomaGold Corporation,TSXV:LOT,TSXV,Capital IQ Pro screen,first review,OUT,metallurgical study only,,,,,,,,,,,,
+Tombill Mines Limited,TSXV:TBLL,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+"TriStar Gold, Inc.",TSXV:TSG,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Castelo de Sonhos,IN,,PEA,2018-11-16,https://www.rohstoff-welt.de/news/313583--51Prozent-IRR-from-PEA-at-TriStar-Golds-Castelo-de-Sonhos-Project.html,,IN,PEA,2018-11-16,after-tax,https://www.rohstoff-welt.de/news/313583--51Prozent-IRR-from-PEA-at-TriStar-Golds-Castelo-de-Sonhos-Project.html
+Triumph Gold Corp.,TSXV:TIG,TSXV,Capital IQ Pro screen,verified from study documents,OUT,by-products above 20%,Freegold Mountain (Nucleus and Revenue),,,,,,,,,,,
+True Gold Mining Inc.,TSXV:TGM,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Karma,IN,,PEA,2012-08-20,https://www.mining.com/web/riverstone-announces-preliminary-economic-assessment-results-on-flagship-karma-gold-project-after-tax-npv-of-192-million-and-irr-of-37/,,IN,PEA,2012-08-20,after-tax,https://www.mining.com/web/riverstone-announces-preliminary-economic-assessment-results-on-flagship-karma-gold-project-after-tax-npv-of-192-million-and-irr-of-37/
+URZ3 Energy Corp.,TSXV:URZ,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Unigold Inc.,TSXV:UGD,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+VVC Exploration Corporation,TSXV:VVC,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Vantex Resources Ltd.,TSXV:VAX.H,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+Velocity Minerals Ltd.,TSXV:VLC,TSXV,Capital IQ Pro screen,verified from study documents,OUT,owner below 50%,Rozino,,,,,,,,,,,
+Viva Gold Corp.,TSXV:VAU,TSXV,Capital IQ Pro screen,verified from study documents,IN,,Tonopah,IN,,PEA,2020-05-12,https://businesswire.com/news/home/20200512005671/en/Viva-Gold-Announces-PEA-Results-at-Tonopah-Gold-Project,,IN,PEA,2020-05-12,after-tax,https://businesswire.com/news/home/20200512005671/en/Viva-Gold-Announces-PEA-Results-at-Tonopah-Gold-Project
+Voleo Trading Systems Inc.,TSXV:LGR,TSXV,Capital IQ Pro screen,first review,OUT,not a mining company,,,,,,,,,,,,
+Wescan Goldfields Inc.,TSXV:WGF,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
+West Vault Mining Inc.,TSXV:WVM,TSXV,Capital IQ Pro screen,verified from study documents,DROPPED,dropped: not established after final search (owner decision 2026-11-17); more than one project at study stage (TUG) unconfirmed,Hasbrouck and Three Hills,,,,,,,,,,,
+Xali Gold Corp.,TSXV:XGC,TSXV,Capital IQ Pro screen,first review,OUT,no economic study in headlines,,,,,,,,,,,,
+Ximen Mining Corp.,TSXV:XIM,TSXV,Capital IQ Pro screen,first review,OUT,no study evidence beyond generic description,,,,,,,,,,,,
