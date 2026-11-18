@@ -34,8 +34,9 @@ def test_calibration_recovers_known_parameters(k: float, g: float) -> None:
     s = calibrate(h)
     assert s.cost_factor == pytest.approx(k, abs=1e-4)
     assert s.tilt == pytest.approx(g, abs=1e-3)
-    assert _npv(s.after_tax, 0.05) == pytest.approx(h.npv_after_tax, abs=0.3)
-    assert _irr(s.after_tax) == pytest.approx(h.irr_after_tax, abs=5e-4)
+    npv, irr = h.target()
+    assert _npv(s.after_tax, 0.05) == pytest.approx(npv, abs=0.3)
+    assert _irr(s.after_tax) == pytest.approx(irr, abs=5e-4)
     assert s.payable_koz.sum() == pytest.approx(150.0 * 10)
 
 
@@ -55,7 +56,35 @@ def test_built_case_reproduces_the_study_npv_in_the_engine() -> None:
         location="Table 1",
     )
     res = simulate(case, Market.study_deck(case), Timing(), Risks(), n_paths=3)
-    np.testing.assert_allclose(res.project_value, h.npv_after_tax, atol=0.01)
+    np.testing.assert_allclose(res.project_value, h.target()[0], atol=0.01)
+
+
+@pytest.mark.parametrize(("k", "g"), [(1.0, 0.0), (0.9, -0.4)])
+def test_pre_tax_headline_recovers_parameters_and_models_tax(k: float, g: float) -> None:
+    s0 = _schedule(BASE, k, g)
+    h = replace(
+        BASE,
+        npv_after_tax=None,
+        irr_after_tax=None,
+        npv_pre_tax=_npv(s0.pre_tax, 0.05),
+        irr_pre_tax=_irr(s0.pre_tax),
+    )
+    assert h.basis == "pre-tax"
+    s = calibrate(h)
+    assert s.cost_factor == pytest.approx(k, abs=1e-4)
+    assert s.tilt == pytest.approx(g, abs=1e-3)
+    # the modelled after-tax value is the one the same regime gives on the true schedule
+    assert _npv(s.after_tax, 0.05) == pytest.approx(_npv(s0.after_tax, 0.05), abs=0.3)
+
+
+def test_after_tax_pair_takes_precedence_when_both_are_given() -> None:
+    h = replace(_headline_from(1.0, 0.0), npv_pre_tax=1.0, irr_pre_tax=0.5)
+    assert h.basis == "after-tax"
+
+
+def test_headline_needs_a_complete_pair() -> None:
+    with pytest.raises(ValueError, match="same basis"):
+        replace(BASE, npv_after_tax=None, irr_after_tax=None, npv_pre_tax=100.0)
 
 
 def test_unmatched_headline_is_rejected() -> None:
