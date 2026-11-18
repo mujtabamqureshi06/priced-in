@@ -51,20 +51,90 @@ st.caption(
 
 name = st.sidebar.selectbox("Case", list(CASES))
 cfg = CASES[name]
-n_paths = st.sidebar.select_slider("Simulated paths", [2_000, 5_000, 10_000, 20_000], 5_000)
+n_paths = st.sidebar.select_slider("Simulated paths", [5_000, 20_000, 200_000], 200_000)
+st.sidebar.caption(
+    "200,000 paths with seed 1 reproduces the published figures. Fewer paths run faster "
+    "and move the numbers within their standard errors."
+)
 y = st.sidebar.select_slider("Gold convenience yield", [0.0, 0.005, 0.01], 0.0)
 st.sidebar.caption("Zero is the headline and is flagged; 1% is the sensitivity (ADR 0024).")
 
-case = load_case(ROOT / "cases" / str(cfg["file"]))
-priors = load_priors(ROOT / "data" / "priors.yaml")
-snap = load_snapshot(ROOT / "data" / "snapshots" / str(cfg["snapshot"]))
-market = Market.from_snapshot(snap, convenience_yield=float(y))
-risks = Risks(
-    stage_odds=defaults.stage_odds(priors, case.study.stage),
-    overrun=defaults.overrun(priors, case.study.stage),
-    build_rule=True,
-)
-timing = defaults.timing(priors, case.id)
+
+def _inputs(case_name: str, convenience_yield: float):  # type: ignore[no-untyped-def]
+    """Case, priors, snapshot, market, risks and timing for one case."""
+    c = CASES[case_name]
+    case = load_case(ROOT / "cases" / str(c["file"]))
+    priors = load_priors(ROOT / "data" / "priors.yaml")
+    snap = load_snapshot(ROOT / "data" / "snapshots" / str(c["snapshot"]))
+    market = Market.from_snapshot(snap, convenience_yield=float(convenience_yield))
+    risks = Risks(
+        stage_odds=defaults.stage_odds(priors, case.study.stage),
+        overrun=defaults.overrun(priors, case.study.stage),
+        build_rule=True,
+    )
+    timing = defaults.timing(priors, case.id)
+    return case, priors, snap, market, risks, timing
+
+
+@st.cache_data(show_spinner="Running the simulation...")
+def _valuation(case_name: str, convenience_yield: float, paths: int):  # type: ignore[no-untyped-def]
+    case, priors, _, market, risks, timing = _inputs(case_name, convenience_yield)
+    steps = project_waterfall(case, market, timing, risks, n_paths=paths, seed=1)
+    res = simulate(
+        case,
+        market,
+        timing,
+        risks,
+        financing=defaults.equity_financing(priors),
+        n_paths=paths,
+        seed=1,
+    )
+    assert res.equity_value is not None
+    return steps, res.estimate(res.equity_value)
+
+
+@st.cache_data(show_spinner="Running the simulation...")
+def _royalty(  # type: ignore[no-untyped-def]
+    case_name: str, convenience_yield: float, paths: int, credited: bool, spread: float
+):
+    case, _, snap, market, risks, timing = _inputs(case_name, convenience_yield)
+    r = snap.value("real_yield_10y")
+    amr, infl = fixed_nominal_advance(
+        120_000, snap.value("usdcad"), snap.value("cad_nominal_10y"), r, 1_000
+    )
+    claim = RoyaltyClaim(0.00633, 0.35, amr, credited, spread, infl)
+    price = 2079.0
+    frontier = royalty_frontier(
+        case,
+        market,
+        timing,
+        replace(risks, overrun=None),
+        claim,
+        price,
+        max_delay=10,
+        n_paths=paths,
+        seed=1,
+    )
+    be = break_even_spread(
+        case,
+        market,
+        timing,
+        replace(risks, overrun=None),
+        claim,
+        price,
+        n_paths=paths,
+        seed=1,
+    )
+    return frontier, be
+
+
+@st.cache_data(show_spinner="Running the simulation...")
+def _timing(case_name: str, convenience_yield: float, paths: int):  # type: ignore[no-untyped-def]
+    case, _, _, market, risks, timing = _inputs(case_name, convenience_yield)
+    return build_year_distribution(simulate(case, market, timing, risks, n_paths=paths, seed=1))
+
+
+case, priors, snap, market, risks, timing = _inputs(name, float(y))
 units = str(cfg["units"])
 
 tabs = ["Valuation", "Timing", "Assumptions"]
@@ -73,7 +143,7 @@ if cfg["royalty"]:
 views = dict(zip(tabs, st.tabs(tabs), strict=True))
 
 with views["Valuation"]:
-    steps = project_waterfall(case, market, timing, risks, n_paths=n_paths, seed=1)
+    steps, (eq, se) = _valuation(name, float(y), n_paths)
     st.write(project_readout(case.name, units, steps))
     st.table(
         {
@@ -84,40 +154,13 @@ with views["Valuation"]:
         }
     )
     st.bar_chart({s.label: s.change for s in steps[1:]})
-    res = simulate(
-        case,
-        market,
-        timing,
-        risks,
-        financing=defaults.equity_financing(priors),
-        n_paths=n_paths,
-        seed=1,
-    )
-    assert res.equity_value is not None
-    eq, se = res.estimate(res.equity_value)
     st.metric(f"Equity claim, all-equity funding ({units})", f"{eq:,.1f}", help=f"s.e. {se:.1f}")
 
 if "Royalty price" in views:
     with views["Royalty price"]:
-        r = snap.value("real_yield_10y")
-        amr, infl = fixed_nominal_advance(
-            120_000, snap.value("usdcad"), snap.value("cad_nominal_10y"), r, 1_000
-        )
         credited = st.toggle("Advances credited against later royalties", value=True)
         spread = st.slider("Buyer's real spread over the risk-free rate", 0.0, 0.20, 0.04, 0.002)
-        claim = RoyaltyClaim(0.00633, 0.35, amr, credited, spread, infl)
-        price = 2079.0
-        frontier = royalty_frontier(
-            case,
-            market,
-            timing,
-            replace(risks, overrun=None),
-            claim,
-            price,
-            max_delay=10,
-            n_paths=n_paths,
-            seed=1,
-        )
+        frontier, be = _royalty(name, float(y), n_paths, credited, float(spread))
         st.write(
             "Implied odds of construction for each number of years late, for a project "
             "that is built (ADR 0025). Values above one mean the price is above the "
@@ -131,16 +174,6 @@ if "Royalty price" in views:
             x="years late",
             y="implied odds",
         )
-        be = break_even_spread(
-            case,
-            market,
-            timing,
-            replace(risks, overrun=None),
-            claim,
-            price,
-            n_paths=n_paths,
-            seed=1,
-        )
         st.write(
             f"Zero-delay odds: {frontier.zero_delay_odds:.2f}. Frontier shape: "
             f"{frontier.shape}. Break-even spread: "
@@ -152,8 +185,7 @@ if "Royalty price" in views:
         )
 
 with views["Timing"]:
-    res = simulate(case, market, timing, risks, n_paths=n_paths, seed=1)
-    shares = build_year_distribution(res)
+    shares = _timing(name, float(y), n_paths)
     st.bar_chart(shares)
     st.caption(
         "Years after the valuation date. 'Never built' covers stage failure and paths "
