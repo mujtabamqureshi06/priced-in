@@ -1,6 +1,6 @@
 # Phase 4 tax method
 
-- Status: written before the validation in section 4 was run. The commit that adds this file is the record of that order.
+- Status: written before the validation in section 4 was run. The record of that order is commit 56837bc in the history of the pull request that added this file, pushed before the validation ran.
 - Decision record: ADR 0054.
 
 Some studies in the panel report only pre-tax NPV and IRR. For those, the study builder (`pricedin.parametric`) is calibrated to the pre-tax figures and the after-tax schedule is modelled with the method below. Studies that report after-tax figures are calibrated to them directly; the same regime table supplies their tax rate, which the builder needs for the depreciation shield.
