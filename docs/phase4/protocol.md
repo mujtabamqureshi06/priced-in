@@ -157,4 +157,4 @@ Frozen on 2026-11-17, before any outcome was labelled. The freezing commit is th
 
 Of the 90 check-panel projects, 14 entered at a study reporting pre-tax figures only. Nine of them enter the primary panel at a later in-window study with after-tax figures; three have no such study (Kiaka, Karlawinda, Katanning) and two have one whose document could not be read (Rothsay, Tampia). The primary panel is above the 60-project floor set in ADR 0054.
 
-Freezing commit hash: to be recorded.
+Freezing commit hash: `84a675b7da3475b7ee6564f72d6b6ffe275f47fd` (#119).
