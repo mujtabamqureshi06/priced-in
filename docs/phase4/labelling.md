@@ -49,3 +49,13 @@ Each step is recorded in `search_log`, including steps that found nothing.
 - **Sample:** 20% of projects, drawn at random with a recorded seed after the inclusion list is frozen. A second coder labels them blind to the first labels.
 - **Disagreements:** go back to the primary document. If the document is ambiguous, the stricter reading applies: funding must be committed before an announcement counts as a construction decision. The resolution is noted in the row.
 - **Construction-decision dates:** at least 20% of `construction_decision` dates are checked against the original announcement (ADR 0052), whether or not the project is in the recode sample.
+
+## Result (2026-11-17)
+
+`data/phase4/labels.csv` holds 99 rows: the 90 check-panel entries and the 9 later entries that apply only to the primary panel. Outcomes were labelled after the panel was frozen and before any implied odds or prices were computed. The dating and funding rules of ADR 0055 were written after a first labelling pass showed the definitions above left cases open; every event row was then re-dated under them.
+
+- **Second coding:** 38 rows recoded blind (the random 20%, seed 20261120, plus every row resting on press only or marked low confidence). Outcomes agreed on 37 of 38, and on 20 of 20 in the random sample. The one disagreement (Shahuindo) was resolved under the funding rule: no company statement that the project was funded was found within the window, so the outcome is the earlier takeover.
+- **Reconciliation:** under the written rules, 12 of 33 event rows changed: one outcome (Shahuindo) and 11 dates. Each change and its reason is in the `resolution` column.
+- **Primary panel (85):** 16 construction decisions, 11 takeovers, 58 no decision within 36 months.
+- **Check panel (90):** 16 construction decisions, 15 takeovers, 59 no decision.
+- Rows whose outcome still rests on press are marked in `outcome_source` and reported in a check without them.
