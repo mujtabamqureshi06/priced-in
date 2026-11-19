@@ -578,7 +578,7 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 </div>
 </div>
 <script type="application/json" id="pi-data">{data_json}</script>
-<script src="assets/home.js" defer></script>
+<script src="assets/home.js?v={esc(meta["commit"][:12])}" defer></script>
 </body>
 </html>
 """
