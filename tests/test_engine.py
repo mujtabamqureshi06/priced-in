@@ -460,7 +460,10 @@ def test_invalid_inputs_raise_clear_errors(factory: object, message: str) -> Non
         factory()  # type: ignore[operator]
 
 
-def test_equity_is_floored_at_zero_and_other_claims_unchanged(osino: Case) -> None:
+def test_equity_is_not_floored_per_path(osino: Case) -> None:
+    """ADR 0059: no per-path floor. Without the build rule every path builds, so a heavy
+    issue discount leaves negative equity on some paths, and the other claims are
+    unchanged by the financing."""
     from pricedin.engine import Financing
 
     market = Market.market_consistent(1200.0, 0.01, 0.0, 0.3)
@@ -478,11 +481,86 @@ def test_equity_is_floored_at_zero_and_other_claims_unchanged(osino: Case) -> No
         seed=3,
     )
     assert heavy.equity_value is not None
-    assert float(np.min(heavy.equity_value)) >= 0.0
-    assert (heavy.equity_value == 0.0).any()
+    assert (heavy.equity_value < 0.0).any()
     np.testing.assert_array_equal(heavy.project_value, plain.project_value)
     assert heavy.royalty_value is not None and plain.royalty_value is not None
     np.testing.assert_array_equal(heavy.royalty_value, plain.royalty_value)
+
+
+@pytest.mark.parametrize("case_name", ["south_railroad", "osino"])
+@pytest.mark.parametrize("spot_multiple", [0.5, 0.8, 1.0, 1.5, 2.0])
+def test_equity_never_exceeds_project(
+    case_name: str, spot_multiple: float, overrun: Overrun, request: pytest.FixtureRequest
+) -> None:
+    """ADR 0059 acceptance test: on every path, equity <= operator share x project."""
+    from pricedin.engine import Financing
+
+    case: Case = request.getfixturevalue(case_name)
+    deck = case.study.price_deck["gold"].value
+    market = Market.market_consistent(deck * spot_multiple, 0.01, 0.0, 0.15)
+    risks = Risks(overrun=overrun, build_rule=True, holding_cost=1.0)
+    res = simulate(
+        case,
+        market,
+        Timing(years_to_start=1, max_wait=3),
+        risks,
+        financing=Financing(0.3, 0.1),
+        n_paths=2000,
+        seed=11,
+    )
+    assert res.equity_value is not None
+    share_project = case.operator_share * res.project_value
+    assert np.all(res.equity_value <= share_project + 1e-9)
+    assert float(res.equity_value.mean()) <= float(share_project.mean()) + 1e-9
+
+
+def test_royalty_less_advances_is_zero_on_unbuilt_paths(south_railroad: Case) -> None:
+    """ADR 0059: an unbuilt path pays the royalty holder only its contractual advances."""
+    from pricedin.engine import Financing
+
+    deck = south_railroad.study.price_deck["gold"].value
+    market = Market.market_consistent(deck * 0.6, 0.01, 0.0, 0.25)
+    claim = RoyaltyClaim(rate=0.01, coverage=1.0, amr_per_year=50.0, amr_credited=False)
+    res = simulate(
+        south_railroad,
+        market,
+        Timing(years_to_start=1, max_wait=2),
+        Risks(build_rule=True),
+        royalty=claim,
+        financing=Financing(0.0, 0.2),
+        n_paths=2000,
+        seed=5,
+    )
+    assert res.royalty_value is not None and res.advance_value is not None
+    unbuilt = ~res.built
+    assert unbuilt.any()
+    np.testing.assert_allclose(
+        res.royalty_value[unbuilt] - res.advance_value[unbuilt], 0.0, atol=1e-12
+    )
+    np.testing.assert_allclose(res.project_value[unbuilt], 0.0, atol=1e-12)
+
+
+def test_decision_gate_includes_expected_overrun_and_dilution(
+    osino: Case, overrun: Overrun
+) -> None:
+    """ADR 0059: the gate charges the mean overrun and, for an equity run, the expected
+    dilution, so a heavy issue discount stops building that the project run would do."""
+    from pricedin.engine import Financing, mean_overrun_ratio
+
+    r = overrun.ratio
+    expected = overrun.real_factor * (r.shift + np.exp(r.mu + 0.5 * r.sigma**2))
+    assert mean_overrun_ratio(Risks(overrun=overrun)) == pytest.approx(expected)
+    assert mean_overrun_ratio(Risks()) == 1.0
+
+    deck = osino.study.price_deck["gold"].value
+    market = Market.market_consistent(deck, 0.01, 0.0, 0.15)
+    risks = Risks(overrun=overrun, build_rule=True, build_hurdle=-1e12)
+    timing = Timing(years_to_start=1)
+    project_run = simulate(osino, market, timing, risks, n_paths=2000, seed=2)
+    equity_run = simulate(
+        osino, market, timing, risks, financing=Financing(0.0, 0.95), n_paths=2000, seed=2
+    )
+    assert equity_run.built.sum() < project_run.built.sum()
 
 
 def test_flat_convention_matches_market_consistent_spread_k_times_one_plus_r(

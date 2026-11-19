@@ -52,30 +52,30 @@ As for Osino, each price is shown against a real spread on net project cash flow
 
 | Real spread | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
 |---|---|---|---|---|
-| 0% | 0.29 | 0.30 | 0.30 | 0.28 |
-| 4% | 0.41 | 0.46 | 0.38 | 0.37 |
-| 8% | 0.57 | 0.72 | 0.47 | 0.50 |
-| 12% | 0.79 | above 1 | 0.59 | 0.67 |
-| 15% | 0.99 | above 1 | 0.69 | 0.86 |
-| Break-even | 15.1% | 10.8% | 22.1% | 16.8% |
+| 0% | 0.29 | 0.32 | 0.30 | 0.29 |
+| 4% | 0.41 | 0.49 | 0.38 | 0.39 |
+| 8% | 0.57 | 0.77 | 0.47 | 0.52 |
+| 12% | 0.78 | above 1 | 0.59 | 0.73 |
+| 15% | 0.98 | above 1 | 0.69 | 0.95 |
+| Break-even | 15.3% | 10.2% | 22.2% | 15.6% |
 
 The study's own rates are read the way the study used them: gold flat at the FS deck of US$1,650, discounted at the rate, with this engine's stage and overrun risks on top (ADR 0045).
 
 | Study rate, gold flat at US$1,650 | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
 |---|---|---|---|---|
-| FS base case, 5% | 0.74 | 0.93 | 0.64 | 0.70 |
-| FS sensitivity table, 10% | no solution | no solution | 0.87 | 0.98 |
+| FS base case, 5% | 0.74 | 0.94 | 0.64 | 0.71 |
+| FS sensitivity table, 10% | no solution | no solution | 0.87 | no solution |
 
-The timing assumption matters as much as the rate. Under the 4-year prior, the market value before the offer is consistent with certain passage at a market-consistent real spread of about 11%. Under the company's schedule, the same price needs a spread of about 17%. One price cannot separate the odds from the timing, so both are reported.
+The timing assumption matters as much as the rate. Under the 4-year prior, the market value before the offer is consistent with certain passage at a market-consistent real spread of about 10%. Under the company's schedule, the same price needs a spread of about 16%. One price cannot separate the odds from the timing, so both are reported.
 
-The undisturbed reading uses the equity claim, floored at zero on each path (ADR 0047). The floor raised its break-even spread from 10.0% to 10.8% (4 years) and from 15.5% to 16.8% (1 year). The offer uses the project claim, which is not floored.
+The undisturbed reading uses the equity claim. Until 2026-11-19 it was floored at zero on each simulated path (ADR 0047), which overstated it; limited liability is now applied at the build decision (ADR 0059). That moved the undisturbed break-even spread from 10.8% to 10.2% (4 years) and from 16.8% to 15.6% (1 year). The offer uses the project claim; the decision-time test moved its break-even spreads by 0.1 to 0.2 point.
 
 **Sensitivity: the LBMA PM gold price (ADR 0050).** The snapshot uses the June 10, 2022 closing gold price, US$1,871. The LBMA PM fix that day was US$1,830, 2.2% lower. June 10, 2022 was a US CPI release day, and gold rallied after the London fix into the New York close. The closing price is kept because the share prices read here are closing prices: a 4 pm New York gold price implied by the GLD trust is within 0.1% of it. At the LBMA PM the break-even spreads fall:
 
 | | Offer, 4 years | Undisturbed, 4 years | Offer, 1 year | Undisturbed, 1 year |
 |---|---|---|---|---|
-| Closing price (headline) | 15.1% | 10.8% | 22.1% | 16.8% |
-| LBMA PM | 14.2% | 10.0% | 20.4% | 15.5% |
+| Closing price (headline) | 15.3% | 10.2% | 22.2% | 15.6% |
+| LBMA PM | 14.5% | 9.4% | 20.6% | 14.2% |
 
 The odds at the study's own rates do not change, because those rows hold gold flat at the FS deck.
 

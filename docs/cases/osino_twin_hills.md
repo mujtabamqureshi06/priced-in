@@ -59,7 +59,7 @@ The ranking does not change. Stage failure is the largest risk step under either
 
 ## Equity claim
 
-Existing shareholders' share of project value, after the transfer to new investors when initial capital is raised at a 10.54% discount: US$881 million with all-equity funding (the dilution upper bound), US$891 million with 30% debt and US$902 million with 60% debt (ADR 0030). Existing holders' value is floored at zero on each path (ADR 0047). Underwriting fees are not modelled.
+Existing shareholders' share of project value, after the transfer to new investors when initial capital is raised at a 10.54% discount: US$865 million with all-equity funding (the dilution upper bound), US$876 million with 30% debt and US$888 million with 60% debt (ADR 0030). Limited liability is applied at the build decision, not on each path (ADR 0059); before that change these figures were US$881, US$891 and US$902 million. Underwriting fees are not modelled.
 
 ## When the project is built
 
@@ -107,23 +107,23 @@ Without a calibrated project-level spread, the implied odds absorb the required 
 
 | Real spread | July 2023, C$1.07 to C$1.20 | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
 |---|---|---|---|---|
-| 0% | 0.15 to 0.16 | 0.15 | 0.19 | 0.23 |
-| 4% | 0.22 to 0.25 | 0.23 | 0.26 | 0.33 |
-| 8% | 0.33 to 0.37 | 0.34 | 0.37 | 0.46 |
-| 12% | 0.50 to 0.56 | 0.50 | 0.52 | 0.64 |
-| 15% | 0.70 to 0.79 | 0.70 | 0.66 | 0.82 |
-| Break-even | 17.0% to 17.9% | 18.1% | 19.7% | 17.3% |
+| 0% | 0.15 to 0.17 | 0.16 | 0.19 | 0.23 |
+| 4% | 0.23 to 0.25 | 0.23 | 0.26 | 0.33 |
+| 8% | 0.35 to 0.39 | 0.35 | 0.37 | 0.46 |
+| 12% | 0.55 to 0.62 | 0.54 | 0.52 | 0.64 |
+| 15% | 0.82 to 0.92 | 0.78 | 0.66 | 0.82 |
+| Break-even | 15.6% to 16.3% | 16.8% | 19.7% | 17.4% |
 
 Reference rates are read the way their sources used them, with this engine's stage and overrun risks on top (ADR 0045). Gold is flat in real terms at the source's deck, or at spot where none is stated, and discounted at the stated rate.
 
 | Reference | Gold | July 2023 | Undisturbed, Dec 15 | Dundee, Dec 18 | Shanjin, Feb 23 |
 |---|---|---|---|---|---|
-| DFS, 5% | US$1,750 (DFS deck) | 0.43 to 0.49 | 0.50 | 0.52 | 0.66 |
-| Eight Capital fairness opinion, 10.5% | US$1,850 (its deck) | 0.62 to 0.70 | 0.71 | 0.72 | 0.92 |
-| Eight Capital, 13.5% | US$1,850 | 0.87 to 0.98 | about 1.0 | 0.98 | no solution |
-| Eight Capital, 10.5% | spot | 0.48 to 0.54 | 0.49 | 0.53 | 0.67 |
-| Eight Capital, 13.5% | spot | 0.65 to 0.73 | 0.65 | 0.69 | 0.86 |
-| Lopatnikov and Rumyantsev (2025), 16% real WACC for this project (applied by them to probability-weighted flows) | spot | 0.85 to 0.96 | 0.84 | 0.86 | no solution |
+| DFS, 5% | US$1,750 (DFS deck) | 0.45 to 0.50 | 0.51 | 0.52 | 0.66 |
+| Eight Capital fairness opinion, 10.5% | US$1,850 (its deck) | 0.65 to 0.73 | 0.74 | 0.72 | 0.92 |
+| Eight Capital, 13.5% | US$1,850 | 0.96 to no solution | no solution | 0.98 | no solution |
+| Eight Capital, 10.5% | spot | 0.49 to 0.55 | 0.50 | 0.53 | 0.67 |
+| Eight Capital, 13.5% | spot | 0.69 to 0.77 | 0.68 | 0.69 | 0.86 |
+| Lopatnikov and Rumyantsev (2025), 16% real WACC for this project (applied by them to probability-weighted flows) | spot | 0.93 to no solution | 0.90 | 0.86 | no solution |
 
 Spot gold was US$1,961 on July 13, 2023, and about US$2,020 to US$2,036 on the three later dates. The Eight Capital opinion is dated after the July and December 15 prices.
 
@@ -133,13 +133,13 @@ The CIM survey's FS-stage gold rate of 8.9% already includes development risk, s
 
 What the readings show:
 
-- **Fairness-opinion rates.** At the opinion's rates and gold deck, the prices are consistent with odds of roughly 0.6 to 1 that the project is built on the schedule assumed at each date. At spot gold the range is roughly 0.5 to 0.85.
-- **July against December.** The market value at the DFS and the undisturbed value five months later need almost the same project-level spread to be fair, about 17% to 18%.
+- **Fairness-opinion rates.** At the opinion's rates and gold deck, the prices are consistent with odds of roughly 0.65 to 1 that the project is built on the schedule assumed at each date; at the 13.5% rate several readings have no solution below 1. At spot gold the range is roughly 0.5 to 0.85.
+- **July against December.** The market value at the DFS and the undisturbed value five months later need almost the same project-level spread to be fair, about 16% to 17%.
 - **Delay at zero spread.** With no spread, implied odds fall slightly as delay is added. Waiting lowers the present value of costs but not of revenue when the convenience yield is zero (ADR 0046). The odds at zero spread are a point on the curve, not anyone's odds.
 
-**July 2023 sensitivity.** The Q1 MD&A implies that about C$4.6 million of cash was spent between March 31 and May 29, 2023 (ADR 0048). Counting it raises the July project price by that amount. The break-even spread then moves to 16.8% to 17.7%, and the Eight Capital readings at its deck to 0.63 to 0.71 (10.5%) and 0.89 to no solution (13.5%).
+**July 2023 sensitivity.** The Q1 MD&A implies that about C$4.6 million of cash was spent between March 31 and May 29, 2023 (ADR 0048). Counting it raises the July project price by that amount. The break-even spread then moves to 15.4% to 16.2%, and the Eight Capital readings at its deck to 0.67 to 0.75 (10.5%) and 0.99 to no solution (13.5%).
 
-**Equity floor.** The market-value readings use the equity claim, which is floored at zero on each path (ADR 0047). Existing holders can walk away rather than fund a value-destroying raise. At high spreads the floor binds on about a fifth of paths, which raised the December break-even spread from 16.9% to 18.2%, measured before the dilution correction of ADR 0048. The offers use the project claim, which is not floored.
+**Limited liability at the decision (ADR 0059).** The market-value readings use the equity claim. Until 2026-11-19 it was floored at zero on each simulated path (ADR 0047), which counted outcomes known only after construction and overstated the claim. Shareholders' limited liability is now applied once, at the build decision: a path builds only if building is worth something after the expected overrun and dilution, and the equity on a built path is not floored. Against the floored claim, the July and December break-even spreads fell by about 1.3 to 1.6 points (July 17.0% to 17.9% became 15.6% to 16.3%; December 18.1% became 16.8%), and the readings at high spreads rose. The offers use the project claim, which was never floored; only Shanjin's break-even moved, by 0.1 point.
 
 `scripts/osino_prices.py` regenerates these figures (200,000 paths, seed 1).
 

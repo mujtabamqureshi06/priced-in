@@ -1,6 +1,6 @@
 # 0047. Equity value floored at zero on each path
 
-- Status: accepted
+- Status: superseded by ADR 0059 (limited liability applied at the build decision)
 - Date: 2026-11-16
 - Amends: ADR 0030
 

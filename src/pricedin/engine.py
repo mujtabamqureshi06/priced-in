@@ -414,6 +414,53 @@ def _build_value(case: Case, market: Market, price: FloatArray, rate: float) -> 
     return values
 
 
+def mean_overrun_ratio(risks: Risks) -> float:
+    """Return the expected capital cost ratio of the overrun prior, computed analytically.
+
+    ``real_factor * (shift + exp(mu + sigma**2 / 2))``; 1.0 with no overrun. The build
+    decision uses this mean, never a path's draw (ADR 0015 rule 3, ADR 0059).
+    """
+    if risks.overrun is None:
+        return 1.0
+    r = risks.overrun.ratio
+    return float(risks.overrun.real_factor * (r.shift + np.exp(r.mu + 0.5 * r.sigma**2)))
+
+
+def _gate_costs(case: Case, market: Market, risks: Risks, financing: Financing | None) -> float:
+    """Return the expected overrun and dilution costs at the build year, at the market rate.
+
+    Subtracted from ``_build_value`` to give the decision-time value C of building
+    (ADR 0059): (mean ratio - 1) x PV of initial and expansion capital, plus, when the
+    run includes a ``Financing``, d / (1 - d) x PV of the equity raise at the mean ratio.
+    Both are present values at the build year on the study's own timing.
+    """
+    cols = case.schedule.columns
+    initial = np.asarray(cols["initial_capex"].values, dtype=np.float64)
+    capex = initial.copy()
+    if "expansion_capex" in cols:
+        capex = capex + np.asarray(cols["expansion_capex"].values, dtype=np.float64)
+    m = mean_overrun_ratio(risks)
+    disc = _discount(market.discount_rate, period_times(case))
+    cost = (m - 1.0) * float(capex @ disc)
+    if financing is not None:
+        raised = np.maximum(m * initial - financing.debt_fraction * initial, 0.0)
+        d = financing.issue_discount
+        cost += float((raised * d / (1.0 - d)) @ disc)
+    return cost
+
+
+def _decision_value(
+    case: Case,
+    market: Market,
+    price: FloatArray,
+    rate: float,
+    gate_cost: float,
+) -> FloatArray:
+    """Decision-time value C of building now at ``price``: build value less expected costs."""
+    values: FloatArray = _build_value(case, market, price, rate) - gate_cost
+    return values
+
+
 def _lsm_build_years(
     case: Case,
     market: Market,
@@ -422,6 +469,7 @@ def _lsm_build_years(
     prices: FloatArray,
     passes: BoolArray,
     rng: np.random.Generator,
+    gate_cost: float = 0.0,
 ) -> IntArray:
     """Build year per path from a least-squares Monte Carlo rule (ADR 0038).
 
@@ -441,7 +489,7 @@ def _lsm_build_years(
     rate = market.discount_rate if risks.lsm_rate is None else risks.lsm_rate
 
     def payoff(k: int, state: FloatArray) -> FloatArray:
-        return np.maximum(_build_value(case, market, state, rate), 0.0)
+        return np.maximum(_decision_value(case, market, state, rate, gate_cost), 0.0)
 
     fit_paths = GBM(market.gold_spot, market.drift, market.volatility).simulate(
         last, prices.shape[0], rng
@@ -489,8 +537,15 @@ def simulate(
         if risks.build_rule
         else range(timing.build_ready, timing.build_ready + 1)
     )
+    # Decision-time gate (ADR 0059): with the build rule on, a path builds only if the
+    # value of building now, net of the expected overrun and (for an equity run) the
+    # expected dilution, is non-negative. Limited liability is applied here, once, at
+    # the decision; it is not applied to realised outcomes.
+    gate_cost = _gate_costs(case, market, risks, financing) if risks.build_rule else 0.0
     if risks.build_rule and risks.build_decision == "lsm":
-        build_year = _lsm_build_years(case, market, timing, risks, prices, passes, fit_rng)
+        build_year = _lsm_build_years(
+            case, market, timing, risks, prices, passes, fit_rng, gate_cost
+        )
         candidates = range(0)
     for k in candidates:
         waiting = passes & (build_year < 0)
@@ -500,6 +555,9 @@ def simulate(
             ok = np.zeros(n_paths, dtype=bool)
             ok[waiting] = (
                 _decision_npv(case, prices[waiting, k], decision_rate) >= risks.build_hurdle
+            ) & (
+                _decision_value(case, market, prices[waiting, k], market.discount_rate, gate_cost)
+                >= 0.0
             )
         else:
             ok = waiting
@@ -541,6 +599,10 @@ def simulate(
                 pv = risks.holding_cost * float(_discount(market.discount_rate, hold_years).sum())
                 holding[hold_end == end] = pv
     project_value -= holding
+    if equity_value is not None:
+        # Unbuilt paths: the equity claim bears the holding cost like the project
+        # (ADR 0049); with no holding cost it is zero.
+        equity_value -= case.operator_share * holding
 
     for b in np.unique(build_year[built]):
         idx = np.flatnonzero(build_year == b)
@@ -553,10 +615,11 @@ def simulate(
             raised = np.maximum(ratio[idx, None] * initial - financing.debt_fraction * initial, 0.0)
             d = financing.issue_discount
             transfer = (raised * d / (1.0 - d)) @ _discount(market.discount_rate, years)
-            # Limited liability (ADR 0030, DR-025): existing holders need not raise money
-            # at a value-destroying discount, so their value on a path is floored at zero.
-            # The project, royalty and stream claims on that path are unchanged.
-            equity_value[idx] = case.operator_share * np.maximum(project_value[idx] - transfer, 0.0)
+            # No per-path floor (ADR 0059, superseding ADR 0047): holders commit at the
+            # build decision, before the overrun and later prices are known, so a single
+            # built path can carry negative equity. Limited liability is applied at the
+            # decision by the gate above.
+            equity_value[idx] = case.operator_share * (project_value[idx] - transfer)
         if stream is not None and stream_value is not None:
             stream_value[idx] = _stream_pv(case, stream, path_prices, years, market.discount_rate)
         if royalty is not None and royalty_value is not None and advance_value is not None:
