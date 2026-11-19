@@ -240,7 +240,7 @@ def fan_chart(d: dict[str, Any], odds0: int | None) -> str:
     label = (
         f"{len(d['paths'])} of the {n_paths:,} simulated gold price paths over twelve years, "
         "with the middle path and the range that holds 90 percent of them. "
-        "The paths drawn in gold are the outcomes that pass at the implied odds."
+        "The share of paths drawn in gold matches the share of built value in the price."
     )
     return (
         f'<div class="pi-chart" id="pi-fan"><svg viewBox="0 0 {FAN_W} {FAN_H}" width="100%" '
@@ -323,7 +323,7 @@ def overrun_chart(d: dict[str, Any]) -> str:
 
 
 def sensitivity_rows(d: dict[str, Any]) -> str:
-    """Draw the implied odds range for each input moved alone."""
+    """Draw the range of the price-to-built-value ratio for each input moved alone."""
     base = d["sensitivity"]["base"]
     out = []
     for row in d["sensitivity"]["rows"]:
@@ -331,7 +331,7 @@ def sensitivity_rows(d: dict[str, Any]) -> str:
         if a is None or b is None:
             raise ValueError(f"sensitivity row {row['name']!r} has no solution at one end")
         lo, hi = min(a, b), max(a, b)
-        label = f"{row['name']}: implied odds from {lo} to {hi} percent."
+        label = f"{row['name']}: price as a share of built value from {lo} to {hi} percent."
         out.append(
             f'<div class="pi-trow"><div class="nm">{esc(row["name"])}'
             f"<small>{esc(row['from'])} to {esc(row['to'])}</small></div>"
@@ -396,7 +396,6 @@ def build_page(d: dict[str, Any]) -> str:
         raise ValueError("sensitivity base differs from the starting odds")
     ov = d["overrun_summary"]
     years_to_start = d["inputs"]["years_to_start"]
-    dots_per = n_paths // 100
     study_rate = pct(h["study_discount_rate"])
     ret0 = f"{dflt['return']}%"
     se_text = f"Simulation error is at most {usd_m(d['se_max'])}."
@@ -445,7 +444,7 @@ def build_page(d: dict[str, Any]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Priced In: the build odds in the price of an unbuilt mine</title>
+<title>Priced In: how much of an unbuilt mine's value is in its price</title>
 <meta name="description" content="Priced In simulates {n_paths:,} possible outcomes for a mine, then works out what chance of construction makes a real price add up.">
 <meta name="generator" content="pricedin {esc(meta["engine_version"])}, commit {esc(meta["commit"][:12])}, {n_paths} paths, seed {meta["seed"]}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230F2747%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%277%27 fill=%27%23D9B15E%27/%3E%3C/svg%3E">
@@ -469,7 +468,7 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 </header>
 <main id="top" class="pi-wrap pi-heroin">
 <div class="pi-pitch">
-<h1>Turn the price of an unbuilt mine into the odds it gets built.</h1>
+<h1>How much of an unbuilt mine's value is in its price?</h1>
 <p>Priced In simulates {n_paths:,} possible outcomes for a mine, then works out what chance of construction makes a real price add up.</p>
 <p style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px"><a class="pi-btn" href="#how">See how it works</a></p>
 </div>
@@ -482,14 +481,14 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 <div class="pi-fact"><span class="l">Worth if built {tip("The average value to this buyer across the simulated outcomes in which the mine goes ahead, at the gold price, return and cost setting chosen below. " + se_text, "tt-value")}</span><b data-k="value">{usd_m(v0)}</b></div>
 </div>
 <div class="pi-out">
-<div class="pi-grid" role="img" aria-label="The {n_paths:,} simulated outcomes drawn as 100 dots. Gold dots are the share that must end with the mine built for the price to match the value.">{dots}</div>
+<div class="pi-grid" role="img" aria-label="The price as a share of the value if built, drawn as 100 dots.">{dots}</div>
 <div class="pi-read">
-<div class="pi-ok"><p class="pi-big" data-k="odds">{odds0}%</p><p class="pi-lab">implied odds of a build on schedule</p><p class="pi-say">At a <span data-k="ret">{ret0}</span> extra return, the price matches the engine's value only if <span data-k="oddsn">{odds0}</span> of every 100 simulated outcomes end with the mine built on schedule.</p><p class="pi-eq">Price paid ÷ worth if built</p></div>
-<div class="pi-ns"><p class="pi-big" style="font-size: 40px; color: #E6EBF2; line-height: 1.05">No odds are high enough</p><p class="pi-say">Even a certain build is worth less than the price at a <span data-k="ret">{ret0}</span> return. Odds alone do not explain this price.</p></div>
+<div class="pi-ok"><p class="pi-big" data-k="odds">{odds0}%</p><p class="pi-lab">price as a share of built value</p><p class="pi-say">The price equals <span data-k="oddsn">{odds0}</span>% of the engine's value if built. If a <span data-k="ret">{ret0}</span> extra return were the only other thing separating price from value, this would be the implied odds of a build on schedule.</p><p class="pi-eq">Price paid ÷ worth if built</p></div>
+<div class="pi-ns"><p class="pi-big" style="font-size: 40px; color: #E6EBF2; line-height: 1.05">Price above built value</p><p class="pi-say">Even a certain build is worth less than the price at a <span data-k="ret">{ret0}</span> return. The chance of a build alone does not explain this price.</p></div>
 </div>
 </div>
 <p class="pi-sr" aria-live="polite" id="pi-live"></p>
-<p class="pi-note">The engine works backwards from the price. It does not count how often the mine got built; it finds the share of simulated outcomes that must end in a built mine for the price to match its value. Each dot stands for {dots_per:,} of the {n_paths:,} outcomes.</p>
+<p class="pi-note">The engine does not count how often mines get built. It divides the price by what the mine would be worth if built on schedule, across {n_paths:,} simulated outcomes. Each dot is one percent of that value.</p>
 <div class="pi-ctl">{ctl}</div>
 <p class="pi-demo"><strong>This mine is made up to show the method.</strong> The engine computed every figure from the inputs shown; none of it describes a real project. The answer moves a lot because it depends on what you assume, and that is the point.</p>
 </section>
@@ -519,7 +518,7 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 <div class="pi-k"><span aria-hidden="true">2</span><h3>Simulate {n_paths:,} outcomes</h3></div>
 <p>In each one gold takes a different path, the build costs more or less than planned, and the mine goes ahead or does not.</p>
 <p style="margin-top: 10px; font-size: 13px; line-height: 1.5; color: #5F6773">Illustrative market inputs: gold at the price set above, moving about {pct(d["inputs"]["gold_volatility"])} a year; a risk-free rate of {pct(d["inputs"]["real_rate"])} after inflation; building starts in {WORDS.get(years_to_start, str(years_to_start))} year{"" if years_to_start == 1 else "s"} and takes {WORDS.get(h["preproduction_years"], str(h["preproduction_years"]))}.</p>
-<div style="margin-top: 14px"><p style="font-size: 13px; font-weight: 700; color: #0F2747; margin: 0 0 6px 0">Gold prices used for valuation, not a forecast {tip(f"Forty of the {n_paths:,} paths, built from today's gold price and interest rates, the way options are priced. They are for valuing the mine, not a prediction of where gold will go. The share of lines drawn in gold matches the implied odds above.", "tt-fan")}</p>{fan_chart(d, odds0)}</div>
+<div style="margin-top: 14px"><p style="font-size: 13px; font-weight: 700; color: #0F2747; margin: 0 0 6px 0">Gold prices used for valuation, not a forecast {tip(f"Forty of the {n_paths:,} paths, built from today's gold price and interest rates, the way options are priced. They are for valuing the mine, not a prediction of where gold will go. The share of lines drawn in gold matches the share above.", "tt-fan")}</p>{fan_chart(d, odds0)}</div>
 <div class="pi-stats"><div><b data-k="g50">{usd(g0["median"])}</b><span>middle path after 12 years</span></div><div><b data-k="g90">{usd(g0["p5"])} to {usd(g0["p95"])}</b><span>where 9 in 10 paths end</span></div></div>
 <p style="margin-top: 22px; font-size: 13px; font-weight: 700; color: #0F2747">Build cost in each outcome, against the estimate in the study {tip(f"Drawn from the record of past mines (Bertisen and Davis, 2008). In the engine's draws the build costs {ov['mean_pct']}% more than planned on average, and about {ov['double_or_more_in_100']} in 100 cost double or more.", "tt-oh")}</p>
 {overrun_chart(d)}
@@ -540,11 +539,11 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 
 <div class="pi-card">
 <div class="pi-k"><span aria-hidden="true">4</span><h3>Solve for the one thing nobody states</h3></div>
-<p>A price reflects two things: the extra return the buyer needs and the chance the mine gets built. If it is never built the buyer gets nothing. So once the return is stated, the price gives the chance.</p>
+<p>Divide the price by the value if built. If the extra return the buyer needs were the only other thing between the two, the result would be the chance the mine gets built on schedule: a mine never built is worth nothing. Anything else the model leaves out also sits in this ratio, so it is read with its stated return.</p>
 <div class="pi-step4"><div class="pi-ok"><div class="pi-eqn"><span data-k="price">{usd_m(p0)}</span><i>÷</i><span data-k="value">{usd_m(v0)}</span><i>=</i><span class="res" data-k="odds">{odds0}%</span></div></div>
-<div class="pi-ns"><div class="pi-eqn" style="font-size: 22px">The price is above worth if built. No odds are high enough.</div></div></div>
+<div class="pi-ns"><div class="pi-eqn" style="font-size: 22px">The price is above worth if built.</div></div></div>
 <div class="pi-ob" aria-hidden="true"><div class="pi-obt"><div class="pi-obf"></div><div class="pi-obm"><span>price paid</span></div></div><div class="pi-obe"><span>US$0 if never built</span><span>worth if built</span></div></div>
-<p style="margin-top: 16px; font-size: 14px; color: #5F6773">This reading assumes the mine is built on schedule. A different build date changes the odds; the deal pages show by how much.</p>
+<p style="margin-top: 16px; font-size: 14px; color: #5F6773">This reading assumes the mine is built on schedule. A different build date changes the ratio's reading as odds; the deal pages show by how much.</p>
 <div class="pi-says"><div><b>What it says</b><span>What a price implies about the chance of a build, once the buyer's return is stated.</span></div><div><b>What it depends on</b><span>The return, the gold price and the costs set above. Change one and the answer moves.</span></div><div><b>What it does not say</b><span>That a price is too high or too low, or what will happen to the mine.</span></div></div>
 </div>
 
@@ -565,7 +564,7 @@ a{{color:#0F2747}}a:hover{{color:#8A6417}}
 <div class="pi-band">
 {contours(1200, 300, 900, 60, "#5B7BAA", 0.5, n=8, step=50)}
 {survey(1200, 300, "#7C9BC9", 0.28, 5, holes=5, grid=150)}
-<div><h2>It has been run on real prices</h2><p>Two royalty purchases and two takeovers of real projects, each with its sources. A test on 85 projects of whether these odds tell you which mines get built is under way.</p></div>
+<div><h2>It has been run on real prices</h2><p>Two royalty purchases and two takeovers of real projects, each with its sources. A test on 80 developers of whether this ratio tells you which mines get built is under way; results will be published when it is complete.</p></div>
 <p style="display: flex; flex-wrap: wrap; gap: 12px; margin: 0; position: relative"><a class="pi-btn" href="{LINKS["deals"]}">See the real deals</a></p>
 </div>
 </section>

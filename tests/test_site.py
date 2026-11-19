@@ -229,7 +229,8 @@ def test_page_wording_rules(page: str) -> None:
     assert "—" not in page
     for word in ("futures", "fair", " bet ", "probability", "the market's odds"):
         assert word not in text, word
-    assert "implied odds of a build on schedule" in text
+    assert "price as a share of built value" in text
+    assert "this would be the implied odds of a build on schedule" in text
     assert "gold prices used for valuation, not a forecast" in text
 
 

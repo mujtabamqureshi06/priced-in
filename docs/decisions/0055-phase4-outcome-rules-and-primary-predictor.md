@@ -1,6 +1,6 @@
 # 0055. Phase 4: outcome rules, takeovers and the primary predictor
 
-- Status: accepted
+- Status: accepted; rule 6 naming amended by ADR 0061
 - Date: 2026-11-17
 - Amends: ADR 0051 and the Phase 4 protocol (sections 4 and 6)
 

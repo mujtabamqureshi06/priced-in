@@ -95,10 +95,10 @@
 
     if (live) {
       live.textContent = ns
-        ? "No odds are high enough at a " + s.ret + "% return. Price " + usdM(price) +
+        ? "Price above built value at a " + s.ret + "% return. Price " + usdM(price) +
           ", worth if built " + usdM(s.value) + "."
-        : "Implied odds " + s.odds + "%. Price " + usdM(price) + ", worth if built " +
-          usdM(s.value) + ", at a " + s.ret + "% extra return.";
+        : "Price as a share of built value " + s.odds + "%. Price " + usdM(price) +
+          ", worth if built " + usdM(s.value) + ", at a " + s.ret + "% extra return.";
     }
   }
 

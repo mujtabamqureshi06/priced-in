@@ -44,8 +44,9 @@ st.set_page_config(page_title="Priced In", layout="wide")
 st.title("Priced In")
 st.caption(
     "A simulation engine for undeveloped mining assets. It values the project, the "
-    "operator's equity and a royalty on the same simulated futures, and shows what a "
-    "price implies about build odds and timing. Results are illustrations under stated, "
+    "operator's equity and a royalty on the same simulated futures, and shows a price as a "
+    "share of the value if built, read as build odds and timing only at a stated required "
+    "return. Results are illustrations under stated, "
     "sourced assumptions; they are not investment advice."
 )
 
@@ -162,9 +163,10 @@ if "Royalty price" in views:
         spread = st.slider("Buyer's real spread over the risk-free rate", 0.0, 0.20, 0.04, 0.002)
         frontier, be = _royalty(name, float(y), n_paths, credited, float(spread))
         st.write(
-            "Implied odds of construction for each number of years late, for a project "
-            "that is built (ADR 0025). Values above one mean the price is above the "
-            "certain-build value at that delay."
+            "The price as a share of the value if built, for each number of years late, "
+            "read as implied odds of construction at the spread chosen above (ADR 0025, "
+            "ADR 0061). Values above one mean the price is above the certain-build value "
+            "at that delay."
         )
         st.line_chart(
             {
