@@ -241,13 +241,17 @@ def build_case(
     document_url: str,
     document_date: date,
     location: str,
+    irr_tol: float = 5e-4,
+    allow_shape_miss: bool = False,
 ) -> Case:
     """Build a schedule-mode case from headline figures, for the engine and the inversion.
 
     Every column cites ``location`` in the named document, marked as built by this
     module, so a reader can tell a built schedule from a transcribed one.
+    ``irr_tol`` and ``allow_shape_miss`` are passed to :func:`calibrate` (ADR 0057,
+    rules 1 and 2), so a panel entry flagged "shape not matched" can still be built.
     """
-    s = calibrate(h)
+    s = calibrate(h, irr_tol=irr_tol, allow_shape_miss=allow_shape_miss)
     n = s.after_tax.size
     src = {"document": case_id, "location": f"{location}; schedule built by pricedin.parametric"}
 

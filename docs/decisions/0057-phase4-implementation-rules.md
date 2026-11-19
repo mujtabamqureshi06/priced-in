@@ -27,3 +27,29 @@ These rules were fixed on 2026-11-19. No implied odds, test statistics or compar
 - The panel keeps every project whose study NPV can be matched.
 - The volatility uses no information after any snapshot.
 - Results carry two new robustness checks: without shape-flagged entries, and with each study's own construction timing.
+
+## Amendment (2026-11-19): panel inputs completed
+
+Fixed after every primary-panel study input was complete and before any implied odds were compared with outcomes.
+
+10. **Shape flags.** With every input complete, 14 of the 85 primary entries are flagged "cash-flow shape not matched", above the eight at which this rule was to be revisited. The rule stands. The flagged entries are 9 TSXV, 4 TSX and 1 ASX; by outcome, none of the 16 construction decisions, 1 of the 11 takeovers and 13 of the 58 entries with no event. The check without flagged entries is reported beside every result. The rule is revisited if that check moves the AUC by more than 0.05.
+11. **Re-read of the three largest misses.** The entry documents of the three entries with the largest IRR misses at the time (Buckreef, Namdini, Castelo de Sonhos) were re-read against the base-case convention and the single-currency rule.
+    - Buckreef (PEA, 25 April 2012): the release gives one case at US$1,600/oz, in US dollars. A restatement filed in August 2012 at a regulator's request used US$1,500/oz as its base; as with other regulator-prompted restatements, it is not a new entry study. Its sensitivity table gives a post-tax IRR of 54% at US$1,600/oz against the release's 48%, at the same NPV; the release figure is kept. The study describes a modular plant, which a single initial capital figure cannot represent.
+    - Namdini (scoping study, 5 February 2018): three throughput options; the release designates none as preferred and presents the 7.0 Mtpa option "for indicative purposes". That option is used, in US dollars. Its higher-grade starter pit front-loads production.
+    - Castelo de Sonhos (PEA, 16 November 2018): one base case, in US dollars, with Brazilian costs converted at a stated R$3.8 per US$. Production averages about 160,000 oz a year for the first four years against 120,000 oz over the 9.1-year life.
+    In each case the inputs stand and the flag stays; the misses come from front-loaded or phased schedules, not from a reading error.
+12. **Schedule shorter than the builder allows.** The builder needs at least two production years. Julius (BFS stage 1, 18 January 2017) has 1.25 years. Its schedule is compressed to two production years with total ounces unchanged (51.2 koz a year over 1.25 years becomes 32 koz a year over 2 years), flagged "schedule compressed to the builder's minimum".
+13. **Annual production.** Annual production is the life-of-mine total divided by the production years, not a steady-state or early-years rate. Where a document gives only tonnes, grade and recovery, production is derived from them and flagged.
+14. **Inputs completed from the entry documents.**
+
+| Entry | Input | Value | Source |
+|---|---|---|---|
+| Eagle Mountain | production | 21.1 koz a year (168,700 oz over 8 years) | Goldsource Mines, PEA release, 31 July 2014 |
+| Granada (primary) | gold price | US$1,260/oz at C$1.11 per US$ | Gold Bullion Development, PFS release, 6 May 2014 |
+| Hammerdown | initial capital | C$54.2M, derived: C$67.8M total less sustaining (C$5.5M and C$7.1M) and closure (C$1.0M); flagged | Maritime Resources, PFS release, 2 March 2017, Table 4 |
+| Laiva | gold price | US$1,300/oz | PEA technical report, 3 July 2018, section 22.2.1, p. 22-1 |
+| Mirado South Zone | production | 23.6 koz a year, derived from 996,000 t at 2.33 g/t and 95% recovery over 3 years; flagged | Orefinders Resources, PEA release, 15 January 2018 |
+| Valentine Lake | initial capital, life, production | US$380M; 10.2 years; 185.9 koz a year (1,896,300 oz) | Marathon Gold, release of 30 October 2018, May 2018 column |
+| Qala Shallows | gold price, life, production | US$1,750/oz; 16 production years, derived from a 17-year life that starts with construction; 41.4 koz a year (663,000 oz); flagged | West Wits Mining, DFS release, 2 September 2021 |
+
+The gold price for Mirado South Zone is US$1,300/oz with figures in Canadian dollars at US$0.76 per C$, as its release states.
