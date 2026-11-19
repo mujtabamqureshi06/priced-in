@@ -79,8 +79,10 @@ priors:
     status: V
     flag: >-
       The authors' own assumption: 3% a year cost inflation, two years from study
-      to construction start, two years of construction. Gives a real mean
-      overrun of about 14%.
+      to construction start, two years of construction. Applied to the sample
+      mean ratio of 1.25 (Table 1) it gives a real mean overrun of about 14%;
+      applied to the fitted distribution's mean ratio of 1.26, which the engine
+      draws from, about 15% (0.914 x 1.26 = 1.152).
     sensitivity:
       - {label: no inflation adjustment, value: 1.0, source: judgment}
     decision: ADR 0007, ADR 0015
