@@ -21,7 +21,7 @@ The builder's existing schedule: tax at the combined rate on revenue less operat
 
 ## 3. Gaps
 
-Three jurisdiction periods have no sourced rate: Ecuador in 2012, Guyana in 2012 to 2016 and Sudan in 2012 to 2015. No pre-tax-only study in the panel falls in them. If one later does, that project is reported only in the results that use reported after-tax figures.
+Two jurisdiction periods have no sourced rate: Ecuador in 2012 and Sudan in 2012 to 2015. No pre-tax-only study in the panel falls in them. If one later does, that project is reported only in the results that use reported after-tax figures. Guyana in 2012 to 2016 was added on 2026-11-19 by this method (30%, from the Corporation Tax Act as amended), because two primary entries need a rate for the depreciation shield; no implied odds had been computed (ADR 0057).
 
 ## 4. Validation
 

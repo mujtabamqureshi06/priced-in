@@ -26,7 +26,7 @@ table is measured on a hand-transcribed validation subsample, not assumed.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
 
 import numpy as np
@@ -124,6 +124,8 @@ class Schedule:
     after_tax: FloatArray
     cost_factor: float
     tilt: float
+    shape_matched: bool = True
+    irr_miss: float = 0.0
 
 
 def _schedule(h: Headline, k: float, g: float) -> Schedule:
@@ -143,6 +145,18 @@ def _schedule(h: Headline, k: float, g: float) -> Schedule:
     return Schedule(koz, revenue, cost, capex, taxes, pre_tax, pre_tax - taxes, k, g)
 
 
+def irr_tolerance(decimals: int) -> float:
+    """IRR tolerance for a study that states its IRR to ``decimals`` places of a percent.
+
+    Half a unit of the last stated digit: 0.5 points for a whole-number IRR such as
+    "24%", 0.05 points for "24.5%" (ADR 0057). A tolerance tighter than the precision a
+    study reports would reject schedules the study's own figures cannot distinguish.
+    """
+    if decimals < 0:
+        raise ValueError("decimals must be zero or positive")
+    return 0.5 * 10.0 ** (-decimals) / 100.0
+
+
 def _npv(flows: FloatArray, rate: float) -> float:
     return float(flows @ (1.0 + rate) ** -np.arange(flows.size))
 
@@ -151,15 +165,30 @@ def _irr(flows: FloatArray) -> float:
     return float(brentq(lambda r: _npv(flows, r), -0.9, 10.0))
 
 
-def calibrate(h: Headline) -> Schedule:
+def calibrate(
+    h: Headline,
+    *,
+    irr_tol: float = 5e-4,
+    npv_tol: float = 1e-3,
+    allow_shape_miss: bool = False,
+) -> Schedule:
     """Solve the cost factor and tilt so the schedule reproduces the study NPV and IRR.
 
     The fit is to the after-tax pair when the study reports it, otherwise to the pre-tax
     pair; in the second case the schedule's after-tax flows are modelled with ``tax_rate``.
 
+    Args:
+        h: the study's headline figures.
+        irr_tol: largest accepted IRR error (fraction); see ``irr_tolerance``.
+        npv_tol: largest accepted NPV error, as a share of initial capital.
+        allow_shape_miss: if no schedule within the tilt bounds matches both figures,
+            return the closest schedule that still matches the NPV, marked
+            ``shape_matched=False`` with its IRR miss recorded (ADR 0057). The NPV must
+            still be matched.
+
     Raises:
-        ValueError: if no schedule within the bounds matches both figures to within
-            0.1% of initial capital (NPV) and 0.05 points (IRR).
+        ValueError: if no schedule matches both figures within tolerance (or, with
+            ``allow_shape_miss``, if none matches the NPV).
 
     """
     g_max = 1.0 - MIN_PRODUCTION_SHARE
@@ -177,15 +206,26 @@ def calibrate(h: Headline) -> Schedule:
             irr_err = 1.0
         return np.array([npv_err, irr_err])
 
-    fit = least_squares(residual, x0=np.array([1.0, 0.0]), bounds=([0.0, -g_max], [5.0, g_max]))
+    bounds = ([0.0, -g_max], [5.0, g_max])
+    fit = least_squares(residual, x0=np.array([1.0, 0.0]), bounds=bounds)
     npv_err, irr_err = residual(fit.x)
-    if abs(npv_err) > 1e-3 or abs(irr_err) > 5e-4:
-        raise ValueError(
-            "no schedule matches the study's NPV and IRR within tolerance "
-            f"(NPV error {npv_err:.2%} of capex, IRR error {irr_err:.2%}); "
-            "check the headline figures"
+    if abs(npv_err) <= npv_tol and abs(irr_err) <= irr_tol:
+        return _schedule(h, float(fit.x[0]), float(fit.x[1]))
+    if allow_shape_miss:
+        # Match the NPV first; the IRR is matched as closely as the tilt bounds allow.
+        weighted = least_squares(
+            lambda x: residual(x) * np.array([1000.0, 1.0]), x0=fit.x, bounds=bounds
         )
-    return _schedule(h, float(fit.x[0]), float(fit.x[1]))
+        npv_err, irr_err = residual(weighted.x)
+        if abs(npv_err) <= npv_tol:
+            s = _schedule(h, float(weighted.x[0]), float(weighted.x[1]))
+            matched = abs(irr_err) <= irr_tol
+            return replace(s, shape_matched=matched, irr_miss=0.0 if matched else float(irr_err))
+    raise ValueError(
+        "no schedule matches the study's NPV and IRR within tolerance "
+        f"(NPV error {npv_err:.2%} of capex, IRR error {irr_err:.2%}); "
+        "check the headline figures"
+    )
 
 
 def build_case(

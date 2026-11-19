@@ -147,6 +147,8 @@ A comparison of implied odds against P/NAV needs a difference in AUC, which thes
 
 On 2026-11-17, after outcomes were labelled and before any implied odds, prices or test statistics were computed, ADR 0055 fixed: the dating of construction decisions and takeovers; the exclusion of snapshots while a takeover offer is outstanding; the scope of the second coding; takeovers as non-events in the primary test, with checks; single-predictor comparison as the primary test with project-level bootstrap intervals; and implied odds at a 0% spread, used as a ranking, as the primary predictor, with 5%, 10% and break-even spreads as checks.
 
+On 2026-11-19, before any implied odds, test statistics or comparisons with outcomes were computed, ADR 0057 fixed the implementation rules: the calibration tolerance follows each study's reported IRR precision, and entries whose cash-flow shape cannot be matched stay in with a flag and a robustness check; 10-year volatility from the World Bank monthly series with the averaging correction; valuation in each study's currency at the snapshot exchange rate; equity value from Capital IQ market capitalisation with the as-traded price from reported shares; a Guyana tax rate for 2012 to 2016; construction one year after each snapshot; the PFS overrun prior for PEA and scoping entries; and attributable ownership.
+
 ## 9. Freeze
 
 Frozen on 2026-11-17, before any outcome was labelled. The freezing commit is the merge of the pull request that adds ADR 0054 and `data/phase4/candidates.csv`; its hash is recorded below by the next commit.
