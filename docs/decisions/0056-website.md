@@ -1,6 +1,6 @@
 # 0056. Website: a static page built from the engine
 
-- Status: accepted
+- Status: accepted; rule 5 wording amended by ADR 0061 (price-to-built-value ratio)
 - Date: 2026-11-19
 
 ## Context

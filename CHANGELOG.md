@@ -4,7 +4,12 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 
 ## [Unreleased]
 
+### Changed
+- The headline number is named the price-to-built-value ratio (ADR 0061): the price as a share of what the project would be worth if built on schedule at today's gold price, rates and volatility, after overrun, the option not to build and dilution. "Implied odds" is kept only as a reading that names the required return. The website headline, key figure, test line, README and app caption are reworded; the website's illustrative figures are regenerated with the corrected engine (ADR 0059).
+- Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
+
 ### Added
+- Methodology section 7 states what the price-to-value ratio measures at a 0% spread: the value if built is close to the undiscounted after-tax cash flow at spot gold (0.90 to 0.97 times on three cases at a 1% real rate), value rises with the real rate (8% to 14% per point), and all study stages share one overrun prior. `scripts/ratio_diagnostics.py` reproduces the figures.
 - Phase 4 secondary analysis fixed before it is run (ADR 0060): a discrete-time hazard on quarterly snapshots, the decision in the next quarter against the log of the ratio and study stage, complementary log-log with a Firth penalty, a project-cluster bootstrap and five stated checks. `scripts/phase4_hazard.py` writes its commit and run time before any result.
 - Phase 4 equity value and entry rules (ADR 0058), fixed before any implied odds were compared with outcomes: entries decided or taken over on or before their entry snapshot leave the primary panel; the primary equity value is undiluted, with the diluted value as a check where company documents give the capital structure; cash raised between the last report and the snapshot is added; the ownership factor follows the basis of each study's NPV. Amended after the screen of all 85 entries: one entry decided before its snapshot; entries with an offer outstanding at entry stay, flagged, with a check without them. The panel (80 entries), documented subset, ownership flags and the hashes of the fixed implied-odds files are recorded before the outcome comparison.
 - Phase 4 panel inputs completed (ADR 0057, amendment): every primary-panel study input now has a source, with derived figures flagged; 14 of 85 entries flagged "cash-flow shape not matched", reported by outcome and exchange; a documented re-read of the three largest misses; one schedule compressed to the builder's two-year minimum. `parametric.build_case` passes the calibration tolerance and the shape-miss option through, so a flagged entry can be valued.
@@ -16,9 +21,6 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Phase 4 sources (ADR 0052): Capital IQ for prices and share counts, exported by the licensed user, with only derived results published; a mining property screen as the preferred candidate frame, with the government list as a pilot fallback. Candidate list extended to the 2017 to 2019 editions.
 - Parametric study builder (`pricedin.parametric`, ADR 0051): an annual schedule from a study's headline figures, calibrated to its after-tax NPV and IRR. On Osino's DFS headline it tracks the transcribed case within 0.6% at market prices (informative; the Phase 4 validation uses a random ASX subsample).
 - Phase 4 panel protocol, draft (`docs/phase4/protocol.md`, ADR 0051): ASX core panel, outcome coding, parametric mine plans with a hand-transcribed validation subsample, power table. Frozen before any outcome data is collected.
-
-### Added
-- Methodology section 7 states what the price-to-value ratio measures at a 0% spread: the value if built is close to the undiscounted after-tax cash flow at spot gold (0.90 to 0.97 times on three cases at a 1% real rate), value rises with the real rate (8% to 14% per point), and all study stages share one overrun prior. `scripts/ratio_diagnostics.py` reproduces the figures.
 
 ### Fixed
 - **Equity claim no longer floored on each simulated path** (ADR 0059, superseding ADR 0047). The per-path floor max(project - transfer, 0) was applied after a path's gold prices and capital overrun were known, which gave shareholders a put option they do not hold and could value equity above the project. Limited liability is now applied at the build decision: with the build rule on, a path builds only if building is worth something after the expected overrun and, for an equity run, the expected dilution; equity on a built path is not floored. On Osino and South Railroad (1% real rate, 15% volatility) the floored claim was 4.7% to 7.4% above the corrected claim at spot equal to the study price, and 25% to 70% above it at 0.7 to 0.8 times. Published figures that change (200,000 paths, seed 1):
@@ -35,9 +37,6 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
   | Orla sum of parts, South Railroad value if built at 4% to 15% spreads | 379.5 to 154.5 | 380.4 to 158.1 |
 
   The case notes give every changed reading. The project claim moves slightly because the build decision now also charges the expected overrun. The Phase 4 primary result is unchanged; values under the new rule are an exploratory secondary.
-
-### Changed
-- Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ## [1.0.0] - 2026-11-16
 

@@ -1,6 +1,6 @@
 # Priced In
 
-Priced In values a mine that has not been built yet, compares that value to what people actually pay for it, and reports the build odds and timing the price implies.
+Priced In values a mine that has not been built yet, compares that value to what people actually pay for it, and reports the price as a share of built value, and the build odds that share would imply at a stated required return.
 
 ## The problem
 
@@ -93,7 +93,7 @@ Market snapshots (`data/snapshots/`) hold derived values only. Gold volatilities
 
 ## Status
 
-Phases 1 to 3 are complete and released (v0.1.0, v0.2.0, v1.0.0). Phase 3 added the least-squares Monte Carlo build decision (checked against QuantLib and a replication of Brennan and Schwartz 1985), the order-independent waterfall, gold streams, the Schwartz-Smith two-factor model, the Gold Standard takeover and the Orla sum of parts. Calibration to copper futures and a uranium deck are deferred (ADR 0042). Ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 4, a test of whether implied odds carry information about which projects get built, is in progress; nothing here claims predictive power. See [docs/ROADMAP.md](docs/ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
+Phases 1 to 3 are complete and released (v0.1.0, v0.2.0, v1.0.0). Phase 3 added the least-squares Monte Carlo build decision (checked against QuantLib and a replication of Brennan and Schwartz 1985), the order-independent waterfall, gold streams, the Schwartz-Smith two-factor model, the Gold Standard takeover and the Orla sum of parts. Calibration to copper futures and a uranium deck are deferred (ADR 0042). Ramp-up is not modelled because the public studies do not give enough detail (ADR 0029). Phase 4, a test of whether the price-to-built-value ratio carries information about which projects get built, is in progress; nothing here claims predictive power. See [docs/ROADMAP.md](docs/ROADMAP.md) and [CHANGELOG.md](CHANGELOG.md).
 
 ## How this was built
 
