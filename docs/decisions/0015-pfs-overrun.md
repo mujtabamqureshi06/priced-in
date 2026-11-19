@@ -1,6 +1,6 @@
 # 0015. Capital cost overrun for PFS-stage cases
 
-- Status: accepted
+- Status: accepted; rule 3 amended by ADR 0059 (the decision also charges the mean overrun)
 - Date: 2026-11-16
 
 ## Context

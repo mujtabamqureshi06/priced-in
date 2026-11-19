@@ -26,12 +26,12 @@ Exploration ground and resources outside the study plans are valued at zero. Tha
 | Real spread | Camino Rojo | South Railroad price | South Railroad value if built on schedule | Implied odds |
 |---|---|---|---|---|
 | 0% | 838.0 | 297.3 to 528.6 | 538.1 | 0.55 to 0.98 |
-| 4% | 723.7 | 411.7 to 643.0 | 379.5 | above 1 |
-| 8% | 633.6 | 501.8 to 733.1 | 271.3 | above 1 |
-| 12% | 561.6 | 573.8 to 805.1 | 196.0 | above 1 |
-| 15% | 516.7 | 618.6 to 849.9 | 154.5 | above 1 |
+| 4% | 723.7 | 411.7 to 643.0 | 380.4 | above 1 |
+| 8% | 633.6 | 501.8 to 733.1 | 273.5 | above 1 |
+| 12% | 561.6 | 573.8 to 805.1 | 199.1 | above 1 |
+| 15% | 516.7 | 618.6 to 849.9 | 158.1 | above 1 |
 
-The band comes from Cerro Quema: its low end takes Cerro Quema at its study NPV, its high end at zero. South Railroad's value uses the 2022 feasibility study and the 4-year timing prior (ADR 0043), read against the project claim (ADR 0047).
+The band comes from Cerro Quema: its low end takes Cerro Quema at its study NPV, its high end at zero. South Railroad's value uses the 2022 feasibility study and the 4-year timing prior (ADR 0043), read against the project claim (ADR 0031).
 
 ## Reading
 

@@ -1,6 +1,6 @@
 # 0030. Equity claim and dilution
 
-- Status: accepted; amended by ADR 0047 (equity floored at zero on each path)
+- Status: accepted; amended by ADR 0047 (equity floored at zero on each path), itself superseded by ADR 0059 (limited liability at the build decision)
 - Date: 2026-11-16
 
 ## Decision
