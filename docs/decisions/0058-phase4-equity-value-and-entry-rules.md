@@ -1,0 +1,31 @@
+# 0058. Phase 4: equity value, decided-before-entry rule and ownership basis
+
+- Status: accepted
+- Date: 2026-11-19
+- Amends: the Phase 4 protocol (sections 2 and 3), ADR 0048 as applied to the panel, ADR 0057 (rules 5 and 9)
+
+## Context
+
+Collecting each entry's capital structure raised four questions the protocol and ADR 0057 do not settle.
+
+- **Dilution.** The protocol counts options and warrants series by series (section 3, ADR 0048). Company documents giving those series at the snapshot were found for 18 of the first 50 entries attempted; most failures were Canadian filings not reachable from public copies. Capital IQ's option and warrant fields are sparse and are on the share basis as reported, while its share counts are restated for later consolidations. Document coverage differs by exchange, and exchange may be related to outcomes.
+- **Cash raised after the last report.** Cash and debt come from the latest report before the snapshot, a median of 92 days earlier (maximum 274). For 16 of 96 entries the shares on issue at the snapshot exceed the shares at that report by more than 10%, so cash raised in between is missing.
+- **Decided before entry.** Laiva's entry study release (13 July 2018) states that the mine is fully built, permitted and financed to production through a gold forward sale agreed in November 2017, with production scheduled for the fourth quarter of 2018. Mining started on 5 August 2018 and the first gold was poured on 30 November 2018. The first coding labelled Laiva "no event". At its snapshot the build question was already answered.
+- **Ownership basis.** Some studies state NPV on a 100% basis and others after a state's carried interest. Applying the carried-interest reduction of ADR 0057 (rule 9) to a study already net of it would count the carry twice.
+
+These rules were fixed on 2026-11-19, before any implied odds were compared with outcomes. An outcome-blind run of implied odds was in progress; its values were not used.
+
+## Decision
+
+1. **Decided before entry.** An entry leaves the primary panel if its construction or restart decision, dated by the ADR 0055 rule (the later of the statement and committed funding), falls on or before its entry snapshot. The same applies to a change of control on or before the snapshot. An entry with a takeover or merger announced but not closed at the snapshot stays, flagged, with a check without it. Every entry is screened against the rule from its own study release and the last company release before the snapshot, with the document and date recorded. Results report the frozen count of 85, each exclusion with its reason, the resulting count, a check that keeps the excluded entries, and a check that keeps Laiva as a construction decision dated at its snapshot. If the screen excludes more than three entries, or more than two of the construction decisions, the panel's composition has changed materially and the primary run waits for review.
+2. **Laiva.** Relabelled in `data/phase4/labels.csv` as a construction decision dated 13 July 2018, with the company releases cited; excluded from the primary panel under rule 1.
+3. **Equity value.** For every entry, the primary equity value is Capital IQ market capitalisation plus Capital IQ net debt at the latest period before the snapshot, without options or warrants. The diluted value of ADR 0048 is a check on the entries whose capital structure was found in company documents. For that check, dilutive securities are taken as a ratio to basic shares from the same document and applied to Capital IQ's share count; the in-the-money test compares strike and price on one share basis; share units with no exercise price count in full with no proceeds. The documented subset is frozen, with its list and date, before any comparison with outcomes. Reported, in this order: the rank correlation between basic and diluted odds on that subset; in-the-money dilution as a share of basic shares, listing every entry above 10%; the AUC on the subset under both definitions. The primary definition is revisited if the rank correlation is below 0.95, if any documented entry has in-the-money dilution above 25% and moves more than ten places in rank, or if the subset AUCs differ by more than 0.05.
+4. **Cash raised after the last report.** Every entry adds estimated cash equal to the increase in shares from the last report to the snapshot, both on Capital IQ's basis, times the snapshot price; a decrease gets no adjustment and a flag. For the 16 entries with an increase above 10%, the releases in between are read and each increase is classed: a cash financing uses the stated gross proceeds less stated fees; shares issued for an acquisition add no cash and flag the entry for the other-assets check; a conversion of debt adds no cash and reduces debt by the amount converted. Where no release is found the estimate stands, flagged. Checks: no adjustment, the panel without the 16, and the estimate for every entry. Cash spent between the report and the snapshot is not adjusted; this is disclosed.
+5. **Ownership basis.** The ownership factor is the owner's share of what the rebuilt cash flows represent. The study builder calibrates to the study's own NPV, so a study already net of a state's carried interest gives cash flows net of it, and the factor is the owner's share of the remaining interest. A study on a 100% basis takes the carried-interest reduction of ADR 0057. The basis and its source are recorded for each entry.
+6. **Ownership not stated.** Where the entry documents do not state ownership, the entry study's tenure section is read before the primary run. Where tenure still cannot be confirmed, 100% is used, flagged "presumed", with a check without those entries. A project made of properties held at different shares is weighted by ounces mined per property in the study's mine plan, or by resource ounces where the plan is not split, flagged, with a bounds check at the lowest and highest share.
+
+## Consequences
+
+- One equity definition applies to every entry, so document availability cannot enter the primary ranking.
+- The protocol's diluted definition is still computed and reported where the data exist.
+- The primary panel may be smaller than 85; every exclusion is listed with its reason.
