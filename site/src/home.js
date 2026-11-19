@@ -106,19 +106,25 @@
     if (ev.target && ev.target.type === "radio") render(400, 0, false);
   });
 
-  // Opening count from zero to the starting values; the page already holds them as text.
+  // Opening count from zero to the starting values. The page already holds the values
+  // as text, and nothing is zeroed until the browser draws a frame, so a page that is
+  // never animated (a background tab, a preview) still shows the right numbers.
   if (!reduce.matches) {
-    for (var i = 0; i < dots.length; i++) {
-      if (dots[i].classList.contains("on")) {
-        dots[i].classList.remove("on");
-        dots[i].style.transitionDelay = (300 + i * 14) + "ms";
+    requestAnimationFrame(function () {
+      for (var i = 0; i < dots.length; i++) {
+        if (dots[i].classList.contains("on")) {
+          dots[i].classList.remove("on");
+          dots[i].style.transitionDelay = (300 + i * 14) + "ms";
+        }
       }
-    }
-    paint("price", 0); paint("value", 0); paint("odds", 0);
-    requestAnimationFrame(function () { render(1600, 300, true); });
-    setTimeout(function () {
-      for (var k = 0; k < dots.length; k++) dots[k].style.transitionDelay = "";
-    }, 2400);
+      paint("price", 0); paint("value", 0); paint("odds", 0);
+      requestAnimationFrame(function () {
+        render(1600, 300, true);
+        setTimeout(function () {
+          for (var k = 0; k < dots.length; k++) dots[k].style.transitionDelay = "";
+        }, 2400);
+      });
+    });
   } else {
     render(0, 0, false);
   }
