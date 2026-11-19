@@ -56,6 +56,6 @@ Each step is recorded in `search_log`, including steps that found nothing.
 
 - **Second coding:** 38 rows recoded blind (the random 20%, seed 20261120, plus every row resting on press only or marked low confidence). Outcomes agreed on 37 of 38, and on 20 of 20 in the random sample. The one disagreement (Shahuindo) was resolved under the funding rule: no company statement that the project was funded was found within the window, so the outcome is the earlier takeover.
 - **Reconciliation:** under the written rules, 12 of 33 event rows changed: one outcome (Shahuindo) and 11 dates. Each change and its reason is in the `resolution` column.
-- **Primary panel (85):** 16 construction decisions, 11 takeovers, 58 no decision within 36 months.
-- **Check panel (90):** 16 construction decisions, 15 takeovers, 59 no decision.
+- **Primary panel (85):** 16 construction decisions, 11 takeovers, 58 no decision within 36 months; 17, 11 and 57 after Laiva was relabelled (ADR 0058).
+- **Check panel (90):** 16 construction decisions, 15 takeovers, 59 no decision; 17, 15 and 58 after Laiva was relabelled.
 - Rows whose outcome still rests on press are marked in `outcome_source` and reported in a check without them.
