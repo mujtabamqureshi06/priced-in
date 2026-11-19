@@ -34,3 +34,5 @@ data/raw/
 .vscode/
 .idea/
 .DS_Store
+site/_site/
+site/data/
