@@ -16,6 +16,9 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Parametric study builder (`pricedin.parametric`, ADR 0051): an annual schedule from a study's headline figures, calibrated to its after-tax NPV and IRR. On Osino's DFS headline it tracks the transcribed case within 0.6% at market prices (informative; the Phase 4 validation uses a random ASX subsample).
 - Phase 4 panel protocol, draft (`docs/phase4/protocol.md`, ADR 0051): ASX core panel, outcome coding, parametric mine plans with a hand-transcribed validation subsample, power table. Frozen before any outcome data is collected.
 
+### Added
+- Methodology section 7 states what the price-to-value ratio measures at a 0% spread: the value if built is close to the undiscounted after-tax cash flow at spot gold (0.90 to 0.97 times on three cases at a 1% real rate), value rises with the real rate (8% to 14% per point), and all study stages share one overrun prior. `scripts/ratio_diagnostics.py` reproduces the figures.
+
 ### Fixed
 - **Equity claim no longer floored on each simulated path** (ADR 0059, superseding ADR 0047). The per-path floor max(project - transfer, 0) was applied after a path's gold prices and capital overrun were known, which gave shareholders a put option they do not hold and could value equity above the project. Limited liability is now applied at the build decision: with the build rule on, a path builds only if building is worth something after the expected overrun and, for an equity run, the expected dilution; equity on a built path is not floored. On Osino and South Railroad (1% real rate, 15% volatility) the floored claim was 4.7% to 7.4% above the corrected claim at spot equal to the study price, and 25% to 70% above it at 0.7 to 0.8 times. Published figures that change (200,000 paths, seed 1):
 
