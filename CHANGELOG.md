@@ -5,6 +5,8 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Added
+- Phase 4 equity value and entry rules (ADR 0058), fixed before any implied odds were compared with outcomes: entries decided or taken over on or before their entry snapshot leave the primary panel; the primary equity value is undiluted, with the diluted value as a check where company documents give the capital structure; cash raised between the last report and the snapshot is added; the ownership factor follows the basis of each study's NPV.
+
 - Phase 4 panel inputs completed (ADR 0057, amendment): every primary-panel study input now has a source, with derived figures flagged; 14 of 85 entries flagged "cash-flow shape not matched", reported by outcome and exchange; a documented re-read of the three largest misses; one schedule compressed to the builder's two-year minimum. `parametric.build_case` passes the calibration tolerance and the shape-miss option through, so a flagged entry can be valued.
 - Phase 4 implementation rules (ADR 0057), fixed before any implied odds were computed: IRR tolerance at each study's reported precision and a flag for entries whose cash-flow shape cannot be matched (`parametric.irr_tolerance`, `calibrate(allow_shape_miss=True)`); 10-year gold volatility from the World Bank monthly series with the correction for monthly averaging (`pricedin.volatility`, tested by simulation); valuation currency, Capital IQ restatement, construction start, overrun prior for PEA and scoping entries, and attributable ownership. Guyana 2012-2016 added to the tax table (30%).
 - Website home page (ADR 0056): a static page on GitHub Pages that turns a price into implied build odds on an illustrative mine, with four controls, the four steps behind the number and what moves it. Every figure comes from `scripts/export_site_example.py`, which runs the engine at 200,000 paths, including the odds for all 120 control states; the page only looks values up and draws, and a test checks every number on the built page against the export.
@@ -14,6 +16,9 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Phase 4 sources (ADR 0052): Capital IQ for prices and share counts, exported by the licensed user, with only derived results published; a mining property screen as the preferred candidate frame, with the government list as a pilot fallback. Candidate list extended to the 2017 to 2019 editions.
 - Parametric study builder (`pricedin.parametric`, ADR 0051): an annual schedule from a study's headline figures, calibrated to its after-tax NPV and IRR. On Osino's DFS headline it tracks the transcribed case within 0.6% at market prices (informative; the Phase 4 validation uses a random ASX subsample).
 - Phase 4 panel protocol, draft (`docs/phase4/protocol.md`, ADR 0051): ASX core panel, outcome coding, parametric mine plans with a hand-transcribed validation subsample, power table. Frozen before any outcome data is collected.
+
+### Changed
+- Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ## [1.0.0] - 2026-11-16
 

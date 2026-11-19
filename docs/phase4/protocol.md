@@ -149,6 +149,8 @@ On 2026-11-17, after outcomes were labelled and before any implied odds, prices 
 
 On 2026-11-19, before any implied odds, test statistics or comparisons with outcomes were computed, ADR 0057 fixed the implementation rules: the calibration tolerance follows each study's reported IRR precision, and entries whose cash-flow shape cannot be matched stay in with a flag and a robustness check; 10-year volatility from the World Bank monthly series with the averaging correction; valuation in each study's currency at the snapshot exchange rate; equity value from Capital IQ market capitalisation with the as-traded price from reported shares; a Guyana tax rate for 2012 to 2016; construction one year after each snapshot; the PFS overrun prior for PEA and scoping entries; and attributable ownership.
 
+On 2026-11-19, after the panel inputs were complete and before any implied odds were compared with outcomes, ADR 0058 fixed: an entry whose construction decision or change of control falls on or before its entry snapshot leaves the primary panel (Laiva, relabelled as a construction decision); the primary equity value is undiluted (market capitalisation plus net debt), with the diluted value of section 3 as a check on the entries whose capital structure was found in company documents; cash raised between the last report and the snapshot is added; and the ownership factor follows the basis of the study's NPV.
+
 ## 9. Freeze
 
 Frozen on 2026-11-17, before any outcome was labelled. The freezing commit is the merge of the pull request that adds ADR 0054 and `data/phase4/candidates.csv`; its hash is recorded below by the next commit.
