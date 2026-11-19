@@ -188,3 +188,26 @@ def test_matched_schedule_is_not_flagged() -> None:
     s = calibrate(_headline_from(1.0, 0.2), allow_shape_miss=True)
     assert s.shape_matched
     assert s.irr_miss == 0.0
+
+
+def test_built_case_keeps_a_flagged_schedule_and_its_npv() -> None:
+    base = _headline_from(1.0, 0.0)
+    h = replace(base, irr_after_tax=(base.irr_after_tax or 0.0) + 0.25)
+    kwargs: dict[str, Any] = {
+        "case_id": "synthetic_flagged",
+        "name": "Synthetic flagged project",
+        "operator": "Synthetic Ltd",
+        "jurisdiction": "Nowhere",
+        "as_of": date(2020, 1, 1),
+        "stage": "PEA",
+        "document_title": "Synthetic study",
+        "document_url": "https://example.org/study",
+        "document_date": date(2020, 1, 1),
+        "location": "Table 1",
+    }
+    with pytest.raises(ValueError):
+        build_case(h, **kwargs)
+    case = build_case(h, allow_shape_miss=True, **kwargs)
+    res = simulate(case, Market.study_deck(case), Timing(), Risks(), n_paths=3)
+    assert h.npv_after_tax is not None
+    np.testing.assert_allclose(res.project_value, h.npv_after_tax, atol=0.001 * h.initial_capex)
