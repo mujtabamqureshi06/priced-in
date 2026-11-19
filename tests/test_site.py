@@ -235,7 +235,7 @@ def test_page_wording_rules(page: str) -> None:
 
 def test_page_makes_no_third_party_requests(page: str) -> None:
     for attr in re.findall(r'(?:src|href)="([^"]+)"', page):
-        if attr.startswith(("#", "assets/", "data:")):
+        if attr.startswith(("#", "assets/", "data:")):  # assets may carry ?v=<commit>
             continue
         # External links are plain navigation, never loaded resources.
         assert attr.startswith(("https://github.com/", "https://www.linkedin.com/")), attr
