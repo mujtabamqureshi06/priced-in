@@ -159,3 +159,32 @@ def test_osino_headline_schedule_tracks_the_transcribed_case() -> None:
         parametric = simulate(built, market, Timing(), Risks(), n_paths=5000, seed=1)
         ratio = parametric.project_value.mean() / (transcribed.project_value.mean() * scale)
         assert abs(ratio - 1.0) < 0.02
+
+
+def test_irr_tolerance_follows_reported_precision() -> None:
+    from pricedin.parametric import irr_tolerance
+
+    assert irr_tolerance(0) == pytest.approx(0.005)
+    assert irr_tolerance(1) == pytest.approx(0.0005)
+    with pytest.raises(ValueError):
+        irr_tolerance(-1)
+
+
+def test_shape_miss_keeps_the_npv_and_flags_the_irr() -> None:
+    # A study whose IRR is far above what the bounded tilt allows at its NPV, as for
+    # front-loaded studies (starter pits, ramp-ups).
+    base = _headline_from(1.0, 0.0)
+    h = replace(base, irr_after_tax=(base.irr_after_tax or 0.0) + 0.25)
+    with pytest.raises(ValueError):
+        calibrate(h)
+    s = calibrate(h, allow_shape_miss=True)
+    assert not s.shape_matched
+    assert s.irr_miss < 0
+    assert h.npv_after_tax is not None
+    assert abs(_npv(s.after_tax, h.discount_rate) - h.npv_after_tax) / h.initial_capex <= 1e-3
+
+
+def test_matched_schedule_is_not_flagged() -> None:
+    s = calibrate(_headline_from(1.0, 0.2), allow_shape_miss=True)
+    assert s.shape_matched
+    assert s.irr_miss == 0.0

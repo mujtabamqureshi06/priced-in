@@ -93,3 +93,11 @@ Two numbers summarise the frontier without a timing prior (ADR 0023): the zero-d
 - Further reading, not read in full and not relied on: Samis, M., Davis, G. A., Laughton, D. and Poulin, R. (2005). Valuing uncertain asset cash flows when there are no options: a real options approach. Resources Policy 30(4), 285 to 298.
 
 Full bibliography with verification status: [sources.md](sources.md).
+
+## Appendix: volatility from monthly average prices
+
+The Phase 4 panel takes gold volatility from the World Bank's monthly series, which reports each month's average price (ADR 0057). Let the log price follow a random walk with variance σ² per month, observed at n equally spaced points a month, and let A_k be the average of month k. The change A_{k+1} − A_k is a weighted sum of the 2n − 1 increments between the first point of month k and the last point of month k+1, with weights rising from 1/n to 1 and falling back to 1/n. Summing the squared weights, each increment having variance σ²/n, gives
+
+Var(A_{k+1} − A_k) = σ² (2n² + 1) / (3n²),
+
+which tends to 2σ²/3 as n grows (Working 1960). Annualised volatility computed from monthly averages therefore understates σ by a factor close to √(2/3); `pricedin.volatility` divides the variance by 2/3. `tests/test_volatility.py` simulates a geometric Brownian motion with 21 trading days a month, averages it monthly, and checks that the variance ratio is 2/3 within 0.03 and that the corrected figure recovers the true volatility. On gold itself, monthly averages built from the daily series give 11.1% for 2012-2021 against 14.7% from daily returns; after the correction the World Bank series gives 13.5%.
