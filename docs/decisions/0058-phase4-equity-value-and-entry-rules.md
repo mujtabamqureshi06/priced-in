@@ -29,3 +29,12 @@ These rules were fixed on 2026-11-19, before any implied odds were compared with
 - One equity definition applies to every entry, so document availability cannot enter the primary ranking.
 - The protocol's diluted definition is still computed and reported where the data exist.
 - The primary panel may be smaller than 85; every exclusion is listed with its reason.
+
+## Amendment (2026-11-19): screen results and offers at entry
+
+Fixed after the screen of all 85 entries and before any implied odds were compared with outcomes.
+
+7. **Screen.** One entry is decided before its snapshot (Laiva). Eight entries could not be read and are resolved before any comparison with outcomes; an entry still unresolved after a recorded search stays, flagged "screen unresolved", with a check without all such entries.
+8. **First phase funded from cash.** Davyhurst's board approved the first phase of development, paid from cash, on its entry date and snapshot date (30 June 2020), with mining subject to financing that closed later. That is not a construction decision under ADR 0055, which needs committed funding for the build. Davyhurst stays, flagged, with a check without it.
+9. **Offers at entry.** Rule 1 of this record governs the entry snapshot: an entry with a takeover or merger announced but not closed at its snapshot stays, flagged, with one combined check that drops every such entry. The exclusion of snapshots while an offer is outstanding (ADR 0055) applies to snapshots after entry, where it does not remove the project. Excluding at entry would mostly drop projects that later end in takeovers, which are non-events in the primary test, and so would select the panel on the outcome. Windfall Lake (agreed share exchange announced 9 June 2015, closed 25 August 2015; snapshot 30 June 2015) is the case found.
+10. **No price.** Mt Ida and Bottle Creek has no market data at its snapshot and leaves the primary panel for that reason; a bid was also outstanding at its entry.
