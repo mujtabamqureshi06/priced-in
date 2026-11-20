@@ -19,7 +19,7 @@ The table needs no prices. The Phase 4 exclusions that existed only for the pric
    - any independent source added under section 2.4.
 2. **Inclusion.** A gold project enters if all of the following hold:
    - it has an economic study with an NPV and an IRR, on either a pre-tax or an after-tax basis;
-   - the study is dated in the window;
+   - the study is dated in the window, 1 January 2012 to 31 March 2022 (the end date of the stock-sample screen, so every source covers the whole window; every entry then has at least 48 months to the data cut-off);
    - the study is held by a company with no producing mine at the study date;
    - gold is at least 80% of the study's revenue.
 3. **Exclusion.** A project is excluded if its construction was decided before its first study in the window. Projects held by producing companies are excluded; the table is labelled "projects held by companies with no producing mine at the study date". A project later acquired by a producer stays in, and is followed through the acquisition.
