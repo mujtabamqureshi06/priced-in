@@ -86,7 +86,7 @@ def test_fine_gray_recovers_a_clear_effect() -> None:
     t1 = rng.exponential(1 / rate)
     t2 = rng.exponential(1 / 0.01, n)
     cens = np.full(n, 60.0)
-    time = np.minimum.reduce([t1, t2, cens])
+    time = np.minimum(np.minimum(t1, t2), cens)
     cause = np.where(time == t1, 1, np.where(time == t2, 2, 0))
     beta = fine_gray(time, cause, cens, group[:, None].astype(float))
     assert beta[0] > 0.6
