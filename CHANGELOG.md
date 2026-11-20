@@ -11,6 +11,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 5 frame recorded before any new outcome label (`docs/phase5/frame.md`, `data/phase5/frame_entries.csv`, `data/phase5/linked_groups.csv`): 171 projects and 245 entries by stage (PEA 115, PFS 49, FS 81), from blind checks of about 265 companies; three projects unresolved and reported with and without.
 - Phase 5 coding rules (ADR 0066, `docs/phase5/protocol.md` section 2.6), fixed before the frame is counted: linked projects, evidence for an entry, producer control including through a parent, trial mining, construction before the first study, gold share of revenue and listing judged study by study.
 - Phase 5 study window stated: 1 January 2012 to 31 March 2022, fixed before the frame is counted (`docs/phase5/protocol.md` section 2.2).
 - Phase 5 frame source and recall wording (ADR 0065): a full-text screen of Capital IQ key-development descriptions quoting NPV, IRR or after-tax figures (2008 to 2022) becomes a frame source, with every flagged company checked on the frame rules by a coder not given outcomes, including listed parents outside Primary Industry = Gold. ASX recall is still audited against the government's major-projects lists; for TSX and TSXV the write-up states that the frame comes from two screens by one vendor and that recall beyond both is unmeasured.
