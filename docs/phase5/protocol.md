@@ -1,6 +1,6 @@
 # Phase 5 protocol: probability and timing of a construction decision by study stage
 
-Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064; frame sources amended by ADR 0065 before the frame was counted). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
+Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064; frame sources amended by ADR 0065 and coding rules added by ADR 0066, both before the frame was counted). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
 
 ## 1. Question
 
@@ -32,6 +32,17 @@ The table needs no prices. The Phase 4 exclusions that existed only for the pric
    - The frame count is recorded, after de-duplication, before any new label.
    - If it is below 120 projects, the frame is extended to studies dated 2008 to 2011 under the same rules. Those projects go into the estimate half.
    - If it is still below 120, the table is reported as descriptive, and no stability claim is made.
+
+6. **Coding rules (ADR 0066).** Fixed before the frame is counted, from the questions coders raised while checking studies blind to outcomes.
+   - **Project identity.** Deposits studied separately become one project only when a later study by the same holder or its successor puts them explicitly in one mine plan. The combined project's entries start from the first study of any component. Components never combined stay separate projects. Intervals come from a bootstrap over linked groups. The table with components kept separate is reported beside the main table. Because linking uses later documents, the number of linked groups is reported by outcome.
+   - **Evidence.** An entry opens only at a study that itself shows an NPV, an IRR and a stated discount rate in a primary document. Where no primary document survives, two independent press reports, each quoting the figures from its own reporting or from the release, may settle it; reprints of one wire story count once. Such entries are flagged low confidence and the table is also reported without them. A study withdrawn at the exchange's request opens no entry. A later study does not open an entry for an earlier stage.
+   - **Holder and control.** The holder is the listed company that publishes the study as its own; listing (section 2.1) is judged on that company. A study is excluded if a producing company controls the project at the study date, directly or through a parent it controls: more than 50%, or exactly 50% when the producer is also the manager. A company whose stated business at the study date is royalties or streams is excluded; an operator developing its own mine that also holds royalties is not.
+   - **Producing.** Test or bulk-sample mining counts only while under way at the study date. Processing-only trials and non-mining production do not. Producing status is taken from the holder's filings dated before each study.
+   - **Construction before the first study.** Only a decision on, or start of, construction of the development the study describes counts. Exploration access, declines and early works do not, unless announced as the start of construction. A plant built by an earlier owner and closed, or never operated, makes the project a redevelopment, which is not excluded. The same holder's earlier construction of the development excludes it.
+   - **Gold share.** Gold's share of revenue comes from the study's own revenue table, or else from payable metal at the study's prices, flagged. Every computed share between 77% and 83% is checked against the technical report's revenue table, and the computed share and its source are recorded either way.
+   - **Study by study.** Producing status, control and listing are judged at each study's date. Entries open only at studies that meet them.
+   - **Unresolved.** A second pass, also blind to outcomes, takes the rows that turn on a missing fact. The frame is reported with and without the rows that stay unresolved.
+   - **Revisit.** If the control rule removes more than 15 projects, the frame is recounted against the 120-project floor before any label. If more than about a quarter of linked groups end in a construction decision while unlinked projects do so at a clearly lower rate, the table with components kept separate becomes the primary table.
 
 ## 3. Stages
 
