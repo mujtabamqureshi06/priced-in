@@ -1,0 +1,4 @@
+project_id,project,stage,date,holder,half,in_lenient_only
+dingman,Dingman (Ontario),PEA,2013-05-17,California Gold Mining,estimate,False
+glenburgh,Glenburgh (WA),PFS,2013-08-05,Gascoyne Resources,estimate,False
+mt_stirling,"Mt Stirling (Leonora, WA)",PEA,2019-05-16,Torian Resources,test,False
