@@ -1,6 +1,6 @@
 # Phase 5 protocol: probability and timing of a construction decision by study stage
 
-Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
+Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064; frame sources amended by ADR 0065 before the frame was counted). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
 
 ## 1. Question
 
@@ -15,6 +15,7 @@ The table needs no prices. The Phase 4 exclusions that existed only for the pric
 1. **Sources.** These are combined and de-duplicated by the project-identity rule (Phase 4 protocol section 2, interpretation 4):
    - the Phase 4 candidate list (`data/phase4/candidates.csv`, study dates 2012 to 2021);
    - the stock-sample screen (ADR 0062, study dates 2017 to 2022);
+   - a full-text screen of Capital IQ key developments dated 2008 to 2022, selecting items whose description (not only the headline) quotes an NPV, an IRR or after-tax figures (ADR 0065). Every company it flags is checked, inside or outside the Phase 4 company frame, including listed parents that Capital IQ does not classify as gold companies. The holder must be listed on the ASX, TSX or TSXV at the study date, as for the other two sources. Inclusion is decided from documents dated on or before each study, by a coder who is not given outcomes. The discovery source is recorded, and the table is also reported without these additions;
    - any independent source added under section 2.4.
 2. **Inclusion.** A gold project enters if all of the following hold:
    - it has an economic study with an NPV and an IRR, on either a pre-tax or an after-tax basis;
@@ -22,11 +23,11 @@ The table needs no prices. The Phase 4 exclusions that existed only for the pric
    - the study is held by a company with no producing mine at the study date;
    - gold is at least 80% of the study's revenue.
 3. **Exclusion.** A project is excluded if its construction was decided before its first study in the window. Projects held by producing companies are excluded; the table is labelled "projects held by companies with no producing mine at the study date". A project later acquired by a producer stays in, and is followed through the acquisition.
-4. **Recall before counting.** Before the frame is counted, its recall is measured against an independent list of gold economic studies for the same exchanges and years:
-   - a property-level study database, if the Capital IQ licence covers one;
-   - otherwise, SEDAR+ filings of NI 43-101 technical reports (TSX and TSXV) and the Australian Government's major-projects lists (ASX).
-
-   Recall is reported by stage. Any study the independent list holds and the frame misses is added if it meets section 2.2. Its discovery source is recorded, and the table is also reported without such additions.
+4. **Recall before counting.**
+   - **ASX.** Recall is measured against the Australian Government's major-projects lists, as in Phase 4. Any study the lists hold and the frame misses is added if it meets section 2.2. Its discovery source is recorded, and the table is also reported without such additions.
+   - **TSX and TSXV.** The full-text screen in section 2.1 measured the recall of the headline screen: the Phase 4 candidate list held about 90% of the companies the full-text screen flagged inside the Phase 4 company frame. For the Phase 4 panel, recall by outcome is computed from qualification decisions made without outcomes and reported with the Phase 4 results. Because the full-text screen's finds enter the frame, it cannot also audit the frame; measured against itself, the merged frame's recall would be 100% by construction. The write-up states that the frame is built from two screens by the same vendor, and that recall beyond both is unmeasured for TSX and TSXV.
+   - **Earlier plan.** A property-level study database is not covered by the Capital IQ licence. SEDAR+ was tried as the TSX and TSXV list; its document-type and date filters could not be applied, so it gave no usable list.
+   - **Revisit.** If a vendor-independent TSX and TSXV list of gold economic studies is found, recall is measured against it and reported by stage.
 5. **Frame size.**
    - The frame count is recorded, after de-duplication, before any new label.
    - If it is below 120 projects, the frame is extended to studies dated 2008 to 2011 under the same rules. Those projects go into the estimate half.
