@@ -1,0 +1,31 @@
+project_id,component,stage,date,outcome,decision_date,basis
+asanko_obotan_esaase,Obotan,PFS,2012-01-12,construction_decision,2014-07-17,statement_and_funding
+asanko_obotan_esaase,Obotan,FS,2012-08-28,construction_decision,2014-07-17,statement_and_funding
+asanko_obotan_esaase,Esaase,PFS,2013-05-14,construction_decision,2019-08-14,construction_started_funding_unstated
+bardoc,Aphrodite,PEA,2012-02-09,no_decision,,none
+bardoc,Kalgoorlie North,,,construction_decision,2015-11-09,statement_and_funding
+leonora_cardinia,Leonora Gold Project / Cardinia,PFS,2016-12-15,no_decision,,none
+leonora_cardinia,Leonora Gold Project / Cardinia,FS,2017-10-02,no_decision,,none
+mallina,Pilbara Gold Project regional deposits,,,no_decision,,none
+mallina,Hemi,,,no_decision,,none
+moose_river_consolidated,Touquoy,FS,2014-03-25,construction_decision,2016-08-31,statement_and_funding
+moose_river_consolidated,Beaver Dam,,,no_decision,,none
+moose_river_consolidated,Fifteen Mile Stream and Cochrane Hill,,,no_decision,,none
+mt_ida,Bottle Creek,,,construction_decision,2021-09-03,construction_started_funding_unstated
+mt_ida,Mt Ida and Quinns,,,construction_decision,2021-09-03,construction_started_funding_unstated
+murchison,Andy Well,PEA,2012-04-18,construction_decision,2012-09-28,statement_and_funding
+murchison,Turnberry,,,construction_decision,2024-12-20,statement_and_funding
+north_bullfrog_and_mother_lode,North Bullfrog,PEA,2012-12-06,no_decision,,none
+north_bullfrog_and_mother_lode,Mother Lode,,,no_decision,,none
+premier_red_mountain,Red Mountain,PEA,2012-06-18,no_decision,,none
+premier_red_mountain,Red Mountain,FS,2017-06-26,no_decision,,none
+premier_red_mountain,Premier,,,construction_decision,2023-01-19,statement_and_funding
+gruyere_yamarna,Yamarna satellites,PEA,2012-09-26,no_decision,,none
+gruyere_yamarna,Gruyere,FS,2016-10-20,construction_decision,2017-02-15,permit_dated
+sanbrado,Mankarga 5,PEA,2014-07-28,construction_decision,2019-04-01,statement_and_funding
+sanbrado,Mankarga 5,PFS,2015-02-23,construction_decision,2019-04-01,statement_and_funding
+sanbrado,M1 South and M3,,,construction_decision,2019-04-01,statement_and_funding
+witwatersrand_basin,Qala Shallows,FS,2021-09-02,no_decision,,none
+witwatersrand_basin,Stages 2 to 4 of the Witwatersrand Basin Project,,,no_decision,,none
+hasbrouck,Hasbrouck,,,no_decision,,none
+hasbrouck,Three Hills,,,no_decision,,none
