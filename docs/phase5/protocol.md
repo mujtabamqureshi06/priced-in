@@ -1,6 +1,6 @@
 # Phase 5 protocol: probability and timing of a construction decision by study stage
 
-Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064; frame sources amended by ADR 0065 and coding rules added by ADR 0066, both before the frame was counted). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
+Status: fixed before the frame is counted and before any new outcome is labelled (ADR 0064; frame sources amended by ADR 0065 and coding rules added by ADR 0066, both before the frame was counted; labelling rules added by ADR 0067 after labelling and before any rate). Outcomes for the Phase 4 panel are already known. That is acceptable here because the table is a count by stage with no fitted parameters, and the rules below are fixed first.
 
 ## 1. Question
 
@@ -67,6 +67,20 @@ The table needs no prices. The Phase 4 exclusions that existed only for the pric
 - **Other events.** Abandonment is a non-event. A project sold to a new owner is followed.
 - **Labelling.** New projects are labelled from company and public documents only.
 - **Second coding.** A random 20% of rows, plus every row resting on press reports alone or marked low confidence, is coded a second time. The second coder has no access to the repository or to the first labels. How that was ensured is recorded.
+
+### 5.1 Labelling rules (ADR 0067)
+
+Fixed on 20 November 2026, after the outcomes were labelled and before any rate, table or comparison was computed. Labelling under the Phase 4 rules showed that about half the construction decisions found have no dated decision statement. The rules below are applied to every row mechanically. Where a rule departs from the Phase 4 rule, the table is also reported under that rule.
+
+- **Decision without a dated statement.** The event is dated at the earliest document stating that construction of the development has started or has been approved, and that it is funded. A statement that the owner funds it from its own cash counts. Where no document ever states funding, the date construction of the development started is used, flagged low confidence. Early works are not construction. This departs from the Phase 4 rule, under which undisclosed funding did not count: a project being built has been decided, and leaving such projects out would understate how often projects are built from each stage. A robustness table codes these rows as no decision.
+- **Committed funding.** A signed facility agreement, even with customary conditions precedent; closed equity; or the company stating that the project is fully funded. Not a term sheet, a commitment still subject to due diligence or credit approval, or a package that depends on money not yet raised.
+- **Approval conditional on a permit.** Dated when the last permit the decision depends on arrives.
+- **Construction before the debt is signed.** Where funding is documented, the event is dated when the full stated funding became binding. The number of events that fall inside or outside 36 months differently under construction-start dating is reported.
+- **Development different from the study.** A construction decision is a funded decision to produce saleable product from the project's ore on a continuing basis, whatever the processing route. Trial mining and bulk sampling do not count. Developments smaller than the study's are flagged as partial, and a robustness table counts only developments at about the study's scale and route. The same definition is applied to the construction-before-study rule in section 2.2, and any change it makes to the frame is reported before rates.
+- **Linked projects.** A decision to build any part of the combined mine plan counts. In the table with components kept separate, each component keeps its own outcome.
+- **Takeover.** A change of control of the project's owner: another party gains more than 50% of the voting shares, or the owner's shareholders before the transaction end with less than 50% of the combined company. Exactly 50% is not a takeover, flagged. A reverse takeover that hands control to new holders counts. A merger in which the owner is the acquirer does not. Receivership and administration are not abandonment unless the project is written off or relinquished; a project sold out of receivership is followed under its new owner.
+- **Second coding.** 35 projects drawn at random (seed 20261121, drawn after the frame was recorded), plus every row marked low confidence or resting on press reports alone, are coded again under these rules by a coder with no access to the repository or the first labels. The agreement rate is reported and every disagreement is resolved under the written rules.
+- **Revisit.** If the no-statement fallback and partial developments together supply more than a quarter of all construction decisions, the table under the Phase 4 rule becomes the headline. If second coding changes more than three event labels, that is reported with the result.
 
 ## 6. Follow-up
 

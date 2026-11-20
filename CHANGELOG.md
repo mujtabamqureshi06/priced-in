@@ -11,6 +11,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 5 labelling rules (ADR 0067, `docs/phase5/protocol.md` section 5.1), fixed after the outcomes were labelled and before any rate was computed: decisions without a dated statement, committed funding, permit-conditional approvals, construction before debt, developments that differ from the study, linked projects and change of control; stricter tables reported beside.
 - Phase 5 frame recorded before any new outcome label (`docs/phase5/frame.md`, `data/phase5/frame_entries.csv`, `data/phase5/linked_groups.csv`): 171 projects and 245 entries by stage (PEA 115, PFS 49, FS 81), from blind checks of about 265 companies; three projects unresolved and reported with and without.
 - Phase 5 coding rules (ADR 0066, `docs/phase5/protocol.md` section 2.6), fixed before the frame is counted: linked projects, evidence for an entry, producer control including through a parent, trial mining, construction before the first study, gold share of revenue and listing judged study by study.
 - Phase 5 study window stated: 1 January 2012 to 31 March 2022, fixed before the frame is counted (`docs/phase5/protocol.md` section 2.2).
