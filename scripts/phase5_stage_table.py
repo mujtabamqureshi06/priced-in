@@ -37,7 +37,13 @@ CUTOFF = date(2026, 3, 31)
 WINDOW_END = date(2022, 3, 31)
 STAGES = ("PEA", "PFS", "FS")
 N_BOOT, SEED = 2_000, 20261121
-DONLIN = "donlin"
+DONLIN = "donlin_gold"
+# Alternative reading of Witwatersrand Basin (ADR 0068 item 4): decided at the September
+# 2025 placement, the later of the two dates the coders gave.
+WWB_ALT = (
+    ("witwatersrand_basin", "2025-09-15"),
+    ("witwatersrand_basin::Qala Shallows", "2025-09-15"),
+)
 
 
 def d(text: str) -> date:
@@ -67,6 +73,7 @@ class Options:
     components: bool = False
     split_groups: frozenset[str] = frozenset()
     drop_projects: frozenset[str] = frozenset()
+    alt_decisions: tuple[tuple[str, str], ...] = ()
 
 
 @dataclass
@@ -102,6 +109,10 @@ class Entries:
 
 def decision_date(lab: dict[str, str], opt: Options) -> date | None:
     """Decision date of a project under the chosen reading, or None."""
+    alt = dict(opt.alt_decisions)
+    if lab["project_id"] in alt:
+        dd_alt = d(alt[lab["project_id"]])
+        return dd_alt if dd_alt <= CUTOFF else None
     if lab["outcome"] != "construction_decision" or not lab["decision_date"]:
         return None
     if opt.partial_as_none and lab["partial_development"] == "yes":
@@ -145,11 +156,13 @@ def build(opt: Options) -> Entries:
             )
             comp_outcome[cid] = {
                 **labels[c["project_id"]],
+                "project_id": cid,
                 "outcome": c["outcome"],
                 "decision_date": c["decision_date"],
                 "decision_basis": c["basis"],
-                "partial_development": "",
-                "construction_start_date": "",
+                "label_confidence": c["label_confidence"],
+                "partial_development": c["partial_development"],
+                "construction_start_date": "",  # not coded for components
             }
     e = Entries()
     for r in rows:
@@ -207,6 +220,11 @@ def cif_by_stage(a: dict[str, np.ndarray], idx: np.ndarray, which: str = "dec") 
 def fmt(x: float) -> str:
     """Percentage with no decimals."""
     return "n/a" if np.isnan(x) else f"{100 * x:.0f}%"
+
+
+def fmt1(x: float) -> str:
+    """Percentage with one decimal."""
+    return "n/a" if np.isnan(x) else f"{100 * x:.1f}%"
 
 
 def table(e: Entries, which: str = "dec", n_boot: int = N_BOOT) -> list[str]:
@@ -352,14 +370,18 @@ def stability(e: Entries) -> tuple[list[str], dict[str, object]]:
     point = stats(est, test)
     rng = np.random.default_rng(SEED)
 
-    def resample(idx: np.ndarray) -> np.ndarray:
-        pids = a["cluster"][idx]
-        uniq = np.unique(pids)
-        rows = {p: idx[pids == p] for p in uniq}
-        draw = rng.choice(uniq, uniq.size)
-        return np.concatenate([rows[p] for p in draw])
+    # Projects are drawn once, with all their entries in both halves, so a project with
+    # entries in both halves carries its dependence into the interval.
+    clusters = a["cluster"]
+    uniq = np.unique(clusters)
+    rows_of = {p: np.flatnonzero(clusters == p) for p in uniq}
+    is_est = a["half"] == "estimate"
 
-    draws = np.array([stats(resample(est), resample(test)) for _ in range(N_BOOT)])
+    def joint() -> tuple[np.ndarray, np.ndarray]:
+        idx = np.concatenate([rows_of[p] for p in rng.choice(uniq, uniq.size)])
+        return idx[is_est[idx]], idx[~is_est[idx]]
+
+    draws = np.array([stats(*joint()) for _ in range(N_BOOT)])
     lo, hi = percentile_interval(draws)
     pt = rates(test)
     pe = rates(est)
@@ -394,8 +416,8 @@ def stability(e: Entries) -> tuple[list[str], dict[str, object]]:
             reading = "too imprecise to judge"
         readings[s] = reading
         lines.append(
-            f"| {s} | {fmt(pe[k])} | {fmt(pt[k])} | {100 * point[k + 1]:+.0f} points "
-            f"({100 * lo_k:+.0f} to {100 * hi_k:+.0f}) | {n_ev} | {reading} |"
+            f"| {s} | {fmt1(pe[k])} | {fmt1(pt[k])} | {100 * point[k + 1]:+.1f} points "
+            f"({100 * lo_k:+.1f} to {100 * hi_k:+.1f}) | {n_ev} | {reading} |"
         )
     return lines, {"brier_diff": point[0], "order": order, "readings": readings}
 
@@ -455,8 +477,12 @@ def main() -> None:
     out += ["## Takeover of the owner", "", *table(main_e, "tk"), ""]
     out += ["## Check: one entry per project, at its first study in the window", ""]
     out += [*table(first_entry_only(main_e)), ""]
-    out += ["## Progression to a later-stage study (observed to 31 March 2022)", ""]
-    out += [*progression(main_e), ""]
+    out += [
+        "## Progression to a later-stage study (linked table, observed to 31 March 2022)",
+        "",
+        *progression(linked_e),
+        "",
+    ]
     out += ["## Competing risks: the first event ends the entry", "", *competing(main_e), ""]
     s_lines, s_res = stability(main_e)
     out += ["## Stability test (primary table)", "", *s_lines, ""]
@@ -471,6 +497,11 @@ def main() -> None:
         ("Linked table, links as fixed", lambda: linked_e),
         ("Linked table, failed links corrected", lambda: build(Options(split_groups=failed))),
         ("Primary without Bardoc", v(drop_projects=frozenset({"bardoc"}))),
+        ("Primary, Witwatersrand Basin decided 2025-09-15", v(alt_decisions=WWB_ALT)),
+        (
+            "Linked table, Witwatersrand Basin decided 2025-09-15",
+            lambda: build(Options(alt_decisions=WWB_ALT)),
+        ),
         (
             "Linked table without Bardoc",
             lambda: build(Options(drop_projects=frozenset({"bardoc"}))),
@@ -496,7 +527,7 @@ def main() -> None:
         ev = fn()
         r = short_row(ev)
         results[name] = r
-        out.append(f"| {name} | " + " | ".join(fmt(x) for x in r) + f" | {len(ev.pid)} |")
+        out.append(f"| {name} | " + " | ".join(fmt1(x) for x in r) + f" | {len(ev.pid)} |")
     sd = build(replace(primary, start_dating=True))
 
     def within36(e: Entries) -> dict[tuple[str, str], bool]:
