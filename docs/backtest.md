@@ -48,13 +48,13 @@ Market inputs are dated snapshots in `data/snapshots/`. No observation postdates
 | Case | Claim | Break-even real spread (market-consistent) | Reference rate, applied as its source did (ADR 0045) | Zero-delay implied odds at the reference |
 |---|---|---|---|---|
 | South Railroad (PFS) | Royalty with advance royalties | 8.4% | Osisko 2020, 3.5% post-tax and 4.76% pre-tax real, gold flat at Osisko's US$1,600 (at spot US$1,898) | 0.80 to 0.89 (0.66 to 0.74) |
-| Osino, market value at the DFS, July 2023 (DFS) | Equity, diluted, less G&A | 17.0% to 17.9% | Eight Capital fairness opinion (dated later), 10.5% to 13.5% real, gold flat at its US$1,850 (at spot) | 0.62 to 0.98 (0.48 to 0.73) |
-| Osino, undisturbed, Dec 2023 (DFS) | Equity, diluted, less G&A | 18.1% | Same | 0.71 to about 1 (0.49 to 0.65) |
+| Osino, market value at the DFS, July 2023 (DFS) | Equity, diluted, less G&A | 15.6% to 16.3% | Eight Capital fairness opinion (dated later), 10.5% to 13.5% real, gold flat at its US$1,850 (at spot) | 0.65 to about 1 (0.49 to 0.77) |
+| Osino, undisturbed, Dec 2023 (DFS) | Equity, diluted, less G&A | 16.8% | Same | 0.74 to about 1 (0.50 to 0.68) |
 | Osino, Dundee offer | Project | 19.7% | Same | 0.72 to 0.98 (0.53 to 0.69) |
-| Osino, Shanjin offer | Project | 17.3% | Same | 0.92 to no solution (0.67 to 0.86) |
+| Osino, Shanjin offer | Project | 17.4% | Same | 0.92 to no solution (0.67 to 0.86) |
 | Sorby Hills (construction) | Royalty; assumes it covers silver and lead (an inference) | 2.3% | OR Royalties 2025, 5.1% post-tax and 6.94% pre-tax real, silver flat at OR's US$42, lead at spot (and both at spot) | no solution: the price is above the value of the plan built on time |
 
-Royalty spreads and project-level spreads are not the same quantity. A royalty carries no capital or operating cost risk; the project claim does. The reference rates are therefore not comparable across rows, and the rows cannot be ranked by stage. Within each row, the reading is the same: what the odds are at the stated required return. The break-even spreads come from 200,000 paths and carry standard errors under 0.2 points.
+Royalty spreads and project-level spreads are not the same quantity. A royalty carries no capital or operating cost risk; the project claim does. The reference rates are therefore not comparable across rows, and the rows cannot be ranked by stage. Within each row, the reading is the same: what the odds are at the stated required return. The break-even spreads come from 200,000 paths and carry standard errors under 0.2 points. The Osino rows were recomputed on 2026-11-19 after limited liability moved to the build decision (ADR 0059); before that change the equity rows read 17.0% to 17.9% (July) and 18.1% (December), and Shanjin's break-even 17.3%. The royalty rows did not change.
 
 ### What happened afterwards (outcome tracking only)
 
