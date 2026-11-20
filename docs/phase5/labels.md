@@ -29,10 +29,14 @@ Six projects changed event label between the first labels and the final labels, 
 | Bardoc | no decision | decision | Linked-projects rule: a funded 2015 start on Zoroastrian, a deposit in the combined plan; partial, low confidence |
 | Mt Hamilton | untraceable | no decision | Second coding traced the project through later owners to March 2026; no decision found |
 
+## Columns
+
+`second_coded` and `second_coding_event_agree` record which projects were coded twice and whether the two codings agreed on the event. `label_route` records how the final label was reached: one coder, two coders in agreement, a disagreement resolved, or the linked-projects rule (Gruyere-Yamarna, which was also resolved, and Bardoc). `components.csv` gives each component its own outcome, confidence and partial-development flag; construction-start dates were not coded for components.
+
 ## Counts
 
 - 72 projects with a construction decision by 31 March 2026, 102 without.
-- Basis of the decision date: 57 statement and funding, 6 dated at the last permit, 9 construction start with funding never stated (low confidence).
+- Basis of the decision date: 57 statement and funding, 6 dated at the last permit, 9 construction start with funding never stated (all flagged low confidence).
 - 6 decisions are partial developments, smaller than the study's or by a different route.
 - The no-statement fallback and partial developments together supply 11 of the 72 decisions (15%), below the quarter at which section 5.1 makes the Phase 4 rule table the headline.
 
