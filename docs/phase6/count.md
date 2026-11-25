@@ -19,7 +19,7 @@ Recorded 2026-11-25, before part 2 of the protocol is written and before any dea
 
 Agreement by rule among the 160 doubly coded deals: price 119, pre-production gold 133, study 121, standard terms 109, one asset per price 144, related party 118.
 
-Deals still unclear after second coding are not usable (section 7.5): 14 unclear for both coders, plus 2 left unclear on documents at resolution and 2 whose terms were not fully specified in documents dated on or before the announcement.
+Deals still unclear after second coding are not usable (section 7.5): 14 unclear for both coders, plus 2 left unclear on documents at resolution and 1 whose stream terms were not fully specified in documents dated on or before the announcement. One further deal, a single-price gold and silver stream, fails the instrument gold-share rule (ADR 0072).
 
 Every "not usable" coding made without a fetched primary document (25 deals, after the coders reached a search limit) was checked against at least one primary document afterwards: all 25 confirmed.
 
