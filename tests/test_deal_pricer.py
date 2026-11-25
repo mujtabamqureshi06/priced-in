@@ -502,10 +502,11 @@ def test_price_range_rejects_missing_replicate() -> None:
 
 def test_contingent_epv_hand_case() -> None:
     t = dp.decision_timing(INC, 0.0)  # 0.1 in each of years 1..5
-    on_decision = dp.contingent_epv(1000.0, t, trigger="decision", real_rate=0.02)
+    end = {"decision_point": 1.0}  # end-of-year dating (sensitivity)
+    on_decision = dp.contingent_epv(1000.0, t, trigger="decision", real_rate=0.02, **end)
     assert on_decision == pytest.approx(sum(100 / 1.02**k for k in range(1, 6)))
     on_production = dp.contingent_epv(
-        1000.0, t, trigger="first_production", real_rate=0.02, preproduction_years=1.0
+        1000.0, t, trigger="first_production", real_rate=0.02, preproduction_years=1.0, **end
     )
     assert on_production == pytest.approx(sum(100 / 1.02**k for k in range(2, 6)))
     any_decision = dp.contingent_epv(
@@ -515,6 +516,65 @@ def test_contingent_epv_hand_case() -> None:
         real_rate=0.02,
         preproduction_years=1.0,
         trigger_in_window=False,
+        **end,
     )
     assert any_decision == pytest.approx(sum(100 / 1.02**k for k in range(2, 7)))
+    mid = dp.contingent_epv(1000.0, t, trigger="decision", real_rate=0.02)
+    assert mid == pytest.approx(sum(100 / 1.02 ** (k - 0.5) for k in range(1, 6)))
+    mid_prod = dp.contingent_epv(
+        1000.0, t, trigger="first_production", real_rate=0.02, preproduction_years=1.0
+    )
+    assert mid_prod == pytest.approx(sum(100 / 1.02 ** (k + 0.5) for k in range(1, 5)))
     assert dp.contingent_epv(1000.0, decided(), trigger="decision", real_rate=0.02) == 1000.0
+
+
+def test_decision_point_mid_year_is_worth_more_than_end_of_year() -> None:
+    claim = dp.RoyaltyTerms(rate=0.02, kind="GRR")
+    market = dp.Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.05)
+    mid = dp.cash_flow_model(claim, [100.0, 100.0], market, preproduction_years=1.0)
+    end = dp.cash_flow_model(
+        claim, [100.0, 100.0], market, preproduction_years=1.0, decision_point=1.0
+    )
+    # scenario k = 1: first payment at 0.5 + 1 + 1 = 2.5 (mid) and 3.0 (end)
+    assert 2.5 in mid.times
+    assert 3.0 in end.times
+
+
+def test_advance_limited_by_years_and_total() -> None:
+    market = dp.Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.0)
+    sched = [100.0]
+
+    def no_decision_row(adv: dp.AdvanceMinimum) -> float:
+        claim = dp.RoyaltyTerms(rate=0.02, kind="GRR", advance=adv)
+        model = dp.cash_flow_model(claim, sched, market, preproduction_years=1.0)
+        return float(model.mean[-1].sum())
+
+    assert no_decision_row(dp.AdvanceMinimum(10.0, credited=False)) == pytest.approx(50.0)
+    assert no_decision_row(dp.AdvanceMinimum(10.0, credited=False, max_years=2)) == pytest.approx(
+        20.0
+    )
+    assert no_decision_row(
+        dp.AdvanceMinimum(10.0, credited=False, max_total=25.0)
+    ) == pytest.approx(25.0)
+
+
+def test_unspecified_threshold_basis_is_not_priced() -> None:
+    claim = dp.RoyaltyTerms(
+        rate=0.02, kind="GRR", steps=(dp.RateStep(100.0, 0.01),), step_basis="unspecified"
+    )
+    with pytest.raises(NotImplementedError, match="not priced"):
+        dp.check_implemented(claim)
+
+
+def test_max_relative_se_is_the_largest_draw() -> None:
+    out = dp.PriceRange(
+        values=np.array([100.0, 50.0, 0.0]),
+        standard_errors=np.array([0.5, 0.4, 0.0]),
+        spreads=np.zeros(3),
+        n_paths=20_000,
+        p10=0.0,
+        p50=50.0,
+        p90=100.0,
+        needs_extension=False,
+    )
+    assert out.max_relative_se == pytest.approx(0.008)

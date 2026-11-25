@@ -348,12 +348,17 @@ class AdvanceMinimum:
             advances are recovered as the same nominal total from the first payments
             (path-dependent, Monte Carlo); ounce advances are recovered from the first
             royalty ounces (deterministic, closed form).
+        max_years: number of yearly payments the terms allow, if they state one.
+        max_total: total of advance payments the terms allow (in ``unit``), if stated;
+            the last payment is reduced to stay within it.
 
     """
 
     amount: float
     unit: Literal["money", "ounces"] = "money"
     credited: bool = True
+    max_years: int | None = None
+    max_total: float | None = None
 
 
 @dataclass(frozen=True)
@@ -371,11 +376,16 @@ class RoyaltyTerms:
             nominal money units; path-dependent, valued by Monte Carlo.
         advance: advance minimum royalty, if any.
         inflation: annual inflation turning fixed nominal amounts (advances, cap) into
-            real terms; 0 treats them as real.
+            real terms; 0 treats them as real. Phase 6 passes the deal-date breakeven
+            inflation from the snapshot (the country's own rate for a non-US$ amount where
+            the snapshot has one, otherwise the US rate, flagged by the caller).
         buyback: "fair_market_value" is ignored (no effect on value); "fixed_price" is
             ignored with a flag, which overstates value slightly (8.4).
         other_terms: any further term, named. A non-empty tuple raises
             ``NotImplementedError``: the deal is not priced.
+        step_basis: "covered" when the terms say thresholds count covered ounces;
+            "unspecified" when the terms do not say which ounces count, so the deal is
+            not priced (the transcriber does not choose).
 
     """
 
@@ -389,6 +399,7 @@ class RoyaltyTerms:
     inflation: float = 0.0
     buyback: BuyBack = "none"
     other_terms: tuple[str, ...] = ()
+    step_basis: Literal["covered", "unspecified"] = "covered"
 
     def __post_init__(self) -> None:
         """Validate fractions, amounts and the order of steps."""
@@ -445,7 +456,7 @@ class StreamTerms:
     spot_share: float = 0.0
     coverage: float = 1.0
     steps: tuple[DeliveryStep, ...] = ()
-    step_basis: Literal["delivered", "produced"] = "delivered"
+    step_basis: Literal["delivered", "produced", "unspecified"] = "delivered"
     buyback: BuyBack = "none"
     other_terms: tuple[str, ...] = ()
 
@@ -462,8 +473,11 @@ class StreamTerms:
             raise ValueError(
                 f"escalation_from must be 'deal' or 'production', not {self.escalation_from}"
             )
-        if self.step_basis not in ("delivered", "produced"):
-            raise ValueError(f"step_basis must be 'delivered' or 'produced', not {self.step_basis}")
+        if self.step_basis not in ("delivered", "produced", "unspecified"):
+            raise ValueError(
+                "step_basis must be 'delivered', 'produced' or 'unspecified', "
+                f"not {self.step_basis}"
+            )
         if not self.inflation > -1.0 or not self.escalation > -1.0:
             raise ValueError("inflation and escalation must be above -1")
         for s in self.steps:
@@ -506,6 +520,11 @@ def check_implemented(claim: Claim) -> tuple[str, ...]:
             "not priced: term(s) not implemented in the Phase 6 pricer: "
             + "; ".join(claim.other_terms)
             + " (protocol 8.4: such a deal is counted and reported, never approximated)"
+        )
+    has_steps = bool(claim.steps)
+    if claim.step_basis == "unspecified" and has_steps:
+        raise NotImplementedError(
+            "not priced: the terms do not say which ounces count toward a threshold"
         )
     flags: list[str] = []
     if claim.buyback == "fixed_price":
@@ -655,6 +674,7 @@ def cash_flow_model(
     preproduction_years: float | None = None,
     window_years: int = WINDOW_YEARS,
     period_offset: float = 1.0,
+    decision_point: float = 0.5,
     n_paths: int = DEFAULT_PATHS,
     seed: int = 0,
 ) -> CashFlowModel:
@@ -670,7 +690,11 @@ def cash_flow_model(
         preproduction_years: decision to first production from the study; None uses one
             year, flagged (8.2).
         window_years: build window in years.
-        period_offset: where in each production year the payment falls (1 = end).
+        period_offset: where in each production year the payment falls (1 = end, the
+            primary run, matching study convention; 0.5 is the mid-year sensitivity).
+        decision_point: where in window year k >= 1 a decision is dated: at
+            t = k - 1 + decision_point (0.5 = mid-year, the primary run; 1 = end of year,
+            a sensitivity). A decision already made is dated at t = 0.
         n_paths: Monte Carlo paths, used only for path-dependent terms.
         seed: Monte Carlo seed (ADR 0011).
 
@@ -686,18 +710,35 @@ def cash_flow_model(
         raise ValueError(f"preproduction_years must be >= 0, got {preproduction_years}")
     if not 0.0 < period_offset <= 1.0:
         raise ValueError(f"period_offset must be in (0, 1], got {period_offset}")
+    if not 0.0 < decision_point <= 1.0:
+        raise ValueError(f"decision_point must be in (0, 1], got {decision_point}")
     sched = np.asarray(schedule, dtype=float)
     if sched.ndim != 1 or sched.size == 0:
         raise ValueError("schedule must be a non-empty 1-d sequence of annual ounces")
     weights = claim_ounces(claim, sched)
     n_prod = sched.size
 
-    decisions = np.arange(window_years + 1, dtype=float)  # scenario k: decision at t = k
+    k_years = np.arange(window_years + 1, dtype=float)
+    decisions = np.where(k_years > 0, k_years - 1.0 + decision_point, 0.0)
     starts = decisions + preproduction_years
     prod_times = starts[:, None] + np.arange(n_prod)[None, :] + period_offset
     # Advances: end of each whole year up to production start; window close if undecided.
     adv_counts = [int(np.floor(s + 1e-9)) for s in starts] + [window_years]
     adv = claim.advance if isinstance(claim, RoyaltyTerms) else None
+    if adv is not None and adv.max_years is not None:
+        adv_counts = [min(c, adv.max_years) for c in adv_counts]
+    if adv is not None and adv.max_total is not None and adv.amount > 0:
+        full = int(np.ceil(adv.max_total / adv.amount - 1e-12))
+        adv_counts = [min(c, full) for c in adv_counts]
+
+    def adv_amounts(n: int) -> FloatArray:
+        """Advance payments in years 1..n, the last cut to respect ``max_total``."""
+        assert adv is not None
+        out = np.full(n, adv.amount, dtype=float)
+        if adv.max_total is not None and n > 0:
+            out[-1] = min(adv.amount, adv.max_total - adv.amount * (n - 1))
+        return out
+
     adv_times = np.arange(1, max(adv_counts) + 1, dtype=float) if adv is not None else np.zeros(0)
     times = np.unique(np.round(np.concatenate([prod_times.ravel(), adv_times]), 9))
     n_scen = window_years + 2
@@ -715,13 +756,14 @@ def cash_flow_model(
             n_adv = adv_counts[k]
             if adv is not None and n_adv > 0:
                 t_adv = np.arange(1, n_adv + 1, dtype=float)
+                amounts = adv_amounts(n_adv)
                 if adv.unit == "money":
-                    mean[k, col(t_adv)] += adv.amount / (1.0 + claim.inflation) ** t_adv
+                    mean[k, col(t_adv)] += amounts / (1.0 + claim.inflation) ** t_adv
                 else:
                     forward = market.gold_spot * np.exp(market.drift * t_adv)
-                    mean[k, col(t_adv)] += adv.amount * forward
+                    mean[k, col(t_adv)] += amounts * forward
                     if adv.credited:
-                        w = _credit_ounces(w, adv.amount * n_adv)
+                        w = _credit_ounces(w, float(amounts.sum()))
             if k == n_scen - 1:
                 continue  # no decision in the window: advances only
             t = prod_times[k]
@@ -739,15 +781,16 @@ def cash_flow_model(
         credit = np.zeros(n_paths)
         if adv is not None and n_adv > 0:
             idx = col(np.arange(1, n_adv + 1, dtype=float))
+            amounts = adv_amounts(n_adv)
             if adv.unit == "money":
-                nominal[:, idx] += adv.amount
+                nominal[:, idx] += amounts
                 if adv.credited:
-                    credit += adv.amount * n_adv
+                    credit += float(amounts.sum())
             else:
-                nominal[:, idx] += adv.amount * prices[:, idx] * deflator[idx]
+                nominal[:, idx] += amounts * prices[:, idx] * deflator[idx]
         w = weights
         if adv is not None and adv.unit == "ounces" and adv.credited and n_adv > 0:
-            w = _credit_ounces(w, adv.amount * n_adv)
+            w = _credit_ounces(w, float(adv_amounts(n_adv).sum()))
         if k < n_scen - 1:
             idx = col(prod_times[k])
             nominal[:, idx] += w * _per_ounce_paths(claim, prices[:, idx]) * deflator[idx]
@@ -926,6 +969,14 @@ class PriceRange:
     needs_extension: bool
     flags: tuple[str, ...] = field(default=())
 
+    @property
+    def max_relative_se(self) -> float:
+        """Largest per-draw standard error as a share of its value (reported, not a typical one)."""
+        nz = self.values != 0.0
+        if not nz.any():
+            return 0.0
+        return float(np.max(np.abs(self.standard_errors[nz] / self.values[nz])))
+
 
 def price_range(
     model: CashFlowModel,
@@ -1000,6 +1051,7 @@ def contingent_epv(
     real_rate: float,
     preproduction_years: float | None = None,
     trigger_in_window: bool = True,
+    decision_point: float = 0.5,
 ) -> float:
     """Return the expected present value of a contingent payment (8.6 sensitivity).
 
@@ -1007,7 +1059,8 @@ def contingent_epv(
     ``preproduction_years`` later (one year if None), and is discounted at the real
     risk-free rate from the trigger date. With ``trigger_in_window`` the trigger itself
     must fall inside the window (so a production trigger needs decision plus
-    pre-production within it); otherwise any decision in the window counts.
+    pre-production within it); otherwise any decision in the window counts. Decisions
+    in window year k >= 1 are dated at k - 1 + ``decision_point`` (mid-year by default).
     """
     if trigger not in ("decision", "first_production"):
         raise ValueError(f"trigger must be 'decision' or 'first_production', got {trigger!r}")
@@ -1016,7 +1069,8 @@ def contingent_epv(
     lag = 0.0
     if trigger == "first_production":
         lag = DEFAULT_PREPRODUCTION_YEARS if preproduction_years is None else preproduction_years
-    t = np.arange(timing.probs.size, dtype=float) + lag
+    k_years = np.arange(timing.probs.size, dtype=float)
+    t = np.where(k_years > 0, k_years - 1.0 + decision_point, 0.0) + lag
     p = timing.probs.copy()
     if trigger_in_window:
         p = np.where(t <= timing.window_years + 1e-9, p, 0.0)

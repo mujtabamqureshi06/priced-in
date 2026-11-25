@@ -38,3 +38,22 @@ The engine also needs build odds and timing for each deal. One price cannot iden
 - Phase 6 scoring waits for the Phase 5 table to be final. No Phase 6 aggregate is published before the Phase 5 results.
 - With 22 deals, any coverage from 14 to 21 is consistent with a calibrated 80% range (probability 0.97). The write-up says the series can reveal gross miscalibration but cannot confirm that the engine prices royalties well.
 - The project's claim stays "what prices imply". Results never describe a party as having overpaid or underpaid.
+
+## Amendment, 2026-11-25: pricer conventions
+
+Fixed without access to any deal price, after the pricer was written. Where the whole-year engine forces a convention, the choice removes an artefact of the method and keeps any convention shared with the study benchmark (B1). Each known bias is stated with its direction.
+
+1. **Decision dating.** A build decision in window year k is dated mid-year, t = k - 0.5. End of year is a sensitivity.
+2. **Payment timing.** Payments are dated at the end of each year in the primary run, the same convention studies use. Royalties are paid monthly or quarterly, so this understates value by about half a year of discounting. A mid-year payment sensitivity is reported.
+3. **Advance royalties.** A shorter duration or a total set by the terms limits the advances; the window end is only the outer limit. Creditable advances are recovered from later payments and add no value of their own. Stopping at the window end understates value where advances run longer.
+4. **Caps.** All payments, advances included, count toward a cap. A nominal cap is deflated at the deal-date breakeven inflation rate from the snapshot. A cap in another currency uses that country's breakeven rate where the snapshot has one, otherwise the US rate, flagged.
+5. **Step thresholds.** If the terms do not say which ounces count toward a threshold, the deal is not priced for that reason. The transcriber does not choose.
+6. **Offsite costs.** Real and constant, with the NSR base floored at zero each year.
+7. **Fixed-price streams.** A lesser-of price is a strip of calls; a pure fixed price is P - c and may be negative. Escalation follows the terms. The flat-deck sensitivity for fixed-payment streams still applies.
+8. **Contingent production triggers.** Modelled only for the contingent sensitivity (item 6 of the decision).
+9. **Incomplete bootstrap replicates.** A replicate without a 60-month value raises an error. It is never dropped silently; if one occurs it is reported and the freeze waits.
+10. **Terms not implemented.**
+    - A sliding scale or value threshold tied to the gold price on a usable deal is a coding error under rule 4 and goes back to resolution.
+    - For other terms, the usable deals were counted before transcription. That count is a coding fact, not a price: 0 carry a debt-linked step, 0 a completion test and 0 an advance on a stream. 1 carries a minimum cash-flow guarantee.
+    - A term carried by 2 or more usable deals is implemented and unit-tested before the freeze if the documents specify it fully. Otherwise the deal is not priced. On these counts, none needs new code, and the deal with the guarantee is not priced unless the guarantee proves to have no effect on value. The count of deals not priced is reported with reasons.
+11. **Monte Carlo.** 20,000 paths and seed 0 for each draw. The same seed across draws gives common random numbers, which reduces noise in differences between draws. The largest per-draw standard error across all draws is reported. A draw above 1% of its value raises the path count for that deal before the freeze.
