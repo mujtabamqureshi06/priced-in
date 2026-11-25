@@ -9,7 +9,9 @@ Estimators for the stage-to-build table in ``docs/phase5/protocol.md``:
   case where every subject's potential censoring time is known (all censoring is at the
   data cut-off), so subjects with the competing event stay in the risk set until that
   time with weight one;
-* the 36-month Brier score and a cluster bootstrap over projects.
+* the 36-month Brier score and a cluster bootstrap over projects;
+* the expected discount factor to the event within a horizon, which turns a stage curve
+  into a NAV multiple (protocol section 8).
 
 Times are in months. Every function takes plain numpy arrays so that the tests can
 check them against hand-worked cases.
@@ -74,6 +76,37 @@ def cumulative_incidence(
         idx = int(np.searchsorted(np.array(times), h, side="right")) - 1
         out[k] = values[idx] if idx >= 0 else 0.0
     return out
+
+
+def discounted_incidence(
+    time: FloatArray, event: NDArray[np.bool_], rate: float, horizon: float
+) -> float:
+    """Return the expected discount factor to the event within ``horizon`` months.
+
+    Each Kaplan-Meier increment of the cumulative incidence is discounted at the annual
+    ``rate`` from its own time: ``sum_j dF(t_j) (1 + rate)^(-t_j / 12)`` over event times
+    ``t_j <= horizon``. With ``rate = 0`` it equals ``cumulative_incidence`` at the
+    horizon. Returns NaN if no subject is observed to the horizon.
+    """
+    time = np.asarray(time, dtype=float)
+    event = np.asarray(event, dtype=bool)
+    if time.size == 0 or horizon > float(np.max(time)):
+        return float("nan")
+    order = np.lexsort((~event, time))
+    t, e = time[order], event[order]
+    n = t.size
+    surv, total, i = 1.0, 0.0, 0
+    while i < n and t[i] <= horizon:
+        j = i
+        while j < n and t[j] == t[i]:
+            j += 1
+        dead = int(e[i:j].sum())
+        if dead:
+            new = surv * (1.0 - dead / (n - i))
+            total += (surv - new) * (1.0 + rate) ** (-t[i] / 12.0)
+            surv = new
+        i = j
+    return total
 
 
 def aalen_johansen(
