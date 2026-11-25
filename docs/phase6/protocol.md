@@ -222,3 +222,7 @@ Nothing in steps 1 to 5 reads a price. People who have seen prices may do steps 
 ### 8.9 What Phase 6 cannot show
 
 With 22 deals and nominal coverage of 80%, a perfectly calibrated range would put between 14 and 21 prices inside with probability 0.97 (binomial, n = 22, p = 0.8: P(k <= 13) = 0.020, P(k >= 22) = 0.007). Any coverage in that band is consistent with a well-calibrated range. The series can show a gross miscalibration of the range, or that the engine's central value is no closer to prices than the study convention. It cannot confirm that the engine prices royalties well, and the write-up says so.
+
+### 8.10 Pricer conventions (ADR 0073 amendment)
+
+The conventions the pricer needs beyond 8.2 to 8.6 are fixed in the amendment to ADR 0073: mid-year decision dating, end-of-year payments with a mid-year sensitivity, limits and crediting of advances, deflation of nominal caps at breakeven inflation, unpriced deals where a threshold's ounce basis is not stated, and how terms not yet implemented are handled. The largest per-draw Monte Carlo standard error is reported.
