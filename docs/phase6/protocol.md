@@ -51,3 +51,13 @@ The count is recorded in `docs/phase6/count.md` and committed before part 2 is w
 ## 6. Publication
 
 Per-deal results are private; only aggregates are published (owner, 2026-11-19). The list of usable deals and their sources can be published if the owner decides, because it contains public information only. Results on real deals state what the price implies, never that a party overpaid or underpaid.
+
+## 7. Coding interpretations (ADR 0071, fixed after the first-pass count)
+
+These were decided after the first-pass count (23 usable, 20 unclear, against the threshold of 25) and before second coding. `count.md` reports the usable count under each interpretation and its alternative, and says so if the test or case-series outcome turns on one of them.
+
+1. **Unlisted or unvalued securities.** Warrants or units in the consideration are unconditional but unvalued. A value stated in a filing or the financial statements is used, flagged "issuer-valued", with a check price without them. Otherwise they are taken at notional value (number times exercise price), an upper bound, and the deal passes rule 1 only if cash and listed shares are at least 75% of that total. If they are not, or the notional value is unknown, the deal is not usable. The project never values warrants itself.
+2. **Buy-back at fair market value.** Standard, flagged, and every result is also reported without such deals. If "fair value" is defined by a formula, the formula must be fully specified.
+3. **Fixed-ounce deliveries.** Not standard. A hybrid with a fixed-ounce part is standard only if the fixed part is a minimum shown to be below study production in every year (a floor), flagged. The number of deals excluded under this point is reported.
+4. **When a study counts.** From the first public date of its after-tax NPV and IRR, usually the results news release, as in Phase 5. The effective date never counts. If the filed report's figures differ from the release, the release figures are used, flagged.
+5. **Gold share on other bases.** Shares use study prices only. A share on head-grade or contained metal settles a deal only outside 70% to 90%: below 70% fails rule 2; 90% or above passes, flagged. Between them the deal stays unclear until a revenue table or payable figures are found. Deals still unclear after second coding are not usable, and are counted.
