@@ -502,11 +502,17 @@ def test_price_range_rejects_missing_replicate() -> None:
 
 def test_contingent_epv_hand_case() -> None:
     t = dp.decision_timing(INC, 0.0)  # 0.1 in each of years 1..5
-    end = {"decision_point": 1.0}  # end-of-year dating (sensitivity)
-    on_decision = dp.contingent_epv(1000.0, t, trigger="decision", real_rate=0.02, **end)
+    on_decision = dp.contingent_epv(
+        1000.0, t, trigger="decision", real_rate=0.02, decision_point=1.0
+    )
     assert on_decision == pytest.approx(sum(100 / 1.02**k for k in range(1, 6)))
     on_production = dp.contingent_epv(
-        1000.0, t, trigger="first_production", real_rate=0.02, preproduction_years=1.0, **end
+        1000.0,
+        t,
+        trigger="first_production",
+        real_rate=0.02,
+        preproduction_years=1.0,
+        decision_point=1.0,
     )
     assert on_production == pytest.approx(sum(100 / 1.02**k for k in range(2, 6)))
     any_decision = dp.contingent_epv(
@@ -516,7 +522,7 @@ def test_contingent_epv_hand_case() -> None:
         real_rate=0.02,
         preproduction_years=1.0,
         trigger_in_window=False,
-        **end,
+        decision_point=1.0,
     )
     assert any_decision == pytest.approx(sum(100 / 1.02**k for k in range(2, 7)))
     mid = dp.contingent_epv(1000.0, t, trigger="decision", real_rate=0.02)
@@ -530,7 +536,7 @@ def test_contingent_epv_hand_case() -> None:
 
 def test_decision_point_mid_year_is_worth_more_than_end_of_year() -> None:
     claim = dp.RoyaltyTerms(rate=0.02, kind="GRR")
-    market = dp.Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.05)
+    market = Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.05)
     mid = dp.cash_flow_model(claim, [100.0, 100.0], market, preproduction_years=1.0)
     end = dp.cash_flow_model(
         claim, [100.0, 100.0], market, preproduction_years=1.0, decision_point=1.0
@@ -541,7 +547,7 @@ def test_decision_point_mid_year_is_worth_more_than_end_of_year() -> None:
 
 
 def test_advance_limited_by_years_and_total() -> None:
-    market = dp.Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.0)
+    market = Market(gold_spot=1500.0, drift=0.0, volatility=0.0, discount_rate=0.0)
     sched = [100.0]
 
     def no_decision_row(adv: dp.AdvanceMinimum) -> float:
