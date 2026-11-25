@@ -82,7 +82,9 @@ observations:
     series: weekday log returns, trailing 10 years, x sqrt(252)
     status: P
     notes: >-
-      Computed by Priced In from the vendor series; see scripts/realised_vol.py.
+      Computed by Priced In from the vendor series; see scripts/realised_vol.py. The vendor
+      series starts on 2012-01-02, so the window is about 9.4 years, not 10 (disclosed
+      2026-11-25).
   cad_nominal_10y:
     value: 0.0147
     units: fraction per year

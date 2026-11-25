@@ -57,3 +57,15 @@ Fixed without access to any deal price, after the pricer was written. Where the 
     - For other terms, the usable deals were counted before transcription. That count is a coding fact, not a price: 0 carry a debt-linked step, 0 a completion test and 0 an advance on a stream. 1 carries a minimum cash-flow guarantee.
     - A term carried by 2 or more usable deals is implemented and unit-tested before the freeze if the documents specify it fully. Otherwise the deal is not priced. On these counts, none needs new code, and the deal with the guarantee is not priced unless the guarantee proves to have no effect on value. The count of deals not priced is reported with reasons.
 11. **Monte Carlo.** 20,000 paths and seed 0 for each draw. The same seed across draws gives common random numbers, which reduces noise in differences between draws. The largest per-draw standard error across all draws is reported. A draw above 1% of its value raises the path count for that deal before the freeze.
+
+## Amendment, 2026-11-25: converting disclosed rates by deck shape (protocol 8.3)
+
+Fixed without access to any deal price, before the freeze. Protocol 8.3 said how to convert a rate stated as nominal, but not one whose basis is not stated, which is 14 of the 24 rows in the primary set.
+
+For a revenue claim on a flat deck the label does not change the value: a flat nominal price at a nominal rate gives the same value as a flat real price at a real rate. So the conversion goes by the deck the rate was applied to (ADR 0045: apply a rate as its source did). Step 1 of the 8.3 conversion now reads, per row:
+
+- a flat deck, or a deck flat in the long term: no conversion, whatever the label (22 rows);
+- an escalating deck with a stated inflation assumption: deflated at that rate (1 row);
+- a deck not stated: treated as flat, flagged, in the primary run, and deflated at the 10-year US breakeven rate at the fiscal year end as a sensitivity (1 row).
+
+If the unstated rates were in fact applied to escalating decks, the primary run overstates spreads and understates values. The minimum of 8 rates from 4 companies still holds: 24 rows from 7 companies. Empress Royalty's 16.5% applies to one producing stream, so it stays in the primary set.

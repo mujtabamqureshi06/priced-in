@@ -110,7 +110,7 @@ The spread is the buyer's real required return over the real risk-free rate, on 
 - **Where.** Audited annual financial statements and the MD&A filed with them, in impairment-test or fair-value notes, fiscal years 2012 to 2025.
 - **What is recorded.** Each rate; whether real or nominal, pre-tax or post-tax; the asset class it applies to (producing, development, or both); the gold price deck stated with it; the statement date; and the page. One row per company, year and asset class. A range "x% to y%" is recorded as both ends.
 - **Conversion.**
-  1. Nominal to real with the inflation assumption stated in the same note; if none is stated, with the 10-year US breakeven inflation rate (FRED T10YIE) at the fiscal year end, flagged.
+  1. By the deck the rate was applied to (ADR 0073 amendment): a flat deck needs no conversion, whatever the label; a rate on an escalating deck is deflated at the inflation assumption stated in the same note; a deck not stated is treated as flat, flagged, with deflation at the 10-year US breakeven rate (FRED T10YIE) at the fiscal year end as a sensitivity.
   2. Post-tax to pre-tax only with a pre-tax equivalent disclosed by the same company; otherwise the post-tax rate is used, flagged (it understates the pre-tax rate).
   3. Rate k to spread s = k(1 + r), with r the real rate at the statement date (ADR 0045).
 - **Primary set.** Rates for producing assets. The engine already applies development risk through 8.2, so rates that include a development premium would count it twice (ADR 0045 item 3).
