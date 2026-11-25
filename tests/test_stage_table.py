@@ -12,6 +12,7 @@ from pricedin.stage_table import (
     brier,
     cluster_bootstrap,
     cumulative_incidence,
+    discounted_incidence,
     fine_gray,
     months_between,
     percentile_interval,
@@ -98,3 +99,25 @@ def test_fine_gray_without_competing_events_is_cox() -> None:
     x = np.array([[1.0], [0.0], [1.0], [0.0], [1.0], [0.0]])
     beta = fine_gray(time, cause, np.full(6, 6.0), x)
     assert np.isfinite(beta[0])
+
+
+def test_discounted_incidence_at_zero_rate_matches_cumulative_incidence() -> None:
+    time = np.array([5.0, 15.0, 20.0, 30.0, 40.0, 70.0, 70.0])
+    event = np.array([True, True, False, True, False, False, False])
+    for h in (12, 24, 36, 60):
+        expected = cumulative_incidence(time, event, (h,))[0]
+        assert discounted_incidence(time, event, 0.0, h) == pytest.approx(expected)
+
+
+def test_discounted_incidence_hand_case() -> None:
+    # No censoring: events at 12 and 24 months among four subjects.
+    time = np.array([12.0, 24.0, 60.0, 60.0])
+    event = np.array([True, True, False, False])
+    got = discounted_incidence(time, event, 0.05, 36)
+    assert got == pytest.approx(0.25 / 1.05 + 0.25 / 1.05**2)
+
+
+def test_discounted_incidence_beyond_follow_up_is_nan() -> None:
+    time = np.array([10.0, 20.0])
+    event = np.array([True, False])
+    assert np.isnan(discounted_incidence(time, event, 0.05, 36))
