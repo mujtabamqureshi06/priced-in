@@ -11,6 +11,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 6 part 2 (ADR 0073, protocol section 8), fixed before any deal is priced: build odds and timing from the stage table, the spread prior, an 80% price range, width ln(upper/lower), the interval score and the benchmarks, and the order of steps with prices joined last.
 - Phase 6 count (`docs/phase6/count.md`, ADR 0072): 22 usable royalty and stream deals from 429 found, with 160 coded twice; Phase 6 is a case series under ADR 0063. Counts only; each coding interpretation shown both ways.
 - Phase 6 coding interpretations (ADR 0071, protocol section 7), fixed after the first-pass count and before second coding: unvalued warrants, buy-backs at fair market value, fixed-ounce deliveries, when a study counts, and gold shares on other bases.
 - Phase 6 counting protocol (ADR 0070, `docs/phase6/protocol.md`), fixed before any deal is counted: which royalty and stream deals on pre-production gold projects are usable, the window, the search and two-pass coding, and how deals already seen are flagged.
