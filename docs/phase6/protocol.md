@@ -52,7 +52,7 @@ The count is recorded in `docs/phase6/count.md` and committed before part 2 is w
 
 Per-deal results are private; only aggregates are published (owner, 2026-11-19). The list of usable deals and their sources can be published if the owner decides, because it contains public information only. Results on real deals state what the price implies, never that a party overpaid or underpaid.
 
-## 7. Coding interpretations (ADR 0071, fixed after the first-pass count)
+## 7. Coding interpretations (ADR 0071 and ADR 0072, fixed after the first-pass count)
 
 These were decided after the first-pass count (23 usable, 20 unclear, against the threshold of 25) and before second coding. `count.md` reports the usable count under each interpretation and its alternative, and says so if the test or case-series outcome turns on one of them.
 
@@ -61,3 +61,4 @@ These were decided after the first-pass count (23 usable, 20 unclear, against th
 3. **Fixed-ounce deliveries.** Not standard. A hybrid with a fixed-ounce part is standard only if the fixed part is a minimum shown to be below study production in every year (a floor), flagged. The number of deals excluded under this point is reported.
 4. **When a study counts.** From the first public date of its after-tax NPV and IRR, usually the results news release, as in Phase 5. The effective date never counts. If the filed report's figures differ from the release, the release figures are used, flagged.
 5. **Gold share on other bases.** Shares use study prices only. A share on head-grade or contained metal settles a deal only outside 70% to 90%: below 70% fails rule 2; 90% or above passes, flagged. Between them the deal stays unclear until a revenue table or payable figures are found. Deals still unclear after second coding are not usable, and are counted.
+6. **Instrument gold share, debt-linked steps, ounce payments (ADR 0072).** Rule 2's 80% applies to the instrument as well as the project. A debt-linked step in a stream's delivery is standard if fully specified, flagged. Pre-production payments in ounces are an advance minimum royalty only if credited against later royalties or a stated minimum with a specified limit.
