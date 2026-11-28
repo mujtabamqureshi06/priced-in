@@ -41,7 +41,7 @@ from pricedin.engine import (
     _decision_value,
     _gate_costs,
 )
-from pricedin.parametric import Headline, _schedule, build_case, calibrate
+from pricedin.parametric import Headline, _schedule, build_case, calibrate, irr_tolerance
 from pricedin.priors import PriorsRegistry, load_priors
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -109,7 +109,12 @@ class MarketRow:
 
 
 def trigger(
-    h: Headline, stage_label: str, m: MarketRow, priors: PriorsRegistry, cost_scale: float = 1.0
+    h: Headline,
+    stage_label: str,
+    m: MarketRow,
+    priors: PriorsRegistry,
+    cost_scale: float = 1.0,
+    irr_decimals: int | None = None,
 ) -> float | None:
     """Lowest real gold price at which the threshold build rule builds now, or None.
 
@@ -118,7 +123,13 @@ def trigger(
     overrun and dilution at or above zero, at the entry snapshot's real rate and
     volatility. ``cost_scale`` multiplies the built operating cost (the sensitivity).
     Returns None when no price in [100, 10,000] US$/oz satisfies the rule.
+
+    The schedule follows the Phase 4 calibration rules (ADR 0057 rules 1 and 2): the IRR
+    tolerance is half a unit of the last digit the study states (``irr_decimals``), and
+    an entry whose cash-flow shape cannot be matched keeps the closest schedule that
+    matches its NPV. ``ValueError`` is raised only if the NPV cannot be matched.
     """
+    irr_tol = irr_tolerance(irr_decimals) if irr_decimals is not None else 5e-4
     case = build_case(
         h,
         case_id="bt",
@@ -131,9 +142,11 @@ def trigger(
         document_url="https://example.org/bt",
         document_date=date(2000, 1, 1),
         location="bt",
+        irr_tol=irr_tol,
+        allow_shape_miss=True,
     )
     if cost_scale != 1.0:
-        base = calibrate(h)
+        base = calibrate(h, irr_tol=irr_tol, allow_shape_miss=True)
         shifted = _schedule(h, base.cost_factor * cost_scale, base.tilt)
         cols = dict(case.schedule.columns)
         for name, values in (
@@ -238,6 +251,7 @@ def run(
     ):
         g_star: dict[str, float] = {}
         missing = []
+        shape_miss: set[str] = set()
         for pid in sorted(stage_of):
             if pid not in heads:
                 missing.append(pid)
@@ -252,13 +266,21 @@ def run(
             )
             entry_q = next(str(r["entry_quarter"]) for r in rows if r["project_id"] == pid)
             e = mkt[entry_q]
-            g = trigger(
-                h,
-                stage_of[pid],
-                MarketRow(float(e["gold_spot"]), float(e["real_rate"]), float(e["volatility"])),
-                priors,
-                scale,
-            )
+            dec = int(raw["irr_decimals"]) if raw.get("irr_decimals") not in (None, "") else None
+            tol = irr_tolerance(dec) if dec is not None else 5e-4
+            try:
+                g = trigger(
+                    h,
+                    stage_of[pid],
+                    MarketRow(float(e["gold_spot"]), float(e["real_rate"]), float(e["volatility"])),
+                    priors,
+                    scale,
+                    dec,
+                )
+                if not calibrate(h, irr_tol=tol, allow_shape_miss=True).shape_matched:
+                    shape_miss.add(pid)
+            except ValueError:
+                g = None
             if g is None:
                 missing.append(pid)
             else:
@@ -305,6 +327,14 @@ def run(
             )
             out["coef"] = (b, lo, hi)
             if label == "primary":
+                print(f"  shape not matched (ADR 0057 rule 2): {len(shape_miss)} projects")
+                sub = [r for r in kept if r["project_id"] not in shape_miss]
+                b3, lo3, hi3 = fit(*design(sub, "x"))
+                print(
+                    f"  check, without shape-not-matched entries: coef {b3:+.3f}"
+                    f" [{lo3:+.3f}, {hi3:+.3f}]"
+                )
+                out["no_shape_miss"] = (b3, lo3, hi3)
                 b2, lo2, hi2 = fit(*design(kept, "above"))
                 print(f"  secondary, spot >= G* coef {b2:+.3f} [{lo2:+.3f}, {hi2:+.3f}]")
                 out["above"] = (b2, lo2, hi2)
