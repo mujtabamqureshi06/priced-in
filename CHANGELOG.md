@@ -12,6 +12,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Study-entry tool (`pricedin.entry_tool.evaluate`, Phase 7): a study's headline figures and a stage in, the value if built out, on the settings the builder was validated on, with the validated builder error and a note where the validation has no evidence (NPV below half of capital). Written as one pure function returning plain values so the website can run the same code in the browser.
 - Phase 7 builder validation (`docs/phase7/builder_validation.md`, ADR 0075): in-sample re-test on 11 tables and the fresh test on 10 hashed tables meet the Phase 4 thresholds without a builder change (fresh: median 3.2%, 90th percentile 10.7%, Spearman 0.976); dated note on the Phase 4 builder misses.
 - Phase 7 hash record: a second hash set for seven fresh tables re-expressed with the ADR 0074 fields only, recorded before any builder run.
@@ -99,6 +100,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Study-entry tool (`pricedin.entry_tool.evaluate`, Phase 7): a study's headline figures and a stage in, the value if built out, on the settings the builder was validated on, with the validated builder error and a note where the validation has no evidence (NPV below half of capital). Written as one pure function returning plain values so the website can run the same code in the browser.
 - LBMA PM cross-check of every gold snapshot (#93, ADR 0050). The vendor closing price stays the gold spot: on the four dates where the two differ by more than 0.5%, it is within 0.24% of a 4 pm New York price implied by the GLD trust. Each snapshot records the LBMA PM, and the Gold Standard note shows a sensitivity at the LBMA PM (break-evens 0.8 to 1.7 points lower).
 - `Risks.holding_cost` (ADR 0049): a real cost per year of deferral beyond the base year, paid by the project. Zero by default, so no published number changes.
@@ -119,6 +121,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 Phase 2: price adapters, inversion and the public back-test.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Study-entry tool (`pricedin.entry_tool.evaluate`, Phase 7): a study's headline figures and a stage in, the value if built out, on the settings the builder was validated on, with the validated builder error and a note where the validation has no evidence (NPV below half of capital). Written as one pure function returning plain values so the website can run the same code in the browser.
 - Back-test write-up (#74): `docs/backtest.md`, and `scripts/backtest.py`, which regenerates every number in it.
 - Multi-metal royalty cases (#72, ADR 0036): `pricedin.royalty_cases` (closed-form market-consistent royalty value on a multi-metal study table, correlated Monte Carlo check, implied odds of reaching production, break-even spread) and `price_models.CorrelatedGBM`.
@@ -137,6 +140,7 @@ Phase 2: price adapters, inversion and the public back-test.
 First release: the Phase 1 forward engine on two public cases, and the South Railroad royalty inversion pulled forward from Phase 2.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Study-entry tool (`pricedin.entry_tool.evaluate`, Phase 7): a study's headline figures and a stage in, the value if built out, on the settings the builder was validated on, with the validated builder error and a note where the validation has no evidence (NPV below half of capital). Written as one pure function returning plain values so the website can run the same code in the browser.
 - App (#65): `app/streamlit_app.py` with valuation, royalty price, timing and assumptions views; optional extra `app` (`uv sync --extra app`). Smoke test runs both cases when Streamlit is installed.
 - Sensitivities and readout (#63): `pricedin.sensitivity` (tornado, build-year distribution, template readout). Osino Twin Hills forward valuation write-up (`docs/cases/osino_twin_hills.md`) and `scripts/osino_case.py` (#64).
@@ -156,6 +160,7 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 - mypy no-any-return on Python 3.11 in `price_models` (#4).
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Study-entry tool (`pricedin.entry_tool.evaluate`, Phase 7): a study's headline figures and a stage in, the value if built out, on the settings the builder was validated on, with the validated builder error and a note where the validation has no evidence (NPV below half of capital). Written as one pure function returning plain values so the website can run the same code in the browser.
 - ADRs 0018 to 0021: tax approximation; ramp-up by plant class, superseding 0017; royalty price basis, clarifying 0014; advance royalties and buy-down for South Railroad. Oxide-class ramp-up weights (`rampup.weight.oxide.*`).
 - Schedule-mode project cash flow (#56): `pricedin.project` recomputes revenue, revenue-linked costs and tax for any gold price path; reproduces both study tables exactly at the deck and the published price sensitivities within the errors in ADR 0018. Cases gain `gold_revenue`, `revenue_linked` and a sourced `marginal_tax_rate`.
