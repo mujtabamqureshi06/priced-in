@@ -23,3 +23,17 @@ The screening rules and the eligibility list were hashed before any table was op
 |---|---|
 | RULES.md | `2890978384894bb09e4fc4df3c6ff931676ae6533c96da56e408e46287c66e98` |
 | eligibility.csv | `18e7c3efb470138b16fd48a93dcdb3d0268e902f62b5fd509a034de961a3e71c` |
+
+## Second hash set, 2026-11-28
+
+Seven tables need the discounting offset (`study.discounting.t0_years`) or the C$ fields (`schedule.money_units` and `schedule.fx_usd_per_unit`, ADR 0074) to reproduce their study NPV. A copy of each was made that changes only those fields; a field-level comparison with the first file shows no other change, and each copy reproduces its study's after-tax NPV within 0.6%. Exchange rates are the studies' own stated rates (0.75 or 0.76 US$ per C$). These copies were hashed before any builder or engine run and are the files used in the test; the first set above stays the record of the original transcriptions.
+
+| File | SHA-256 |
+|---|---|
+| 33_yaramoko_v2.yaml | `39c971c8180d588b5e42e2aaaeb0977aafb8176d77d77dfba79073b015aa470f` |
+| 42_lindero_v2.yaml | `9b194f6fd50db9b6a592d2758f1eae08a0429e25a0ec69f8aaa2318e79cf1159` |
+| 43_mirado_v2.yaml | `c9c423ffd56abc41fb54d5c9ec29f8357f3f4502323ffac5892905e178422b06` |
+| 47_west_cache_v2.yaml | `f55ddeb4542ca3cf2bf7f180c0757fc5f885496493128dad178776401b43e27b` |
+| 101_loma_larga_v2.yaml | `f8473a632a0461302867ea8e0ca3d23f04424da03899789249a0fe0122f34d1e` |
+| 106_val_d_or_east_v2.yaml | `87b3c905264c7acd506babd8a24cb35f62cfc15ee588ac8c92c5bd67f79f6c3f` |
+| 107_garrison_v2.yaml | `84e4e51dfd491e008a6460117782cc8288bf49c27bb235f26e58a4faea69a0f6` |

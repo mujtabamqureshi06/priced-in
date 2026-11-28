@@ -11,6 +11,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 7 hash record: a second hash set for seven fresh tables re-expressed with the ADR 0074 fields only, recorded before any builder run.
 - Case schema (ADR 0074): `study.discounting.t0_years` and `periods_at_t0` for studies that discount their first column or place several pre-production years at the valuation date, and C$ money units with a stated `schedule.fx_usd_per_unit`; defaults leave existing cases unchanged.
 - Phase 7 builder validation hash record (`docs/phase7/fresh_tables.md`): SHA-256 hashes of 10 fresh annual cash-flow tables and of the screening rules, recorded before the builder fix is designed and before any run on them.
 - Phase 5 results (`docs/phase5/results.md`): cumulative incidence of a construction decision by study stage at 12, 24, 36 and 60 months with bootstrap intervals (36 months: PEA 8%, PFS 17%, FS 47%), takeover of the owner and competing risks, the stability test in its fixed wording, robustness readings, limits, and a secondary comparison of implied NAV multiples with a published set of sell-side stage multiples. The roadmap marks Phase 5 complete.
