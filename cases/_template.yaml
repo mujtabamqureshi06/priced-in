@@ -8,7 +8,8 @@
 # - Every number carries a source: a document id from `documents` plus a location
 #   (section, table, page). A reader must be able to find each value in the report.
 # - Enter money in the report's own units and declare them once in schedule.money_units
-#   ("US$ thousands" or "US$ millions"). Do not convert while transcribing. Set a row's
+#   ("US$ thousands", "US$ millions", "C$ thousands" or "C$ millions"). Do not convert
+#   while transcribing; a C$ table also records schedule.fx_usd_per_unit. Set a row's
 #   resolution to the smallest digit the report shows (1, or 0.1 for one decimal).
 # - Schedule mode: copy the report's annual cash-flow table row by row, including the
 #   report's own total for each row. The loader rejects a row whose values do not add up
@@ -44,15 +45,19 @@ study:
                         #   check it against the report's gold-price sensitivity table.
                         #   If the derived rate misses that table, fit the rate to the
                         #   table and state both rates in the source (ADR 0043).
-  discounting:          # {t0_column (period discounted with exponent 0),
-                        #   convention: end_of_year | mid_year, source}. Choose the
-                        #   convention that reproduces the report's NPVs.
+  discounting:          # {t0_column (first period), convention: end_of_year | mid_year,
+                        #   t0_years (exponent of t0, default 0; 0.5 or 1 if the report
+                        #   discounts its first column), periods_at_t0 (leading periods
+                        #   placed at t0, default 1), source}. Choose what reproduces
+                        #   the report's NPVs.
   tax_summary:          # one paragraph, with section references
 
 status:                 # {permitted, financed, construction_decision, source}
 
 schedule:
-  money_units:          # US$ thousands | US$ millions
+  money_units:          # US$ thousands | US$ millions | C$ thousands | C$ millions
+  fx_usd_per_unit:      # C$ tables only: {value (US$ per C$), units, source}; the study's
+                        #   own rate if stated, otherwise the valuation-date rate
   revenue_linked:       # list of column names that scale with revenue (royalties,
                         #   refining charges, revenue-based duties); [] if none
   periods:              # the report's own period labels, in order
