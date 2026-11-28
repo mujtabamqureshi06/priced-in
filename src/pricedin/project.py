@@ -32,7 +32,7 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-from pricedin.inputs import Case
+from pricedin.inputs import MILLIONS_PER_UNIT, Case
 
 FloatArray = NDArray[np.float64]
 
@@ -137,14 +137,26 @@ def _adjusted_tax(study_tax: FloatArray, change: FloatArray) -> FloatArray:
 def period_times(case: Case) -> FloatArray:
     """Years from the t0 column to each period's cash flow, on the study's convention.
 
-    The period named by ``case.study.discounting.t0_column`` is at 0. Later periods are
-    at whole years (``end_of_year``) or half a year earlier (``mid_year``).
+    The period named by ``case.study.discounting.t0_column`` and the
+    ``periods_at_t0 - 1`` periods after it are at ``t0_years``. Later periods are at
+    whole years after the last of them (``end_of_year``) or half a year earlier
+    (``mid_year``). Periods before t0 are at negative times, compounded forward.
     """
-    t0 = case.schedule.periods.index(case.study.discounting.t0_column)
-    t = np.arange(len(case.schedule.periods), dtype=np.float64) - t0
-    if case.study.discounting.convention == "mid_year":
-        t = np.where(t > 0, t - 0.5, t)
-    return t
+    d = case.study.discounting
+    t0 = case.schedule.periods.index(d.t0_column)
+    k = np.arange(len(case.schedule.periods), dtype=np.float64) - t0
+    t = np.where(k >= d.periods_at_t0, k - (d.periods_at_t0 - 1), np.minimum(k, 0.0))
+    if d.convention == "mid_year":
+        t = np.where(k >= d.periods_at_t0, t - 0.5, t)
+    out: FloatArray = t + d.t0_years
+    return out
+
+
+def usd_millions_per_unit(case: Case) -> float:
+    """US$ millions per unit of the case's money, at the case's stated exchange rate."""
+    scale = MILLIONS_PER_UNIT[case.schedule.money_units]
+    fx = case.schedule.fx_usd_per_unit
+    return scale * (1.0 if fx is None else fx.value)
 
 
 def discount_factors(case: Case, rate: float) -> FloatArray:
