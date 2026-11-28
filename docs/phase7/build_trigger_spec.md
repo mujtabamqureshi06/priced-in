@@ -76,3 +76,12 @@ The study can show only an association between gold's position relative to the t
 2. The market file is rebuilt and hashed.
 3. Headline figures are transcribed blind, second transcriptions are checked, and the set is hashed. The hash is added here before the run.
 4. The script runs once. It prints its commit, the run time and both input hashes before any result.
+
+## Input record (2026-11-28, before any trigger was computed)
+
+- Releases read: 74 of 80, with 6 unreachable. Seven entries had no source link in the Phase 4 files, so the owner's release of the same study on the same date was found by search, and each match is recorded.
+- Kept: 68 projects. Dropped: 12, namely the 6 unreachable, 1 whose figures came only from a later release, 1 with no discounted NPV, 3 without a stated mine life or production, and 1 whose release does not restate the figures. This is above the stop rule's 60.
+- Second transcription: 13 projects readable in both passes. No field differs in more than a quarter of them (the largest is life-of-mine ounces, 3 of 13), so no field-wide re-check was needed.
+- Conversion to US$: at the exchange rate the study states, otherwise the FRED monthly average for the study month.
+- SHA-256 of the headline file: `a4216ca3ed3ad6d2af2e58784a1f6d9eeb6fc5d27d8d769a672df2810d6e891c`.
+- SHA-256 of the market file: `d9c16a8f862532a2ed9711c6a4c9ccebfbf7f3cacbe9fbe578165ba7d5c79ef5`. It is rebuilt from Alpha Vantage, FRED and World Bank series, and matches the 19 Phase 7 snapshots exactly.
