@@ -12,6 +12,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Laiva relabelled as a construction decision dated 13 July 2018: its restart was financed and scheduled before the entry snapshot (`data/phase4/labels.csv`).
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Phase 7 builder validation (`docs/phase7/builder_validation.md`, ADR 0075): in-sample re-test on 11 tables and the fresh test on 10 hashed tables meet the Phase 4 thresholds without a builder change (fresh: median 3.2%, 90th percentile 10.7%, Spearman 0.976); dated note on the Phase 4 builder misses.
 - Phase 7 hash record: a second hash set for seven fresh tables re-expressed with the ADR 0074 fields only, recorded before any builder run.
 - Case schema (ADR 0074): `study.discounting.t0_years` and `periods_at_t0` for studies that discount their first column or place several pre-production years at the valuation date, and C$ money units with a stated `schedule.fx_usd_per_unit`; defaults leave existing cases unchanged.
@@ -98,6 +99,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Editorial pass on the documentation for public release: internal process notes removed from the decision records and changelog; no decision changed (ADR 0001). ADR 0009 renamed `0009-thin-slice-sequencing.md`.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - LBMA PM cross-check of every gold snapshot (#93, ADR 0050). The vendor closing price stays the gold spot: on the four dates where the two differ by more than 0.5%, it is within 0.24% of a 4 pm New York price implied by the GLD trust. Each snapshot records the LBMA PM, and the Gold Standard note shows a sensitivity at the LBMA PM (break-evens 0.8 to 1.7 points lower).
 - `Risks.holding_cost` (ADR 0049): a real cost per year of deferral beyond the base year, paid by the project. Zero by default, so no published number changes.
 - Osino market value at the DFS (#90, ADR 0048). The July 2023 trading range is read on the March 31, 2023 statements: break-even spread 17.0% to 17.9%, against 18.1% for the December undisturbed value. Cash spent to May 29, 2023 is a sensitivity. USD/CAD added to the July 13, 2023 snapshot.
@@ -117,6 +119,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 Phase 2: price adapters, inversion and the public back-test.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - Back-test write-up (#74): `docs/backtest.md`, and `scripts/backtest.py`, which regenerates every number in it.
 - Multi-metal royalty cases (#72, ADR 0036): `pricedin.royalty_cases` (closed-form market-consistent royalty value on a multi-metal study table, correlated Monte Carlo check, implied odds of reaching production, break-even spread) and `price_models.CorrelatedGBM`.
 - Sorby Hills royalty case (ADR 0035): `cases/sorby_hills.yaml` (FEED Table 10), market snapshot for 2026-09-28, `scripts/sorby_hills_case.py` and the write-up `docs/cases/sorby_hills.md`. The price equals the on-schedule value at a 2.3% real spread.
@@ -134,6 +137,7 @@ Phase 2: price adapters, inversion and the public back-test.
 First release: the Phase 1 forward engine on two public cases, and the South Railroad royalty inversion pulled forward from Phase 2.
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - App (#65): `app/streamlit_app.py` with valuation, royalty price, timing and assumptions views; optional extra `app` (`uv sync --extra app`). Smoke test runs both cases when Streamlit is installed.
 - Sensitivities and readout (#63): `pricedin.sensitivity` (tornado, build-year distribution, template readout). Osino Twin Hills forward valuation write-up (`docs/cases/osino_twin_hills.md`) and `scripts/osino_case.py` (#64).
 - Equity claim (#61, ADR 0030): `engine.Financing` and `Results.equity_value`; priors `equity.issue_discount` (Carpentier and Suret 2009) and `equity.debt_fraction`. ADR 0029: ramp-up not modelled in the public cases.
@@ -152,6 +156,7 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 - mypy no-any-return on Python 3.11 in `price_models` (#4).
 
 ### Added
+- Phase 7 build-trigger study specification (`docs/phase7/build_trigger_spec.md`, ADR 0076) and script (`scripts/phase7_build_trigger.py`), with synthetic tests only, fixed before any trigger is computed: the lowest gold price at which the build rule builds now, related to construction decisions on the Phase 4 quarterly panel (80 projects, 838 quarters, 16 decisions), exploratory, with power at 16 decisions stated.
 - ADRs 0018 to 0021: tax approximation; ramp-up by plant class, superseding 0017; royalty price basis, clarifying 0014; advance royalties and buy-down for South Railroad. Oxide-class ramp-up weights (`rampup.weight.oxide.*`).
 - Schedule-mode project cash flow (#56): `pricedin.project` recomputes revenue, revenue-linked costs and tax for any gold price path; reproduces both study tables exactly at the deck and the published price sensitivities within the errors in ADR 0018. Cases gain `gold_revenue`, `revenue_linked` and a sourced `marginal_tax_rate`.
 - McNulty (1998) ramp-up curves digitised from the original Figure 1 (`data/ramp_up_mcnulty_1998.csv`) and series weights from its Table 2 (`rampup.weight.series1` to `series4`).
