@@ -12,7 +12,7 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 | 5. Stage-to-build table | Probability and timing of a construction decision, and of a takeover, by study stage | Full-period table with intervals; stability test run and reported in fixed wording (ADR 0064, ADR 0065) | Complete: results in `docs/phase5/results.md` (frame of 171 projects and 245 entries; outcomes labelled and second-coded, ADR 0068; implied NAV multiple, ADR 0069) |
 | 6. Royalty and stream pricer | Price royalties and streams on pre-production projects; test on disclosed deals | Model and scoring rules fixed before any deal is priced; results reported in aggregate | In progress: model and scoring rules fixed (ADR 0073); results not yet published |
 | 7. Study-entry tool | A study's headline figures in; risked value, peer position and a royalty or stream range out; then a calibration of the engine's non-gold frictions to the stage table on realised gold paths, with a hold-out (ADR 0069) | Builder error bands by project margin, validated on new tables; calibration run and reported under a protocol committed before the run | In progress: builder validated on new tables (`docs/phase7/builder_validation.md`, ADR 0075); calibration not started |
-| 8. Design | App, public visuals and repository presentation | Specification implemented; repository presentation complete | Not started |
+| 8. Design | App and public visuals | Specification implemented | Not started |
 | 9. Launch | Public polish, confidentiality audit, documentation | Every public number traceable; nothing private public | Not started |
 
 ## Phase 0
@@ -69,10 +69,4 @@ Phases close on exit criteria, not dates. This file summarises the plan; each it
 | #80 | Streams | Done (ADR 0041) |
 | #81 | Gold Standard Ventures takeover case | Done (ADR 0043) |
 
-## Phase 8
-
-| Item | Content | Status |
-|---|---|---|
-| Repository presentation | Done before the Phase 9 launch, for a reader new to the project: consistent file and folder names and layout, a rewritten README and repository description with images, a short statement that AI assistance was used in development, and a review of the listed contributors. Detailed requirements to be set when this step starts | Not started |
-
-Other later phases are tracked by the `phase-4` and `phase-5` labels on the issue tracker.
+Later phases are tracked by the `phase-4` and `phase-5` labels on the issue tracker.
