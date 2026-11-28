@@ -169,6 +169,8 @@ All three are measured at 0% spread. They were set after the errors on four tabl
 - A percentage error is badly behaved when value-if-built is near zero, so the error is also shown as a share of initial capital.
 - Any later use of the builder with the corrected engine must reduce the error on marginal projects. The reduction must be tested on tables not used here, and the error must be reported by project margin.
 
+**Note added 2026-11-28.** Re-tested on rebuilt entry snapshots and re-transcribed tables (`docs/phase7/builder_validation.md`): Brewery Creek +7.6%, Livengood +31.3% (a project whose value is almost all option value; 0.01 times capital). Engine 2df6022 and the current engine give the same errors on these tables, so the earlier misses were not caused by engine changes. They could not be reproduced, and their cause is unknown because the original comparison script and transcriptions were lost.
+
 ## 11. A second sample, shelved
 
 A stock sample of developers at 31 March 2022 was fixed in ADR 0062 and screened before any outcome or price was examined. It gave:
