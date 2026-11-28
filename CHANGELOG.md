@@ -5,6 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Changed
+- The Phase 7 build-trigger script follows the Phase 4 calibration rules (ADR 0057 rules 1 and 2): IRR tolerance by stated precision, entries whose cash-flow shape cannot be matched kept and flagged with a check without them, entries whose NPV cannot be matched dropped and counted. Added before any trigger was computed.
 - The roadmap updates the Phase 6 and Phase 7 status rows.
 - The Osino rows of the back-test table (`docs/backtest.md`) are recomputed with the corrected engine (ADR 0059). Erratum: the equity break-even spreads read 17.0% to 17.9% (July 2023) and 18.1% (December 2023) before the change and read 15.6% to 16.3% and 16.8% now; Shanjin's offer moves from 17.3% to 17.4%. The royalty rows and the website example are unchanged.
 - The roadmap lists the phases after Phase 4: a stage-to-build table, a royalty and stream pricer tested on disclosed deals, a study-entry tool, design and launch (ADR 0063).
@@ -93,6 +94,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 - Samis et al. (2006) and Schwartz (1997) were cited from secondary sources. The discounting rule now cites Samis, Davis and Laughton (2007), read in full. The gold-model rationale cites Brennan and Schwartz (1985).
 
 ### Changed
+- The Phase 7 build-trigger script follows the Phase 4 calibration rules (ADR 0057 rules 1 and 2): IRR tolerance by stated precision, entries whose cash-flow shape cannot be matched kept and flagged with a check without them, entries whose NPV cannot be matched dropped and counted. Added before any trigger was computed.
 - The note on the capital overrun inflation factor in `data/priors.yaml` and `docs/sources.md` now gives both readings: about 14% real on the sample mean ratio, about 15% on the fitted distribution the engine draws from.
 - Methodology section 7 defines the spread and says why one price cannot separate it from the odds. The Osino note sets the fairness opinion's P/NAV ranges beside the prices (0.27x to 0.56x of the DFS NPV) and explains why a multiple is not a probability.
 - Osino's July 2023 trading range (C$1.07 to C$1.20) is now verified against Osino's own copy of its March 25, 2024 circular, p. 97 (status V); the earlier "p. 109" reference is corrected.
@@ -168,6 +170,7 @@ First release: the Phase 1 forward engine on two public cases, and the South Rai
 - Osino Twin Hills case (`cases/osino_twin_hills.yaml`) from DFS Table 22.3.2, reproducing the published NPV5 within cell rounding; two internal DFS inconsistencies documented.
 
 ### Changed
+- The Phase 7 build-trigger script follows the Phase 4 calibration rules (ADR 0057 rules 1 and 2): IRR tolerance by stated precision, entries whose cash-flow shape cannot be matched kept and flagged with a check without them, entries whose NPV cannot be matched dropped and counted. Added before any trigger was computed.
 - Case schema: money units declared once per case (`schedule.money_units`, US$ thousands or millions); NPV fields renamed `npv_pre_tax` and `npv_after_tax`; per-row `resolution` for total checks.
 
 ### Added (earlier)

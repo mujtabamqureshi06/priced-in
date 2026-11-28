@@ -39,6 +39,8 @@ G* is the lowest gold price, in the study's money, at which the engine's thresho
 
 **Computation.** G* is solved by bisection on US$100 to US$10,000 an ounce, to US$0.01. No simulation is used. A project with no G* in that range is dropped and counted.
 
+**Calibration.** The schedule follows the Phase 4 calibration rules (ADR 0057 rules 1 and 2). The IRR tolerance is half a unit of the last digit the study states. An entry whose cash-flow shape cannot be matched keeps the closest schedule that matches its NPV, and is flagged. An entry whose NPV cannot be matched is dropped and counted. (Added 2026-11-28, before any trigger was computed, when the transcribed inputs showed that some entries need these rules.)
+
 ## Covariate and model
 
 - **Covariate.** The covariate is x = ln(S / G*). S is the quarter-end gold spot deflated to the study month by CPIAUCSL. G* is held fixed for each project.
@@ -57,7 +59,8 @@ With 16 decisions, the usual events-based approximation for one continuous covar
 ## Sensitivities, fixed now
 
 1. **Builder error.** Each project's calibrated cost factor is moved by the in-sample 90th-percentile builder error, minus and plus 18.9% (`docs/phase7/builder_validation.md`). G* is recomputed and the model refitted. The trigger lies where the builder is weakest, because the fresh validation tables include no project below half its capital in NPV.
-2. **Phase 5 labels.** Projects whose identifier is in `data/phase5/labels.csv` take their Phase 5 construction label and date, with construction by any owner. Only the labels are used; no Phase 5 rates are used.
+2. **Without shape-not-matched entries.** The primary model refitted without the flagged entries (as in Phase 4).
+3. **Phase 5 labels.** Projects whose identifier is in `data/phase5/labels.csv` take their Phase 5 construction label and date, with construction by any owner. Only the labels are used; no Phase 5 rates are used.
 
 ## Stop rule
 
