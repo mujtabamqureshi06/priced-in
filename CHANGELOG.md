@@ -5,7 +5,7 @@ All notable changes are recorded here. The format follows [Keep a Changelog](htt
 ## [Unreleased]
 
 ### Changed
-- The roadmap adds a repository presentation item to Phase 8 (file and folder names, README and description with images, a statement on AI assistance, a review of listed contributors) and updates the Phase 6 and Phase 7 status rows.
+- The roadmap updates the Phase 6 and Phase 7 status rows.
 - The Osino rows of the back-test table (`docs/backtest.md`) are recomputed with the corrected engine (ADR 0059). Erratum: the equity break-even spreads read 17.0% to 17.9% (July 2023) and 18.1% (December 2023) before the change and read 15.6% to 16.3% and 16.8% now; Shanjin's offer moves from 17.3% to 17.4%. The royalty rows and the website example are unchanged.
 - The roadmap lists the phases after Phase 4: a stage-to-build table, a royalty and stream pricer tested on disclosed deals, a study-entry tool, design and launch (ADR 0063).
 - The headline number is named the price-to-built-value ratio (ADR 0061): the price as a share of what the project would be worth if built on schedule at today's gold price, rates and volatility, after overrun, the option not to build and dilution. "Implied odds" is kept only as a reading that names the required return. The website headline, key figure, test line, README and app caption are reworded; the website's illustrative figures are regenerated with the corrected engine (ADR 0059).
