@@ -40,7 +40,15 @@ REQUIRED_COLUMNS: frozenset[str] = frozenset(
 )
 
 #: Money units a report may use.
-MoneyUnits = Literal["US$ thousands", "US$ millions"]
+MoneyUnits = Literal["US$ thousands", "US$ millions", "C$ thousands", "C$ millions"]
+
+#: US$ millions per money unit, before any exchange rate.
+MILLIONS_PER_UNIT: dict[str, float] = {
+    "US$ thousands": 1e-3,
+    "US$ millions": 1.0,
+    "C$ thousands": 1e-3,
+    "C$ millions": 1.0,
+}
 
 #: Tolerance when checking a column against the report's own total, in units of the
 #: smallest digit shown. Reports round each cell, so totals can differ from the sum.
@@ -89,15 +97,21 @@ class Quantity(_Strict):
 class Discounting(_Strict):
     """How the study discounts its cash-flow table.
 
-    ``t0_column`` is the schedule column discounted with exponent zero. Under
-    ``end_of_year`` the column k periods later is discounted k years; under
-    ``mid_year`` it is discounted k - 0.5 years (the t0 column itself stays at zero,
-    the common practice of placing pre-production capital at the valuation date). The
+    ``t0_column`` is the schedule column discounted with exponent ``t0_years`` (zero by
+    default). Under ``end_of_year`` the column k periods later is discounted
+    ``t0_years + k`` years; under ``mid_year`` it is discounted ``t0_years + k - 0.5``
+    years (the t0 column itself stays at ``t0_years``, the common practice of placing
+    pre-production capital at the valuation date). ``t0_years`` of 0.5 or 1 covers a
+    study that discounts its first column half a year or a full year. ``periods_at_t0``
+    columns from t0 on share t0's time, for a study that places several pre-production
+    years at the valuation date; later columns count on from the last of them. The
     choice is checked by reproducing the study NPV from the table.
     """
 
     t0_column: NonEmpty
     convention: Annotated[str, Field(pattern=r"^(end_of_year|mid_year)$")] = "end_of_year"
+    t0_years: Annotated[float, Field(ge=0.0, le=1.0)] = 0.0
+    periods_at_t0: Annotated[int, Field(ge=1)] = 1
     source: SourceRef
 
 
@@ -136,11 +150,22 @@ class Schedule(_Strict):
 
     periods: tuple[NonEmpty, ...]
     money_units: MoneyUnits
+    fx_usd_per_unit: Quantity | None = None
     revenue_linked: tuple[NonEmpty, ...] = ()
     columns: dict[str, Column]
 
     @model_validator(mode="after")
     def _consistent(self) -> Schedule:
+        foreign = not self.money_units.startswith("US$")
+        if foreign and self.fx_usd_per_unit is None:
+            raise ValueError(
+                f"money units '{self.money_units}' need fx_usd_per_unit: the study's own "
+                "exchange rate if it states one, otherwise the valuation-date rate"
+            )
+        if not foreign and self.fx_usd_per_unit is not None:
+            raise ValueError("fx_usd_per_unit is only for non-US$ money units")
+        if self.fx_usd_per_unit is not None and self.fx_usd_per_unit.value <= 0:
+            raise ValueError("fx_usd_per_unit must be positive")
         missing = REQUIRED_COLUMNS - self.columns.keys()
         if missing:
             raise ValueError(f"schedule is missing required columns: {sorted(missing)}")

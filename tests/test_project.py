@@ -4,7 +4,14 @@ import numpy as np
 import pytest
 
 from pricedin.inputs import Case, load_case
-from pricedin.project import _adjusted_tax, discount_factors, npv, schedule_cash_flows
+from pricedin.project import (
+    _adjusted_tax,
+    discount_factors,
+    npv,
+    period_times,
+    schedule_cash_flows,
+    usd_millions_per_unit,
+)
 
 CASES = Path(__file__).resolve().parents[1] / "cases"
 
@@ -104,3 +111,56 @@ def test_rejects_non_positive_prices(osino: Case) -> None:
     prices[0, 2] = 0.0
     with pytest.raises(ValueError, match="positive"):
         schedule_cash_flows(osino, prices)
+
+
+def _with_discounting(case: Case, **changes: object) -> Case:
+    raw = case.model_dump()
+    raw["study"]["discounting"].update(changes)
+    return Case.model_validate(raw)
+
+
+def test_default_timing_unchanged(south_railroad: Case) -> None:
+    n = len(south_railroad.schedule.periods)
+    np.testing.assert_allclose(period_times(south_railroad), np.arange(n, dtype=float))
+
+
+def test_first_column_discounted_a_year(south_railroad: Case) -> None:
+    case = _with_discounting(south_railroad, t0_years=1.0)
+    n = len(case.schedule.periods)
+    np.testing.assert_allclose(period_times(case), np.arange(n, dtype=float) + 1.0)
+    base = npv(np.ones((1, n)), south_railroad, 0.05)
+    assert npv(np.ones((1, n)), case, 0.05)[0] == pytest.approx(base[0] / 1.05)
+
+
+def test_mid_year_from_the_first_column(south_railroad: Case) -> None:
+    case = _with_discounting(south_railroad, t0_years=0.5)
+    n = len(case.schedule.periods)
+    np.testing.assert_allclose(period_times(case), np.arange(n, dtype=float) + 0.5)
+
+
+def test_leading_periods_share_t0(south_railroad: Case) -> None:
+    # Three pre-production years at the valuation date, then mid-year from year 1.
+    case = _with_discounting(south_railroad, periods_at_t0=3, convention="mid_year")
+    t = period_times(case)
+    np.testing.assert_allclose(t[:3], 0.0)
+    np.testing.assert_allclose(t[3:6], [0.5, 1.5, 2.5])
+
+
+def test_canadian_dollar_case_needs_a_rate(south_railroad: Case) -> None:
+    raw = south_railroad.model_dump()
+    raw["schedule"]["money_units"] = "C$ thousands"
+    with pytest.raises(ValueError, match="need fx_usd_per_unit"):
+        Case.model_validate(raw)
+    src = raw["study"]["discount_rate"]["source"]
+    raw["schedule"]["fx_usd_per_unit"] = {"value": 0.75, "units": "US$ per C$", "source": src}
+    case = Case.model_validate(raw)
+    assert usd_millions_per_unit(case) == pytest.approx(0.75e-3)
+
+
+def test_us_dollar_case_rejects_a_rate(south_railroad: Case) -> None:
+    raw = south_railroad.model_dump()
+    src = raw["study"]["discount_rate"]["source"]
+    raw["schedule"]["fx_usd_per_unit"] = {"value": 1.0, "units": "US$ per US$", "source": src}
+    with pytest.raises(ValueError, match="only for non-US"):
+        Case.model_validate(raw)
+    assert usd_millions_per_unit(south_railroad) == pytest.approx(1e-3)
